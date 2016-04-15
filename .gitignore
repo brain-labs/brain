@@ -1,3 +1,8 @@
+*
+!/**/
+!*.*
+
+
 # Compiled Object files
 *.slo
 *.lo
@@ -26,3 +31,11 @@
 *.exe
 *.out
 *.app
+
+# Debug files
+*.dSYM/
+
+*.swp
+*.swo
+
+*_r2
