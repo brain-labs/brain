@@ -1,6 +1,12 @@
+/* This is the source code of Brain Programming Language.
+ * It is licensed under GNU GPL v. 3 or later.
+ * You should have received a copy of the license in this archive (see LICENSE).
+ *
+ * Copyright Luiz Peres, 2016.
+ */
 
 #include "Parser.h"
-#include <iostream>
+#include "ShiftExpr.h"
 
 bool Parser::isSkippable(char c)
 {
@@ -21,25 +27,31 @@ void Parser::parse()
 {
    char c = 0;
    while ( (c = getToken()) ) {
+     Expr *expr = NULL;
      switch (c)
      {
        case '<':
-         std::cout << "go to left" << std::endl; break;
+         expr = new ShiftExpr(-1); break;
        case '>':
-        std::cout << "go to right" << std::endl; break;
+         expr = new ShiftExpr(1); break;
        case '+':
-        std::cout << "add one" << std::endl; break;
+         break;
        case '-':
-         std::cout << "substract one" << std::endl; break;
+         break;
        case '.':
-         std::cout << "print" << std::endl; break;
+         break;
        case ',':
-         std::cout << "ask for value" << std::endl; break;
+          break;
        case '[':
-         std::cout << "start loop" << std::endl; break;
+         break;
        case ']':
-         std::cout << "end loop" << std::endl; break;
+         break;
        default: break; // Ignored character
+     }
+
+     if (expr) 
+     {
+       _exprs.push_back(expr);
      }
    }
 }
