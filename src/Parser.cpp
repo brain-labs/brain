@@ -10,6 +10,7 @@
 #include "IncrementExpr.h"
 #include "InputExpr.h"
 #include "OutputExpr.h"
+#include "LoopExpr.h"
 
 bool Parser::isSkippable(char c)
 {
@@ -26,7 +27,7 @@ char Parser::getToken()
   return c;
 }
 
-void Parser::parse()
+void Parser::parse(std::vector<Expr *> &exprs)
 {
    char c = 0;
    while ( (c = getToken()) ) {
@@ -34,31 +35,55 @@ void Parser::parse()
      switch (c)
      {
        case '<':
-         expr = new ShiftExpr(-1); break;
+       {
+         expr = new ShiftExpr(-1); 
+         break;
+       }
        case '>':
-         expr = new ShiftExpr(1); break;
+       {
+         expr = new ShiftExpr(1); 
+         break;
+       }
        case '+':
+       {
          expr = new IncrementExpr(1);
          break;
+       }
        case '-':
+       {
          expr = new IncrementExpr(-1);
          break;
+       }
        case '.':
+       {
          expr = new InputExpr();
          break;
+       }
        case ',':
+       {
          expr = new OutputExpr();
          break;
+       }
        case '[':
+       {
+         std::vector<Expr *> loopExpr;
+         parse(loopExpr);
+         expr = new LoopExpr(loopExpr);
          break;
+       }
        case ']':
-         break;
-       default: break; // Ignored character
+       {
+         return; // exit the recursivity 
+       }
+       default: 
+       {
+         break; // Ignored character
+       }
      }
 
      if (expr) 
      {
-       _exprs.push_back(expr);
+       exprs.push_back(expr);
      }
    }
 }

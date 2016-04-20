@@ -5,25 +5,20 @@
  * Copyright Luiz Peres, 2016.
  */
 
-#ifndef PARSER_H
-#define PARSER_H
+#ifndef LOOP_EXPR_H
+#define LOOP_EXPR_H
 
-#include <string>
 #include <vector>
 #include "Expr.h"
 
-class Parser
+class LoopExpr : public Expr
 {
   protected:
-    std::string _data;
-    int _index;
     std::vector<Expr *> _exprs;
-  
-    static bool isSkippable(char c);
-    char getToken();
-    void parse(std::vector<Expr *> &exprs);
   public:
-    Parser(std::string s) : _data(s), _index(0) { parse(_exprs); }
+    LoopExpr(std::vector<Expr *> exprs) : _exprs(exprs) { }
+    void CodeGen();
 };
 
-#endif 
+#endif
+
