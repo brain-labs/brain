@@ -24,6 +24,8 @@ class Parser
     void parse(std::vector<Expr *> &exprs);
   public:
     Parser(std::string s) : _data(s), _index(0) { parse(_exprs); }
+    void CodeGen(Module *M, IRBuilder<> &B);
+    void DebugDescription(int level);
 };
 
 #endif 
