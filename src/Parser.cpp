@@ -7,6 +7,9 @@
 
 #include "Parser.h"
 #include "ShiftExpr.h"
+#include "IncrementExpr.h"
+#include "InputExpr.h"
+#include "OutputExpr.h"
 
 bool Parser::isSkippable(char c)
 {
@@ -35,13 +38,17 @@ void Parser::parse()
        case '>':
          expr = new ShiftExpr(1); break;
        case '+':
+         expr = new IncrementExpr(1);
          break;
        case '-':
+         expr = new IncrementExpr(-1);
          break;
        case '.':
+         expr = new InputExpr();
          break;
        case ',':
-          break;
+         expr = new OutputExpr();
+         break;
        case '[':
          break;
        case ']':
