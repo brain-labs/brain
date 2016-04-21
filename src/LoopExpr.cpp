@@ -7,8 +7,12 @@
 
 #include "LoopExpr.h"
 
-void LoopExpr::CodeGen()
+void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
   // We will implement this later
+}
+
+void LoopExpr::DebugDescription(int level)
+{
 }
 

@@ -7,7 +7,11 @@
 
 #include "ShiftExpr.h"
 
-void ShiftExpr::CodeGen()
+void ShiftExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
   // We will implement this later
+}
+
+void ShiftExpr::DebugDescription(int level)
+{
 }

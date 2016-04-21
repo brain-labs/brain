@@ -8,6 +8,9 @@
 #ifndef SHIFT_EXPR_H
 #define SHIFT_EXPR_H
 
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Module.h"
+
 #include "Expr.h"
 
 class ShiftExpr : public Expr
@@ -16,7 +19,9 @@ class ShiftExpr : public Expr
     int _step;
   public:
     ShiftExpr(int step) : _step(step) { }
-    void CodeGen();
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
+    void DebugDescription(int level);
+    ~ShiftExpr() {};
 };
 
 #endif

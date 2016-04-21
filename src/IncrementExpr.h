@@ -8,6 +8,9 @@
 #ifndef INCREMENT_EXPR_H
 #define INCREMENT_EXPR_H
 
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Module.h"
+
 #include "Expr.h"
 
 class IncrementExpr : public Expr
@@ -16,7 +19,9 @@ class IncrementExpr : public Expr
     int _increment;
   public:
     IncrementExpr(int increment) : _increment(increment) { }
-    void CodeGen();
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
+    void DebugDescription(int level);
+    ~IncrementExpr() {};
 };
 
 #endif

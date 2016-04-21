@@ -7,8 +7,12 @@
 
 #include "IncrementExpr.h"
 
-void IncrementExpr::CodeGen()
+void IncrementExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
   // We will implement this later
+}
+
+void IncrementExpr::DebugDescription(int level)
+{
 }
 

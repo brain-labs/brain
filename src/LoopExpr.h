@@ -9,6 +9,10 @@
 #define LOOP_EXPR_H
 
 #include <vector>
+
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Module.h"
+
 #include "Expr.h"
 
 class LoopExpr : public Expr
@@ -17,7 +21,9 @@ class LoopExpr : public Expr
     std::vector<Expr *> _exprs;
   public:
     LoopExpr(std::vector<Expr *> exprs) : _exprs(exprs) { }
-    void CodeGen();
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
+    void DebugDescription(int level);
+    ~LoopExpr() {};
 };
 
 #endif

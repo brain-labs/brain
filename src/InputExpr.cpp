@@ -7,7 +7,11 @@
 
 #include "InputExpr.h"
 
-void InputExpr::CodeGen()
+void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
   // We will implement this later
+}
+
+void InputExpr::DebugDescription(int level)
+{
 }

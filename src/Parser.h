@@ -10,6 +10,10 @@
 
 #include <string>
 #include <vector>
+
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Module.h"
+
 #include "Expr.h"
 
 class Parser
@@ -24,7 +28,7 @@ class Parser
     void parse(std::vector<Expr *> &exprs);
   public:
     Parser(std::string s) : _data(s), _index(0) { parse(_exprs); }
-    void CodeGen(Module *M, IRBuilder<> &B);
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
     void DebugDescription(int level);
 };
 

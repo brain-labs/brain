@@ -8,13 +8,18 @@
 #ifndef OUTPUT_EXPR_H
 #define OUTPUT_EXPR_H
 
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Module.h"
+
 #include "Expr.h"
 
 class OutputExpr : public Expr
 {
   public:
     OutputExpr() { }
-    void CodeGen();
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
+    void DebugDescription(int level);
+    ~OutputExpr() {};
 };
 
 #endif

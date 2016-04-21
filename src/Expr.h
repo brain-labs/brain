@@ -8,10 +8,15 @@
 #ifndef EXPR_H
 #define EXPR_H
 
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Module.h"
+
 class Expr
 {
   public:
-    virtual void CodeGen() = 0;
+    virtual void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B) = 0;
+    virtual void DebugDescription(int level) = 0;
+    virtual ~Expr() {};
 };
 
 

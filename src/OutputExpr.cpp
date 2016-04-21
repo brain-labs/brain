@@ -7,7 +7,7 @@
 
 #include "OutputExpr.h"
 
-void OutputExpr::CodeGen()
+void OutputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
   // We will implement this later
 }

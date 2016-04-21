@@ -88,7 +88,7 @@ void Parser::parse(std::vector<Expr *> &exprs)
    }
 }
 
-void Parser::CodeGen(Module *M, IRBuilder<> &B)
+void Parser::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
 }
 
