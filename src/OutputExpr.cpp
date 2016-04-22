@@ -11,3 +11,7 @@ void OutputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
   // We will implement this later
 }
+
+void OutputExpr::DebugDescription(int level)
+{
+}
