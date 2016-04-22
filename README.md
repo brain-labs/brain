@@ -1,6 +1,9 @@
 # Brain
 A computer language based on Brainfuck.
 
+### Last informations
+This build is broken as I do not have time to fix it now... So download it on your own and good lucky!
+
 ### How
 Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types. 
 
