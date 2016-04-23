@@ -90,6 +90,10 @@ void Parser::parse(std::vector<Expr *> &exprs)
 
 void Parser::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
+  for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) 
+  {
+    (*it)->CodeGen(M, B);
+  }
 }
 
 void Parser::DebugDescription(int level)
