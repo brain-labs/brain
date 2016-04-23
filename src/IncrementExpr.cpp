@@ -7,9 +7,15 @@
 
 #include "IncrementExpr.h"
 
-void IncrementExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
+void IncrementExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
-  // We will implement this later
+  llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(index) };
+  llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
+  llvm::Value *CellPtr = B.CreateGEP(cells, IdxsArr);
+  // Load cell value
+  llvm::Value *CellV = B.CreateLoad(CellPtr);
+  // Add |_step| to cell value and save the value
+  B.CreateStore(B.CreateAdd(CellV, B.getInt32(_increment)), CellPtr);
 }
 
 void IncrementExpr::DebugDescription(int level)

@@ -14,7 +14,7 @@
 class Expr
 {
   public:
-    virtual void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B) = 0;
+    virtual void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells) = 0;
     virtual void DebugDescription(int level) = 0;
     virtual ~Expr() {};
 };

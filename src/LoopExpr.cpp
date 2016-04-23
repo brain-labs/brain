@@ -7,7 +7,7 @@
 
 #include "LoopExpr.h"
 
-void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
+void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   // We will implement this later
 }

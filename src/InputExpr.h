@@ -8,6 +8,7 @@
 #ifndef INPUT_EXPR_H
 #define INPUT_EXPR_H
 
+#include "llvm/Transforms/Utils/BuildLibCalls.h"
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Module.h"
 
@@ -17,7 +18,7 @@ class InputExpr : public Expr
 {
   public:
     InputExpr() { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
     ~InputExpr() {};
 };

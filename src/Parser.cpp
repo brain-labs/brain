@@ -12,6 +12,9 @@
 #include "OutputExpr.h"
 #include "LoopExpr.h"
 
+static llvm::GlobalVariable *__Brain_IndexPtr = NULL;
+static llvm::GlobalVariable *__Brain_CellsPtr = NULL;
+
 bool Parser::isSkippable(char c)
 {
   return (c != '<' && c != '>' &&
@@ -90,9 +93,35 @@ void Parser::parse(std::vector<Expr *> &exprs)
 
 void Parser::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
+  llvm::LLVMContext &C = M->getContext();
+  
+  if (!__Brain_IndexPtr)
+  {
+    // Create global variable |brainf.index|
+    llvm::Type *Ty = llvm::Type::getInt32Ty(C);
+    const llvm::APInt Zero = llvm::APInt(32, 0); // int32 0
+    llvm::Constant *InitV = llvm::Constant::getIntegerValue(Ty, Zero);
+    __Brain_IndexPtr = new llvm::GlobalVariable(*M, Ty, false /* non-constant */,
+                                           llvm::GlobalValue::WeakAnyLinkage, // Keep one copy when linking (weak)
+                                           InitV, "brainf.index");
+  }
+  
+  if (!__Brain_CellsPtr)
+  {
+    #define kCellsCount 100
+    // Create |brainf.cells|
+    llvm::ArrayType *ArrTy = llvm::ArrayType::get(llvm::Type::getInt32Ty(C), kCellsCount);
+    std::vector<llvm::Constant *> constants(kCellsCount, B.getInt32(0)); // Create a vector of kCellsCount items equal to 0
+    llvm::ArrayRef<llvm::Constant *> Constants = llvm::ArrayRef<llvm::Constant *>(constants);
+    llvm::Constant *InitPtr = llvm::ConstantArray::get(ArrTy, Constants);
+    __Brain_CellsPtr = new llvm::GlobalVariable(*M, ArrTy, false /* non-constant */,
+                                           llvm::GlobalValue::WeakAnyLinkage, // Keep one copy when linking (weak)
+                                           InitPtr, "brainf.cells");
+  }
+
   for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) 
   {
-    (*it)->CodeGen(M, B);
+    (*it)->CodeGen(M, B, __Brain_IndexPtr, __Brain_CellsPtr);
   }
 }
 

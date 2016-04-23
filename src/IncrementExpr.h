@@ -19,7 +19,7 @@ class IncrementExpr : public Expr
     int _increment;
   public:
     IncrementExpr(int increment) : _increment(increment) { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
     ~IncrementExpr() {};
 };

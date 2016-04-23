@@ -7,9 +7,12 @@
 
 #include "ShiftExpr.h"
 
-void ShiftExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
+void ShiftExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
-  // We will implement this later
+  // Load index value
+  llvm::Value *IdxV = B.CreateLoad(index);
+  // Add |_step| to index and save the value
+  B.CreateStore(B.CreateAdd(IdxV, B.getInt32(_step)), index);
 }
 
 void ShiftExpr::DebugDescription(int level)
