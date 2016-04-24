@@ -8,6 +8,8 @@
 #ifndef INCREMENT_EXPR_H
 #define INCREMENT_EXPR_H
 
+#include <iostream>
+
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Module.h"
 

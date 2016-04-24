@@ -8,6 +8,8 @@
 #ifndef SHIFT_EXPR_H
 #define SHIFT_EXPR_H
 
+#include <iostream>
+
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Module.h"
 

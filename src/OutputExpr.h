@@ -8,6 +8,9 @@
 #ifndef OUTPUT_EXPR_H
 #define OUTPUT_EXPR_H
 
+#include <iostream>
+
+#include "llvm/Transforms/Utils/BuildLibCalls.h"
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Module.h"
 

@@ -9,6 +9,7 @@
 #define LOOP_EXPR_H
 
 #include <vector>
+#include <iostream>
 
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Module.h"

@@ -20,5 +20,7 @@ void IncrementExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalV
 
 void IncrementExpr::DebugDescription(int level)
 {
+  std::cout.width(level);
+  std::cout << "IncrementExpr (" << _increment << ")" << std::endl;
 }
 

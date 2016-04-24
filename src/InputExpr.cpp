@@ -44,4 +44,6 @@ void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
 
 void InputExpr::DebugDescription(int level)
 {
+  std::cout.width(level);
+  std::cout << "InputExpr" << std::endl;
 }

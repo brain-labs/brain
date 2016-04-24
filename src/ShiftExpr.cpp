@@ -17,4 +17,6 @@ void ShiftExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
 
 void ShiftExpr::DebugDescription(int level)
 {
+  std::cout.width(level);
+  std::cout << "ShiftExpr (" << _step << ")" << std::endl;
 }
