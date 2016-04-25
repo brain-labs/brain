@@ -59,12 +59,12 @@ void Parser::parse(std::vector<Expr *> &exprs)
        }
        case '.':
        {
-         expr = new InputExpr();
+         expr = new OutputExpr();
          break;
        }
        case ',':
        {
-         expr = new OutputExpr();
+         expr = new InputExpr();
          break;
        }
        case '[':

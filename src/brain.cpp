@@ -27,10 +27,10 @@
 
 int main(int argc, char *argv[])
 {
-  std::string s = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
+  std::string s = ">++++++++[<+++++++++>-]<.>>+>+>++>[-]+<[>[->+<<++++>]<<]>.+++++++..+++.>>+++++++.<<<[[-]<[-]>]<+++++++++++++++.>>.+++.------.--------.>>+.>++++."; 
   
   Parser parser(s);
-  
+ 
   // Create the context and the module
   llvm::LLVMContext C;
   llvm::ErrorOr<llvm::Module *> ModuleOrErr = new llvm::Module("my test", C);
@@ -56,12 +56,12 @@ int main(int argc, char *argv[])
   
   // Print (dump) the module
   M->dump();
-  
+ 
   // Default initialisation
   llvm::InitializeNativeTarget();
   llvm::InitializeNativeTargetAsmPrinter();
   llvm::InitializeNativeTargetAsmParser();
-  
+ 
   // Create the execution engine
   std::string ErrStr;
   llvm::EngineBuilder *EB = new llvm::EngineBuilder(std::move(Owner));

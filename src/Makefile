@@ -8,5 +8,8 @@ all: build
 build: $(SRCS)
 	$(CC) $(CFLAGS) $(SRCS) $(CONFIG) -o brain 
 
+debug: $(SRCS)
+	$(CC) -g $(CFLAGS) $(SRCS) $(CONFIG) -o brain
+
 run: brain 
 	./brain
