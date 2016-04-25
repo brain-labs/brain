@@ -23,31 +23,29 @@
 #include "llvm/IR/Module.h"
 #include "llvm/IR/Value.h"
 
-using "Parser.h"
-
-using namespace llvm;
+#include "Parser.h"
 
 int main(int argc, char *argv[])
 {
-  std::string s = ">++++++++[<+++++++++>-]<.>>+>+>++>[-]+<[>[->+<<++++>]<<]>.+++++++..+++.>>+++++++.<<<[[-]<[-]>]<+++++++++++++++.>>.+++.------.--------.>>+.>++++.";
+  std::string s = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
   
   Parser parser(s);
   
   // Create the context and the module
-  LLVMContext &C = getGlobalContext();
-  ErrorOr<Module *> ModuleOrErr = new Module("my test", C);
-  std::unique_ptr<Module> Owner = std::unique_ptr<Module>(ModuleOrErr.get());
-  Module *M = Owner.get();
+  llvm::LLVMContext C;
+  llvm::ErrorOr<llvm::Module *> ModuleOrErr = new llvm::Module("my test", C);
+  std::unique_ptr<llvm::Module> Owner = std::unique_ptr<llvm::Module>(ModuleOrErr.get());
+  llvm::Module *M = Owner.get();
 
   // Create the main function: "i32 @main()"
-  Function *MainF = cast<Function>(M->getOrInsertFunction("main", Type::getInt32Ty(C), (Type *)0));
+  llvm::Function *MainF = llvm::cast<llvm::Function>(M->getOrInsertFunction("main", llvm::Type::getInt32Ty(C), (llvm::Type *)0));
 
   // Create the entry block
-  BasicBlock *BB = BasicBlock::Create(C,
+  llvm::BasicBlock *BB = llvm::BasicBlock::Create(C,
                                       "EntryBlock", // Conventionnaly called "EntryBlock"
                                       MainF // Add it to "main" function
                                       );
-  IRBuilder<> B(BB); // Create a builder to add instructions
+  llvm::IRBuilder<> B(BB); // Create a builder to add instructions
   B.SetInsertPoint(BB); // Insert the block to function
 
   // Generate IR code from parser
@@ -60,15 +58,15 @@ int main(int argc, char *argv[])
   M->dump();
   
   // Default initialisation
-  InitializeNativeTarget();
-  InitializeNativeTargetAsmPrinter();
-  InitializeNativeTargetAsmParser();
+  llvm::InitializeNativeTarget();
+  llvm::InitializeNativeTargetAsmPrinter();
+  llvm::InitializeNativeTargetAsmParser();
   
   // Create the execution engine
   std::string ErrStr;
-  EngineBuilder *EB = new EngineBuilder(std::move(Owner));
-  ExecutionEngine *EE = EB->setErrorStr(&ErrStr)
-    .setMCJITMemoryManager(std::unique_ptr<SectionMemoryManager>(new SectionMemoryManager()))
+  llvm::EngineBuilder *EB = new llvm::EngineBuilder(std::move(Owner));
+  llvm::ExecutionEngine *EE = EB->setErrorStr(&ErrStr)
+    .setMCJITMemoryManager(std::unique_ptr<llvm::SectionMemoryManager>(new llvm::SectionMemoryManager()))
     .create();
 
   if (!ErrStr.empty()) {
@@ -81,12 +79,12 @@ int main(int argc, char *argv[])
 
   // Run the program
   std::cout << "\n" << "=== Program Output ===" << "\n";
-  std::vector<GenericValue> Args(0); // No args
-  GenericValue gv = EE->runFunction(MainF, Args);
+  std::vector<llvm::GenericValue> Args(0); // No args
+  llvm::GenericValue gv = EE->runFunction(MainF, Args);
   
   // Clean up and shutdown
   delete EE;
-  llvm_shutdown();
+  llvm::llvm_shutdown();
   
   return 0;
 }
