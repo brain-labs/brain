@@ -22,7 +22,7 @@ void OutputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVari
   // Prepare args
   static llvm::Value *GPrintfFormat = NULL;
   if (!GPrintfFormat) {
-    GPrintfFormat = B.CreateGlobalString("%c\n", "brainf.printf.format");
+    GPrintfFormat = B.CreateGlobalString("%c", "brainf.printf.format");
   }
   llvm::Value *IdxV = B.CreateLoad(index);
   llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
