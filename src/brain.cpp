@@ -24,9 +24,14 @@
 #include "llvm/IR/Value.h"
 
 #include "Parser.h"
+#include "ArgsHandler.h"
+
+#define MODULE_NAME "brainModule"
 
 int main(int argc, char *argv[])
 {
+  ArgsHandler argsHandler(argc, argv);
+
   if (argc < 2)
   {
     std::cout << "brain: error: no input files\n";
@@ -39,7 +44,7 @@ int main(int argc, char *argv[])
  
   // Create the context and the module
   llvm::LLVMContext C;
-  llvm::ErrorOr<llvm::Module *> ModuleOrErr = new llvm::Module("my test", C);
+  llvm::ErrorOr<llvm::Module *> ModuleOrErr = new llvm::Module(MODULE_NAME, C);
   std::unique_ptr<llvm::Module> Owner = std::unique_ptr<llvm::Module>(ModuleOrErr.get());
   llvm::Module *M = Owner.get();
 
@@ -59,9 +64,12 @@ int main(int argc, char *argv[])
   
   // Return 0 to the "main" function
   B.CreateRet(B.getInt32(0));
-  
-  // Print (dump) the module
-  M->dump();
+
+  if(argsHandler.isDebugActive())
+  {  
+    // Print (dump) the module
+    M->dump();
+  }
  
   // Default initialisation
   llvm::InitializeNativeTarget();
@@ -83,8 +91,11 @@ int main(int argc, char *argv[])
   // Finalize the execution engine before use it
   EE->finalizeObject();
 
-  // Run the program
-  std::cout << "\n" << "=== Program Output ===" << "\n";
+  if (argsHandler.isDebugActive())
+  {
+    // Run the program
+    std::cout << "\n" << "=== Program Output ===" << "\n";
+  }
   std::vector<llvm::GenericValue> Args(0); // No args
   llvm::GenericValue gv = EE->runFunction(MainF, Args);
   
