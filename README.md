@@ -4,6 +4,9 @@ A computer language based on Brainfuck.
 ### Technical Information
 Brain is __not yet__ a Turing Complete language, once I'm limiting the ```memory``` to ```100 * 32 bytes```.
 
+### Current Status
+Brain is running just like __Brainfuck__ so far, so feel free to use it... (The final executable final is gonna be giant, because of LLVM).
+
 ### How
 Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types. 
 
