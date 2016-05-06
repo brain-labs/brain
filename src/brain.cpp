@@ -32,15 +32,7 @@ int main(int argc, char *argv[])
 {
   ArgsHandler argsHandler(argc, argv);
 
-  if (argc < 2)
-  {
-    std::cout << "brain: error: no input files\n";
-    return -1;
-  }
-
-  std::string s = ">++++++++[<+++++++++>-]<.>>+>+>++>[-]+<[>[->+<<++++>]<<]>.+++++++..+++.>>+++++++.<<<[[-]<[-]>]<+++++++++++++++.>>.+++.------.--------.>>+.>++++."; 
-  
-  Parser parser(s);
+  Parser parser(argsHandler.getStringFile());
  
   // Create the context and the module
   llvm::LLVMContext C;
