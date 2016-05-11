@@ -25,7 +25,7 @@ void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
   static llvm::Value *GScanfFormat = NULL;
   if (!GScanfFormat) 
   {
-    GScanfFormat = B.CreateGlobalString("%d", "brainf.scanf.format");
+    GScanfFormat = B.CreateGlobalString(" %c", "brainf.scanf.format");
   }
   llvm::Value *IntPtr = B.CreateAlloca(llvm::Type::getInt32Ty(C));
   
