@@ -1,9 +1,28 @@
 # Brain
 A computer language based on Brainfuck.
 
+### Information
+__Brain__ wants to improve the performance of the Brainfuck programming language and extend it as well, as Brainfuck itself has a lack of data types and does not perform great control over variables, as well as when you want to make libraries and/or functions and when you want to use different models other than characters integers.
+
+One of the main ideas of __Brain__ is saving some operations in machine language, creating an instruction optmizer due to the excess of instructions that Brainfuck would generate. Brain aims to implement it by using current technology __(LLVM)__.
+
+In spite of implementing new commands and features, __Brain__ tries to be **completely compatible** with Brainfuck.
+
+### How it has been built
+Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types. 
+
+### Technical Information
+Brain is __not yet__ a Turing Complete language, once I'm limiting its ```memory``` to ```100 * 32 bytes``` for now (only for testing purposes). Later on I will think in a way to allocate memory as needed instead.
+
+### Current Status
+Brain is running just like __Brainfuck__ so far, so feel free to use its tag [version 0.5](https://github.com/luizperes/brain/blob/v0.5/README.md)
+
+### How to run your Brain files
+It is as simple as: ```./brain your_brain_file.b```
+
 ### Project Status
 
-```To use Project Status, please visit:https://github.com/luizperes/status-projects/blob/master/README.md and http://luizperes.github.io/status-projects/```
+To use __Project Status__, please visit:```https://github.com/luizperes/status-projects/blob/master/README.md``` and ```http://luizperes.github.io/status-projects/```
 
 | Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
 | ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
@@ -44,22 +63,6 @@ __Thinking About__
 Example of the instructions above: 
 - ___if-else___: ```? +++ : --- ;``` _// if (*ptr) { *ptr += 3; } else { *ptr -= 3; }_
 - __for__: ```++++ { commands }``` _// makes four iterations 4 through 0 (excluded)_
-
-### Technical Information
-Brain is __not yet__ a Turing Complete language, once I'm limiting its ```memory``` to ```100 * 32 bytes``` (only for testing purposes).
-
-### Current Status
-Brain is running just like __Brainfuck__ so far, so feel free to use its tag [version 0.5](https://github.com/luizperes/brain/blob/v0.5/README.md)
-
-### How
-Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types. 
-
-### Information
-__Brain__ wants to improve the performance of the Brainfuck programming language and extend it as well, as Brainfuck itself has a lack of data types and does not perform great control over variables when you need more than 8 bytes, when you want to make libraries and/or functions, when you want to use different models other than integers and so on.
-
-The main idea of Brain is saving some operations in machine language, creating an instruction optmizer due to the excess of instructions that Brainfuck would generate. Brain aims to implement it by using current technology __(LLVM)__.
-
-In spite of implementing new commands and features, __Brain__ tries to be **completely compatible** with Brainfuck.
 
 ### Help
 Feel free to send your pull requests. :)
