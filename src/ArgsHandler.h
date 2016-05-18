@@ -15,9 +15,10 @@ class ArgsHandler
   protected:
     std::string _stringFile;
     bool _isDebugging;
+    bool _isOptimizing;
     void handle(int argc, char *argv[]);
   public:
-    ArgsHandler(int argc, char *argv[]) { handle(argc, argv); }
+    ArgsHandler(int argc, char *argv[]) : _isDebugging(false), _isOptimizing(true) { handle(argc, argv); }
     std::string getStringFile();
     bool isDebugActive();
 };

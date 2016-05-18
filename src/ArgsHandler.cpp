@@ -31,13 +31,23 @@ void ArgsHandler::handle(int argc, char *argv[])
     if (str.compare("--help") == 0)
     {
       std::cout << "\n"
-                << "--debug  activates debug mode\n" 
+                << "--debug\t\tActivates debug mode\n"
+                << "-O0\t\tGenerates output code with no optmizations\n"
+                << "-O1\t\tOptimizes Brain generated output code (Default)\n" 
                 << "\n";
       exit(0);
     }
     else if (str.compare("--debug") == 0)
     {
       _isDebugging = true;
+    }
+    else if (str.compare("-O0") == 0)
+    {
+      _isOptimizing = false;
+    }
+    else if (str.compare("-O1") == 0)
+    {
+      _isOptimizing = true;
     }
     else if (str.substr(str.size()-2,2) == ".b")
     {
@@ -52,6 +62,12 @@ void ArgsHandler::handle(int argc, char *argv[])
        exit(-1);
      }
       _stringFile = strFile;
+    }
+    else if (str.find("-") == 0)
+    {
+      std::cout << "Unsupported option '" << str << "'\n"
+                << BRAIN_HELP;
+       exit(-1);
     }
     else
     {
