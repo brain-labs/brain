@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 {
   ArgsHandler argsHandler(argc, argv);
 
-  Parser parser(argsHandler.getStringFile());
+  Parser parser(argsHandler.getStringFile(), argsHandler.isOptimizing());
  
   // Create the context and the module
   llvm::LLVMContext C;

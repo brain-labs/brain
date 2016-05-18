@@ -22,12 +22,13 @@ class Parser
     std::string _data;
     int _index;
     std::vector<Expr *> _exprs;
+    bool _isOptimizing;
   
     static bool isSkippable(char c);
     char getToken();
     void parse(std::vector<Expr *> &exprs);
   public:
-    Parser(std::string s) : _data(s), _index(0) { parse(_exprs); }
+    Parser(std::string s, bool isOptimizing) : _data(s), _index(0), _isOptimizing(isOptimizing) { parse(_exprs); }
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
     void DebugDescription(int level);
 };

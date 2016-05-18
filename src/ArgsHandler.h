@@ -21,6 +21,7 @@ class ArgsHandler
     ArgsHandler(int argc, char *argv[]) : _isDebugging(false), _isOptimizing(true) { handle(argc, argv); }
     std::string getStringFile();
     bool isDebugActive();
+    bool isOptimizing();
 };
 
 #endif

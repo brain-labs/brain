@@ -89,3 +89,8 @@ bool ArgsHandler::isDebugActive()
   return _isDebugging;
 }
 
+bool ArgsHandler::isOptimizing()
+{
+  return _isOptimizing;
+}
+
