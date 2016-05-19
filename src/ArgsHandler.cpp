@@ -28,18 +28,23 @@ void ArgsHandler::handle(int argc, char *argv[])
   for (int i = 1; i < argc; i++)
   {
     std::string str(argv[i]);
-    if (str.compare("--help") == 0)
+    if (str.compare("--help") == 0 || str.compare("-help") == 0)
     {
       std::cout << "\n"
-                << "--debug\t\tActivates debug mode\n"
+                << "-emit-llvm\tDumps the LLVM IR code before executing\n"
+                << "-emit-expr\tDumps the Expressions generated before executing\n"
                 << "-O0\t\tGenerates output code with no optmizations\n"
                 << "-O1\t\tOptimizes Brain generated output code (Default)\n" 
                 << "\n";
       exit(0);
     }
-    else if (str.compare("--debug") == 0)
+    else if (str.compare("-emit-llvm") == 0)
     {
-      _isDebugging = true;
+      _isEmitingLLVM = true;
+    }
+    else if (str.compare("-emit-expr") == 0)
+    {
+      _isEmitingExpr = true;
     }
     else if (str.compare("-O0") == 0)
     {
@@ -84,9 +89,14 @@ std::string ArgsHandler::getStringFile()
   return _stringFile;
 }
 
-bool ArgsHandler::isDebugActive()
+bool ArgsHandler::isEmitLLVMActive()
 {
-  return _isDebugging;
+  return _isEmitingLLVM;
+}
+
+bool ArgsHandler::isEmitExprActive()
+{
+  return _isEmitingExpr;
 }
 
 bool ArgsHandler::isOptimizing()

@@ -148,4 +148,9 @@ void Parser::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 
 void Parser::DebugDescription(int level)
 {
+  for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) 
+  {
+    std::cout << std::string(level * 2, ' ');
+    (*it)->DebugDescription(level+1);
+  }
 }

@@ -14,13 +14,15 @@ class ArgsHandler
 {
   protected:
     std::string _stringFile;
-    bool _isDebugging;
+    bool _isEmitingLLVM;
+    bool _isEmitingExpr;
     bool _isOptimizing;
     void handle(int argc, char *argv[]);
   public:
-    ArgsHandler(int argc, char *argv[]) : _isDebugging(false), _isOptimizing(true) { handle(argc, argv); }
+    ArgsHandler(int argc, char *argv[]) : _isEmitingLLVM(false), _isEmitingExpr(false), _isOptimizing(true) { handle(argc, argv); }
     std::string getStringFile();
-    bool isDebugActive();
+    bool isEmitLLVMActive();
+    bool isEmitExprActive();
     bool isOptimizing();
 };
 

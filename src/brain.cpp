@@ -57,8 +57,15 @@ int main(int argc, char *argv[])
   // Return 0 to the "main" function
   B.CreateRet(B.getInt32(0));
 
-  if(argsHandler.isDebugActive())
-  {  
+  if (argsHandler.isEmitExprActive())
+  {
+    std::cout << "\n" << "=== Debug Information ===" << "\n";
+    parser.DebugDescription(0);
+  }
+
+  if(argsHandler.isEmitLLVMActive())
+  { 
+    std::cout << "\n" << "=== LLVM IR ===" << "\n"; 
     // Print (dump) the module
     M->dump();
   }
@@ -83,7 +90,7 @@ int main(int argc, char *argv[])
   // Finalize the execution engine before use it
   EE->finalizeObject();
 
-  if (argsHandler.isDebugActive())
+  if (argsHandler.isEmitExprActive() || argsHandler.isEmitLLVMActive())
   {
     // Run the program
     std::cout << "\n" << "=== Program Output ===" << "\n";
