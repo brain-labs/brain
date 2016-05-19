@@ -1,5 +1,5 @@
 CC=clang++
-CFLAGS=-O3 -Wall
+CFLAGS=-O3 -Wall 
 SRCS=ArgsHandler.cpp Parser.cpp Expr.cpp ShiftExpr.cpp IncrementExpr.cpp InputExpr.cpp OutputExpr.cpp LoopExpr.cpp brain.cpp
 CONFIG=`llvm-config --cxxflags --ldflags --system-libs --libs core mcjit native nativecodegen`
 

@@ -20,3 +20,18 @@ void ShiftExpr::DebugDescription(int level)
   std::cout.width(level);
   std::cout << "ShiftExpr (" << _step << ")" << std::endl;
 }
+
+bool ShiftExpr::UpdateExpr(char update)
+{
+  switch(update)
+  {
+    case '>': _step++; return true;
+    case '<': _step--; return true;
+    default : return false;
+  }
+}
+
+EXPR_TYPE ShiftExpr::ExprType()
+{
+  return ET_SHIFT;
+}

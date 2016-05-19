@@ -24,6 +24,8 @@ class LoopExpr : public Expr
     LoopExpr(std::vector<Expr *> exprs) : _exprs(exprs) { }
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
+    bool UpdateExpr(char update);
+    EXPR_TYPE ExprType();
     ~LoopExpr() {};
 };
 

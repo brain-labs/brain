@@ -24,3 +24,17 @@ void IncrementExpr::DebugDescription(int level)
   std::cout << "IncrementExpr (" << _increment << ")" << std::endl;
 }
 
+bool IncrementExpr::UpdateExpr(char update)
+{
+  switch(update)
+  {
+    case '+': _increment++; return true;
+    case '-': _increment--; return true;
+    default : return false;
+  } 
+}
+
+EXPR_TYPE IncrementExpr::ExprType()
+{
+  return ET_INCREMENT;
+}

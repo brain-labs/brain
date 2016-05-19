@@ -33,27 +33,14 @@ char Parser::getToken()
 void Parser::parse(std::vector<Expr *> &exprs)
 {
    char c = 0;
-   while ( (c = getToken()) ) {
+   while ( (c = getToken()) ) 
+   {
      Expr *expr = NULL;
-     if (_isOptimizing)
+     if (_isOptimizing && exprs.size())
      {
        Expr *lastExpr = exprs.back();
-       switch(c)
-       {
-         case '<':
-         {
-         }
-         case '>':
-         {
-         }
-         case '+':
-         {
-         }
-         case '-':
-         {
-         }
-         default: break;
-       }
+       if (lastExpr->UpdateExpr(c))
+         continue;
      }
 
      switch (c)

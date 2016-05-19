@@ -47,3 +47,13 @@ void InputExpr::DebugDescription(int level)
   std::cout.width(level);
   std::cout << "InputExpr" << std::endl;
 }
+
+bool InputExpr::UpdateExpr(char update)
+{
+  return false;
+}
+
+EXPR_TYPE InputExpr::ExprType()
+{
+  return ET_INPUT;
+}

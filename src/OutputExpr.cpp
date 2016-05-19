@@ -40,3 +40,13 @@ void OutputExpr::DebugDescription(int level)
   std::cout.width(level);
   std::cout << "OutputExpr" << std::endl;
 }
+
+bool OutputExpr::UpdateExpr(char update)
+{
+  return false;
+}
+
+EXPR_TYPE OutputExpr::ExprType()
+{
+  return ET_OUTPUT;
+}

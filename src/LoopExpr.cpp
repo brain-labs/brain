@@ -55,3 +55,12 @@ void LoopExpr::DebugDescription(int level)
   std::cout << std::string(level, ' ') << "]" << std::endl;
 }
 
+bool LoopExpr::UpdateExpr(char update)
+{
+  return false;
+}
+
+EXPR_TYPE LoopExpr::ExprType()
+{
+  return ET_LOOP;
+}

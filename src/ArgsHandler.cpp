@@ -82,6 +82,13 @@ void ArgsHandler::handle(int argc, char *argv[])
        exit(-1);
     }
   }
+
+  if (_stringFile.empty())
+  {
+    std::cout << "No input files\n"
+              << BRAIN_FORMAT;
+    exit(-1);
+  }
 }
 
 std::string ArgsHandler::getStringFile()
