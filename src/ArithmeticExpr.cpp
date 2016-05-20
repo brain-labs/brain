@@ -24,15 +24,54 @@ void ArithmeticExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Global
   // Load cell value
   llvm::Value *CellV2 = B.CreateLoad(CellPtr2);
 
-  // Multiplies the value at the current index with the value at the current index - 1 and
-  // stores it at the current index 
-  B.CreateStore(B.CreateMul(CellV, CellV2), CellPtr);
+  switch(_type)
+  {
+    case AT_MUL:
+    {
+      // Multiplies the value at the current index with the value at the current index - 1 and
+      // stores it at the current index
+      B.CreateStore(B.CreateMul(CellV, CellV2), CellPtr);
+      break;
+    }
+    case AT_DIV:
+    {
+      B.CreateStore(B.CreateSDiv(CellV, CellV2), CellPtr);
+      break;
+    }
+    case AT_REM:
+    {
+      B.CreateStore(B.CreateSRem(CellV, CellV2), CellPtr);
+      break;
+    }
+    default: break;
+  }
 }
 
 void ArithmeticExpr::DebugDescription(int level)
 {
   std::cout.width(level);
-  std::cout << "ArithmeticExpr " << std::endl;
+  std::cout << "ArithmeticExpr ( " << TypeToString() << " )" << std::endl;
+}
+
+std::string ArithmeticExpr::TypeToString()
+{
+  switch(_type)
+  {
+    case AT_MUL:
+    {
+      return "Multiplication";
+    }
+    case AT_DIV:
+    {
+      return "Division";
+    }
+    case AT_REM:
+    {
+      return "Remainder";
+    }
+    default: return "";
+  }
+
 }
 
 bool ArithmeticExpr::UpdateExpr(char update)

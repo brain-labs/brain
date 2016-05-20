@@ -91,7 +91,17 @@ void Parser::parse(std::vector<Expr *> &exprs)
        }
        case '*':
        {
-         expr = new ArithmeticExpr();
+         expr = new ArithmeticExpr(AT_MUL);
+         break;
+       }
+       case '/':
+       {
+         expr = new ArithmeticExpr(AT_DIV);
+         break;
+       }
+       case '%':
+       {
+         expr = new ArithmeticExpr(AT_REM);
          break;
        }
        default: 
