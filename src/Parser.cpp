@@ -12,6 +12,7 @@
 #include "OutputExpr.h"
 #include "LoopExpr.h"
 #include "ArithmeticExpr.h"
+#include "DebugExpr.h"
 
 static llvm::GlobalVariable *__Brain_IndexPtr = NULL;
 static llvm::GlobalVariable *__Brain_CellsPtr = NULL;
@@ -23,7 +24,7 @@ bool Parser::isSkippable(char c)
           c != '.' && c != ',' &&
           c != '[' && c != ']' &&
           c != '*' && c != '/' &&
-          c != '%');
+          c != '%' && c != '#');
 }
 
 char Parser::getToken()
@@ -102,6 +103,11 @@ void Parser::parse(std::vector<Expr *> &exprs)
        case '%':
        {
          expr = new ArithmeticExpr(AT_REM);
+         break;
+       }
+       case '#':
+       {
+         expr = new DebugExpr();
          break;
        }
        default: 

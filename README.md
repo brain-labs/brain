@@ -30,9 +30,9 @@ To use __Project Status__, please visit:```https://github.com/luizperes/status-p
 
 | To Do | In Progress | Done  |
 | :---: | :---------: | :---: |
-|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20Brain%20Commands.)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20(*,%20/%20%).)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
+|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20Brain%20Commands.)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!).)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
 ||| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
-|||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%235&desc=Optmize%20generated%20code.%20Include%20-O0%20and%20-O1%20options.)|
+|||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%235&desc=Optmize%20generated%20code.%20Include%20-O0%20and%20-O1%20options.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20(*,%20/%20%).)|
 
 ### Commands
 __Implemented__
@@ -44,9 +44,12 @@ __Implemented__
 - ```,``` accept one value of input, storing its value in the value at the data pointer.
 - ```[``` if the value at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
 - ```]``` jump to its correspondent [ .
+- ```*``` multiply ```*ptr``` with ```*(ptr-1)```. Store result in *ptr _// format: 2 3 *_
+- ```/``` divide ```*ptr``` with ```*(ptr-1)```. Store the result in *ptr _// format: 2 3 /_
+- ```%``` divide ```*ptr``` with ```*(ptr-1)```. Store the remainder in *ptr _// format: 2 3 %_
+- ```#``` prints out the current debug information.
 
 __Not Implemented__
-- ```#``` prints out the current debug information.
 - ```{``` (__for__ loop) iterates ```'value-at-the-data-pointer' times``` and needs to be closed with a matching } command.
 - ```}``` jump to its correspondent { . It also drecreases the value at the data pointer.
 - ```!``` (__break__) jumps to the end of a loop (__[ ]__ or __{ }__)
@@ -57,9 +60,6 @@ __Not Implemented__
 __Thinking About__
 - ```$``` cast the value at the data pointer back and forth to ```float``` and ```int```.
 - ```@``` include other __Brain__ files.
-- ```*``` multiply ```*ptr``` with *(ptr-1). Store result in *ptr _// format: 2 3 *_
-- ```/``` divide ```*ptr``` with *(ptr-1). Store the result in *ptr _// format: 2 3 /_
-- ```%``` divide ```*ptr``` with *(ptr-1). Store the remainder in *ptr _// format: 2 3 %_
 
 Example of the instructions above: 
 - ___if-else___: ```? +++ : --- ;``` _// if (*ptr) { *ptr += 3; } else { *ptr -= 3; }_
@@ -78,4 +78,5 @@ Feel free to send your pull requests. :)
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
+
 
