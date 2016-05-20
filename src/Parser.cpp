@@ -11,6 +11,7 @@
 #include "InputExpr.h"
 #include "OutputExpr.h"
 #include "LoopExpr.h"
+#include "ArithmeticExpr.h"
 
 static llvm::GlobalVariable *__Brain_IndexPtr = NULL;
 static llvm::GlobalVariable *__Brain_CellsPtr = NULL;
@@ -20,7 +21,9 @@ bool Parser::isSkippable(char c)
   return (c != '<' && c != '>' &&
           c != '+' && c != '-' &&
           c != '.' && c != ',' &&
-          c != '[' && c != ']');
+          c != '[' && c != ']' &&
+          c != '*' && c != '/' &&
+          c != '%');
 }
 
 char Parser::getToken()
@@ -85,6 +88,11 @@ void Parser::parse(std::vector<Expr *> &exprs)
        case ']':
        {
          return; // exit the recursivity 
+       }
+       case '*':
+       {
+         expr = new ArithmeticExpr();
+         break;
        }
        default: 
        {
