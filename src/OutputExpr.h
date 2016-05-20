@@ -23,7 +23,6 @@ class OutputExpr : public Expr
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
     bool UpdateExpr(char update);
-    EXPR_TYPE ExprType();
     ~OutputExpr() {};
 };
 

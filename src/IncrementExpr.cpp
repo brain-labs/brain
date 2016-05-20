@@ -34,7 +34,3 @@ bool IncrementExpr::UpdateExpr(char update)
   } 
 }
 
-EXPR_TYPE IncrementExpr::ExprType()
-{
-  return ET_INCREMENT;
-}

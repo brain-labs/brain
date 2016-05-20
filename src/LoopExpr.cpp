@@ -60,7 +60,3 @@ bool LoopExpr::UpdateExpr(char update)
   return false;
 }
 
-EXPR_TYPE LoopExpr::ExprType()
-{
-  return ET_LOOP;
-}

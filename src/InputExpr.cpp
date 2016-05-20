@@ -53,7 +53,3 @@ bool InputExpr::UpdateExpr(char update)
   return false;
 }
 
-EXPR_TYPE InputExpr::ExprType()
-{
-  return ET_INPUT;
-}

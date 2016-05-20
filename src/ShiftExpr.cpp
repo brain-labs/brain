@@ -31,7 +31,3 @@ bool ShiftExpr::UpdateExpr(char update)
   }
 }
 
-EXPR_TYPE ShiftExpr::ExprType()
-{
-  return ET_SHIFT;
-}

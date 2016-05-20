@@ -46,7 +46,3 @@ bool OutputExpr::UpdateExpr(char update)
   return false;
 }
 
-EXPR_TYPE OutputExpr::ExprType()
-{
-  return ET_OUTPUT;
-}
