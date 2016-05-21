@@ -1,4 +1,6 @@
 # Brain
+[![Build Status](https://travis-ci.org/luizperes/brain.svg?branch=master)](https://travis-ci.org/luizperes/brain)
+
 A computer language based on Brainfuck.
 
 ### Information
