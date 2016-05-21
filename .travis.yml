@@ -44,12 +44,22 @@ compiler:
 
 sudo: true
 
-install: sudo apt-get install gcc clang-3.7 clang-3.7-doc \
-                                  libclang-common-3.7-dev libclang-3.7-dev \
-                                  libclang1-3.7 libclang1-3.7-dbg libllvm-3.7-ocaml-dev \
-                                  libllvm3.7 libllvm3.7-dbg lldb-3.7 llvm-3.7 llvm-3.7-dev \
-                                  llvm-3.7-doc llvm-3.7-examples llvm-3.7-runtime clang-modernize-3.7 \
-                                  clang-format-3.7 python-clang-3.7 lldb-3.7-dev \
+git:
+    depth:3
+
+before_install:
+
+    # Build LLVM dependencies
+    - git clone --depth=1 http://llvm.org/git/llvm.git
+    - cd llvm
+    - mkdir build
+    - cd build
+    - cmake ../llvm/
+    - cmake --build .
+    - cmake --build . --target install
+
+    # go back to the root directory
+    - cd ../..
+
 
 script: cd src && make
-  

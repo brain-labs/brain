@@ -3,24 +3,73 @@
 
 A computer language based on Brainfuck.
 
-### Information
-__Brain__ wants to improve the performance of the Brainfuck programming language and extend it as well, as Brainfuck itself has a lack of data types and does not perform great control over variables, as well as when you want to make libraries and/or functions and when you want to use different models other than characters integers.
+## Table of Contents
+
+- [About](#about)
+- How to build Brain
+  - [How to build LLVM (Required)](#how-to-build-llvm)
+  - [How to install pre-commit(Optional)](#how-to-install-pre-commit)
+  - [How to build Brain and compile/run files](#how-to-build-brain-and-run-files)
+- TODO: get table of contents done and minimize headers
+
+### About
+__Brain__ wants to improve the performance of the Brainfuck programming language and extend it as well, as Brainfuck itself has a lack of data types and does not perform great control over variables, as well as when you want to make libraries and/or functions and when you want to use different models other than characters and smalld integers.
 
 One of the main ideas of __Brain__ is saving some operations in machine language, creating an instruction optmizer due to the excess of instructions that Brainfuck would generate. Brain aims to implement it by using current technology __(LLVM)__.
 
 In spite of implementing new commands and features, __Brain__ tries to be **completely compatible** with Brainfuck.
 
+### How to build LLVM
+__Brain__ runs on the top of __LLVM__, thus, you are required to install the lasted version of LLVM. You can do that with git and CMake:
+
+```
+$ git clone http://llvm.org/git/llvm.git
+$ cd llvm/
+$ mkdir mybuilddir
+$ cd mybuilddir
+$ cmake --build .
+$ cmake --build . --target install
+```
+
+_You should be good to start. Although, having any problems with installing LLVM, please visit:http://llvm.org/docs/CMake.html_
+
+### How to install pre-commit
+This project uses __pre-commit__ to help us to check our commits in order to minimize bugs and other problems on the project, therefore is strongly recommended that you use it, if you are intending to contribute to the project. For that, you can install by:
+
+if you have ```pip``` installed:
+```
+brew install pre-commit
+```
+Linux
+-----
+```
+sudo pip install pre-commit
+```
+After that, go to where Brain lives:
+```
+$ cd /path/to/brain
+$ pre-commit install
+```
+More information about that [here](http://pre-commit.com/)
+
+### How to build Brain and run files
+To build it, after [installing LLVM](#how-to-build-llvm), execute:
+```
+$ cd /path/to/brain/src
+$ make
+```
+You can also change the compiler (tested on ```g++``` and ```clang++```) on the ```Makefile``` inside the ```src``` directory.
+
+After running ```make``` on it, you can execute:```./brain your_brain_file.b```. Please check the [current status](#current-status) of the project.
+
 ### How it has been built
-Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types. 
+Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types.
 
 ### Technical Information
 Brain is __not yet__ a Turing Complete language, once I'm limiting its ```memory``` to ```100 * 32 bytes``` for now (only for testing purposes). Later on I will think in a way to allocate memory as needed instead.
 
 ### Current Status
 Brain is running just like __Brainfuck__ so far, so feel free to use its tag [version 0.5](https://github.com/luizperes/brain/blob/v0.5/README.md)
-
-### How to run your Brain files
-It is as simple as: ```./brain your_brain_file.b```
 
 ### Project Status
 
@@ -40,7 +89,7 @@ To use __Project Status__, please visit:```https://github.com/luizperes/status-p
 __Implemented__
 - ```>``` increment the data pointer (to point to the next cell to the right).
 - ```<``` decrement the data pointer (to point to the next cell to the left).
-- ```+``` increment (increase by one) the value at the data pointer. 
+- ```+``` increment (increase by one) the value at the data pointer.
 - ```-``` decrement (decrease by one) the value at the data pointer.
 - ```.``` output the value at the data pointer.
 - ```,``` accept one value of input, storing its value in the value at the data pointer.
@@ -63,7 +112,7 @@ __Thinking About__
 - ```$``` cast the value at the data pointer back and forth to ```float``` and ```int```.
 - ```@``` include other __Brain__ files.
 
-Example of the instructions above: 
+Example of the instructions above:
 - ___if-else___: ```? +++ : --- ;``` _// if (*ptr) { *ptr += 3; } else { *ptr -= 3; }_
 - __for__: ```++++ { commands }``` _// makes four iterations 4 through 0 (excluded)_
 
@@ -80,5 +129,3 @@ Feel free to send your pull requests. :)
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
-
-
