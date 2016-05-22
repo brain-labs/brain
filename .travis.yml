@@ -34,8 +34,6 @@
 # MMMMMMMMMMMMMHQO>:!>>>>!:?O$$QQ$$?;    ..;;-::!!::::::>MMMMM MMMMMMMMM
 # MMMMMMMMMMMMMMMMMQ>:::::::>?O$OC7:-:::::!!!!:::::!>>7ONMMMMMMMMMMMMMMM
 
-
-
 language: cpp
 
 compiler:
@@ -44,22 +42,30 @@ compiler:
 
 sudo: true
 
-git:
-    depth:3
+cache:
+    directories:
+        - cmake-2.8.12.2
 
 before_install:
 
-    # Build LLVM dependencies
-    - git clone --depth=1 http://llvm.org/git/llvm.git
-    - cd llvm
-    - mkdir build
-    - cd build
-    - cmake ../llvm/
-    - cmake --build .
-    - cmake --build . --target install
+  # Install CMake
+  - (if test -f cmake-2.8.12.2/bin/cmake; then echo OK; else
+           git clone --branch v2.8.12.2 --single-branch --depth 1 git://cmake.org/cmake.git cmake-2.8.12.2-src &&
+           cd cmake-2.8.12.2-src &&
+           ./configure --prefix=$TRAVIS_BUILD_DIR/cmake-2.8.12.2 &&
+           make &&
+           make install;
+     fi)
 
-    # go back to the root directory
-    - cd ../..
+  # Build LLVM dependencies
+  - git clone --depth=1 http://llvm.org/git/llvm.git
+  - mkdir llvm-build
+  - cd llvm-build
+  - cmake ../llvm/
+  - cmake --build .
+  - cmake --build . --target install
 
+  # go back to the root directory
+  - cd ..
 
 script: cd src && make

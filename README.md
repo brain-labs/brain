@@ -6,11 +6,16 @@ A computer language based on Brainfuck.
 ## Table of Contents
 
 - [About](#about)
-- How to build Brain
+- [Current Status](#current-status)
+- __How to build Brain__
   - [How to build LLVM (Required)](#how-to-build-llvm)
   - [How to install pre-commit(Optional)](#how-to-install-pre-commit)
   - [How to build Brain and compile/run files](#how-to-build-brain-and-run-files)
-- TODO: get table of contents done and minimize headers
+- [How it has been built](#how-it-has-been-built)
+- [Technical Information](#technical-information)
+- [Compiler Options](#compiler-options)
+- [Help the Project](#help)
+- [License](#license)
 
 ### About
 __Brain__ wants to improve the performance of the Brainfuck programming language and extend it as well, as Brainfuck itself has a lack of data types and does not perform great control over variables, as well as when you want to make libraries and/or functions and when you want to use different models other than characters and smalld integers.
@@ -19,14 +24,30 @@ One of the main ideas of __Brain__ is saving some operations in machine language
 
 In spite of implementing new commands and features, __Brain__ tries to be **completely compatible** with Brainfuck.
 
+### Current Status
+Brain is running just like __Brainfuck__ so far, so feel free to use its tag [version 0.5](https://github.com/luizperes/brain/blob/v0.5/README.md)
+
+Obs.: To use __Project Status__ (the "Kanban" below), please visit:```https://github.com/luizperes/status-projects/blob/master/README.md``` and ```http://luizperes.github.io/status-projects/```
+
+| Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
+| ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
+| [Brain](#brain)         | ![Progress](http://progressed.io/bar/50)  | C/C++/LLVM  | Low      |              |
+
+| To Do | In Progress | Done  |
+| :---: | :---------: | :---: |
+|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20Brain%20Commands.)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!).)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
+||| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
+|||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%235&desc=Optmize%20generated%20code.%20Include%20-O0%20and%20-O1%20options.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20(*,%20/%20%).)|
+
+
 ### How to build LLVM
 __Brain__ runs on the top of __LLVM__, thus, you are required to install the lasted version of LLVM. You can do that with git and CMake:
 
 ```
 $ git clone http://llvm.org/git/llvm.git
-$ cd llvm/
 $ mkdir mybuilddir
 $ cd mybuilddir
+$ cmake ../llvm
 $ cmake --build .
 $ cmake --build . --target install
 ```
@@ -37,11 +58,12 @@ _You should be good to start. Although, having any problems with installing LLVM
 This project uses __pre-commit__ to help us to check our commits in order to minimize bugs and other problems on the project, therefore is strongly recommended that you use it, if you are intending to contribute to the project. For that, you can install by:
 
 if you have ```pip``` installed:
+
+__Mac__
 ```
 brew install pre-commit
 ```
-Linux
------
+__Linux__
 ```
 sudo pip install pre-commit
 ```
@@ -67,23 +89,6 @@ Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpret
 
 ### Technical Information
 Brain is __not yet__ a Turing Complete language, once I'm limiting its ```memory``` to ```100 * 32 bytes``` for now (only for testing purposes). Later on I will think in a way to allocate memory as needed instead.
-
-### Current Status
-Brain is running just like __Brainfuck__ so far, so feel free to use its tag [version 0.5](https://github.com/luizperes/brain/blob/v0.5/README.md)
-
-### Project Status
-
-To use __Project Status__, please visit:```https://github.com/luizperes/status-projects/blob/master/README.md``` and ```http://luizperes.github.io/status-projects/```
-
-| Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
-| ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
-| [Brain](#brain)         | ![Progress](http://progressed.io/bar/50)  | C/C++/LLVM  | Low      |              |
-
-| To Do | In Progress | Done  |
-| :---: | :---------: | :---: |
-|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20Brain%20Commands.)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!).)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
-||| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
-|||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%235&desc=Optmize%20generated%20code.%20Include%20-O0%20and%20-O1%20options.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20(*,%20/%20%).)|
 
 ### Commands
 __Implemented__
