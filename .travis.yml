@@ -44,6 +44,8 @@ sudo: true
 cache:
     directories:
         - cmake-2.8.12.2
+        - llvm
+        - llvm-build    
 
 before_install:
 
@@ -87,7 +89,9 @@ before_install:
 
   # Build LLVM dependencies
   - git clone --depth=1 http://llvm.org/git/llvm.git
-  - mkdir llvm-build
+  - (if test -f llvm-build; then echo OK; else
+          mkdir llvm-build;
+     fi)
   - cd llvm-build
   - cmake ../llvm/
   - cmake --build .
@@ -97,3 +101,4 @@ before_install:
   - cd ..
 
 script: cd src && make
+
