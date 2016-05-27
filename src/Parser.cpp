@@ -13,6 +13,7 @@
 #include "LoopExpr.h"
 #include "ArithmeticExpr.h"
 #include "DebugExpr.h"
+#include "BreakExpr.h"
 
 static llvm::GlobalVariable *__Brain_IndexPtr = NULL;
 static llvm::GlobalVariable *__Brain_CellsPtr = NULL;
@@ -24,7 +25,8 @@ bool Parser::isSkippable(char c)
           c != '.' && c != ',' &&
           c != '[' && c != ']' &&
           c != '*' && c != '/' &&
-          c != '%' && c != '#');
+          c != '%' && c != '#' &&
+          c != '!');
 }
 
 char Parser::getToken()
@@ -110,6 +112,11 @@ void Parser::parse(std::vector<Expr *> &exprs)
          expr = new DebugExpr();
          break;
        }
+       case '!':
+       {
+         expr = new BreakExpr();
+         break;
+       }
        default: 
        {
          break; // Ignored character
@@ -153,7 +160,7 @@ void Parser::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 
   for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) 
   {
-    (*it)->CodeGen(M, B, __Brain_IndexPtr, __Brain_CellsPtr);
+    (*it)->CodeGen(M, B, NULL, __Brain_IndexPtr, __Brain_CellsPtr);
   }
 }
 

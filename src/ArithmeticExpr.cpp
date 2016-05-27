@@ -7,7 +7,7 @@
 
 #include "ArithmeticExpr.h"
 
-void ArithmeticExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void ArithmeticExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::Value *IdxV = B.CreateLoad(index);  
   llvm::Value* Idxs[] = { B.getInt32(0), IdxV };
@@ -43,7 +43,6 @@ void ArithmeticExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Global
       B.CreateStore(B.CreateSRem(CellV, CellV2), CellPtr);
       break;
     }
-    default: break;
   }
 }
 
@@ -69,7 +68,6 @@ std::string ArithmeticExpr::TypeToString()
     {
       return "Remainder";
     }
-    default: return "";
   }
 
 }

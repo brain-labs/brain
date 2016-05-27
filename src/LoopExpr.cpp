@@ -7,7 +7,7 @@
 
 #include "LoopExpr.h"
 
-void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
   
@@ -37,8 +37,9 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariab
   // Recursively generate code (into "LoopBody" block)
   for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it)
   {
-    (*it)->CodeGen(M, LoopB, index, cells);
+    (*it)->CodeGen(M, LoopB, EndBB, index, cells);
   }
+  
   LoopB.CreateBr(StartBB); // Restart loop (will next exit if current cell value > 0)
   
   B.SetInsertPoint(EndBB);

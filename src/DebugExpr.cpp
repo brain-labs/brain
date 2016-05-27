@@ -9,7 +9,7 @@
 
 using namespace llvm;
 
-void DebugExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void DebugExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
   

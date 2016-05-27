@@ -5,8 +5,8 @@
  * Copyright Luiz Peres, 2016.
  */
 
-#ifndef OUTPUT_EXPR_H
-#define OUTPUT_EXPR_H
+#ifndef BREAK_EXPR_H
+#define BREAK_EXPR_H
 
 #include <iostream>
 
@@ -16,14 +16,14 @@
 
 #include "Expr.h"
 
-class OutputExpr : public Expr
+class BreakExpr : public Expr
 {
   public:
-    OutputExpr() { }
+    BreakExpr() { }
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
     bool UpdateExpr(char update);
-    ~OutputExpr() {};
+    ~BreakExpr() {};
 };
 
 #endif
