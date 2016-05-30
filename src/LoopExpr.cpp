@@ -14,6 +14,19 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *
   // Create a basic block for loop
   llvm::Function *F = B.GetInsertBlock()->getParent();
   llvm::BasicBlock *StartBB = llvm::BasicBlock::Create(C, "LoopStart", F);
+  
+  // Get the current cell adress
+  llvm::Value *IdxV = B.CreateLoad(index);
+  llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
+                               IdxV);
+  llvm::Value *CounterV = nullptr;
+  if (_type == LT_FOR)
+  {
+    CounterV = B.CreateAlloca(llvm::Type::getInt32Ty(C), 0, "Counter");
+    B.CreateStore(B.CreateLoad(CellPtr), CounterV);
+  }
+
   B.CreateBr(StartBB);
   
   B.SetInsertPoint(StartBB);
@@ -23,13 +36,18 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *
   llvm::BasicBlock *LoopBB = llvm::BasicBlock::Create(C, "LoopBody", F);
   llvm::BasicBlock *EndBB = llvm::BasicBlock::Create(C, "LoopEnd", F);
   
-  // Get the current cell adress
-  llvm::Value *IdxV = B.CreateLoad(index);
-  llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
-                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
-                               IdxV);
-  llvm::Value *SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CellPtr),
+  llvm::Value *SGZeroCond = nullptr;
+  if (_type == LT_FOR)
+  {
+    SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CounterV),
                                            StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
+  }
+  else
+  {
+    SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CellPtr),
+                                           StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
+  }
+
   StartB.CreateCondBr(SGZeroCond, LoopBB, EndBB);
   
   B.SetInsertPoint(LoopBB);
@@ -39,6 +57,9 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *
   {
     (*it)->CodeGen(M, LoopB, EndBB, index, cells);
   }
+
+  if (_type == LT_FOR)
+    LoopB.CreateStore(LoopB.CreateAdd(LoopB.CreateLoad(CounterV), LoopB.getInt32(-1)), CounterV);
   
   LoopB.CreateBr(StartBB); // Restart loop (will next exit if current cell value > 0)
   

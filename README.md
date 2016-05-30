@@ -104,10 +104,10 @@ __Implemented__
 - ```/``` divide ```*ptr``` with ```*(ptr-1)```. Store the result in *ptr _// format: 2 3 /_
 - ```%``` divide ```*ptr``` with ```*(ptr-1)```. Store the remainder in *ptr _// format: 2 3 %_
 - ```#``` prints out the current debug information.
-
-__Not Implemented__
 - ```{``` (__for__ loop) iterates ```'value-at-the-data-pointer' times``` and needs to be closed with a matching } command.
 - ```}``` jump to its correspondent { . It also drecreases the value at the data pointer.
+
+__Not Implemented__
 - ```!``` (__break__) jumps to the end of a loop (__[ ]__ or __{ }__)
 - ```?``` if the value at the data pointer is ```0```, jumps to the block with ```:``` or ```;``` and executes the commands one by one up to its correlative ```;```, otherwise, it executes the code until it finds a ```:``` or ```;```.
 - ```:``` it works as an ```otherwise``` (or ```else```) for ```?```.

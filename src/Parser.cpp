@@ -26,7 +26,8 @@ bool Parser::isSkippable(char c)
           c != '[' && c != ']' &&
           c != '*' && c != '/' &&
           c != '%' && c != '#' &&
-          c != '!');
+          c != '!' && c != '{' &&
+          c != '}');
 }
 
 char Parser::getToken()
@@ -85,12 +86,23 @@ void Parser::parse(std::vector<Expr *> &exprs)
        {
          std::vector<Expr *> loopExpr;
          parse(loopExpr);
-         expr = new LoopExpr(loopExpr);
+         expr = new LoopExpr(loopExpr, LT_WHILE);
          break;
        }
        case ']':
        {
          return; // exit the recursivity 
+       }
+       case '{':
+       {
+         std::vector<Expr *> loopExpr;
+         parse(loopExpr);
+         expr = new LoopExpr(loopExpr, LT_FOR);
+         break;
+       }
+       case '}':
+       {
+         return; // exit the recursivity
        }
        case '*':
        {

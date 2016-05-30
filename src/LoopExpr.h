@@ -16,12 +16,19 @@
 
 #include "Expr.h"
 
+typedef enum
+{
+  LT_WHILE,
+  LT_FOR
+}LoopType;
+
 class LoopExpr : public Expr
 {
   protected:
     std::vector<Expr *> _exprs;
+    LoopType _type;
   public:
-    LoopExpr(std::vector<Expr *> exprs) : _exprs(exprs) { }
+    LoopExpr(std::vector<Expr *> exprs, LoopType type) : _exprs(exprs), _type(type) { }
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
     bool UpdateExpr(char update);
