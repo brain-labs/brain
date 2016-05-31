@@ -23,7 +23,7 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *
   llvm::Value *CounterV = nullptr;
   if (_type == LT_FOR)
   {
-    CounterV = B.CreateAlloca(llvm::Type::getInt32Ty(C), 0, "Counter");
+    CounterV = B.CreateAlloca(llvm::Type::getInt32Ty(C), 0, "counter");
     B.CreateStore(B.CreateLoad(CellPtr), CounterV);
   }
 
@@ -68,13 +68,16 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *
 
 void LoopExpr::DebugDescription(int level)
 {
-  std::cout << "LoopExpr: [" << std::endl;
+  std::string openedBrackets = (_type == LT_FOR) ? "{" : "[";
+  std::string closedBrackets = (_type == LT_FOR) ? "}" : "]";  
+ 
+  std::cout << "LoopExpr: " << openedBrackets << std::endl;
   for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it)
   {
     std::cout << std::string(level * 2, ' ');
     (*it)->DebugDescription(level+1);
   }
-  std::cout << std::string(level, ' ') << "]" << std::endl;
+  std::cout << std::string(level, ' ') << closedBrackets << std::endl;
 }
 
 bool LoopExpr::UpdateExpr(char update)

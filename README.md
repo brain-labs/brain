@@ -31,7 +31,7 @@ Obs.: To use __Project Status__ (the "Kanban" below), please visit:```https://gi
 
 | Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
 | ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
-| [Brain](#brain)         | ![Progress](http://progressed.io/bar/50)  | C/C++/LLVM  | Low      |              |
+| [Brain](#brain)         | ![Progress](http://progressed.io/bar/60)  | C/C++/LLVM  | Low      |              |
 
 | To Do | In Progress | Done  |
 | :---: | :---------: | :---: |

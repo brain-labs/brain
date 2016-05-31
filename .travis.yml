@@ -45,7 +45,7 @@ cache:
     directories:
         - cmake-2.8.12.2
         - llvm
-        - llvm-build    
+        - llvm-build
 
 before_install:
 
@@ -88,10 +88,8 @@ before_install:
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
 
   # Build LLVM dependencies
-  - git clone --depth=1 http://llvm.org/git/llvm.git
-  - (if test -f llvm-build; then echo OK; else
-          mkdir llvm-build;
-     fi)
+  - if test -d llvm; then echo OK; else git clone --depth=1 http://llvm.org/git/llvm.git; fi
+  - mkdir -p llvm-build
   - cd llvm-build
   - cmake ../llvm/
   - cmake --build .
@@ -101,4 +99,3 @@ before_install:
   - cd ..
 
 script: cd src && make
-
