@@ -15,14 +15,16 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *
   llvm::Function *F = B.GetInsertBlock()->getParent();
   llvm::BasicBlock *StartBB = llvm::BasicBlock::Create(C, "LoopStart", F);
   
-  // Get the current cell adress
-  llvm::Value *IdxV = B.CreateLoad(index);
-  llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
-                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
-                               IdxV);
+  llvm::Value *IdxV = nullptr; 
+  llvm::Value *CellPtr = nullptr; 
   llvm::Value *CounterV = nullptr;
   if (_type == LT_FOR)
   {
+    // Get the current cell adress
+    IdxV = B.CreateLoad(index);
+    CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
+                               IdxV);
     CounterV = B.CreateAlloca(llvm::Type::getInt32Ty(C), 0, "counter");
     B.CreateStore(B.CreateLoad(CellPtr), CounterV);
   }
@@ -44,6 +46,11 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *
   }
   else
   {
+    // Get the current cell adress
+    IdxV = B.CreateLoad(index);
+    CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
+                               IdxV);
     SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CellPtr),
                                            StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
   }
@@ -59,7 +66,9 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *
   }
 
   if (_type == LT_FOR)
+  {
     LoopB.CreateStore(LoopB.CreateAdd(LoopB.CreateLoad(CounterV), LoopB.getInt32(-1)), CounterV);
+  }
   
   LoopB.CreateBr(StartBB); // Restart loop (will next exit if current cell value > 0)
   
