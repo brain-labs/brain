@@ -34,6 +34,42 @@
 # MMMMMMMMMMMMMHQO>:!>>>>!:?O$$QQ$$?;    ..;;-::!!::::::>MMMMM MMMMMMMMM
 # MMMMMMMMMMMMMMMMMQ>:::::::>?O$OC7:-:::::!!!!:::::!>>7ONMMMMMMMMMMMMMMM
 
+# MMMMMMMMMMMMOMOOOQQQQQQQQQQQQQQ$$$$QQQQQQQQQQ$$OO$OOMMMMMMMMMMMMMMMMMM
+# MMMMMMMMMMMMOOOO$Q$QQQQQQQQQQQQQQQQQQQQQQQQQQQQ$OOMOMMMMMMMMMMMMMMMMMM
+# MMMMMMMMMMMOOMMOO$QQQQQQQQQQQQQQQ$QQQQQQQQQQQQ$QOO$MOMMMMMMMMMMMMMMMMM
+# MMMMMMMMMOOMMOOOO$Q$QQQQQQQQQQQQQQ$$$Q$$$$$$$$$QOO$MOMMMMMMMMMMMMMMMMM
+# MMMMMMMMMMMOOOO$$QQQQQQQQQQQQQQ$$$QQQQ$$$$$$$$Q$OOMHMMMMMMMMMMMMMMMMMM
+# MMMMMMMOOOOO$$QQQQQQQQQQQQQQQ$QQQ$$$$$OCCCCCCOOOQMNMMMMMMMMMMMMMMMMMMM
+# MMMMMMMOMOO$QQ$$QQQQQQQQQQQ$QQ$$$O?7>!!!::::::!>$NMMMHMMMMMMMMMMMMMMMM
+# MMMMMMOM$O$Q$QQQQQQQQQQQQQ$Q$$OC>!::::---:::!!::::7$NMMNMMMMMMMMMMMMMM
+# MMMMMMNM OOQ$QQQQQQQQQQQQ$Q$OC>::-;.        .;:!!::-!CNMMNMMMMMMMMMMMM
+# MMMMMMM$MHO$Q$$$$$$QQQQQ$Q$OC!-;               .;:!!:::CNMMMMMMMMMMMMM
+# MMMMMMMMM7>O$Q$$$$$$Q$Q$Q$O?-.                    ;:!!::!$MMMMMMMMMMMM
+# MMMMMMMH-  :?O$$$$$$$QQQ$O?.                        ;:!:::?MMMMMMMMMMM
+# MMMMMMQ.     ;-:::;7O$Q$O7.                           -!:!-7MMMMMMMMMM
+# MMMMMH;......      .?$$$O!............................ -!:!:7MMMMMMMMM
+# MMMMMMNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNM> -!:!-?MMMMMMMM
+# $HMMMMMMMMMMMMMMMMMM7::>!OMMQ$HMMH$QMMMMMMMMMMMMMMMMMM?  :::!:QMMMMMMM
+# QHHHMMMMMMMMMMMMMMMM-    7MMHQQHHHQQHHNMMMMMMMMMMMMNCC:  ;!:::7MMMMMMM
+# MN$$HMMMMMMMMMMMMMHN-    7HHMMN$$NMM$OQMMMMMMMMMMNHO     .!::::HMMMMMM
+# O$MMQOOMMMMMMMMMMC          NMMMMQO$MMHOONMMMMMMM-       ;!::!:$MMMMMM
+# NMMMMMMMMMMMMMM:-.          --7MMMMMMMMMMMMMMMO-:        ::::!:CMMMMMM
+# MMMO?????????77.->?CCOOCC?>:. .???????????????:         -!:::!:CMMMMMM
+# MMM!         -?$$OC??????CO$$C-                       .:!::::!:CMMMMMM
+# MMM?       -$QC?777777777777?CQC                      :!:::::!:CMMMMMM
+# MMM$      :HO777?????????????7?Q7                     :::::::::?MMMMMM
+# MMMH     .QO7?????????????????7QO                     .!:::::::>MMMMMM
+# MMMM     !H???77777????????777OH$?;                    ;!:::::::QMMMMM
+# MMMN-    :H$OO$OOC?77777777?C$QQ$$C.                    ::::::::7MMMMM
+# MMM$::    C; .;-?QQ$$OOOO$$QQQ$$Q$O!                   .::::::::-HMMMM
+# MMMO-::;        ?$QQQQQQQQQQ$$QQ$Q$?                   :!::::::>QMMMMM
+# MMMN?>!>!-;.   :O$Q$$$$$$$$QQQQQ$Q$C                 .:!::::!:OMMMMMMM
+# MMMMMMMM$:!!::-7O$Q$QQQQ$QQQQQQQ$$$?                ;:!::::::-$MMMMMMM
+# MMMMMMMMH:-::!!>O$QQ$QQ$$$Q$QQQ$Q$O!             .-:!:::::!>7ONMMMMMMM
+# MMMMMMMMMHC7!::-!CO$$$$OCO$QQQQQ$$C           .-:!!::!:>$NNMMMMMMMMMMM
+# MMMMMMMMMMMMMHQO>:!>>>>!:?O$$QQ$$?;    ..;;-::!!::::::>MMMMM MMMMMMMMM
+# MMMMMMMMMMMMMMMMMQ>:::::::>?O$OC7:-:::::!!!!:::::!>>7ONMMMMMMMMMMMMMMM
+
 language: cpp
 compiler:
   - clang
@@ -41,25 +77,7 @@ compiler:
 
 sudo: true
 
-cache:
-    directories:
-        - cmake-2.8.12.2
-        - llvm
-        - llvm-build
-
 before_install:
-
-  # Install CMake
-  - (if test -f cmake-2.8.12.2/bin/cmake; then echo OK; else
-           git clone --branch v2.8.12.2 --single-branch --depth 1 git://cmake.org/cmake.git cmake-2.8.12.2-src &&
-           cd cmake-2.8.12.2-src &&
-           ./configure --prefix=$TRAVIS_BUILD_DIR/cmake-2.8.12.2 &&
-           make &&
-           make install;
-     fi)
-
-  - PATH="$TRAVIS_BUILD_DIR/cmake-2.8.12.2/bin:$PATH"
-  - alias cmake=$TRAVIS_BUILD_DIR/cmake-2.8.12.2/bin/cmake
 
   # g++4.8.1
   - if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
@@ -74,28 +92,23 @@ before_install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"; fi
 
   # clang 3.4
-  - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.4; fi
-  - if [ "$CXX" == "clang++" ]; then export CXXFLAGS="-std=c++0x -stdlib=libc++"; fi
-  - if [ "$CXX" == "clang++" ]; then svn co --quiet http://llvm.org/svn/llvm-project/libcxx/trunk libcxx; fi
+  - sudo apt-get install --allow-unauthenticated -qq clang-3.4 clang-3.4-doc libclang-common-3.4-dev libclang-3.4-dev libclang1-3.4 libclang1-3.4-dbg libllvm-3.4-ocaml-dev libllvm3.4 libllvm3.4-dbg llvm-3.4 llvm-3.4-dev llvm-3.4-doc llvm-3.4-examples llvm-3.4-runtime cpp11-migrate-3.4 clang-format-3.4
+  - export CXXFLAGS="-std=c++0x -stdlib=libc++"
+  - svn co --quiet http://llvm.org/svn/llvm-project/libcxx/trunk libcxx
 
-  - if [ "$CXX" == "clang++" ]; then cd libcxx/lib && bash buildit; fi
-  - if [ "$CXX" == "clang++" ]; then sudo cp ./libc++.so.1.0 /usr/lib/; fi
-  - if [ "$CXX" == "clang++" ]; then sudo mkdir /usr/include/c++/v1; fi
-  - if [ "$CXX" == "clang++" ]; then cd .. && sudo cp -r include/* /usr/include/c++/v1/; fi
-  - if [ "$CXX" == "clang++" ]; then cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so; fi
-  - if [ "$CXX" == "clang++" ]; then sudo ln -sf libc++.so.1.0 libc++.so.1 && cd $cwd; fi
+  - cd libcxx/lib && bash buildit
+  - sudo cp ./libc++.so.1.0 /usr/lib/
+  - sudo mkdir /usr/include/c++/v1
+  - cd .. && sudo cp -r include/* /usr/include/c++/v1/
+  - cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so
+  - sudo ln -sf libc++.so.1.0 libc++.so.1 && cd $cwd
 
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
+  - if [ "$CXX" == "clang++" ]; then alias clang=clang++-3.4; fi
 
-  # Build LLVM dependencies
-  - if test -d llvm; then echo OK; else git clone --depth=1 http://llvm.org/git/llvm.git; fi
-  - mkdir -p llvm-build
-  - cd llvm-build
-  - cmake ../llvm/
-  - cmake --build .
-  - cmake --build . --target install
+install:
+  - ls
+  - cd src
+  - make
 
-  # go back to the root directory
-  - cd ..
-
-script: cd src && make
+script: echo ok
