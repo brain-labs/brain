@@ -34,42 +34,6 @@
 # MMMMMMMMMMMMMHQO>:!>>>>!:?O$$QQ$$?;    ..;;-::!!::::::>MMMMM MMMMMMMMM
 # MMMMMMMMMMMMMMMMMQ>:::::::>?O$OC7:-:::::!!!!:::::!>>7ONMMMMMMMMMMMMMMM
 
-# MMMMMMMMMMMMOMOOOQQQQQQQQQQQQQQ$$$$QQQQQQQQQQ$$OO$OOMMMMMMMMMMMMMMMMMM
-# MMMMMMMMMMMMOOOO$Q$QQQQQQQQQQQQQQQQQQQQQQQQQQQQ$OOMOMMMMMMMMMMMMMMMMMM
-# MMMMMMMMMMMOOMMOO$QQQQQQQQQQQQQQQ$QQQQQQQQQQQQ$QOO$MOMMMMMMMMMMMMMMMMM
-# MMMMMMMMMOOMMOOOO$Q$QQQQQQQQQQQQQQ$$$Q$$$$$$$$$QOO$MOMMMMMMMMMMMMMMMMM
-# MMMMMMMMMMMOOOO$$QQQQQQQQQQQQQQ$$$QQQQ$$$$$$$$Q$OOMHMMMMMMMMMMMMMMMMMM
-# MMMMMMMOOOOO$$QQQQQQQQQQQQQQQ$QQQ$$$$$OCCCCCCOOOQMNMMMMMMMMMMMMMMMMMMM
-# MMMMMMMOMOO$QQ$$QQQQQQQQQQQ$QQ$$$O?7>!!!::::::!>$NMMMHMMMMMMMMMMMMMMMM
-# MMMMMMOM$O$Q$QQQQQQQQQQQQQ$Q$$OC>!::::---:::!!::::7$NMMNMMMMMMMMMMMMMM
-# MMMMMMNM OOQ$QQQQQQQQQQQQ$Q$OC>::-;.        .;:!!::-!CNMMNMMMMMMMMMMMM
-# MMMMMMM$MHO$Q$$$$$$QQQQQ$Q$OC!-;               .;:!!:::CNMMMMMMMMMMMMM
-# MMMMMMMMM7>O$Q$$$$$$Q$Q$Q$O?-.                    ;:!!::!$MMMMMMMMMMMM
-# MMMMMMMH-  :?O$$$$$$$QQQ$O?.                        ;:!:::?MMMMMMMMMMM
-# MMMMMMQ.     ;-:::;7O$Q$O7.                           -!:!-7MMMMMMMMMM
-# MMMMMH;......      .?$$$O!............................ -!:!:7MMMMMMMMM
-# MMMMMMNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNM> -!:!-?MMMMMMMM
-# $HMMMMMMMMMMMMMMMMMM7::>!OMMQ$HMMH$QMMMMMMMMMMMMMMMMMM?  :::!:QMMMMMMM
-# QHHHMMMMMMMMMMMMMMMM-    7MMHQQHHHQQHHNMMMMMMMMMMMMNCC:  ;!:::7MMMMMMM
-# MN$$HMMMMMMMMMMMMMHN-    7HHMMN$$NMM$OQMMMMMMMMMMNHO     .!::::HMMMMMM
-# O$MMQOOMMMMMMMMMMC          NMMMMQO$MMHOONMMMMMMM-       ;!::!:$MMMMMM
-# NMMMMMMMMMMMMMM:-.          --7MMMMMMMMMMMMMMMO-:        ::::!:CMMMMMM
-# MMMO?????????77.->?CCOOCC?>:. .???????????????:         -!:::!:CMMMMMM
-# MMM!         -?$$OC??????CO$$C-                       .:!::::!:CMMMMMM
-# MMM?       -$QC?777777777777?CQC                      :!:::::!:CMMMMMM
-# MMM$      :HO777?????????????7?Q7                     :::::::::?MMMMMM
-# MMMH     .QO7?????????????????7QO                     .!:::::::>MMMMMM
-# MMMM     !H???77777????????777OH$?;                    ;!:::::::QMMMMM
-# MMMN-    :H$OO$OOC?77777777?C$QQ$$C.                    ::::::::7MMMMM
-# MMM$::    C; .;-?QQ$$OOOO$$QQQ$$Q$O!                   .::::::::-HMMMM
-# MMMO-::;        ?$QQQQQQQQQQ$$QQ$Q$?                   :!::::::>QMMMMM
-# MMMN?>!>!-;.   :O$Q$$$$$$$$QQQQQ$Q$C                 .:!::::!:OMMMMMMM
-# MMMMMMMM$:!!::-7O$Q$QQQQ$QQQQQQQ$$$?                ;:!::::::-$MMMMMMM
-# MMMMMMMMH:-::!!>O$QQ$QQ$$$Q$QQQ$Q$O!             .-:!:::::!>7ONMMMMMMM
-# MMMMMMMMMHC7!::-!CO$$$$OCO$QQQQQ$$C           .-:!!::!:>$NNMMMMMMMMMMM
-# MMMMMMMMMMMMMHQO>:!>>>>!:?O$$QQ$$?;    ..;;-::!!::::::>MMMMM MMMMMMMMM
-# MMMMMMMMMMMMMMMMMQ>:::::::>?O$OC7:-:::::!!!!:::::!>>7ONMMMMMMMMMMMMMMM
-
 language: cpp
 compiler:
   - clang
@@ -96,17 +60,18 @@ before_install:
   - export CXXFLAGS="-std=c++0x -stdlib=libc++"
   - svn co --quiet http://llvm.org/svn/llvm-project/libcxx/trunk libcxx
 
-  - if [ "$CXX" == "clang++" ]; cd libcxx/lib && bash buildit; fi
-  - if [ "$CXX" == "clang++" ]; sudo cp ./libc++.so.1.0 /usr/lib/; fi
-  - if [ "$CXX" == "clang++" ]; sudo mkdir /usr/include/c++/v1; fi
-  - if [ "$CXX" == "clang++" ]; cd .. && sudo cp -r include/* /usr/include/c++/v1/; fi
-  - if [ "$CXX" == "clang++" ]; cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so; fi
-  - if [ "$CXX" == "clang++" ]; sudo ln -sf libc++.so.1.0 libc++.so.1 && cd $cwd; fi
+  - if [ "$CXX" == "clang++" ]; then cd libcxx/lib && bash buildit; fi
+  - if [ "$CXX" == "clang++" ]; then sudo cp ./libc++.so.1.0 /usr/lib/; fi
+  - if [ "$CXX" == "clang++" ]; then sudo mkdir /usr/include/c++/v1; fi
+  - if [ "$CXX" == "clang++" ]; then cd .. && sudo cp -r include/* /usr/include/c++/v1/; fi
+  - if [ "$CXX" == "clang++" ]; then cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so; fi
+  - if [ "$CXX" == "clang++" ]; then sudo ln -sf libc++.so.1.0 libc++.so.1 && cd $cwd; fi
 
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
   - if [ "$CXX" == "clang++" ]; then alias clang=clang++-3.4; fi
 
-script:
-  - ls
-  - cd src
+  - cd $TRAVIS_BUILD_DIR/src
   - make
+
+script:
+  - echo OK
