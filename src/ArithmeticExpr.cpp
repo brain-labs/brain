@@ -69,11 +69,5 @@ std::string ArithmeticExpr::TypeToString()
       return "Remainder";
     }
   }
-
-}
-
-bool ArithmeticExpr::UpdateExpr(char update)
-{
-  return false;
 }
 

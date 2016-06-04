@@ -89,8 +89,3 @@ void LoopExpr::DebugDescription(int level)
   std::cout << std::string(level, ' ') << closedBrackets << std::endl;
 }
 
-bool LoopExpr::UpdateExpr(char update)
-{
-  return false;
-}
-

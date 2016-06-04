@@ -23,7 +23,7 @@ void BreakExpr::DebugDescription(int level)
   std::cout << "BreakExpr" << std::endl;
 }
 
-bool BreakExpr::UpdateExpr(char update)
+bool BreakExpr::IsTerminator()
 {
-  return false;
+  return true;
 }

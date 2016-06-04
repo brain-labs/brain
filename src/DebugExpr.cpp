@@ -41,8 +41,3 @@ void DebugExpr::DebugDescription(int level)
   std::cout << "DebugExpr" << std::endl;
 }
 
-bool DebugExpr::UpdateExpr(char update)
-{
-  return false;
-}
-

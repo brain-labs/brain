@@ -16,9 +16,19 @@ class Expr
   public:
     virtual void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells) = 0;
     virtual void DebugDescription(int level) = 0;
-    virtual bool UpdateExpr(char update) = 0;
+    bool UpdateExpr(char update);
+    bool IsTerminator(); 
     virtual ~Expr() {};
 };
 
+inline bool Expr::UpdateExpr(char update)
+{
+  return false;
+}
+
+inline bool Expr::IsTerminator() 
+{
+  return false;
+}
 
 #endif

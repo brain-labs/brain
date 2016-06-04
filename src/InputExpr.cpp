@@ -48,8 +48,3 @@ void InputExpr::DebugDescription(int level)
   std::cout << "InputExpr" << std::endl;
 }
 
-bool InputExpr::UpdateExpr(char update)
-{
-  return false;
-}
-
