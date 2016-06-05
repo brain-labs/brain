@@ -22,7 +22,6 @@ class OutputExpr : public Expr
     OutputExpr() { }
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
-    bool UpdateExpr(char update);
     ~OutputExpr() {};
 };
 
