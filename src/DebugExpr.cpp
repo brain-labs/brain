@@ -30,7 +30,7 @@ void DebugExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock 
                                IdxV);
   
   // Call "printf"
-  llvm::Value* Args[] = { castToCStr(GDBPrintfFormat, B), IdxV, B.CreateLoad(CellPtr) };
+  llvm::Value* Args[] = { CAST_TO_C_STRING(GDBPrintfFormat, B), IdxV, B.CreateLoad(CellPtr) };
   llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
   B.CreateCall(PrintfF, ArgsArr);
 }

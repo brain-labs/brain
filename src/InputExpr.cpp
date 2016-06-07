@@ -30,7 +30,7 @@ void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock 
   llvm::Value *IntPtr = B.CreateAlloca(llvm::Type::getInt32Ty(C));
   
   // Call "scanf"
-  llvm::Value* Args[] = { castToCStr(GScanfFormat, B), IntPtr };
+  llvm::Value* Args[] = { CAST_TO_C_STRING(GScanfFormat, B), IntPtr };
   llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
   B.CreateCall(ScanfF, ArgsArr);
 	

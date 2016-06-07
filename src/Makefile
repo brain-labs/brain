@@ -11,5 +11,8 @@ build: $(SRCS)
 debug: $(SRCS)
 	$(CC) -g $(CFLAGS) $(SRCS) $(CONFIG) -o brain
 
+docker-build: $(SRCS)
+	$(CC) --std=c++11 -stdlib=libc++ $(CFLAGS) $(SRCS) $(CONFIG) -o brain
+
 run: brain 
 	./brain
