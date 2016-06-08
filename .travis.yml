@@ -37,7 +37,6 @@
 language: cpp
 compiler:
   - clang
-  - gcc
 
 services:
   - docker
@@ -45,10 +44,8 @@ services:
 sudo: required
 
 before_install:
-  - docker pull ldmbis/llvm
-  - docker run -d -p 127.0.0.1:80:4567 ldmbis/llvm /bin/sh -c "cd /root/llvm; bundle exec foreman start;"
-  - docker ps -a
-  - docker run ldmbis/llvm /bin/sh -c "cd /root/llvm; bundle exec rake test"
+  - docker pull luizperes/brain
+  - docker run -i luizperes/brain /bin/sh -c "cd /root/ && rm -rf brain && git clone https://github.com/luizperes/brain.git && cd /root/brain/src && make && cd /root/brain/src/tests && ../brain helloworld.b" 
 
 script:
   - echo OK

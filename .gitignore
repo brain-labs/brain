@@ -39,7 +39,6 @@
 *.swo
 
 *_r2
-*.b
 *.ll
 
 *.DS_Store
