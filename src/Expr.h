@@ -12,10 +12,10 @@
 #include "llvm/IR/Module.h"
 
 
-#if (__clang_major__ == 3) && (__clang_minor <= 8)
-  #define CAST_TO_C_STRING CastToCStr
-#else
+#ifndef __cast_capital__ 
   #define CAST_TO_C_STRING castToCStr
+#else
+  #define CAST_TO_C_STRING CastToCStr
 #endif
 
 class Expr

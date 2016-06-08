@@ -12,7 +12,7 @@ debug: $(SRCS)
 	$(CC) -g $(CFLAGS) $(SRCS) $(CONFIG) -o brain
 
 docker-build: $(SRCS)
-	$(CC) --std=c++11 -stdlib=libc++ $(CFLAGS) $(SRCS) $(CONFIG) -o brain
+	$(CC) $(CFLAGS) -D__cast_capital__=1  $(SRCS) $(CONFIG) -o brain
 
 run: brain 
 	./brain

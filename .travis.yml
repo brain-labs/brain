@@ -45,7 +45,7 @@ sudo: required
 
 before_install:
   - docker pull luizperes/brain
-  - docker run -i luizperes/brain /bin/sh -c "cd /root/ && rm -rf brain && git clone https://github.com/luizperes/brain.git && cd /root/brain/src && make && cd /root/brain/src/tests && ../brain helloworld.b" 
+  - docker run -i luizperes/brain /bin/sh -c "cd /root/ && rm -rf brain && git clone https://github.com/luizperes/brain.git && cd /root/brain/src && make docker-build && cd /root/brain/src/tests && ../brain helloworld.b && ../brain loop.b" 
 
 script:
   - echo OK
