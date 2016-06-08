@@ -54,7 +54,9 @@ void ArgsHandler::handle(int argc, char *argv[])
     {
       _isOptimizing = true;
     }
-    else if (str.substr(str.size()-2,2) == ".b")
+    else if ((str.size() > 2 && str.substr(str.size()-2,2) == ".b")    || 
+             (str.size() > 3 && str.substr(str.size()-3,3) == ".br")   ||
+             (str.size() > 6 && str.substr(str.size()-6,6) == ".brain" ))
     {
       // TODO: Make it a list
       std::ifstream t(str);
