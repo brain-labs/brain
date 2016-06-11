@@ -14,6 +14,7 @@ A computer language based on Brainfuck.
 - [How it has been built](#how-it-has-been-built)
 - [Technical Information](#technical-information)
 - [Compiler Options](#compiler-options)
+- [Applications for real life](#applications-on-real-life)
 - [Help the Project](#help)
 - [License](#license)
 
@@ -129,8 +130,15 @@ Example of the instructions above:
 - ```-O0```: Generates output code with no optmizations.
 - ```-O1```: Optimizes Brain generated output code (Default).
 
+### Applications on real life
+
+  - Artificial Intelligence/ Machine Learning
+  - Send commands to Arduino
+  - Easy support to primitive processors
+
 ### Help
 Feel free to send your pull requests. :)
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
+
