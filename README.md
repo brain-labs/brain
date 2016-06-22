@@ -40,6 +40,8 @@ Obs.: To use __Project Status__ (the "Kanban" below), please visit:```https://gi
 ||| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
 |||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%235&desc=Optmize%20generated%20code.%20Include%20-O0%20and%20-O1%20options.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20(*,%20/%20%).)|
 
+### TODO List
+If you want to check the micro TODO list, please see the [TODO.md](TODO.md)
 
 ### How to build LLVM
 __Brain__ runs on the top of __LLVM__, thus, you are required to install the lasted version of LLVM. You can do that with git and CMake:

@@ -14,9 +14,11 @@
 #include "ArithmeticExpr.h"
 #include "DebugExpr.h"
 #include "BreakExpr.h"
+#include "IfExpr.h"
 
 static llvm::GlobalVariable *__Brain_IndexPtr = NULL;
 static llvm::GlobalVariable *__Brain_CellsPtr = NULL;
+static bool hasDoneThen = false;
 
 bool Parser::isSkippable(char c)
 {
@@ -27,7 +29,8 @@ bool Parser::isSkippable(char c)
           c != '*' && c != '/' &&
           c != '%' && c != '#' &&
           c != '!' && c != '{' &&
-          c != '}');
+          c != '}' && c != '?' &&
+          c != ':' && c != ';');
 }
 
 char Parser::getToken()
@@ -103,6 +106,41 @@ void Parser::parse(std::vector<Expr *> &exprs)
        case '}':
        {
          return; // exit the recursivity
+       }
+       case '?':
+       {
+         std::vector<Expr *> ifExpr;
+         parse(ifExpr);
+         expr = new IfExpr(ifExpr);
+         break;
+       }
+       case ':':
+       {
+         if (!hasDoneThen)
+         {
+           _index--; // move one step back to read the ':' again
+           hasDoneThen = true;
+           return; // return to exit the 'then' recursivity
+         }
+        
+         if (exprs.size()) // do the else
+         {
+           Expr *expr = exprs.back();
+           if (expr->IsBranch())
+           {
+             std::vector<Expr *> elseExpr;
+             parse(elseExpr);
+             ((IfExpr *)expr)->SetElse (elseExpr);
+           }
+         }
+
+         hasDoneThen = false; // reset the flag       
+
+         break;
+       }
+       case ';':
+       {
+         return;
        }
        case '*':
        {

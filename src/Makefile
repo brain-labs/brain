@@ -1,6 +1,6 @@
 CC=clang++
 CFLAGS=-O3 -Wall 
-SRCS=ArgsHandler.cpp Parser.cpp Expr.cpp ShiftExpr.cpp IncrementExpr.cpp InputExpr.cpp OutputExpr.cpp LoopExpr.cpp ArithmeticExpr.cpp DebugExpr.cpp BreakExpr.cpp brain.cpp
+SRCS=ArgsHandler.cpp Parser.cpp Expr.cpp ShiftExpr.cpp IncrementExpr.cpp InputExpr.cpp OutputExpr.cpp LoopExpr.cpp ArithmeticExpr.cpp DebugExpr.cpp BreakExpr.cpp IfExpr.cpp brain.cpp
 CONFIG=`llvm-config --cxxflags --ldflags --system-libs --libs core mcjit native nativecodegen`
 
 all: build
