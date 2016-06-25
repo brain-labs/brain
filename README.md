@@ -107,8 +107,8 @@ __Implemented__
 - ```/``` divide ```*ptr``` with ```*(ptr-1)```. Store the result in *ptr _// format: 2 3 /_
 - ```%``` divide ```*ptr``` with ```*(ptr-1)```. Store the remainder in *ptr _// format: 2 3 %_
 - ```#``` prints out the current debug information.
-- ```{``` (__for__ loop) iterates ```'value-at-the-data-pointer' times``` and needs to be closed with a matching } command. It __does not decrease__ the ```value``` at the data pointer. 
-- ```}``` jump to its correspondent { . 
+- ```{``` (__for__ loop) iterates ```'value-at-the-data-pointer' times``` and needs to be closed with a matching } command. It __does not decrease__ the ```value``` at the data pointer.
+- ```}``` jump to its correspondent { .
 
 __Not Implemented__
 - ```!``` (__break__) jumps to the end of a loop (__[ ]__ or __{ }__)
@@ -143,4 +143,3 @@ Feel free to send your pull requests. :)
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
-

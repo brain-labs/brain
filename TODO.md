@@ -7,5 +7,5 @@
 - [ ] Implement optimization for empty moves ```ShiftExpr(0)``` and ```IncrementExpr(0)```.
 - [ ] Implement a ```delete comments``` option for the compiler.
 - [ ] Implement a ```generate optimized code``` option for the compiler.
-- [ ] Improve the ```return``` at the method ```Parser::isSkippable```. 
-- [ ] Implement ```@``` and ```$``` if decided to. 
+- [ ] Improve the ```return``` at the method ```Parser::isSkippable```.
+- [ ] Implement ```@``` and ```$``` if decided to.
