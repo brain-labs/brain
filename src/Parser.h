@@ -26,9 +26,9 @@ class Parser
   
     static bool isSkippable(char c);
     char getToken();
-    void parse(std::vector<Expr *> &exprs);
+    void parse(std::vector<Expr *> &exprs, int level);
   public:
-    Parser(std::string s, bool isOptimizing) : _data(s), _index(0), _isOptimizing(isOptimizing) { parse(_exprs); }
+    Parser(std::string s, bool isOptimizing) : _data(s), _index(0), _isOptimizing(isOptimizing) { parse(_exprs, 0); }
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
     void DebugDescription(int level);
 };

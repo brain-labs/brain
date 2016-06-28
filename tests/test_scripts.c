@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 5 
+#define MAX 6 
 
 int main()
 {
@@ -14,22 +14,23 @@ int main()
   files[2] = "hellbox";
   files[3] = "ifelse";
   files[4] = "else";
+  files[5] = "crazyloops";
 
-  int i = 0;
+  int i;
   for(i = 0; i < MAX; i++)
   {
     int sizeBFileName = strlen(files[i]) + 3;
-    char *bFileName = (char *) malloc(sizeof(char) * sizeBFileName);
-    strncpy(bFileName, files[i], sizeBFileName);
+    char *bFileName = (char *) calloc(sizeBFileName, sizeof(char));
+    strncpy(bFileName, files[i], sizeBFileName - 3);
     strncat(bFileName, ".b", 2);
 
     int sizeCmpFileName = strlen(files[i]) + 5;
-    char *cmpFileName = (char *) malloc(sizeof(char) * sizeCmpFileName);
+    char *cmpFileName = (char *) calloc(sizeCmpFileName, sizeof(char));
     strncpy(cmpFileName, files[i], sizeCmpFileName - 5);
     strncat(cmpFileName, ".cmp", 4);
 
     int sizeCmd = strlen(execProg) + sizeBFileName + strlen(files[i]) + 4; 
-    char *cmd = (char *) malloc(sizeof(char) * sizeCmd);
+    char *cmd = (char *) calloc(sizeCmd, sizeof(char));
     // brain loopinc.b > loopinc
     snprintf(cmd, sizeCmd, "brain %s > %s", bFileName, files[i]);   
 

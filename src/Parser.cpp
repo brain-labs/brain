@@ -40,7 +40,7 @@ char Parser::getToken()
   return c;
 }
 
-void Parser::parse(std::vector<Expr *> &exprs)
+void Parser::parse(std::vector<Expr *> &exprs, int level)
 {
    char c = 0;
    while ( (c = getToken()) ) 
@@ -88,29 +88,33 @@ void Parser::parse(std::vector<Expr *> &exprs)
        case '[':
        {
          std::vector<Expr *> loopExpr;
-         parse(loopExpr);
+         parse(loopExpr, level + 1);
          expr = new LoopExpr(loopExpr, LT_WHILE);
          break;
        }
        case ']':
        {
-         return; // exit the recursivity 
+         if (level > 0)
+           return; // exit the recursivity
+         break; 
        }
        case '{':
        {
          std::vector<Expr *> loopExpr;
-         parse(loopExpr);
+         parse(loopExpr, level + 1);
          expr = new LoopExpr(loopExpr, LT_FOR);
          break;
        }
        case '}':
        {
-         return; // exit the recursivity
+         if (level > 0)
+           return; // exit the recursivity
+         break;
        }
        case '?':
        {
          std::vector<Expr *> ifExpr;
-         parse(ifExpr);
+         parse(ifExpr, level + 1);
          expr = new IfExpr(ifExpr);
          break;
        }
@@ -118,6 +122,9 @@ void Parser::parse(std::vector<Expr *> &exprs)
        {
          if (!hasDoneThen)
          {
+           if (level == 0)
+             break;
+
            _index--; // move one step back to read the ':' again
            hasDoneThen = true;
            return; // return to exit the 'then' recursivity
@@ -129,7 +136,7 @@ void Parser::parse(std::vector<Expr *> &exprs)
            if (expr->IsBranch())
            {
              std::vector<Expr *> elseExpr;
-             parse(elseExpr);
+             parse(elseExpr, level + 1);
              ((IfExpr *)expr)->SetElse (elseExpr);
            }
          }
@@ -140,7 +147,9 @@ void Parser::parse(std::vector<Expr *> &exprs)
        }
        case ';':
        {
-         return;
+         if (level > 0)
+           return;
+         break;
        }
        case '*':
        {
