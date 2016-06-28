@@ -9,7 +9,53 @@
 
 void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
+  llvm::LLVMContext &C = M->getContext();
+  llvm::Function *F = B.GetInsertBlock()->getParent();
+  
+  llvm::BasicBlock *ThenBB = llvm::BasicBlock::Create(C, "ThenBody", F);
+  llvm::BasicBlock *ElseBB = nullptr;
+  llvm::BasicBlock *ContBB = llvm::BasicBlock::Create(C, "IfEnd", F);
 
+  // Get the current cell adress
+  llvm::Value *IdxV = B.CreateLoad(index);
+  llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
+                               IdxV);
+  llvm::Value *SGZeroCond = B.CreateICmpSGT(B.CreateLoad(CellPtr),
+                                           B.getInt32(0)); // is cell Signed Int Greater than Zero?
+  
+  if (!_exprsElse.empty())
+  {
+    ElseBB = llvm::BasicBlock::Create(C, "ElseEnd", F);
+    B.CreateCondBr(SGZeroCond, ThenBB, ElseBB);
+  }
+  else
+  {
+    B.CreateCondBr(SGZeroCond, ThenBB, ContBB);
+  }
+
+  B.SetInsertPoint(ThenBB);
+  llvm::IRBuilder<> ThenB(ThenBB);
+  for (std::vector<Expr *>::iterator it = _exprsThen.begin(); it != _exprsThen.end(); ++it)
+  {
+    (*it)->CodeGen(M, ThenB, ContBB, index, cells);
+  }
+  
+  ThenB.CreateBr(ContBB); // uncoditional jump
+
+  if (!_exprsElse.empty()) 
+  {
+    B.SetInsertPoint(ElseBB);
+    llvm::IRBuilder<> ElseB(ElseBB);
+    for (std::vector<Expr *>::iterator it = _exprsElse.begin(); it != _exprsElse.end(); ++it)
+    {
+      (*it)->CodeGen(M, ElseB, ContBB, index, cells);
+    }
+
+    ElseB.CreateBr(ContBB); // uncoditional jump
+  }
+
+  B.SetInsertPoint(ContBB);
 }
 
 void IfExpr::DebugDescription(int level)
@@ -23,14 +69,17 @@ void IfExpr::DebugDescription(int level)
 
   std::cout << std::string(level, ' ') << "]" << std::endl;
 
-  std::cout << std::string(level, ' ') << "IfExpr (ELSE) [" << std::endl;
-  for (std::vector<Expr *>::iterator it = _exprsElse.begin(); it != _exprsElse.end(); ++it)
+  if (!_exprsElse.empty())
   {
-    std::cout << std::string(level * 2, ' ');
-    (*it)->DebugDescription(level+1);
-  }
+    std::cout << std::string(level, ' ') << "IfExpr (ELSE) [" << std::endl;
+    for (std::vector<Expr *>::iterator it = _exprsElse.begin(); it != _exprsElse.end(); ++it)
+    {
+      std::cout << std::string(level * 2, ' ');
+      (*it)->DebugDescription(level+1);
+    }
 
-  std::cout << std::string(level, ' ') << "]" << std::endl;
+    std::cout << std::string(level, ' ') << "]" << std::endl;
+  }
 }
 
 bool IfExpr::IsBranch()

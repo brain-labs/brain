@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 3
+#define MAX 5 
 
 int main()
 {
@@ -12,13 +12,15 @@ int main()
   files[0] = "helloworld";
   files[1] = "loopinc";
   files[2] = "hellbox";
+  files[3] = "ifelse";
+  files[4] = "else";
 
   int i = 0;
   for(i = 0; i < MAX; i++)
   {
     int sizeBFileName = strlen(files[i]) + 3;
     char *bFileName = (char *) malloc(sizeof(char) * sizeBFileName);
-    strncpy(bFileName, files[i], sizeBFileName );
+    strncpy(bFileName, files[i], sizeBFileName);
     strncat(bFileName, ".b", 2);
 
     int sizeCmpFileName = strlen(files[i]) + 5;
@@ -42,7 +44,7 @@ int main()
     int ch1 = getc(f1);
     int ch2 = getc(f2);
  
-    while ((ch1 != EOF) && (ch2 != EOF) && (ch1 == ch2)) 
+    while (((ch1 != EOF) || (ch2 != EOF)) && (ch1 == ch2)) 
     {
       ch1 = getc(f1);
       ch2 = getc(f2);

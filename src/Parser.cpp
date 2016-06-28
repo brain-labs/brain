@@ -46,7 +46,7 @@ void Parser::parse(std::vector<Expr *> &exprs)
    while ( (c = getToken()) ) 
    {
      Expr *expr = NULL;
-     if (_isOptimizing && exprs.size())
+     if (_isOptimizing && !exprs.empty())
      {
        Expr *lastExpr = exprs.back();
        if (lastExpr->UpdateExpr(c))
@@ -123,7 +123,7 @@ void Parser::parse(std::vector<Expr *> &exprs)
            return; // return to exit the 'then' recursivity
          }
         
-         if (exprs.size()) // do the else
+         if (!exprs.empty()) // do the else
          {
            Expr *expr = exprs.back();
            if (expr->IsBranch())

@@ -101,18 +101,18 @@ __Implemented__
 - ```-``` decrement (decrease by one) the value at the data pointer.
 - ```.``` output the value at the data pointer.
 - ```,``` accept one value of input, storing its value in the value at the data pointer.
-- ```[``` if the value at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
+- ```[``` if the value at the data pointer is zero or less, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
 - ```]``` jump to its correspondent [ .
 - ```*``` multiply ```*ptr``` with ```*(ptr-1)```. Store result in *ptr _// format: 2 3 *_
 - ```/``` divide ```*ptr``` with ```*(ptr-1)```. Store the result in *ptr _// format: 2 3 /_
 - ```%``` divide ```*ptr``` with ```*(ptr-1)```. Store the remainder in *ptr _// format: 2 3 %_
 - ```#``` prints out the current debug information.
-- ```{``` (__for__ loop) iterates ```'value-at-the-data-pointer' times``` and needs to be closed with a matching } command. It __does not decrease__ the ```value``` at the data pointer.
+- ```{``` (__for__ loop) iterates ```'value-at-the-data-pointer' times``` and needs to be closed with a matching } command. It __does not decrease__ the ```value``` at the data pointer. It will __only__ work for positive values.
 - ```}``` jump to its correspondent { .
 
 __Not Implemented__
 - ```!``` (__break__) jumps to the end of a loop (__[ ]__ or __{ }__)
-- ```?``` if the value at the data pointer is ```0```, jumps to the block with ```:``` or ```;``` and executes the commands one by one up to its correlative ```;```, otherwise, it executes the code until it finds a ```:``` or ```;```.
+- ```?``` if the value at the data pointer is ```0``` or ```less``` , jumps to the block with ```:``` or ```;``` and executes the commands one by one up to its correlative ```;```, otherwise, it executes the code until it finds a ```:``` or ```;```.
 - ```:``` it works as an ```otherwise``` (or ```else```) for ```?```.
 - ```;``` ends a statement.
 

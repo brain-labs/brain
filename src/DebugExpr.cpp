@@ -22,7 +22,7 @@ void DebugExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock 
   // Prepare args
   static llvm::Value *GDBPrintfFormat = NULL;
   if (!GDBPrintfFormat) {
-    GDBPrintfFormat = B.CreateGlobalString("\nIndex Pointer: %d Value at Index Pointer: %d\n", "brainf.debug.printf.format");
+    GDBPrintfFormat = B.CreateGlobalString("Index Pointer: %d Value at Index Pointer: %d\n", "brainf.debug.printf.format");
   }
   llvm::Value *IdxV = B.CreateLoad(index);
   llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
