@@ -1,18 +1,18 @@
 CC=clang++
 CFLAGS=-O3 -Wall 
-SRCS=ArgsHandler.cpp Parser.cpp Expr.cpp ShiftExpr.cpp IncrementExpr.cpp InputExpr.cpp OutputExpr.cpp LoopExpr.cpp ArithmeticExpr.cpp DebugExpr.cpp BreakExpr.cpp IfExpr.cpp brain.cpp
+BIN=./bin
+MKBIN=mkdir -p bin
+SRCS=utils/ArgsHandler.cpp parser/Parser.cpp ast/expr/Expr.cpp ast/expr/ShiftExpr.cpp ast/expr/IncrementExpr.cpp ast/expr/InputExpr.cpp ast/expr/OutputExpr.cpp ast/expr/LoopExpr.cpp ast/expr/ArithmeticExpr.cpp ast/expr/DebugExpr.cpp ast/expr/BreakExpr.cpp ast/expr/IfExpr.cpp brain.cpp
 CONFIG=`llvm-config --cxxflags --ldflags --system-libs --libs core mcjit native nativecodegen`
 
 all: build
 
 build: $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS) $(CONFIG) -o brain 
+	$(MKBIN) && $(CC) $(CFLAGS) $(SRCS) $(CONFIG) -o $(BIN)/brain 
 
 debug: $(SRCS)
-	$(CC) -g $(CFLAGS) $(SRCS) $(CONFIG) -o brain
+	$(MKBIN) && $(CC) -g $(CFLAGS) $(SRCS) $(CONFIG) -o $(BIN)/brain
 
 docker-build: $(SRCS)
 	$(CC) $(CFLAGS) -D__cast_capital__=1  $(SRCS) $(CONFIG) -o brain
 
-run: brain 
-	./brain

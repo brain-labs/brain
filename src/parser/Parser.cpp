@@ -6,15 +6,15 @@
  */
 
 #include "Parser.h"
-#include "ShiftExpr.h"
-#include "IncrementExpr.h"
-#include "InputExpr.h"
-#include "OutputExpr.h"
-#include "LoopExpr.h"
-#include "ArithmeticExpr.h"
-#include "DebugExpr.h"
-#include "BreakExpr.h"
-#include "IfExpr.h"
+#include "../ast/expr/ShiftExpr.h"
+#include "../ast/expr/IncrementExpr.h"
+#include "../ast/expr/InputExpr.h"
+#include "../ast/expr/OutputExpr.h"
+#include "../ast/expr/LoopExpr.h"
+#include "../ast/expr/ArithmeticExpr.h"
+#include "../ast/expr/DebugExpr.h"
+#include "../ast/expr/BreakExpr.h"
+#include "../ast/expr/IfExpr.h"
 
 static llvm::GlobalVariable *__Brain_IndexPtr = NULL;
 static llvm::GlobalVariable *__Brain_CellsPtr = NULL;

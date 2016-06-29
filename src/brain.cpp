@@ -23,8 +23,8 @@
 #include "llvm/IR/Module.h"
 #include "llvm/IR/Value.h"
 
-#include "Parser.h"
-#include "ArgsHandler.h"
+#include "parser/Parser.h"
+#include "utils/ArgsHandler.h"
 
 #define MODULE_NAME "brainModule"
 
