@@ -9,14 +9,10 @@
 
 using namespace llvm;
 
-void BreakExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void BreakExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
-  //it is not needed to create code gen for the BreakExpr
-
-  //if (EndBlock != NULL) // if it is NULL, we do not have where to jump to.
-  //{
-  //  B.CreateBr(EndBlock);
-  //}
+  // it is not needed to create code gen for the BreakExpr
+  // it is a terminator, so the code will stop inside the loop 
 }
 
 void BreakExpr::DebugDescription(int level)

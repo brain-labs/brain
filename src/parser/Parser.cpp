@@ -219,7 +219,7 @@ void Parser::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 
   for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) 
   {
-    (*it)->CodeGen(M, B, NULL, __Brain_IndexPtr, __Brain_CellsPtr);
+    (*it)->CodeGen(M, B, __Brain_IndexPtr, __Brain_CellsPtr);
   }
 }
 

@@ -7,7 +7,7 @@
 
 #include "IfExpr.h"
 
-void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
   llvm::Function *F = B.GetInsertBlock()->getParent();
@@ -41,7 +41,7 @@ void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *En
     if ((*it)->ExprCategory() == ET_TERMINAL)
       break;
 
-    (*it)->CodeGen(M, ThenB, ContBB, index, cells);
+    (*it)->CodeGen(M, ThenB, index, cells);
   }
   
   ThenB.CreateBr(ContBB); // uncoditional jump
@@ -55,7 +55,7 @@ void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *En
       if ((*it)->ExprCategory() == ET_TERMINAL)
         break;
 
-      (*it)->CodeGen(M, ElseB, ContBB, index, cells);
+      (*it)->CodeGen(M, ElseB, index, cells);
     }
 
     ElseB.CreateBr(ContBB); // uncoditional jump

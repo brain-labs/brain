@@ -21,7 +21,7 @@ class ShiftExpr : public Expr
     int _step;
   public:
     ShiftExpr(int step) : _step(step) { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
     bool UpdateExpr(char update);
     ~ShiftExpr() {};

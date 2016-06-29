@@ -9,11 +9,9 @@
 
 using namespace llvm;
 
-void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
-  
-  // @TODO: Print "> "
   
   // Get "scanf" function
   // i32 @scanf(i8*, ...)

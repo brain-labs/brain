@@ -29,7 +29,7 @@ class LoopExpr : public Expr
     LoopType _type;
   public:
     LoopExpr(std::vector<Expr *> exprs, LoopType type) : _exprs(exprs), _type(type) { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
     ~LoopExpr() {};
 };
