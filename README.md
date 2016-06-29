@@ -32,13 +32,14 @@ Obs.: To use __Project Status__ (the "Kanban" below), please visit:```https://gi
 
 | Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
 | ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
-| [Brain](#brain)         | ![Progress](http://progressed.io/bar/65)  | C/C++/LLVM  | Low      |              |
+| [Brain](#brain)         | ![Progress](http://progressed.io/bar/75)  | C/C++/LLVM  | Low      |              |
 
 | To Do | In Progress | Done  |
 | :---: | :---------: | :---: |
-|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%238&desc=Implement%20Brain%20Commands.)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!).)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
-||| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
+|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%239&desc=Implement%20Brain%20Commands(@,$))|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%238&desc=Code%20Refactoring.)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
+|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%239&desc=Implement%20REPL)|| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
 |||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%235&desc=Optmize%20generated%20code.%20Include%20-O0%20and%20-O1%20options.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20(*,%20/%20%).)|
+|||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!).)|
 
 ### TODO List
 If you want to check the micro TODO list, please see the [TODO.md](TODO.md)
@@ -109,14 +110,12 @@ __Implemented__
 - ```#``` prints out the current debug information.
 - ```{``` (__for__ loop) iterates ```'value-at-the-data-pointer' times``` and needs to be closed with a matching } command. It __does not decrease__ the ```value``` at the data pointer. It will __only__ work for positive values.
 - ```}``` jump to its correspondent { .
-
-__Not Implemented__
 - ```!``` (__break__) jumps to the end of a loop (__[ ]__ or __{ }__)
-- ```?``` if the value at the data pointer is ```0``` or ```less``` , jumps to the block with ```:``` or ```;``` and executes the commands one by one up to its correlative ```;```, otherwise, it executes the code until it finds a ```:``` or ```;```.
+- ```?``` if the value at the data pointer is ```zero``` or ```less``` , jumps to the block with ```:``` or ```;``` and executes the commands one by one up to its correlative ```;```, otherwise, it executes the code until it finds a ```:``` or ```;```.
 - ```:``` it works as an ```otherwise``` (or ```else```) for ```?```.
 - ```;``` ends a statement.
 
-__Thinking About__
+__Not Implemented__
 - ```$``` cast the value at the data pointer back and forth to ```float``` and ```int```.
 - ```@``` include other __Brain__ files.
 
@@ -143,3 +142,4 @@ Feel free to send your pull requests. :)
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
+
