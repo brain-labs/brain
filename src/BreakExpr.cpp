@@ -11,10 +11,12 @@ using namespace llvm;
 
 void BreakExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
-  if (EndBlock != NULL) // if it is NULL, we do not have where to jump to.
-  {
-    B.CreateBr(EndBlock);
-  }
+  //it is not needed to create code gen for the BreakExpr
+
+  //if (EndBlock != NULL) // if it is NULL, we do not have where to jump to.
+  //{
+  //  B.CreateBr(EndBlock);
+  //}
 }
 
 void BreakExpr::DebugDescription(int level)
@@ -23,7 +25,7 @@ void BreakExpr::DebugDescription(int level)
   std::cout << "BreakExpr" << std::endl;
 }
 
-bool BreakExpr::IsTerminator()
+ExpressionType BreakExpr::ExprCategory()
 {
-  return true;
+  return ET_TERMINAL;
 }

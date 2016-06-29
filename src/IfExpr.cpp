@@ -14,7 +14,7 @@ void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *En
   
   llvm::BasicBlock *ThenBB = llvm::BasicBlock::Create(C, "ThenBody", F);
   llvm::BasicBlock *ElseBB = nullptr;
-  llvm::BasicBlock *ContBB = llvm::BasicBlock::Create(C, "IfEnd", F);
+  llvm::BasicBlock *ContBB = llvm::BasicBlock::Create(C, "IfCont", F);
 
   // Get the current cell adress
   llvm::Value *IdxV = B.CreateLoad(index);
@@ -26,7 +26,7 @@ void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *En
   
   if (!_exprsElse.empty())
   {
-    ElseBB = llvm::BasicBlock::Create(C, "ElseEnd", F);
+    ElseBB = llvm::BasicBlock::Create(C, "ElseBody", F);
     B.CreateCondBr(SGZeroCond, ThenBB, ElseBB);
   }
   else
@@ -38,6 +38,9 @@ void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *En
   llvm::IRBuilder<> ThenB(ThenBB);
   for (std::vector<Expr *>::iterator it = _exprsThen.begin(); it != _exprsThen.end(); ++it)
   {
+    if ((*it)->ExprCategory() == ET_TERMINAL)
+      break;
+
     (*it)->CodeGen(M, ThenB, ContBB, index, cells);
   }
   
@@ -49,6 +52,9 @@ void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *En
     llvm::IRBuilder<> ElseB(ElseBB);
     for (std::vector<Expr *>::iterator it = _exprsElse.begin(); it != _exprsElse.end(); ++it)
     {
+      if ((*it)->ExprCategory() == ET_TERMINAL)
+        break;
+
       (*it)->CodeGen(M, ElseB, ContBB, index, cells);
     }
 
@@ -65,6 +71,9 @@ void IfExpr::DebugDescription(int level)
   {
     std::cout << std::string(level * 2, ' ');
     (*it)->DebugDescription(level+1);
+
+    if ((*it)->ExprCategory() == ET_TERMINAL)
+      break;
   }
 
   std::cout << std::string(level, ' ') << "]" << std::endl;
@@ -76,13 +85,17 @@ void IfExpr::DebugDescription(int level)
     {
       std::cout << std::string(level * 2, ' ');
       (*it)->DebugDescription(level+1);
+
+      if ((*it)->ExprCategory() == ET_TERMINAL)
+        break;
     }
 
     std::cout << std::string(level, ' ') << "]" << std::endl;
   }
 }
 
-bool IfExpr::IsBranch()
+ExpressionType IfExpr::ExprCategory()
 {
-  return true;
+  return ET_BRANCH;
 }
+

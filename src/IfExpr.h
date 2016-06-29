@@ -25,7 +25,7 @@ class IfExpr : public Expr
     IfExpr(std::vector<Expr *> exprsThen) : _exprsThen(exprsThen) { }
     void SetElse(std::vector<Expr *> exprsElse) { _exprsElse = exprsElse; } 
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
-    bool IsBranch();
+    ExpressionType ExprCategory();
     void DebugDescription(int level);
     ~IfExpr() {};
 };

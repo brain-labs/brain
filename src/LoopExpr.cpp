@@ -62,6 +62,9 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *
   // Recursively generate code (into "LoopBody" block)
   for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it)
   {
+    if ((*it)->ExprCategory() == ET_TERMINAL)
+      break;
+
     (*it)->CodeGen(M, LoopB, EndBB, index, cells);
   }
 
@@ -85,6 +88,9 @@ void LoopExpr::DebugDescription(int level)
   {
     std::cout << std::string(level * 2, ' ');
     (*it)->DebugDescription(level+1);
+
+    if ((*it)->ExprCategory() == ET_TERMINAL)
+      break;
   }
   std::cout << std::string(level, ' ') << closedBrackets << std::endl;
 }

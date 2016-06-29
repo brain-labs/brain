@@ -18,14 +18,20 @@
   #define CAST_TO_C_STRING CastToCStr
 #endif
 
+typedef enum
+{
+  ET_NOT_IMPORTANT,
+  ET_BRANCH,
+  ET_TERMINAL 
+}ExpressionType;
+
 class Expr
 {
   public:
     virtual void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells) = 0;
     virtual void DebugDescription(int level) = 0;
     virtual bool UpdateExpr(char update) { return false; }
-    virtual bool IsBranch() { return false; }
-    virtual bool IsTerminator() { return false; } 
+    virtual ExpressionType ExprCategory() { return ET_NOT_IMPORTANT; }
     virtual ~Expr() {};
 };
 

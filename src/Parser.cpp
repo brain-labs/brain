@@ -133,7 +133,7 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
          if (!exprs.empty()) // do the else
          {
            Expr *expr = exprs.back();
-           if (expr->IsBranch())
+           if (expr->ExprCategory() == ET_BRANCH)
            {
              std::vector<Expr *> elseExpr;
              parse(elseExpr, level + 1);

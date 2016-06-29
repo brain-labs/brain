@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 6 
+#define MAX 7 
 
 int main()
 {
@@ -15,6 +15,7 @@ int main()
   files[3] = "ifelse";
   files[4] = "else";
   files[5] = "crazyloops";
+  files[6] = "loopbreak";
 
   int i;
   for(i = 0; i < MAX; i++)

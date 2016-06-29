@@ -3,7 +3,7 @@
 - [x] Fix file ```testscripts.c```. // Working on Linux. It needs to be tested on Mac.
 - [x] Implement ```?```, ```:```, ```;```.
 - [x] Ignore else's without if's.
-- [ ] Improve the methods IsBranch, IsTerminator and so on.
+- [x] Improve the methods IsBranch, IsTerminator and so on.
 - [x] Code refactoring for the return methods inside the recursivity.
 - [ ] Code refactoring for the whole project. Improve readability (CodeGen params too).
 - [ ] Implement optimization for empty whiles ```[ ]```. Ignore them (For Else too).

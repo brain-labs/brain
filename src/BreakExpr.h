@@ -22,7 +22,7 @@ class BreakExpr : public Expr
     BreakExpr() { }
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::BasicBlock *EndBlock, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
-    bool IsTerminator();
+    ExpressionType ExprCategory();
     ~BreakExpr() {};
 };
 
