@@ -9,7 +9,7 @@
 
 using namespace llvm;
 
-void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, ArgsOptions &argsOptions, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
   

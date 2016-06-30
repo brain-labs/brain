@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 {
   ArgsHandler argsHandler(argc, argv);
   ArgsOptions argsOptions = argsHandler.getArgsOptions();
-  Parser parser(argsHandler.getStringFile(), argsOptions.hasOption(BO_IS_OPTIMIZING_O1));
+  Parser parser(argsHandler.getStringFile(), argsOptions);
  
   // Create the context and the module
   llvm::LLVMContext C;

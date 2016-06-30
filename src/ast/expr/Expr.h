@@ -11,6 +11,7 @@
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Module.h"
 
+#include "../../utils/ArgsOptions.h"
 
 #ifndef __cast_capital__ 
   #define CAST_TO_C_STRING castToCStr
@@ -28,7 +29,7 @@ typedef enum
 class Expr
 {
   public:
-    virtual void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells) = 0;
+    virtual void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, ArgsOptions &argsOptions, llvm::GlobalVariable *index, llvm::GlobalVariable *cells) = 0;
     virtual void DebugDescription(int level) = 0;
     virtual bool UpdateExpr(char update) { return false; }
     virtual ExpressionType ExprCategory() { return ET_NOT_IMPORTANT; }

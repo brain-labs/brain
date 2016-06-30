@@ -7,7 +7,7 @@
 
 #include "LoopExpr.h"
 
-void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, ArgsOptions &argsOptions, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
   
@@ -65,7 +65,7 @@ void LoopExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariab
     if ((*it)->ExprCategory() == ET_TERMINAL)
       break;
 
-    (*it)->CodeGen(M, LoopB, index, cells);
+    (*it)->CodeGen(M, LoopB, argsOptions, index, cells);
   }
 
   if (_type == LT_FOR)

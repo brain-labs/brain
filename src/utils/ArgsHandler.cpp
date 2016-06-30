@@ -33,7 +33,7 @@ void ArgsHandler::handle(int argc, char *argv[])
     {
       std::cout << "\n"
                 << "-emit-llvm\tDumps the LLVM IR code before executing\n"
-                << "-emit-expr\tDumps the Expressions generated before executing\n"
+                << "-emit-expr\tDumps the AST Expressions generated before executing\n"
                 << "-v\t\tUses verbose mode for the output\n"
                 << "-O0\t\tGenerates output code with no optmizations\n"
                 << "-O1\t\tOptimizes Brain generated output code (Default)\n" 
