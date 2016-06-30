@@ -13,6 +13,6 @@
 - [ ] Implement a ```generate optimized code``` option for the compiler.
 - [ ] Improve the ```return``` at the method ```Parser::isSkippable```.
 - [ ] Change module's name.
-- [ ] Code's refactoring for the files brain.cpp and Parser.cpp. 
+- [ ] Code's refactoring for the files brain.cpp and Parser.cpp.
 - [ ] Make sure you are deleting objects from the heap.
 - [ ] Implement ```@``` and ```$``` if decided to.

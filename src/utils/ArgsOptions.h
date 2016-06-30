@@ -18,4 +18,14 @@ typedef enum
   BO_IS_OPTIMIZING_O1 = 16
 }BrainOption;
 
+class ArgsOptions
+{
+  private:
+    int _options;
+  public:
+    ArgsOptions() : _options(BO_NONE) {}
+    void addOption(BrainOption option);
+    bool hasOption(BrainOption option);
+};
+
 #endif

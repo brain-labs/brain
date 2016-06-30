@@ -42,41 +42,41 @@ void ArgsHandler::handle(int argc, char *argv[])
     }
     else if (str.compare("--version") == 0 || str.compare("-version") == 0)
     {
-      std::cout << "Brain version " << BRAIN_VERSION << ". "
+      std::cout << "Brain version " << BRAIN_VERSION << ".\n"
               << BRAIN_HELP;
       exit(0);
     }
     else if (str.compare("-emit-llvm") == 0)
     {
-      _options |= BO_IS_EMITTING_LLVM;
+      _argsOptions.addOption(BO_IS_EMITTING_LLVM);
     }
     else if (str.compare("-emit-expr") == 0)
     {
-      _options |= BO_IS_EMITTING_EXPR;
+      _argsOptions.addOption(BO_IS_EMITTING_EXPR);
     }
     else if (str.compare("-v") == 0)
     {
-      _options |= BO_IS_VERBOSE;
+      _argsOptions.addOption(BO_IS_VERBOSE);
     }
     else if (str.compare("-O0") == 0)
     {
-      if (isUsingOption(BO_IS_OPTIMIZING_O1))
+      if (_argsOptions.hasOption(BO_IS_OPTIMIZING_O1))
       {
         std::cout << BRAIN_OPT_ERR;
         exit(-1);
       }
 
-      _options |= BO_IS_OPTIMIZING_O0;
+      _argsOptions.addOption(BO_IS_OPTIMIZING_O0);
     }
     else if (str.compare("-O1") == 0)
     {
-      if (isUsingOption(BO_IS_OPTIMIZING_O0))
+      if (_argsOptions.hasOption(BO_IS_OPTIMIZING_O0))
       {
         std::cout << BRAIN_OPT_ERR;
         exit(-1);
       }
 
-      _options |= BO_IS_OPTIMIZING_O1;
+      _argsOptions.addOption(BO_IS_OPTIMIZING_O1);
     }
     else if ((str.size() > 2 && str.substr(str.size()-2,2) == ".b")    || 
              (str.size() > 3 && str.substr(str.size()-3,3) == ".br")   ||
@@ -121,8 +121,8 @@ std::string ArgsHandler::getStringFile()
   return _stringFile;
 }
 
-bool ArgsHandler::isUsingOption(BrainOption option)
+ArgsOptions ArgsHandler::getArgsOptions()
 {
-  return (_options & option) == option;
+  return _argsOptions;
 }
 

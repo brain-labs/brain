@@ -16,12 +16,12 @@ class ArgsHandler
 {
   protected:
     std::string _stringFile;
-    int _options;
+    ArgsOptions _argsOptions;
     void handle(int argc, char *argv[]);
   public:
-    ArgsHandler(int argc, char *argv[]) : _options(BO_NONE) { handle(argc, argv); }
+    ArgsHandler(int argc, char *argv[]) { handle(argc, argv); }
     std::string getStringFile();
-    bool isUsingOption(BrainOption option);
+    ArgsOptions getArgsOptions();
 };
 
 #endif
