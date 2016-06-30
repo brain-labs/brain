@@ -11,9 +11,10 @@
 
 #include "ArgsHandler.h"
 
-#define BRAIN_VERSION 0.5
+#define BRAIN_VERSION 0.8
 #define BRAIN_FORMAT "Please execute Brain with the command: brain filename\n"
 #define BRAIN_HELP "Use the identifier '--help' for getting information about the settings\n";
+#define BRAIN_OPT_ERR "You can not use more than one type of optimization at time.\n"
 
 void ArgsHandler::handle(int argc, char *argv[])
 {
@@ -33,32 +34,54 @@ void ArgsHandler::handle(int argc, char *argv[])
       std::cout << "\n"
                 << "-emit-llvm\tDumps the LLVM IR code before executing\n"
                 << "-emit-expr\tDumps the Expressions generated before executing\n"
+                << "-v\t\tUses verbose mode for the output\n"
                 << "-O0\t\tGenerates output code with no optmizations\n"
                 << "-O1\t\tOptimizes Brain generated output code (Default)\n" 
                 << "\n";
       exit(0);
     }
+    else if (str.compare("--version") == 0 || str.compare("-version") == 0)
+    {
+      std::cout << "Brain version " << BRAIN_VERSION << ". "
+              << BRAIN_HELP;
+      exit(0);
+    }
     else if (str.compare("-emit-llvm") == 0)
     {
-      _isEmitingLLVM = true;
+      _options |= BO_IS_EMITTING_LLVM;
     }
     else if (str.compare("-emit-expr") == 0)
     {
-      _isEmitingExpr = true;
+      _options |= BO_IS_EMITTING_EXPR;
+    }
+    else if (str.compare("-v") == 0)
+    {
+      _options |= BO_IS_VERBOSE;
     }
     else if (str.compare("-O0") == 0)
     {
-      _isOptimizing = false;
+      if (isUsingOption(BO_IS_OPTIMIZING_O1))
+      {
+        std::cout << BRAIN_OPT_ERR;
+        exit(-1);
+      }
+
+      _options |= BO_IS_OPTIMIZING_O0;
     }
     else if (str.compare("-O1") == 0)
     {
-      _isOptimizing = true;
+      if (isUsingOption(BO_IS_OPTIMIZING_O0))
+      {
+        std::cout << BRAIN_OPT_ERR;
+        exit(-1);
+      }
+
+      _options |= BO_IS_OPTIMIZING_O1;
     }
     else if ((str.size() > 2 && str.substr(str.size()-2,2) == ".b")    || 
              (str.size() > 3 && str.substr(str.size()-3,3) == ".br")   ||
              (str.size() > 6 && str.substr(str.size()-6,6) == ".brain" ))
     {
-      // TODO: Make it a list
       std::ifstream t(str);
       std::string strFile((std::istreambuf_iterator<char>(t)),
                        std::istreambuf_iterator<char>());
@@ -98,18 +121,8 @@ std::string ArgsHandler::getStringFile()
   return _stringFile;
 }
 
-bool ArgsHandler::isEmitLLVMActive()
+bool ArgsHandler::isUsingOption(BrainOption option)
 {
-  return _isEmitingLLVM;
-}
-
-bool ArgsHandler::isEmitExprActive()
-{
-  return _isEmitingExpr;
-}
-
-bool ArgsHandler::isOptimizing()
-{
-  return _isOptimizing;
+  return (_options & option) == option;
 }
 

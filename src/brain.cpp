@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 {
   ArgsHandler argsHandler(argc, argv);
 
-  Parser parser(argsHandler.getStringFile(), argsHandler.isOptimizing());
+  Parser parser(argsHandler.getStringFile(), argsHandler.isUsingOption(BO_IS_OPTIMIZING_O1));
  
   // Create the context and the module
   llvm::LLVMContext C;
@@ -57,13 +57,13 @@ int main(int argc, char *argv[])
   // Return 0 to the "main" function
   B.CreateRet(B.getInt32(0));
 
-  if (argsHandler.isEmitExprActive())
+  if (argsHandler.isUsingOption(BO_IS_EMITTING_EXPR))
   {
     std::cout << "\n" << "=== Debug Information ===" << "\n";
     parser.DebugDescription(0);
   }
 
-  if(argsHandler.isEmitLLVMActive())
+  if(argsHandler.isUsingOption(BO_IS_EMITTING_LLVM))
   { 
     std::cout << "\n" << "=== LLVM IR ===" << "\n"; 
     // Print (dump) the module
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
   // Finalize the execution engine before use it
   EE->finalizeObject();
 
-  if (argsHandler.isEmitExprActive() || argsHandler.isEmitLLVMActive())
+  if (argsHandler.isUsingOption(BO_IS_EMITTING_EXPR) || argsHandler.isUsingOption(BO_IS_EMITTING_LLVM))
   {
     // Run the program
     std::cout << "\n" << "=== Program Output ===" << "\n";
