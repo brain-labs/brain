@@ -21,9 +21,13 @@ typedef enum
 class ArgsOptions
 {
   private:
+    ArgsOptions() : _options(BO_NONE) {}
+    static ArgsOptions *_instance;
     int _options;
   public:
-    ArgsOptions() : _options(BO_NONE) {}
+    ArgsOptions(ArgsOptions const&) = delete;
+    ArgsOptions& operator=(ArgsOptions const&) = delete;
+    static ArgsOptions* instance();
     void addOption(BrainOption option);
     bool hasOption(BrainOption option);
 };

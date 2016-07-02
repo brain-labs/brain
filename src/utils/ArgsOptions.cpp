@@ -7,6 +7,15 @@
 
 #include "ArgsOptions.h"
 
+ArgsOptions *ArgsOptions::_instance = nullptr;
+
+ArgsOptions* ArgsOptions::instance()
+{
+  if (!ArgsOptions::_instance)
+      ArgsOptions::_instance = new ArgsOptions();
+  return _instance;
+}
+
 void ArgsOptions::addOption(BrainOption option)
 {
   _options |= option;

@@ -48,35 +48,35 @@ void ArgsHandler::handle(int argc, char *argv[])
     }
     else if (str.compare("-emit-llvm") == 0)
     {
-      _argsOptions.addOption(BO_IS_EMITTING_LLVM);
+      ArgsOptions::instance()->addOption(BO_IS_EMITTING_LLVM);
     }
     else if (str.compare("-emit-expr") == 0)
     {
-      _argsOptions.addOption(BO_IS_EMITTING_EXPR);
+      ArgsOptions::instance()->addOption(BO_IS_EMITTING_EXPR);
     }
     else if (str.compare("-v") == 0)
     {
-      _argsOptions.addOption(BO_IS_VERBOSE);
+      ArgsOptions::instance()->addOption(BO_IS_VERBOSE);
     }
     else if (str.compare("-O0") == 0)
     {
-      if (_argsOptions.hasOption(BO_IS_OPTIMIZING_O1))
+      if (ArgsOptions::instance()->hasOption(BO_IS_OPTIMIZING_O1))
       {
         std::cout << BRAIN_OPT_ERR;
         exit(-1);
       }
 
-      _argsOptions.addOption(BO_IS_OPTIMIZING_O0);
+      ArgsOptions::instance()->addOption(BO_IS_OPTIMIZING_O0);
     }
     else if (str.compare("-O1") == 0)
     {
-      if (_argsOptions.hasOption(BO_IS_OPTIMIZING_O0))
+      if (ArgsOptions::instance()->hasOption(BO_IS_OPTIMIZING_O0))
       {
         std::cout << BRAIN_OPT_ERR;
         exit(-1);
       }
 
-      _argsOptions.addOption(BO_IS_OPTIMIZING_O1);
+      ArgsOptions::instance()->addOption(BO_IS_OPTIMIZING_O1);
     }
     else if ((str.size() > 2 && str.substr(str.size()-2,2) == ".b")    || 
              (str.size() > 3 && str.substr(str.size()-3,3) == ".br")   ||
@@ -119,10 +119,5 @@ void ArgsHandler::handle(int argc, char *argv[])
 std::string ArgsHandler::getStringFile()
 {
   return _stringFile;
-}
-
-ArgsOptions ArgsHandler::getArgsOptions()
-{
-  return _argsOptions;
 }
 

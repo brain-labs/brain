@@ -16,12 +16,10 @@ class ArgsHandler
 {
   protected:
     std::string _stringFile;
-    ArgsOptions _argsOptions;
     void handle(int argc, char *argv[]);
   public:
     ArgsHandler(int argc, char *argv[]) { handle(argc, argv); }
     std::string getStringFile();
-    ArgsOptions getArgsOptions();
 };
 
 #endif

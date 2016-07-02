@@ -23,13 +23,12 @@ class Parser
     std::string _data;
     int _index;
     std::vector<Expr *> _exprs;
-    ArgsOptions _argsOptions;
   
     static bool isSkippable(char c);
     char getToken();
     void parse(std::vector<Expr *> &exprs, int level);
   public:
-    Parser(std::string s, ArgsOptions argsOptions) : _data(s), _index(0), _argsOptions(argsOptions) { parse(_exprs, 0); }
+    Parser(std::string s) : _data(s), _index(0) { parse(_exprs, 0); }
     void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
     void DebugDescription(int level);
 };

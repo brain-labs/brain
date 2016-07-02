@@ -20,7 +20,7 @@ class DebugExpr : public Expr
 {
   public:
     DebugExpr() { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, ArgsOptions &argsOptions, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     void DebugDescription(int level);
     ~DebugExpr() {};
 };

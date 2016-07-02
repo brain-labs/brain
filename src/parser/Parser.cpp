@@ -46,7 +46,7 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
    while ( (c = getToken()) ) 
    {
      Expr *expr = NULL;
-     if (_argsOptions.hasOption(BO_IS_OPTIMIZING_O1) && !exprs.empty())
+     if (ArgsOptions::instance()->hasOption(BO_IS_OPTIMIZING_O1) && !exprs.empty())
      {
        Expr *lastExpr = exprs.back();
        if (lastExpr->UpdateExpr(c))
@@ -219,7 +219,7 @@ void Parser::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B)
 
   for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) 
   {
-    (*it)->CodeGen(M, B, _argsOptions, __Brain_IndexPtr, __Brain_CellsPtr);
+    (*it)->CodeGen(M, B, __Brain_IndexPtr, __Brain_CellsPtr);
   }
 }
 

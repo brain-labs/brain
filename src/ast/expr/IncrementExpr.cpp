@@ -7,7 +7,7 @@
 
 #include "IncrementExpr.h"
 
-void IncrementExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, ArgsOptions &argsOptions, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void IncrementExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(index) };
   llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);

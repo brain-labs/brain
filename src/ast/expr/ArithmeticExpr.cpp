@@ -7,7 +7,7 @@
 
 #include "ArithmeticExpr.h"
 
-void ArithmeticExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, ArgsOptions &argsOptions, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void ArithmeticExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::Value *IdxV = B.CreateLoad(index);  
   llvm::Value* Idxs[] = { B.getInt32(0), IdxV };
