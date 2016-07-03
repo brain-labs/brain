@@ -12,7 +12,7 @@ typedef enum
 {
   BO_NONE = 0,
   BO_IS_EMITTING_LLVM = 1,
-  BO_IS_EMITTING_EXPR = 2,
+  BO_IS_EMITTING_AST = 2,
   BO_IS_VERBOSE = 4,
   BO_IS_OPTIMIZING_O0 = 8,
   BO_IS_OPTIMIZING_O1 = 16
@@ -30,6 +30,7 @@ class ArgsOptions
     static ArgsOptions* instance();
     void addOption(BrainOption option);
     bool hasOption(BrainOption option);
+    BrainOption getOptimization();
 };
 
 #endif

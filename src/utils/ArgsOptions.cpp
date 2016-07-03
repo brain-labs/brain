@@ -26,3 +26,20 @@ bool ArgsOptions::hasOption(BrainOption option)
   return (_options & option) == option;
 }
 
+BrainOption ArgsOptions::getOptimization()
+{
+  // default value
+  if ((_options & BO_IS_OPTIMIZING_O1) == 0 &&
+     (_options & BO_IS_OPTIMIZING_O0) == 0)
+  {
+    return BO_IS_OPTIMIZING_O1;
+  }
+  else if ((_options & BO_IS_OPTIMIZING_O1) == BO_IS_OPTIMIZING_O1)
+  {
+    return BO_IS_OPTIMIZING_O1;
+  }
+  else
+  {
+    return BO_IS_OPTIMIZING_O0;
+  }
+}

@@ -46,7 +46,7 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
    while ( (c = getToken()) ) 
    {
      Expr *expr = NULL;
-     if (ArgsOptions::instance()->hasOption(BO_IS_OPTIMIZING_O1) && !exprs.empty())
+     if (ArgsOptions::instance()->getOptimization() == BO_IS_OPTIMIZING_O1 && !exprs.empty())
      {
        Expr *lastExpr = exprs.back();
        if (lastExpr->UpdateExpr(c))

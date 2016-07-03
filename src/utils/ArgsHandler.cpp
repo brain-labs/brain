@@ -32,8 +32,8 @@ void ArgsHandler::handle(int argc, char *argv[])
     if (str.compare("--help") == 0 || str.compare("-help") == 0)
     {
       std::cout << "\n"
-                << "-emit-llvm\tDumps the LLVM IR code before executing\n"
-                << "-emit-expr\tDumps the AST Expressions generated before executing\n"
+                << "-emit-llvm\tEmits LLVM IR code for the given input\n"
+                << "-emit-ast\tEmits the AST for the given input\n"
                 << "-v\t\tUses verbose mode for the output\n"
                 << "-O0\t\tGenerates output code with no optmizations\n"
                 << "-O1\t\tOptimizes Brain generated output code (Default)\n" 
@@ -50,9 +50,9 @@ void ArgsHandler::handle(int argc, char *argv[])
     {
       ArgsOptions::instance()->addOption(BO_IS_EMITTING_LLVM);
     }
-    else if (str.compare("-emit-expr") == 0)
+    else if (str.compare("-emit-ast") == 0)
     {
-      ArgsOptions::instance()->addOption(BO_IS_EMITTING_EXPR);
+      ArgsOptions::instance()->addOption(BO_IS_EMITTING_AST);
     }
     else if (str.compare("-v") == 0)
     {

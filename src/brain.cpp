@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
   // Return 0 to the "main" function
   B.CreateRet(B.getInt32(0));
 
-  if (ArgsOptions::instance()->hasOption(BO_IS_EMITTING_EXPR))
+  if (ArgsOptions::instance()->hasOption(BO_IS_EMITTING_AST))
   {
     std::cout << "\n" << "=== Debug Information ===" << "\n";
     parser.DebugDescription(0);
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
   // Finalize the execution engine before use it
   EE->finalizeObject();
 
-  if (ArgsOptions::instance()->hasOption(BO_IS_EMITTING_EXPR) || ArgsOptions::instance()->hasOption(BO_IS_EMITTING_LLVM))
+  if (ArgsOptions::instance()->hasOption(BO_IS_EMITTING_AST) || ArgsOptions::instance()->hasOption(BO_IS_EMITTING_LLVM))
   {
     // Run the program
     std::cout << "\n" << "=== Program Output ===" << "\n";
