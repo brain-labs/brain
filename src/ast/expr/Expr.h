@@ -12,6 +12,7 @@
 #include "llvm/IR/Module.h"
 
 #include "../../utils/ArgsOptions.h"
+#include "../general/ASTInfo.h"
 
 #ifndef __cast_capital__ 
   #define CAST_TO_C_STRING castToCStr

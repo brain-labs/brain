@@ -12,7 +12,7 @@ ArgsOptions *ArgsOptions::_instance = nullptr;
 ArgsOptions* ArgsOptions::instance()
 {
   if (!ArgsOptions::_instance)
-      ArgsOptions::_instance = new ArgsOptions();
+    ArgsOptions::_instance = new ArgsOptions();
   return _instance;
 }
 

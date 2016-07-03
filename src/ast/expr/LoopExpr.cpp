@@ -82,8 +82,20 @@ void LoopExpr::DebugDescription(int level)
 {
   std::string openedBrackets = (_type == LT_FOR) ? "{" : "[";
   std::string closedBrackets = (_type == LT_FOR) ? "}" : "]";  
- 
-  std::cout << "LoopExpr: " << openedBrackets << std::endl;
+
+  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
+  {
+    std::cout << "Loop Expression - "
+              << "data point at cell "
+              << ASTInfo::instance()->debugIndex 
+              << openedBrackets 
+              << std::endl; 
+  }
+  else
+  {
+    std::cout << "LoopExpr: " << openedBrackets << std::endl;
+  }
+
   for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it)
   {
     std::cout << std::string(level * 2, ' ');
@@ -92,6 +104,7 @@ void LoopExpr::DebugDescription(int level)
     if ((*it)->ExprCategory() == ET_TERMINAL)
       break;
   }
+
   std::cout << std::string(level, ' ') << closedBrackets << std::endl;
 }
 

@@ -18,7 +18,16 @@ void BreakExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
 void BreakExpr::DebugDescription(int level)
 {
   std::cout.width(level);
-  std::cout << "BreakExpr" << std::endl;
+  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
+  {
+    std::cout << "Break Expression - data pointer at cell " 
+              << ASTInfo::instance()->debugIndex
+              << std::endl;
+  }
+  else
+  {
+    std::cout << "BreakExpr" << std::endl;
+  }
 }
 
 ExpressionType BreakExpr::ExprCategory()

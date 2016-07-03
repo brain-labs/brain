@@ -38,6 +38,15 @@ void DebugExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
 void DebugExpr::DebugDescription(int level)
 {
   std::cout.width(level);
-  std::cout << "DebugExpr" << std::endl;
+  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
+  {
+    std::cout << "Debug Expression - data pointer at cell " 
+              << ASTInfo::instance()->debugIndex
+              << std::endl;
+  }
+  else
+  {
+    std::cout << "DebugExpr" << std::endl;
+  }
 }
 

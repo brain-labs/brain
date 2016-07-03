@@ -18,7 +18,23 @@ void ShiftExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
 void ShiftExpr::DebugDescription(int level)
 {
   std::cout.width(level);
-  std::cout << "ShiftExpr (" << _step << ")" << std::endl;
+  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
+  {
+    std::cout << "Shift Expression - move data pointer from "
+              << ASTInfo::instance()->debugIndex
+              << " to "
+              << ASTInfo::instance()->debugIndex + _step
+              << " - "
+              << _step
+              << " step(s)"
+              << std::endl;
+  }
+  else
+  {
+    std::cout << "ShiftExpr (" << _step << ")" << std::endl;
+  }
+
+  ASTInfo::instance()->debugIndex += _step;
 }
 
 bool ShiftExpr::UpdateExpr(char update)

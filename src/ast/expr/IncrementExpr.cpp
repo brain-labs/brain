@@ -21,12 +21,23 @@ void IncrementExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalV
 void IncrementExpr::DebugDescription(int level)
 {
   std::cout.width(level);
-  std::cout << "IncrementExpr (" << _increment << ")" << std::endl;
+  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
+  {
+    std::cout << "Increment Expression - increment of "
+              << _increment
+              << " with data pointer at cell "
+              << ASTInfo::instance()->debugIndex
+              << std::endl;
+  }
+  else
+  {
+    std::cout << "IncrementExpr (" << _increment << ")" << std::endl;
+  }
 }
 
 bool IncrementExpr::UpdateExpr(char update)
 {
-  switch(update)
+  switch (update)
   {
     case '+': _increment++; return true;
     case '-': _increment--; return true;

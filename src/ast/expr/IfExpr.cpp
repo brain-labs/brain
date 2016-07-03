@@ -66,7 +66,18 @@ void IfExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable
 
 void IfExpr::DebugDescription(int level)
 {
-  std::cout << "IfExpr (THEN) [" << std::endl;
+  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
+  {
+    std::cout << "If Expression - THEN - if cell "
+              << ASTInfo::instance()->debugIndex
+              << " != 0 ["
+              << std::endl;
+  }
+  else
+  {
+    std::cout << "IfExpr (THEN) [" << std::endl;
+  }
+
   for (std::vector<Expr *>::iterator it = _exprsThen.begin(); it != _exprsThen.end(); ++it)
   {
     std::cout << std::string(level * 2, ' ');
@@ -80,7 +91,17 @@ void IfExpr::DebugDescription(int level)
 
   if (!_exprsElse.empty())
   {
-    std::cout << std::string(level, ' ') << "IfExpr (ELSE) [" << std::endl;
+    if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
+    {
+      std::cout << std::string(level, ' ') 
+                << "If Expression - ELSE - [" 
+                << std::endl;
+    }
+    else
+    {
+      std::cout << std::string(level, ' ') << "IfExpr (ELSE) [" << std::endl;
+    }
+
     for (std::vector<Expr *>::iterator it = _exprsElse.begin(); it != _exprsElse.end(); ++it)
     {
       std::cout << std::string(level * 2, ' ');

@@ -49,7 +49,21 @@ void ArithmeticExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Global
 void ArithmeticExpr::DebugDescription(int level)
 {
   std::cout.width(level);
-  std::cout << "ArithmeticExpr ( " << TypeToString() << " )" << std::endl;
+  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
+  {
+    std::cout << "Arithmetic Expression - " << TypeToString() 
+              << " with the cells " 
+              << ASTInfo::instance()->debugIndex
+              << " and "
+              << (ASTInfo::instance()->debugIndex - 1)
+              << " with data pointer at cell " 
+              << ASTInfo::instance()->debugIndex
+              << std::endl;
+  }
+  else
+  {
+    std::cout << "ArithmeticExpr ( " << TypeToString() << " )" << std::endl;
+  }
 }
 
 std::string ArithmeticExpr::TypeToString()
