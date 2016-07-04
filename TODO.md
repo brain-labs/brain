@@ -7,6 +7,7 @@
 - [x] Code refactoring for the return methods inside the recursivity.
 - [x] Code refactoring for the whole project. Improve readability (CodeGen params too).
 - [x] Create verbose mode describe on https://github.com/luizperes/brain/issues/2
+- [ ] Fix InputExpr .
 - [ ] Implement optimization for empty whiles ```[ ]```. Ignore them (For Else too).
 - [ ] Implement optimization for empty moves ```ShiftExpr(0)``` and ```IncrementExpr(0)```.
 - [ ] Implement a ```delete comments``` option for the compiler.

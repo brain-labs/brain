@@ -24,7 +24,7 @@ void ArithmeticExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Global
   // Load cell value
   llvm::Value *CellV2 = B.CreateLoad(CellPtr2);
 
-  switch(_type)
+  switch (_type)
   {
     case AT_MUL:
     {
@@ -68,19 +68,19 @@ void ArithmeticExpr::DebugDescription(int level)
 
 std::string ArithmeticExpr::TypeToString()
 {
-  switch(_type)
+  switch (_type)
   {
     case AT_MUL:
     {
-      return "Multiplication";
+      return "multiplication";
     }
     case AT_DIV:
     {
-      return "Division";
+      return "division";
     }
     case AT_REM:
     {
-      return "Remainder";
+      return "remainder";
     }
   }
 }
