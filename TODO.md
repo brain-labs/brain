@@ -12,7 +12,7 @@
 - [ ] Implement optimization for empty moves ```ShiftExpr(0)``` and ```IncrementExpr(0)```.
 - [ ] Implement a ```delete comments``` option for the compiler.
 - [ ] Implement a ```generate optimized code``` option for the compiler.
-- [ ] Improve the ```return``` at the method ```Parser::isSkippable```.
+- [ ] Improve the ```return``` at the method ```Parser::isSkippable```. Check switch at the parser.
 - [ ] Change module's name.
 - [ ] Change the if and while.`if (*ptr != 0)`, not `if (*ptr > 0)` 
 - [ ] Code's refactoring for the files brain.cpp and Parser.cpp.
