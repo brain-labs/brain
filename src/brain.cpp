@@ -8,6 +8,8 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <streambuf>
 
 #include "llvm/ExecutionEngine/SectionMemoryManager.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
@@ -17,11 +19,14 @@
 #include "llvm/Support/ManagedStatic.h"
 #include "llvm/Support/TargetSelect.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/Support/SourceMgr.h"
+#include "llvm/Support/MemoryBuffer.h"
 
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Module.h"
 #include "llvm/IR/Value.h"
+#include "llvm/IRReader/IRReader.h"
 
 #include "parser/Parser.h"
 #include "utils/ArgsHandler.h"
@@ -36,6 +41,26 @@ int main(int argc, char *argv[])
  
   // Create the context and the module
   llvm::LLVMContext C;
+
+  // here  
+  std::ifstream t(argv[1]);
+  std::string str((std::istreambuf_iterator<char>(t)),
+                       std::istreambuf_iterator<char>());
+  llvm::StringRef strRef(str);
+  llvm::MemoryBufferRef buff = llvm::MemoryBufferRef(str, "io.b");
+  // here
+  llvm::SMDiagnostic Err;
+  std::unique_ptr<llvm::Module> Mod = llvm::parseIR(buff, Err, C);
+  if (!Mod)
+  {
+    Err.print(argv[0], llvm::errs());
+    return -1;
+  }
+
+  Mod->dump();
+  // here
+
+
   llvm::ErrorOr<llvm::Module *> ModuleOrErr = new llvm::Module(MODULE_NAME, C);
   std::unique_ptr<llvm::Module> Owner = std::unique_ptr<llvm::Module>(ModuleOrErr.get());
   llvm::Module *M = Owner.get();
@@ -69,12 +94,12 @@ int main(int argc, char *argv[])
     // Print (dump) the module
     M->dump();
   }
- 
+
   // Default initialisation
   llvm::InitializeNativeTarget();
   llvm::InitializeNativeTargetAsmPrinter();
   llvm::InitializeNativeTargetAsmParser();
- 
+
   // Create the execution engine
   std::string ErrStr;
   llvm::EngineBuilder *EB = new llvm::EngineBuilder(std::move(Owner));
