@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// you can overwrite those functions! :)
+
 int brain_getchar() {
   return getchar();
 }

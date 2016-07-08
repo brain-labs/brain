@@ -18,3 +18,4 @@
 - [ ] Code's refactoring for the files brain.cpp and Parser.cpp.
 - [ ] Make sure you are deleting objects from the heap.
 - [ ] Implement ```@``` and ```$``` if decided to.
+- [ ] Create install script. (remember to install the libs)

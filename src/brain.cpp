@@ -56,10 +56,7 @@ int main(int argc, char *argv[])
     Err.print(argv[0], llvm::errs());
     return -1;
   }
-
-  Mod->dump();
   // here
-
 
   llvm::ErrorOr<llvm::Module *> ModuleOrErr = new llvm::Module(MODULE_NAME, C);
   std::unique_ptr<llvm::Module> Owner = std::unique_ptr<llvm::Module>(ModuleOrErr.get());
@@ -93,6 +90,7 @@ int main(int argc, char *argv[])
     std::cout << "\n" << "=== LLVM IR ===" << "\n"; 
     // Print (dump) the module
     M->dump();
+    Mod->dump();
   }
 
   // Default initialisation
@@ -106,6 +104,8 @@ int main(int argc, char *argv[])
   llvm::ExecutionEngine *EE = EB->setErrorStr(&ErrStr)
     .setMCJITMemoryManager(std::unique_ptr<llvm::SectionMemoryManager>(new llvm::SectionMemoryManager()))
     .create();
+
+  EE->addModule(std::move(Mod));
 
   if (!ErrStr.empty()) {
     std::cout << ErrStr << "\n";

@@ -13,31 +13,17 @@ void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
 {
   llvm::LLVMContext &C = M->getContext();
   
-  // Get "scanf" function
-  // i32 @scanf(i8*, ...)
-  llvm::Type* ScanfArgs[] = { llvm::Type::getInt8PtrTy(C) };
-  llvm::FunctionType *ScanfTy = llvm::FunctionType::get(llvm::Type::getInt32Ty(C), ScanfArgs, true /* vaarg */);
-  llvm::Function *ScanfF = llvm::cast<llvm::Function>(M->getOrInsertFunction("scanf", ScanfTy));
-  
-  // Prepare args
-  static llvm::Value *GScanfFormat = NULL;
-  if (!GScanfFormat) 
-  {
-    GScanfFormat = B.CreateGlobalString(" %c", "brainf.scanf.format");
-  }
-  llvm::Value *IntPtr = B.CreateAlloca(llvm::Type::getInt32Ty(C));
-  
-  // Call "scanf"
-  llvm::Value* Args[] = { CAST_TO_C_STRING(GScanfFormat, B), IntPtr };
-  llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
-  B.CreateCall(ScanfF, ArgsArr);
+  llvm::Function *GetCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("brain_getchar", llvm::Type::getInt32Ty(C), NULL));
+  llvm::CallInst *GetCharCall = B.CreateCall(GetCharF);
+  GetCharCall->setTailCall(false);
+  llvm::Value *IntPtr = GetCharCall;
 	
   llvm::Value *IdxV = B.CreateLoad(index);
   llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
                                                    llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                                IdxV);
   // Save the new value to current cell
-  B.CreateStore(B.CreateLoad(IntPtr), CellPtr);
+  B.CreateStore(IntPtr, CellPtr);
 }
 
 void InputExpr::DebugDescription(int level)
