@@ -10,19 +10,33 @@
 
 #include <iostream>
 
-#include "llvm/Transforms/Utils/BuildLibCalls.h"
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
+#include <llvm/Transforms/Utils/BuildLibCalls.h>
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "Expr.h"
 
-class DebugExpr : public Expr
+/**
+ * @brief Class that represents the debug operator in Brain.
+ */
+class DebugExpression : public Expression
 {
-  public:
-    DebugExpr() { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
-    void DebugDescription(int level);
-    ~DebugExpr() {};
+public:
+    DebugExpression() { }
+    /**
+     * @brief
+     * @param M
+     * @param B
+     * @param index
+     * @param cells
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    /**
+     * @brief
+     * @param level
+     */ 
+    void debug_description(int level);
+    ~DebugExpression() {};
 };
 
-#endif
+#endif // DEBUG_EXPR_H

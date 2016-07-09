@@ -9,7 +9,7 @@
 
 using namespace llvm;
 
-void DebugExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void DebugExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
   
@@ -35,18 +35,16 @@ void DebugExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
   B.CreateCall(PrintfF, ArgsArr);
 }
 
-void DebugExpr::DebugDescription(int level)
+void DebugExpression::debug_description(int level)
 {
   std::cout.width(level);
-  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
-  {
+  if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
     std::cout << "Debug Expression - data pointer at cell " 
-              << ASTInfo::instance()->debugIndex
+              << ASTInfo::instance()->debug_index
               << std::endl;
   }
-  else
-  {
-    std::cout << "DebugExpr" << std::endl;
+  else {
+    std::cout << "DebugExpression" << std::endl;
   }
 }
 

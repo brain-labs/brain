@@ -10,21 +10,35 @@
 
 #include <iostream>
 
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "Expr.h"
 
-class IncrementExpr : public Expr
+/**
+ * @brief Class that represent the increment operator in Brain.
+ */
+class IncrementExpression : public Expression
 {
-  protected:
+protected:
     int _increment;
-  public:
-    IncrementExpr(int increment) : _increment(increment) { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
-    void DebugDescription(int level);
-    bool UpdateExpr(char update);
-    ~IncrementExpr() {};
+public:
+    IncrementExpression(int increment) : _increment(increment) { }
+    /**
+     * @brief
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    /**
+     * @brief
+     * @param level
+     */
+    void debug_description(int level);
+    /**
+     * @brief
+     * @param update
+     */
+    bool update_expression(char update);
+    ~IncrementExpression() {};
 };
 
-#endif
+#endif // INCREMENT_EXPR_H

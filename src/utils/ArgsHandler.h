@@ -12,14 +12,23 @@
 
 #include "ArgsOptions.h"
 
+/**
+ * @brief Consumes the arguments passed to brain and do whatever actions it's supposed to.
+ */
 class ArgsHandler 
 {
-  protected:
-    std::string _stringFile;
+protected:
+    std::string _string_file;
+    /**
+     * @brief
+     */
     void handle(int argc, char *argv[]);
-  public:
+public:
     ArgsHandler(int argc, char *argv[]) { handle(argc, argv); }
-    std::string getStringFile();
+    /**
+     * @brief
+     */
+    std::string get_string_file();
 };
 
-#endif
+#endif // ARGS_HANDLER_H
