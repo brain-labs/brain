@@ -14,10 +14,11 @@
 - [ ] Implement a ```generate optimized code``` option for the compiler.
 - [ ] Improve the ```return``` at the method ```Parser::isSkippable```. Check switch at the parser.
 - [ ] Change module's name.
-- [ ] Change the if and while.`if (*ptr != 0)`, not `if (*ptr > 0)`. Although for is going to work only for positive numbers. 
+- [ ] Change the if and while.`if (*ptr != 0)`, not `if (*ptr > 0)`. Although for is going to work only for positive numbers.
 - [ ] Code's refactoring for the files brain.cpp and Parser.cpp.
 - [ ] Make sure you are deleting objects from the heap.
 - [ ] Implement ```@``` for function calls
 - [ ] Implement ```$``` as a print for number / 100.
 - [ ] Allow the compiler to have cells larger than 100 x 4
+- [ ] Check if required functions (LLVM IR) are implemented.
 - [ ] Create install script. (remember to install the libs)
