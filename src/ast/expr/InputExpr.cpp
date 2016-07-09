@@ -11,19 +11,43 @@ using namespace llvm;
 
 void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
+  /*llvm::LLVMContext &C = M->getContext();
+
+  llvm::Function *GetCharF = llvm::cast<llvm::Function>(
+    M->getOrInsertFunction(
+      "b_getchar",
+      llvm::Type::getVoidTy(C), 
+      llvm::Type::getInt32Ty(C),
+      llvm::Type::getInt32Ty(C)->getPointerTo(),
+      NULL
+  ));
+
+  llvm::Value* Args[] = { 
+    B.CreateLoad(index),
+    B.CreateGEP(
+      B.CreatePointerCast(
+        cells,
+        llvm::Type::getInt32Ty(C)->getPointerTo()
+      ), 
+      llvm::ConstantInt::get(llvm::Type::getInt32Ty(C), 0)
+    )
+  };
+
+  llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
+  B.CreateCall(GetCharF, ArgsArr);*/
+
   llvm::LLVMContext &C = M->getContext();
-  
-  llvm::Function *GetCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("brain_getchar", llvm::Type::getInt32Ty(C), NULL));
-  llvm::CallInst *GetCharCall = B.CreateCall(GetCharF);
-  GetCharCall->setTailCall(false);
-  llvm::Value *IntPtr = GetCharCall;
-	
-  llvm::Value *IdxV = B.CreateLoad(index);
-  llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
-                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
-                               IdxV);
-  // Save the new value to current cell
-  B.CreateStore(IntPtr, CellPtr);
+
+  llvm::Type* PutCharArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
+  llvm::FunctionType *PutCharTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C), PutCharArgs, false);
+  llvm::Function *PutCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("b_getchar", PutCharTy));
+  llvm::Value* Args[] = {
+    B.CreateLoad(index),
+    B.CreatePointerCast(cells, llvm::Type::getInt32Ty(C)->getPointerTo())
+  };
+  llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
+  B.CreateCall(PutCharF, ArgsArr);
+
 }
 
 void InputExpr::DebugDescription(int level)

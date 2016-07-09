@@ -12,27 +12,16 @@ using namespace llvm;
 void OutputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
-  
-  // Get "printf" function
-  // i32 @printf(i8*, ...)
-  llvm::Type* PrintfArgs[] = { llvm::Type::getInt8PtrTy(C) };
-  llvm::FunctionType *PrintfTy = llvm::FunctionType::get(llvm::Type::getInt32Ty(C), PrintfArgs, true /* vaarg */);
-  llvm::Function *PrintfF = llvm::cast<llvm::Function>(M->getOrInsertFunction("printf", PrintfTy));
-  
-  // Prepare args
-  static llvm::Value *GPrintfFormat = NULL;
-  if (!GPrintfFormat) {
-    GPrintfFormat = B.CreateGlobalString("%c", "brainf.printf.format");
-  }
-  llvm::Value *IdxV = B.CreateLoad(index);
-  llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
-                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
-                               IdxV);
-  
-  // Call "printf"
-  llvm::Value* Args[] = { CAST_TO_C_STRING(GPrintfFormat, B), B.CreateLoad(CellPtr) };
+
+  llvm::Type* PutCharArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };  
+  llvm::FunctionType *PutCharTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C), PutCharArgs, false);
+  llvm::Function *PutCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("b_putchar", PutCharTy));
+  llvm::Value* Args[] = { 
+    B.CreateLoad(index),
+    B.CreatePointerCast(cells, llvm::Type::getInt32Ty(C)->getPointerTo())
+  };
   llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
-  B.CreateCall(PrintfF, ArgsArr);
+  B.CreateCall(PutCharF, ArgsArr);  
 }
 
 void OutputExpr::DebugDescription(int level)

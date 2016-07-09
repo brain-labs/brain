@@ -2,11 +2,18 @@
 
 // you can overwrite those functions! :)
 
-int brain_getchar() {
-  return getchar();
+void b_getchar(int idx, int *cells) {
+  cells[idx] = getchar();
 }
 
-int brain_putchar(int c) { 
-  return putchar(c);
+void b_putchar(int idx, int *cells) { 
+  putchar(cells[idx]);
+}
+
+void b_comment(int idx, int *cells) {
+  printf("Index Pointer: %d Value at Index Pointer: %d\n",
+         idx,
+         cells[idx]
+  );
 }
 
