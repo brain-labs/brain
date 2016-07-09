@@ -11,7 +11,7 @@ fi
 
 files=$(find $1 -type f -name "*.c")
 if [ $? -ne 0 ] ; then
-  echo "Please pass an argument like '.' or 'libs/'"
+  echo "Please pass an argument like '.' or '../libs/'"
   exit
 fi
 
