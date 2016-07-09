@@ -33,6 +33,7 @@
 #include "utils/ArgsOptions.h"
 
 #define MODULE_NAME "brainModule"
+#define IO_LIB "/usr/local/include/brain/io.ll"
 
 int main(int argc, char *argv[])
 {
@@ -42,21 +43,14 @@ int main(int argc, char *argv[])
   // Create the context and the module
   llvm::LLVMContext C;
 
-  // here  
-  std::ifstream t(argv[1]);
-  std::string str((std::istreambuf_iterator<char>(t)),
-                       std::istreambuf_iterator<char>());
-  llvm::StringRef strRef(str);
-  llvm::MemoryBufferRef buff = llvm::MemoryBufferRef(str, "io.b");
-  // here
   llvm::SMDiagnostic Err;
-  std::unique_ptr<llvm::Module> Mod = llvm::parseIR(buff, Err, C);
+  //std::unique_ptr<llvm::Module> Mod = llvm::parseIR(buff, Err, C);
+  std::unique_ptr<llvm::Module> Mod = llvm::parseIRFile(llvm::StringRef(IO_LIB), Err, C);
   if (!Mod)
   {
     Err.print(argv[0], llvm::errs());
     return -1;
   }
-  // here
 
   llvm::ErrorOr<llvm::Module *> ModuleOrErr = new llvm::Module(MODULE_NAME, C);
   std::unique_ptr<llvm::Module> Owner = std::unique_ptr<llvm::Module>(ModuleOrErr.get());
