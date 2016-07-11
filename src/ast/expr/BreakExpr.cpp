@@ -9,28 +9,26 @@
 
 using namespace llvm;
 
-void BreakExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void BreakExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
-  // it is not needed to create code gen for the BreakExpr
+  // it is not needed to create code gen for the BreakExpression
   // it is a terminator, so the code will stop inside the loop 
 }
 
-void BreakExpr::DebugDescription(int level)
+void BreakExpression::debug_description(int level)
 {
-  std::cout.width(level);
-  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
-  {
-    std::cout << "Break Expression - data pointer at cell " 
-              << ASTInfo::instance()->debugIndex
-              << std::endl;
-  }
-  else
-  {
-    std::cout << "BreakExpr" << std::endl;
-  }
+    std::cout.width(level);
+    if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
+	std::cout << "Break Expression - data pointer at cell " 
+		  << ASTInfo::instance()->debug_index
+		  << std::endl;
+    }
+    else {
+	std::cout << "BreakExpression" << std::endl;
+    }
 }
 
-ExpressionType BreakExpr::ExprCategory()
+ExpressionType BreakExpression::expression_category()
 {
-  return ET_TERMINAL;
+    return ET_TERMINAL;
 }
