@@ -84,14 +84,12 @@ void ArgsHandler::handle(int argc, char **argv)
 	    }
 	    _string_file = str_file;
 	}
-	else if (str.find("-") == 0)
-	{
+	else if (str.find("-") == 0) {
 	    std::cout << "Unsupported option \"" << str << "\"\n"
 		      << BRAIN_HELP;
 	    exit(-1);
 	}
-	else
-	{
+	else {
 	    std::cout << "No such file '" << str << "'\n"
 		      << BRAIN_FORMAT
 		      << BRAIN_HELP;
@@ -99,8 +97,7 @@ void ArgsHandler::handle(int argc, char **argv)
 	}
   }
 
-  if (_string_file.empty())
-  {
+  if (_string_file.empty()) {
     std::cout << "No input files\n"
               << BRAIN_FORMAT;
     exit(-1);

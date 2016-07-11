@@ -8,6 +8,9 @@
 #ifndef ARGS_OPTIONS_H
 #define ARGS_OPTIONS_H
 
+/**
+ * @brief
+ */
 typedef enum
 {
   BO_NONE = 0,
@@ -19,7 +22,7 @@ typedef enum
 } BrainOption;
 
 /**
- * @brief Handles all the inputs to Brain.
+ * @brief Handles all the options passed as arguments to Brain.
  *
  */
 class ArgsOptions

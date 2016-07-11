@@ -16,9 +16,9 @@
 #include "../ast/expr/BreakExpr.h"
 #include "../ast/expr/IfExpr.h"
 
-static llvm::GlobalVariable *__Brain_IndexPtr = nullptr;
-static llvm::GlobalVariable *__Brain_CellsPtr = nullptr;
-static bool hasDoneThen = false;
+static llvm::GlobalVariable *__brain_index_ptr = nullptr;
+static llvm::GlobalVariable *__brain_cells_ptr = nullptr;
+static bool has_done_then = false;
 
 bool Parser::is_skippable(char c)
 {
@@ -104,16 +104,15 @@ void Parser::parse(std::vector<Expression *> &exprs, int level)
 	    break;
 	}
 	case ':':
-	    if (!hasDoneThen) {
+	    if (!has_done_then) {
 		if (level == 0) {
 		    break;
 		}
-                
-                _index--; // move one step back to read the ':' again
-                hasDoneThen = true;
-                return; // return to exit the 'then' recursivity
 	    }
 	    
+	    _index--; // move one step back to read the ':' again
+	    has_done_then = true;
+	    return; // return to exit the 'then' recursivity
 	    // do the else
 	    if (!exprs.empty()) {
 		Expression *expr = exprs.back();
@@ -123,8 +122,8 @@ void Parser::parse(std::vector<Expression *> &exprs, int level)
 		    ((IfExpression *)expr)->set_else(elseExpr);
 		}
 	    }
-	
-	    hasDoneThen = false; // reset the flag
+        
+	    has_done_then = false; // reset the flag
 	    break;
 	case ';':
 	    if (level > 0) {
@@ -161,24 +160,24 @@ void Parser::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
     llvm::LLVMContext &C = M->getContext();
   
-    if (!__Brain_IndexPtr) {
+    if (!__brain_index_ptr) {
 	// Create global variable |brainf.index|
 	llvm::Type *Ty = llvm::Type::getInt32Ty(C);
 	const llvm::APInt Zero = llvm::APInt(32, 0); // int32 0
 	llvm::Constant *InitV = llvm::Constant::getIntegerValue(Ty, Zero);
-    __Brain_IndexPtr = new llvm::GlobalVariable(*M, Ty, false /* non-constant */,
+	__brain_index_ptr = new llvm::GlobalVariable(*M, Ty, false /* non-constant */,
                                            llvm::GlobalValue::WeakAnyLinkage, // Keep one copy when linking (weak)
                                            InitV, "brainf.index");
   }
   
-    if (!__Brain_CellsPtr) {
+    if (!__brain_cells_ptr) {
 #define kCellsCount 100
 	// Create |brainf.cells|
 	llvm::ArrayType *ArrTy = llvm::ArrayType::get(llvm::Type::getInt32Ty(C), kCellsCount);
 	std::vector<llvm::Constant *> constants(kCellsCount, B.getInt32(0)); // Create a vector of kCellsCount items equal to 0
 	llvm::ArrayRef<llvm::Constant *> Constants = llvm::ArrayRef<llvm::Constant *>(constants);
 	llvm::Constant *InitPtr = llvm::ConstantArray::get(ArrTy, Constants);
-	__Brain_CellsPtr = new llvm::GlobalVariable(*M, ArrTy, false /* non-constant */,
+	__brain_cells_ptr = new llvm::GlobalVariable(*M, ArrTy, false /* non-constant */,
 						llvm::GlobalValue::WeakAnyLinkage,
 // Keep one copy when linking (weak)
                                            InitPtr, "brainf.cells");
@@ -186,7 +185,7 @@ void Parser::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 
     for (std::vector<Expression *>::iterator it = _exprs.begin();
 	 it != _exprs.end(); ++it) {
-	(*it)->code_gen(M, B, __Brain_IndexPtr, __Brain_CellsPtr);
+	(*it)->code_gen(M, B, __brain_index_ptr, __brain_cells_ptr);
     }
 }
 

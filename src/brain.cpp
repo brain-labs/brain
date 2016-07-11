@@ -71,25 +71,22 @@ int main(int argc, char **argv)
     // Return 0 to the "main" function
     B.CreateRet(B.getInt32(0));
 
-    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST))
-    {
+    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST)) {
         std::cout << "\n" << "=== Debug Information ===" << "\n";
         parser.debug_description(0);
     }
 
-    if(ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM))
-    { 
+    if(ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) { 
         std::cout << "\n" << "=== LLVM IR ===" << "\n"; 
         // Print (dump) the module
         M->dump();
         Mod->dump();
     }
-
+    
     // Default initialisation
     llvm::InitializeNativeTarget();
     llvm::InitializeNativeTargetAsmPrinter();
     llvm::InitializeNativeTargetAsmParser();
-
     // Create the execution engine
     std::string ErrStr;
     llvm::EngineBuilder *EB = new llvm::EngineBuilder(std::move(Owner));
@@ -107,12 +104,12 @@ int main(int argc, char **argv)
     // Finalize the execution engine before use it
     EE->finalizeObject();
 
-    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) || ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM))
-    {
+    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) ||
+	ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
         // Run the program
         std::cout << "\n" << "=== Program Output ===" << "\n";
     }
-
+    
     std::vector<llvm::GenericValue> Args(0); // No args
     llvm::GenericValue gv = EE->runFunction(MainF, Args);
   

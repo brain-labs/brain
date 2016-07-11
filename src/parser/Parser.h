@@ -18,7 +18,7 @@
 #include "../utils/ArgsOptions.h"
 
 /**
- * @brief
+ * @brief The parser of the Brain language, it interpretes *.b files.
  */
 class Parser
 {
