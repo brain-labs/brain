@@ -10,19 +10,29 @@
 
 #include <iostream>
 
-#include "llvm/Transforms/Utils/BuildLibCalls.h"
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
+#include <llvm/Transforms/Utils/BuildLibCalls.h>
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "Expr.h"
 
-class InputExpr : public Expr
+/**
+ * @brief
+ */
+class InputExpression : public Expression
 {
-  public:
-    InputExpr() { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
-    void DebugDescription(int level);
-    ~InputExpr() {};
+public:
+    InputExpression() { }
+    /**
+     * @brief
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    /**
+     * @brief
+     * @param level 
+     */
+    void debug_description(int level);
+    ~InputExpression() {};
 };
 
-#endif
+#endif // INPUT_EXPR_H

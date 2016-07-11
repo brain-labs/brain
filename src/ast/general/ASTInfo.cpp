@@ -11,7 +11,9 @@ ASTInfo *ASTInfo::_instance = nullptr;
 
 ASTInfo* ASTInfo::instance()
 {
-  if (!ASTInfo::_instance)
+  if (!ASTInfo::_instance) {
     ASTInfo::_instance = new ASTInfo();
+  }
+  
   return _instance;
 }

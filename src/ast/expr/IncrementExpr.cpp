@@ -7,7 +7,7 @@
 
 #include "IncrementExpr.h"
 
-void IncrementExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void IncrementExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(index) };
   llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
@@ -18,30 +18,34 @@ void IncrementExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalV
   B.CreateStore(B.CreateAdd(CellV, B.getInt32(_increment)), CellPtr);
 }
 
-void IncrementExpr::DebugDescription(int level)
+void IncrementExpression::debug_description(int level)
 {
-  std::cout.width(level);
-  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
-  {
-    std::cout << "Increment Expression - increment of "
-              << _increment
-              << " with data pointer at cell "
-              << ASTInfo::instance()->debugIndex
-              << std::endl;
-  }
-  else
-  {
-    std::cout << "IncrementExpr (" << _increment << ")" << std::endl;
-  }
+    std::cout.width(level);
+    if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
+	std::cout << "Increment Expression - increment of "
+		  << _increment
+		  << " with data pointer at cell "
+		  << ASTInfo::instance()->debug_index
+		  << std::endl;
+    }
+    else
+    {
+	std::cout << "IncrementExpression (" << _increment << ")" << std::endl;
+    }
 }
 
-bool IncrementExpr::UpdateExpr(char update)
+bool IncrementExpression::update_expression(char update)
 {
-  switch (update)
-  {
-    case '+': _increment++; return true;
-    case '-': _increment--; return true;
-    default : return false;
-  } 
+    switch (update)
+    {
+    case '+':
+	_increment++;
+	return true;
+    case '-':
+	_increment--;
+	return true;
+    default :
+	return false;
+    } 
 }
 
