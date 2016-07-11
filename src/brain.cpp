@@ -31,8 +31,8 @@
 #include "utils/ArgsHandler.h"
 #include "utils/ArgsOptions.h"
 
-#define MODULE_NAME "brainModule"
-#define IO_LIB "/usr/local/include/brain/io.ll"
+const std::string MODULE_NAME =  "brainModule";
+const std::string IO_LIB =  "/usr/local/include/brain/io.ll";
 
 int main(int argc, char **argv)
 {
@@ -44,8 +44,7 @@ int main(int argc, char **argv)
 
     llvm::SMDiagnostic Err;
     std::unique_ptr<llvm::Module> Mod = llvm::parseIRFile(llvm::StringRef(IO_LIB), Err, C);
-    if (!Mod)
-    {
+    if (!Mod) {
         Err.print(argv[0], llvm::errs());
         return -1;
     }
