@@ -10,20 +10,37 @@
 
 #include <iostream>
 
-#include "llvm/Transforms/Utils/BuildLibCalls.h"
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
+#include <llvm/Transforms/Utils/BuildLibCalls.h>
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "Expr.h"
 
-class BreakExpr : public Expr
+/**
+ * @brief Class that represents the break operator in Brain.
+ */
+class BreakExpression : public Expression
 {
-  public:
-    BreakExpr() { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
-    void DebugDescription(int level);
-    ExpressionType ExprCategory();
-    ~BreakExpr() {};
+public:
+    BreakExpression() { }
+    /**
+     * @brief
+     * @param M
+     * @param B
+     * @param index
+     * @param cells
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    /**
+     * @brief
+     * @param level
+     */ 
+    void debug_description(int level);
+    /**
+     * @brief
+     */ 
+    ExpressionType expression_category();
+    ~BreakExpression() {};
 };
 
-#endif
+#endif // BREAK_EXPR_H

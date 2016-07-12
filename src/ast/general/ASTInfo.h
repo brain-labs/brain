@@ -8,17 +8,27 @@
 #ifndef AST_INFO_H
 #define AST_INFO_H
 
+/**
+ * @brief
+ */
 class ASTInfo 
 {
-  private:
-    ASTInfo() : debugIndex(0) {}
+private:
+    /**
+     * @brief Private constructor of ASTInfo, denoting that this is a Singleton.
+     */
+    ASTInfo() : debug_index(0) {}
     static ASTInfo *_instance;
-  public:
-    long debugIndex;
+public:
+    long debug_index;
     ASTInfo(ASTInfo const&) = delete;
     ASTInfo& operator=(ASTInfo const&) = delete;
+    /**
+     * @brief Returns the instance of ASTInfo class if the member _instance is 
+     * nullptr, otherwise it creates a new ASTInfo object and returns it.
+     */
     static ASTInfo* instance();
 };
 
-#endif
+#endif // AST_INFO_H
 

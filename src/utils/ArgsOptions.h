@@ -8,6 +8,9 @@
 #ifndef ARGS_OPTIONS_H
 #define ARGS_OPTIONS_H
 
+/**
+ * @brief
+ */
 typedef enum
 {
   BO_NONE = 0,
@@ -16,21 +19,39 @@ typedef enum
   BO_IS_VERBOSE = 4,
   BO_IS_OPTIMIZING_O0 = 8,
   BO_IS_OPTIMIZING_O1 = 16
-}BrainOption;
+} BrainOption;
 
+/**
+ * @brief Handles all the options passed as arguments to Brain.
+ *
+ */
 class ArgsOptions
 {
-  private:
+private:
     ArgsOptions() : _options(BO_NONE) {}
     static ArgsOptions *_instance;
     int _options;
-  public:
+public:
     ArgsOptions(ArgsOptions const&) = delete;
     ArgsOptions& operator=(ArgsOptions const&) = delete;
+    /**
+     * @brief Returns the AST instance.
+     */
     static ArgsOptions* instance();
-    void addOption(BrainOption option);
-    bool hasOption(BrainOption option);
-    BrainOption getOptimization();
+    /**
+     * @brief
+     * @param option
+     */
+    void add_option(BrainOption option);
+    /**
+     * @brief
+     * @param option
+     */
+    bool has_option(BrainOption option);
+    /**
+     * @brief
+     */
+    BrainOption get_optimization();
 };
 
-#endif
+#endif // ARGS_OPTIONS_H

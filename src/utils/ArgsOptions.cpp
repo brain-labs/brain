@@ -11,35 +11,34 @@ ArgsOptions *ArgsOptions::_instance = nullptr;
 
 ArgsOptions* ArgsOptions::instance()
 {
-  if (!ArgsOptions::_instance)
-    ArgsOptions::_instance = new ArgsOptions();
-  return _instance;
+    if (!ArgsOptions::_instance) {
+	ArgsOptions::_instance = new ArgsOptions();
+    }
+  
+    return _instance;
 }
 
-void ArgsOptions::addOption(BrainOption option)
+void ArgsOptions::add_option(BrainOption option)
 {
-  _options |= option;
+    _options |= option;
 }
 
-bool ArgsOptions::hasOption(BrainOption option)
+bool ArgsOptions::has_option(BrainOption option)
 {
-  return (_options & option) == option;
+    return (_options & option) == option;
 }
 
-BrainOption ArgsOptions::getOptimization()
+BrainOption ArgsOptions::get_optimization()
 {
-  // default value
-  if ((_options & BO_IS_OPTIMIZING_O1) == 0 &&
-     (_options & BO_IS_OPTIMIZING_O0) == 0)
-  {
-    return BO_IS_OPTIMIZING_O1;
-  }
-  else if ((_options & BO_IS_OPTIMIZING_O1) == BO_IS_OPTIMIZING_O1)
-  {
-    return BO_IS_OPTIMIZING_O1;
-  }
-  else
-  {
-    return BO_IS_OPTIMIZING_O0;
-  }
+    // default value
+    if ((_options & BO_IS_OPTIMIZING_O1) == 0 &&
+	(_options & BO_IS_OPTIMIZING_O0) == 0) {
+	return BO_IS_OPTIMIZING_O1;
+    }
+    else if ((_options & BO_IS_OPTIMIZING_O1) == BO_IS_OPTIMIZING_O1) {
+	return BO_IS_OPTIMIZING_O1;
+    }
+    else {
+	return BO_IS_OPTIMIZING_O0;
+    }
 }

@@ -10,19 +10,29 @@
 
 #include <iostream>
 
-#include "llvm/Transforms/Utils/BuildLibCalls.h"
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
+#include <llvm/Transforms/Utils/BuildLibCalls.h>
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "Expr.h"
 
-class OutputExpr : public Expr
+/**
+ * @brief Class that represents the output operator in Brain.
+ */
+class OutputExpression : public Expression
 {
-  public:
-    OutputExpr() { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
-    void DebugDescription(int level);
-    ~OutputExpr() {};
+public:
+    OutputExpression() { }
+    /**
+     * @brief
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    /**
+     * @brief
+     * @param level
+     */ 
+    void debug_description(int level);
+    ~OutputExpression() {};
 };
 
-#endif
+#endif // OUTPUT_EXPR_H

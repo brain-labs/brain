@@ -11,24 +11,45 @@
 #include <vector>
 #include <iostream>
 
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "Expr.h"
 
-class IfExpr : public Expr
+/**
+ * @brief Class that represents the if operator in Brain.
+ */
+class IfExpression : public Expression
 {
-  protected:
-    std::vector<Expr *> _exprsThen;
-    std::vector<Expr *> _exprsElse;
-  public:
-    IfExpr(std::vector<Expr *> exprsThen) : _exprsThen(exprsThen) { }
-    void SetElse(std::vector<Expr *> exprsElse) { _exprsElse = exprsElse; } 
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
-    ExpressionType ExprCategory();
-    void DebugDescription(int level);
-    ~IfExpr() {};
+protected:
+    std::vector<Expression *> _exprs_then;
+    std::vector<Expression *> _exprs_else;
+public:
+    IfExpression(std::vector<Expression *> exprs_then) : _exprs_then(exprs_then) { }
+    /**
+     * @brief
+     * @param exprs_else
+     */
+    void set_else(std::vector<Expression *> exprs_else) { _exprs_else = exprs_else; }
+    /**
+     * @brief
+     * @param M
+     * @param B
+     * @param index
+     * @param cells
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    /**
+     * @brief
+     */
+    ExpressionType expression_category();
+    /**
+     * @brief
+     * @param level
+     */
+    void debug_description(int level);
+    ~IfExpression() {};
 };
 
-#endif
+#endif // IF_EXPR_H
 

@@ -19,11 +19,11 @@ A computer language based on Brainfuck.
 - [License](#license)
 
 ### About
-__Brain__ wants to improve the performance of the Brainfuck programming language and extend it as well, as Brainfuck itself has a lack of data types and does not perform great control over variables, as well as when you want to make libraries and/or functions and when you want to use different models other than characters and small integers.
+__Brain__ wants to improve the performance of the Brainfuck programming language and extend it as well, as Brainfuck itself has a lack of flexibility and does not perform great control over complex computations. __Brain__ is open to new model represetantion and allows programmers to extend its capability by attaching `LLVM IR` to its code.
 
 One of the main ideas of __Brain__ is saving some operations in machine language, creating an instruction optmizer due to the excess of instructions that Brainfuck would generate. Brain aims to implement it by using current technology __(LLVM)__.
 
-In spite of implementing new commands and features, __Brain__ tries to be **completely compatible** with Brainfuck.
+In spite of implementing new commands and features, __Brain__ is **completely compatible** with Brainfuck.
 
 ### Current Status
 Brain is running just like __Brainfuck__ so far, so feel free to use its tag [version 0.5](https://github.com/luizperes/brain/blob/v0.5/README.md)
@@ -32,7 +32,7 @@ Obs.: To use __Project Status__ (the "Kanban" below), please visit:```https://gi
 
 | Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
 | ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
-| [Brain](#brain)         | ![Progress](http://progressed.io/bar/75)  | C/C++/LLVM  | Low      |              |
+| [Brain](#brain)         | ![Progress](http://progressed.io/bar/80)  | C/C++/LLVM  | Low      |              |
 
 | To Do | In Progress | Done  |
 | :---: | :---------: | :---: |
@@ -45,18 +45,7 @@ Obs.: To use __Project Status__ (the "Kanban" below), please visit:```https://gi
 If you want to check the micro TODO list, please see the [TODO.md](TODO.md)
 
 ### How to build LLVM
-__Brain__ runs on the top of __LLVM__, thus, you are required to install the lasted version of LLVM. You can do that with git and CMake:
-
-```
-$ git clone http://llvm.org/git/llvm.git
-$ mkdir mybuilddir
-$ cd mybuilddir
-$ cmake ../llvm
-$ cmake --build .
-$ cmake --build . --target install
-```
-
-_You should be good to start. Although, having any problems with installing LLVM, please visit:http://llvm.org/docs/CMake.html_
+__Brain__ runs on the top of __LLVM__, thus, you are required to install the lastest versions of LLVM. You can do that by following this http://apt.llvm.org/
 
 ### How to install pre-commit
 This project uses __pre-commit__ to help us to check our commits in order to minimize bugs and other problems on the project, therefore is strongly recommended that you use it, if you are intending to contribute to the project. For that, you can install by:
@@ -92,7 +81,7 @@ After running ```make``` on it, you can execute:```./brain your_brain_file.b```.
 Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types.
 
 ### Technical Information
-Brain is __not yet__ a Turing Complete language, once I'm limiting its ```memory``` to ```100 * 32 bytes``` for now (only for testing purposes). Later on I will think in a way to allocate memory as needed instead.
+Brain is __not yet__ a Turing Complete language, once its ```memory``` is limited to ```100 * 32 bytes``` for now (only for testing purposes). That will be changed on the future.
 
 ### Commands
 __Implemented__
@@ -102,7 +91,7 @@ __Implemented__
 - ```-``` decrement (decrease by one) the value at the data pointer.
 - ```.``` output the value at the data pointer.
 - ```,``` accept one value of input, storing its value in the value at the data pointer.
-- ```[``` if the value at the data pointer is zero or less, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
+- ```[``` if the value at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
 - ```]``` jump to its correspondent [ .
 - ```*``` multiply ```*ptr``` with ```*(ptr-1)```. Store result in *ptr _// format: 2 3 *_
 - ```/``` divide ```*ptr``` with ```*(ptr-1)```. Store the result in *ptr _// format: 2 3 /_
@@ -111,13 +100,13 @@ __Implemented__
 - ```{``` (__for__ loop) iterates ```'value-at-the-data-pointer' times``` and needs to be closed with a matching } command. It __does not decrease__ the ```value``` at the data pointer. It will __only__ work for positive values.
 - ```}``` jump to its correspondent { .
 - ```!``` (__break__) jumps to the end of a loop (__[ ]__ or __{ }__)
-- ```?``` if the value at the data pointer is ```zero``` or ```less``` , jumps to the block with ```:``` or ```;``` and executes the commands one by one up to its correlative ```;```, otherwise, it executes the code until it finds a ```:``` or ```;```.
+- ```?``` if the value at the data pointer is ```zero``` , jumps to the block with ```:``` or ```;``` and executes the commands one by one up to its correlative ```;```, otherwise, it executes the code until it finds a ```:``` or ```;```.
 - ```:``` it works as an ```otherwise``` (or ```else```) for ```?```.
 - ```;``` ends a statement.
 
 __Not Implemented__
-- ```$``` cast the value at the data pointer back and forth to ```float``` and ```int```.
-- ```@``` include other __Brain__ files.
+- ```$``` prints out the value at the data pointer `divided` by `100`.
+- ```@``` calls a function according to the value at the data pointer. 
 
 Example of the instructions above:
 - ___if-else___: ```? +++ : --- ;``` _// if (*ptr) { *ptr += 3; } else { *ptr -= 3; }_
