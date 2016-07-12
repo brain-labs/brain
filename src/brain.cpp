@@ -31,8 +31,8 @@
 #include "utils/ArgsHandler.h"
 #include "utils/ArgsOptions.h"
 
-#define MODULE_NAME "brainModule"
-#define IO_LIB "/usr/local/include/brain/io.ll"
+const std::string MODULE_NAME =  "brainModule";
+const std::string IO_LIB =  "/usr/local/include/brain/io.ll";
 
 int main(int argc, char **argv)
 {
@@ -44,8 +44,7 @@ int main(int argc, char **argv)
 
     llvm::SMDiagnostic Err;
     std::unique_ptr<llvm::Module> Mod = llvm::parseIRFile(llvm::StringRef(IO_LIB), Err, C);
-    if (!Mod)
-    {
+    if (!Mod) {
         Err.print(argv[0], llvm::errs());
         return -1;
     }
@@ -71,25 +70,22 @@ int main(int argc, char **argv)
     // Return 0 to the "main" function
     B.CreateRet(B.getInt32(0));
 
-    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST))
-    {
+    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST)) {
         std::cout << "\n" << "=== Debug Information ===" << "\n";
         parser.debug_description(0);
     }
 
-    if(ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM))
-    { 
+    if(ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) { 
         std::cout << "\n" << "=== LLVM IR ===" << "\n"; 
         // Print (dump) the module
         M->dump();
         Mod->dump();
     }
-
+    
     // Default initialisation
     llvm::InitializeNativeTarget();
     llvm::InitializeNativeTargetAsmPrinter();
     llvm::InitializeNativeTargetAsmParser();
-
     // Create the execution engine
     std::string ErrStr;
     llvm::EngineBuilder *EB = new llvm::EngineBuilder(std::move(Owner));
@@ -107,12 +103,12 @@ int main(int argc, char **argv)
     // Finalize the execution engine before use it
     EE->finalizeObject();
 
-    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) || ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM))
-    {
+    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) ||
+	ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
         // Run the program
         std::cout << "\n" << "=== Program Output ===" << "\n";
     }
-
+    
     std::vector<llvm::GenericValue> Args(0); // No args
     llvm::GenericValue gv = EE->runFunction(MainF, Args);
   
