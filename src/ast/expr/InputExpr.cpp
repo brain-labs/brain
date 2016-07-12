@@ -9,49 +9,30 @@
 
 using namespace llvm;
 
-void InputExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void InputExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
-  llvm::LLVMContext &C = M->getContext();
-  
-  // Get "scanf" function
-  // i32 @scanf(i8*, ...)
-  llvm::Type* ScanfArgs[] = { llvm::Type::getInt8PtrTy(C) };
-  llvm::FunctionType *ScanfTy = llvm::FunctionType::get(llvm::Type::getInt32Ty(C), ScanfArgs, true /* vaarg */);
-  llvm::Function *ScanfF = llvm::cast<llvm::Function>(M->getOrInsertFunction("scanf", ScanfTy));
-  
-  // Prepare args
-  static llvm::Value *GScanfFormat = NULL;
-  if (!GScanfFormat) 
-  {
-    GScanfFormat = B.CreateGlobalString(" %c", "brainf.scanf.format");
-  }
-  llvm::Value *IntPtr = B.CreateAlloca(llvm::Type::getInt32Ty(C));
-  
-  // Call "scanf"
-  llvm::Value* Args[] = { CAST_TO_C_STRING(GScanfFormat, B), IntPtr };
-  llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
-  B.CreateCall(ScanfF, ArgsArr);
-	
-  llvm::Value *IdxV = B.CreateLoad(index);
-  llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
-                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
-                               IdxV);
-  // Save the new value to current cell
-  B.CreateStore(B.CreateLoad(IntPtr), CellPtr);
+    llvm::LLVMContext &C = M->getContext();
+    llvm::Type* GetCharArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
+    llvm::FunctionType *GetCharTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C), GetCharArgs, false);
+    llvm::Function *GetCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("b_getchar", GetCharTy));
+    llvm::Value* Args[] = {
+        B.CreateLoad(index),
+        B.CreatePointerCast(cells, llvm::Type::getInt32Ty(C)->getPointerTo())
+    };
+    llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
+    B.CreateCall(GetCharF, ArgsArr);
 }
 
-void InputExpr::DebugDescription(int level)
+void InputExpression::debug_description(int level)
 {
-  std::cout.width(level);
-  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
-  {
-    std::cout << "Input Expression - read char with data pointer at cell " 
-              << ASTInfo::instance()->debugIndex
-              << std::endl;
-  }
-  else
-  {
-    std::cout << "InputExpr" << std::endl;
-  }
+    std::cout.width(level);
+    if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
+	std::cout << "Input Expression - read char with data pointer at cell " 
+		  << ASTInfo::instance()->debug_index
+		  << std::endl;
+    }
+    else {
+	std::cout << "InputExpression" << std::endl;
+    }
 }
 

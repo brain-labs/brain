@@ -11,27 +11,41 @@
 #include <vector>
 #include <iostream>
 
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "Expr.h"
 
+/**
+ * @brief 
+ */
 typedef enum
 {
   LT_WHILE,
   LT_FOR
-}LoopType;
+} LoopType;
 
-class LoopExpr : public Expr
+
+/**
+ * @brief Class that represents the loop operator in Brain.
+ */
+class LoopExpression : public Expression
 {
-  protected:
-    std::vector<Expr *> _exprs;
+protected:
+    std::vector<Expression *> _exprs;
     LoopType _type;
-  public:
-    LoopExpr(std::vector<Expr *> exprs, LoopType type) : _exprs(exprs), _type(type) { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
-    void DebugDescription(int level);
-    ~LoopExpr() {};
+public:
+    LoopExpression(std::vector<Expression *> exprs, LoopType type) : _exprs(exprs), _type(type) { }
+    /**
+     * @brief
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    /**
+     * @brief
+     * @param level
+     */
+    void debug_description(int level);
+    ~LoopExpression() {};
 };
 
 #endif

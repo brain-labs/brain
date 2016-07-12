@@ -11,26 +11,54 @@
 #include <string>
 #include <vector>
 
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "../ast/expr/Expr.h"
 #include "../utils/ArgsOptions.h"
 
+/**
+ * @brief The parser of the Brain language, it interpretes *.b files.
+ */
 class Parser
 {
-  protected:
+protected:
     std::string _data;
     int _index;
-    std::vector<Expr *> _exprs;
-  
-    static bool isSkippable(char c);
-    char getToken();
-    void parse(std::vector<Expr *> &exprs, int level);
-  public:
+    std::vector<Expression *> _exprs;
+
+    /**
+     * @brief
+     * @param c
+     */
+    static bool is_skippable(char c);
+    /**
+     * @brief
+     */
+    char get_token();
+    /**
+     * @brief
+     * @param exprs
+     * @param level
+     */
+    void parse(std::vector<Expression *> &exprs, int level);
+public:
+    /**
+     * @brief
+     * @param s
+     */
     Parser(std::string s) : _data(s), _index(0) { parse(_exprs, 0); }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B);
-    void DebugDescription(int level);
+    /**
+     * @brief
+     * @param M
+     * @param B
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
+    /**
+     * @brief
+     * @param level
+     */
+    void debug_description(int level);
 };
 
-#endif 
+#endif // PARSER_H 

@@ -7,43 +7,46 @@
 
 #include "ShiftExpr.h"
 
-void ShiftExpr::CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void ShiftExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
-  // Load index value
-  llvm::Value *IdxV = B.CreateLoad(index);
-  // Add |_step| to index and save the value
-  B.CreateStore(B.CreateAdd(IdxV, B.getInt32(_step)), index);
+    // Load index value
+    llvm::Value *IdxV = B.CreateLoad(index);
+    // Add |_step| to index and save the value
+    B.CreateStore(B.CreateAdd(IdxV, B.getInt32(_step)), index);
 }
 
-void ShiftExpr::DebugDescription(int level)
+void ShiftExpression::debug_description(int level)
 {
-  std::cout.width(level);
-  if (ArgsOptions::instance()->hasOption(BO_IS_VERBOSE))
-  {
-    std::cout << "Shift Expression - move data pointer from "
-              << ASTInfo::instance()->debugIndex
-              << " to "
-              << ASTInfo::instance()->debugIndex + _step
-              << " - "
-              << _step
-              << " step(s)"
-              << std::endl;
-  }
-  else
-  {
-    std::cout << "ShiftExpr (" << _step << ")" << std::endl;
-  }
+    std::cout.width(level);
+    if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
+	std::cout << "Shift Expression - move data pointer from "
+		  << ASTInfo::instance()->debug_index
+		  << " to "
+		  << ASTInfo::instance()->debug_index + _step
+		  << " - "
+		  << _step
+		  << " step(s)"
+		  << std::endl;
+    }
+    else {
+	std::cout << "ShiftExpression (" << _step << ")" << std::endl;
+    }
 
-  ASTInfo::instance()->debugIndex += _step;
+    ASTInfo::instance()->debug_index += _step;
 }
 
-bool ShiftExpr::UpdateExpr(char update)
+bool ShiftExpression::update_expression(char update)
 {
-  switch(update)
-  {
-    case '>': _step++; return true;
-    case '<': _step--; return true;
-    default : return false;
-  }
+    switch(update)
+    {
+    case '>':
+	_step++;
+	return true;
+    case '<':
+	_step--;
+	return true;
+    default :
+	return false;
+    }
 }
 

@@ -10,21 +10,35 @@
 
 #include <iostream>
 
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "Expr.h"
 
-class ShiftExpr : public Expr
+/**
+ * @brief Class that represents the shift operator in Brain.
+ */
+class ShiftExpression : public Expression
 {
-  protected:
+protected:
     int _step;
-  public:
-    ShiftExpr(int step) : _step(step) { }
-    void CodeGen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
-    void DebugDescription(int level);
-    bool UpdateExpr(char update);
-    ~ShiftExpr() {};
+public:
+    ShiftExpression(int step) : _step(step) { }
+    /**
+     * @brief
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    /**
+     * @brief
+     * @param level
+     */
+    void debug_description(int level);
+    /**
+     * @brief
+     * @param level
+     */
+    bool update_expression(char update);
+    ~ShiftExpression() {};
 };
 
-#endif
+#endif // SHIFT_EXPR_H
