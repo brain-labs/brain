@@ -108,11 +108,12 @@ void Parser::parse(std::vector<Expression *> &exprs, int level)
 		if (level == 0) {
 		    break;
 		}
+
+		_index--; // move one step back to read the ':' again
+		has_done_then = true;
+		return; // return to exit the 'then' recursivity
 	    }
-	    
-	    _index--; // move one step back to read the ':' again
-	    has_done_then = true;
-	    return; // return to exit the 'then' recursivity
+
 	    // do the else
 	    if (!exprs.empty()) {
 		Expression *expr = exprs.back();
