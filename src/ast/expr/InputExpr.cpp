@@ -7,6 +7,14 @@
 
 #include "InputExpr.h"
 
+InputExpression::InputExpression()
+{
+}
+
+InputExpression::~InputExpression()
+{
+}
+
 void InputExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();

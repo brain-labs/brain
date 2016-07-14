@@ -24,6 +24,7 @@ protected:
     int _increment;
 public:
     explicit IncrementExpression(int increment) : _increment(increment) { }
+    ~IncrementExpression();
     /**
      * @brief
      */
@@ -38,7 +39,6 @@ public:
      * @param update
      */
     bool update_expression(char update);
-    ~IncrementExpression();
 };
 
 #endif  // INCREMENT_EXPR_H

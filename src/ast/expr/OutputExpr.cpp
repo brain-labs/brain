@@ -7,6 +7,14 @@
 
 #include "OutputExpr.h"
 
+OutputExpression::OutputExpression()
+{
+}
+
+OutputExpression::~OutputExpression()
+{
+}
+
 void OutputExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();

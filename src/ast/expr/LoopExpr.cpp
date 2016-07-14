@@ -7,6 +7,10 @@
 
 #include "LoopExpr.h"
 
+LoopExpression::~LoopExpression()
+{
+}
+
 void LoopExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();

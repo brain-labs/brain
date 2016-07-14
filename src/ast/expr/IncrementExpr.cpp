@@ -7,6 +7,10 @@
 
 #include "IncrementExpr.h"
 
+IncrementExpression::~IncrementExpression()
+{
+}
+
 void IncrementExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(index) };
