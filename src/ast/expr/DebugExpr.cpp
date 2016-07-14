@@ -7,8 +7,6 @@
 
 #include "DebugExpr.h"
 
-using namespace llvm;
-
 void DebugExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();

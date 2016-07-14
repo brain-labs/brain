@@ -7,8 +7,6 @@
 
 #include "InputExpr.h"
 
-using namespace llvm;
-
 void InputExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();
@@ -27,12 +25,12 @@ void InputExpression::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-	std::cout << "Input Expression - read char with data pointer at cell " 
-		  << ASTInfo::instance()->debug_index
-		  << std::endl;
+        std::cout << "Input Expression - read char with data pointer at cell " 
+                  << ASTInfo::instance()->debug_index
+                  << std::endl;
     }
     else {
-	std::cout << "InputExpression" << std::endl;
+        std::cout << "InputExpression" << std::endl;
     }
 }
 

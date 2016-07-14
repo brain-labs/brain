@@ -8,12 +8,12 @@
 #ifndef SHIFT_EXPR_H
 #define SHIFT_EXPR_H
 
-#include <iostream>
-
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expr.h"
+#include <iostream>
+
+#include "Expression.h"
 
 /**
  * @brief Class that represents the shift operator in Brain.
@@ -41,4 +41,4 @@ public:
     ~ShiftExpression() {};
 };
 
-#endif // SHIFT_EXPR_H
+#endif  // SHIFT_EXPR_H

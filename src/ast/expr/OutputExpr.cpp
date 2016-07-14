@@ -7,32 +7,30 @@
 
 #include "OutputExpr.h"
 
-using namespace llvm;
-
 void OutputExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();
-    llvm::Type* PutCharArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };  
+    llvm::Type* PutCharArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
     llvm::FunctionType *PutCharTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C), PutCharArgs, false);
     llvm::Function *PutCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("b_putchar", PutCharTy));
-    llvm::Value* Args[] = { 
+    llvm::Value* Args[] = {
         B.CreateLoad(index),
         B.CreatePointerCast(cells, llvm::Type::getInt32Ty(C)->getPointerTo())
     };
     llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
-    B.CreateCall(PutCharF, ArgsArr);  
+    B.CreateCall(PutCharF, ArgsArr);
 }
 
 void OutputExpression::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-	std::cout << "Output Expression - print out char with data pointer at cell "
-		  << ASTInfo::instance()->debug_index
-		  << std::endl;
+        std::cout << "Output Expression - print out char with data pointer at cell "
+                  << ASTInfo::instance()->debug_index
+                  << std::endl;
     }
     else {
-	std::cout << "OutputExpr" << std::endl;
+        std::cout << "OutputExpr" << std::endl;
     }
 }
 

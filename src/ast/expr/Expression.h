@@ -14,7 +14,7 @@
 #include "../../utils/ArgsOptions.h"
 #include "../general/ASTInfo.h"
 
-#ifndef __cast_capital__ 
+#ifndef __cast_capital__
   #define CAST_TO_C_STRING castToCStr
 #else
   #define CAST_TO_C_STRING CastToCStr
@@ -27,11 +27,11 @@ typedef enum
 {
   ET_NOT_IMPORTANT,
   ET_BRANCH,
-  ET_TERMINAL 
+  ET_TERMINAL
 } ExpressionType;
 
 /**
- * @brief Abstract class in which all expressions in Brain implement from.  
+ * @brief Abstract class in which all expressions in Brain implement from.
  */
 class Expression
 {

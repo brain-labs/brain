@@ -14,7 +14,7 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expr.h"
+#include "Expression.h"
 
 /**
  * @brief Class that represents the debug operator in Brain.
@@ -34,7 +34,7 @@ public:
     /**
      * @brief
      * @param level
-     */ 
+     */
     void debug_description(int level);
     ~DebugExpression() {};
 };

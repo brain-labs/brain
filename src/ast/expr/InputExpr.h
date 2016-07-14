@@ -14,7 +14,7 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expr.h"
+#include "Expression.h"
 
 /**
  * @brief
@@ -22,17 +22,17 @@
 class InputExpression : public Expression
 {
 public:
-    InputExpression() { }
+    InputExpression();
+    ~InputExpression();
     /**
      * @brief
      */
     void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
-     * @param level 
+     * @param level
      */
     void debug_description(int level);
-    ~InputExpression() {};
 };
 
-#endif // INPUT_EXPR_H
+#endif  // INPUT_EXPR_H

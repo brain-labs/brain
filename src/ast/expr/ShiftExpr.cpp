@@ -19,17 +19,17 @@ void ShiftExpression::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-	std::cout << "Shift Expression - move data pointer from "
-		  << ASTInfo::instance()->debug_index
-		  << " to "
-		  << ASTInfo::instance()->debug_index + _step
-		  << " - "
-		  << _step
-		  << " step(s)"
-		  << std::endl;
+        std::cout << "Shift Expression - move data pointer from "
+                  << ASTInfo::instance()->debug_index
+                  << " to "
+                  << ASTInfo::instance()->debug_index + _step
+                  << " - "
+                  << _step
+                  << " step(s)"
+                  << std::endl;
     }
     else {
-	std::cout << "ShiftExpression (" << _step << ")" << std::endl;
+        std::cout << "ShiftExpression (" << _step << ")" << std::endl;
     }
 
     ASTInfo::instance()->debug_index += _step;
@@ -40,13 +40,13 @@ bool ShiftExpression::update_expression(char update)
     switch(update)
     {
     case '>':
-	_step++;
-	return true;
+        _step++;
+        return true;
     case '<':
-	_step--;
-	return true;
+        _step--;
+        return true;
     default :
-	return false;
+        return false;
     }
 }
 

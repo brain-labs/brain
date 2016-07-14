@@ -8,16 +8,17 @@
 #ifndef ARITHMETIC_EXPR_H
 #define ARITHMETIC_EXPR_H
 
-#include <iostream>
-#include <string>
-
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expr.h"
+#include <iostream>
+#include <string>
+
+#include "Expression.h"
 
 /**
- * @brief
+ * @brief The three kinds of arithmetic operations used in Brain: multiplication,
+ * division and modulus.
  */
 typedef enum
 {
@@ -53,4 +54,4 @@ public:
     ~ArithmeticExpression() {};
 };
 
-#endif
+#endif // ARITHMETIC_EXPR_H

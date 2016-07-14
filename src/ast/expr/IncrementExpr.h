@@ -13,7 +13,7 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expr.h"
+#include "Expression.h"
 
 /**
  * @brief Class that represent the increment operator in Brain.
@@ -23,7 +23,7 @@ class IncrementExpression : public Expression
 protected:
     int _increment;
 public:
-    IncrementExpression(int increment) : _increment(increment) { }
+    explicit IncrementExpression(int increment) : _increment(increment) { }
     /**
      * @brief
      */
@@ -38,7 +38,7 @@ public:
      * @param update
      */
     bool update_expression(char update);
-    ~IncrementExpression() {};
+    ~IncrementExpression();
 };
 
-#endif // INCREMENT_EXPR_H
+#endif  // INCREMENT_EXPR_H
