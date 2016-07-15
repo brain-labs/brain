@@ -42,3 +42,7 @@
 *.ll
 
 *.DS_Store
+
+# QtCreator files
+*.pro
+*.pro.user

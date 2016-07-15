@@ -42,7 +42,7 @@ Obs.: To use __Project Status__ (the "Kanban" below), please visit:```https://gi
 |||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!).)|
 
 ### TODO List
-If you want to check the micro TODO list, please see the [TODO.md](TODO.md)
+If you want to check the micro TODO list, please see this [issue](https://github.com/luizperes/brain/issues/12).
 
 ### How to build LLVM
 __Brain__ runs on the top of __LLVM__, thus, you are required to install the lastest versions of LLVM. You can do that by following this http://apt.llvm.org/
@@ -106,7 +106,7 @@ __Implemented__
 
 __Not Implemented__
 - ```$``` prints out the value at the data pointer `divided` by `100`.
-- ```@``` calls a function according to the value at the data pointer. 
+- ```@``` calls a function according to the value at the data pointer.
 
 Example of the instructions above:
 - ___if-else___: ```? +++ : --- ;``` _// if (*ptr) { *ptr += 3; } else { *ptr -= 3; }_

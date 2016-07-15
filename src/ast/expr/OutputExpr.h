@@ -8,21 +8,22 @@
 #ifndef OUTPUT_EXPR_H
 #define OUTPUT_EXPR_H
 
-#include <iostream>
-
 #include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
+
+#include <iostream>
 
 #include "Expr.h"
 
 /**
  * @brief Class that represents the output operator in Brain.
  */
-class OutputExpression : public Expression
+class OutputExpr : public Expr
 {
 public:
-    OutputExpression() { }
+    OutputExpr() {}
+    ~OutputExpr() {}
     /**
      * @brief
      */
@@ -32,7 +33,6 @@ public:
      * @param level
      */ 
     void debug_description(int level);
-    ~OutputExpression() {};
 };
 
-#endif // OUTPUT_EXPR_H
+#endif  // OUTPUT_EXPR_H

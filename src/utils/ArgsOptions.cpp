@@ -12,9 +12,9 @@ ArgsOptions *ArgsOptions::_instance = nullptr;
 ArgsOptions* ArgsOptions::instance()
 {
     if (!ArgsOptions::_instance) {
-	ArgsOptions::_instance = new ArgsOptions();
+        ArgsOptions::_instance = new ArgsOptions();
     }
-  
+
     return _instance;
 }
 
@@ -32,13 +32,13 @@ BrainOption ArgsOptions::get_optimization()
 {
     // default value
     if ((_options & BO_IS_OPTIMIZING_O1) == 0 &&
-	(_options & BO_IS_OPTIMIZING_O0) == 0) {
-	return BO_IS_OPTIMIZING_O1;
+        (_options & BO_IS_OPTIMIZING_O0) == 0) {
+        return BO_IS_OPTIMIZING_O1;
     }
     else if ((_options & BO_IS_OPTIMIZING_O1) == BO_IS_OPTIMIZING_O1) {
-	return BO_IS_OPTIMIZING_O1;
+        return BO_IS_OPTIMIZING_O1;
     }
     else {
-	return BO_IS_OPTIMIZING_O0;
+        return BO_IS_OPTIMIZING_O0;
     }
 }

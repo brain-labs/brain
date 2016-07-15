@@ -18,16 +18,18 @@
 /**
  * @brief Class that represent the increment operator in Brain.
  */
-class IncrementExpression : public Expression
+class IncrementExpr : public Expr
 {
 protected:
     int _increment;
 public:
-    IncrementExpression(int increment) : _increment(increment) { }
+    explicit IncrementExpr(int increment) : _increment(increment) { }
+    ~IncrementExpr() { }
     /**
      * @brief
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
      * @param level
@@ -38,7 +40,6 @@ public:
      * @param update
      */
     bool update_expression(char update);
-    ~IncrementExpression() {};
 };
 
-#endif // INCREMENT_EXPR_H
+#endif  // INCREMENT_EXPR_H

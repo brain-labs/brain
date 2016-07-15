@@ -7,99 +7,98 @@
 
 #include "LoopExpr.h"
 
-void LoopExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();
-  
+
     // Create a basic block for loop
     llvm::Function *F = B.GetInsertBlock()->getParent();
     llvm::BasicBlock *StartBB = llvm::BasicBlock::Create(C, "LoopStart", F);
-    
-    llvm::Value *IdxV = nullptr; 
-    llvm::Value *CellPtr = nullptr; 
+
+    llvm::Value *IdxV = nullptr;
+    llvm::Value *CellPtr = nullptr;
     llvm::Value *CounterV = nullptr;
-    
+
     if (_type == LT_FOR) {
-	// Get the current cell adress
-	IdxV = B.CreateLoad(index);
-	CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
-                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
-                               IdxV);
-	CounterV = B.CreateAlloca(llvm::Type::getInt32Ty(C), 0, "counter");
-	B.CreateStore(B.CreateLoad(CellPtr), CounterV);
+        // Get the current cell adress
+        IdxV = B.CreateLoad(index);
+        CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+                                                  llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
+                              IdxV);
+        CounterV = B.CreateAlloca(llvm::Type::getInt32Ty(C), 0, "counter");
+        B.CreateStore(B.CreateLoad(CellPtr), CounterV);
     }
 
     B.CreateBr(StartBB);
-    
+
     B.SetInsertPoint(StartBB);
     llvm::IRBuilder<> StartB(StartBB);
-    
+
     // Enter the block ("LoopBody") if current cell value > 0, else skip the loop (i.e.: go to "LoopEnd")
     llvm::BasicBlock *LoopBB = llvm::BasicBlock::Create(C, "LoopBody", F);
     llvm::BasicBlock *EndBB = llvm::BasicBlock::Create(C, "LoopEnd", F);
-    
+
     llvm::Value *SGZeroCond = nullptr;
     if (_type == LT_FOR) {
-	SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CounterV),
-					  StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
+        SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CounterV),
+                                          StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
     }
     else {
-	// Get the current cell adress
-	IdxV = B.CreateLoad(index);
-	CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
-						  llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
-			      IdxV);
-	SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CellPtr),
-                                           StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
+        // Get the current cell adress
+        IdxV = B.CreateLoad(index);
+        CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+                                                  llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
+                              IdxV);
+        SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CellPtr),
+                                          StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
     }
 
     StartB.CreateCondBr(SGZeroCond, LoopBB, EndBB);
-  
+
     B.SetInsertPoint(LoopBB);
     llvm::IRBuilder<> LoopB(LoopBB);
     // Recursively generate code (into "LoopBody" block)
-    for (std::vector<Expression *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
-	if ((*it)->expression_category() == ET_TERMINAL) {
-	    break;
-	}
-	
-	(*it)->code_gen(M, LoopB, index, cells);
+    for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
+        if ((*it)->expression_category() == ET_TERMINAL) {
+            break;
+        }
+
+        (*it)->code_gen(M, LoopB, index, cells);
     }
 
     if (_type == LT_FOR) {
-	LoopB.CreateStore(LoopB.CreateAdd(LoopB.CreateLoad(CounterV), LoopB.getInt32(-1)), CounterV);
+        LoopB.CreateStore(LoopB.CreateAdd(LoopB.CreateLoad(CounterV), LoopB.getInt32(-1)), CounterV);
     }
-  
+
     LoopB.CreateBr(StartBB); // Restart loop (will next exit if current cell value > 0)
-  
+
     B.SetInsertPoint(EndBB);
 }
 
-void LoopExpression::debug_description(int level)
+void LoopExpr::debug_description(int level)
 {
     std::string openedBrackets = (_type == LT_FOR) ? "{" : "[";
-    std::string closedBrackets = (_type == LT_FOR) ? "}" : "]";  
+    std::string closedBrackets = (_type == LT_FOR) ? "}" : "]";
 
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-	std::cout << "Loop Expression - "
-		  << "data point at cell "
-		  << ASTInfo::instance()->debug_index 
-		  << openedBrackets 
-		  << std::endl; 
+        std::cout << "Loop Expression - "
+                  << "data point at cell "
+                  << ASTInfo::instance()->debug_index
+                  << openedBrackets
+                  << std::endl;
     }
     else {
-	std::cout << "LoopExpression: " << openedBrackets << std::endl;
+        std::cout << "LoopExpr: " << openedBrackets << std::endl;
     }
 
-    for (std::vector<Expression *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
-	std::cout << std::string(level * 2, ' ');
-	(*it)->debug_description(level+1);
-    
-	if ((*it)->expression_category() == ET_TERMINAL) {
-	    break;
-	}
+    for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
+        std::cout << std::string(level * 2, ' ');
+        (*it)->debug_description(level+1);
+
+        if ((*it)->expression_category() == ET_TERMINAL) {
+            break;
+        }
     }
 
     std::cout << std::string(level, ' ') << closedBrackets << std::endl;
 }
-

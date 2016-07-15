@@ -14,7 +14,7 @@
 #include "../../utils/ArgsOptions.h"
 #include "../general/ASTInfo.h"
 
-#ifndef __cast_capital__ 
+#ifndef __cast_capital__
   #define CAST_TO_C_STRING castToCStr
 #else
   #define CAST_TO_C_STRING CastToCStr
@@ -27,15 +27,17 @@ typedef enum
 {
   ET_NOT_IMPORTANT,
   ET_BRANCH,
-  ET_TERMINAL 
+  ET_TERMINAL
 } ExpressionType;
 
 /**
- * @brief Abstract class in which all expressions in Brain implement from.  
+ * @brief Abstract class in which all expressions in Brain implement from.
  */
-class Expression
+class Expr
 {
 public:
+    virtual ~Expr() {}
+
     /**
      * @brief
      * @param M
@@ -43,7 +45,9 @@ public:
      * @param index
      * @param cells
      */
-    virtual void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells) = 0;
+    virtual void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                          llvm::GlobalVariable *index,
+                          llvm::GlobalVariable *cells) = 0;
     /**
      * @brief
      * @param level
@@ -58,7 +62,6 @@ public:
      * @brief
      */
     virtual ExpressionType expression_category() { return ET_NOT_IMPORTANT; }
-    virtual ~Expression() {};
 };
 
-#endif // EXPR_H
+#endif  // EXPR_H
