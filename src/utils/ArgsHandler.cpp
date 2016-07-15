@@ -5,11 +5,11 @@
  * Copyright Luiz Peres, 2016.
  */
 
-#include "ArgsHandler.h"
-
 #include <iostream>
 #include <fstream>
 #include <streambuf>
+
+#include "ArgsHandler.h"
 
 const std::string BRAIN_VERSION =  "0.8";
 const std::string BRAIN_FORMAT = "Please execute Brain with the command: brain <options...> <filename>\n";

@@ -33,9 +33,11 @@ typedef enum
 /**
  * @brief Abstract class in which all expressions in Brain implement from.
  */
-class Expression
+class Expr
 {
 public:
+    virtual ~Expr() {}
+
     /**
      * @brief
      * @param M
@@ -43,7 +45,9 @@ public:
      * @param index
      * @param cells
      */
-    virtual void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells) = 0;
+    virtual void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                          llvm::GlobalVariable *index,
+                          llvm::GlobalVariable *cells) = 0;
     /**
      * @brief
      * @param level
@@ -58,7 +62,6 @@ public:
      * @brief
      */
     virtual ExpressionType expression_category() { return ET_NOT_IMPORTANT; }
-    virtual ~Expression() {};
 };
 
-#endif // EXPR_H
+#endif  // EXPR_H

@@ -8,7 +8,7 @@
 
 #include "ArithmeticExpr.h"
 
-void ArithmeticExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::Value *IdxV = B.CreateLoad(index);
     llvm::Value* Idxs[] = { B.getInt32(0), IdxV };
@@ -41,7 +41,7 @@ void ArithmeticExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm:
     }
 }
 
-void ArithmeticExpression::debug_description(int level)
+void ArithmeticExpr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
@@ -55,12 +55,12 @@ void ArithmeticExpression::debug_description(int level)
                   << std::endl;
     }
     else {
-        std::cout << "ArithmeticExpression ( " << type_to_string() << " )"
+        std::cout << "ArithmeticExpr ( " << type_to_string() << " )"
                   << std::endl;
     }
 }
 
-std::string ArithmeticExpression::type_to_string()
+std::string ArithmeticExpr::type_to_string()
 {
     std::string type = "";
 

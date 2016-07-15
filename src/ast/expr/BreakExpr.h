@@ -14,15 +14,16 @@
 
 #include <iostream>
 
-#include "Expression.h"
+#include "Expr.h"
 
 /**
  * @brief Class that represents the break operator in Brain.
  */
-class BreakExpression : public Expression
+class BreakExpr : public Expr
 {
 public:
-    BreakExpression() { }
+    BreakExpr() {}
+    ~BreakExpr() {}
     /**
      * @brief
      * @param M
@@ -30,7 +31,8 @@ public:
      * @param index
      * @param cells
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
      * @param level
@@ -40,7 +42,6 @@ public:
      * @brief
      */
     ExpressionType expression_category();
-    ~BreakExpression() {};
 };
 
 #endif // BREAK_EXPR_H

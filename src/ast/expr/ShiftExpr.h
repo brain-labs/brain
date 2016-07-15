@@ -13,21 +13,23 @@
 
 #include <iostream>
 
-#include "Expression.h"
+#include "Expr.h"
 
 /**
  * @brief Class that represents the shift operator in Brain.
  */
-class ShiftExpression : public Expression
+class ShiftExpr : public Expr
 {
 protected:
     int _step;
 public:
-    ShiftExpression(int step) : _step(step) { }
+    ShiftExpr(int step) : _step(step) {}
+    ~ShiftExpr() {}
     /**
      * @brief
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
      * @param level
@@ -38,7 +40,6 @@ public:
      * @param level
      */
     bool update_expression(char update);
-    ~ShiftExpression() {};
 };
 
 #endif  // SHIFT_EXPR_H

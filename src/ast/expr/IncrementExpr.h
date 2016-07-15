@@ -13,22 +13,23 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expression.h"
+#include "Expr.h"
 
 /**
  * @brief Class that represent the increment operator in Brain.
  */
-class IncrementExpression : public Expression
+class IncrementExpr : public Expr
 {
 protected:
     int _increment;
 public:
-    explicit IncrementExpression(int increment) : _increment(increment) { }
-    ~IncrementExpression();
+    explicit IncrementExpr(int increment) : _increment(increment) { }
+    ~IncrementExpr() { }
     /**
      * @brief
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
      * @param level

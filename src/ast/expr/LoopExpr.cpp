@@ -7,11 +7,7 @@
 
 #include "LoopExpr.h"
 
-LoopExpression::~LoopExpression()
-{
-}
-
-void LoopExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();
 
@@ -62,7 +58,7 @@ void LoopExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Globa
     B.SetInsertPoint(LoopBB);
     llvm::IRBuilder<> LoopB(LoopBB);
     // Recursively generate code (into "LoopBody" block)
-    for (std::vector<Expression *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
+    for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
         if ((*it)->expression_category() == ET_TERMINAL) {
             break;
         }
@@ -79,7 +75,7 @@ void LoopExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Globa
     B.SetInsertPoint(EndBB);
 }
 
-void LoopExpression::debug_description(int level)
+void LoopExpr::debug_description(int level)
 {
     std::string openedBrackets = (_type == LT_FOR) ? "{" : "[";
     std::string closedBrackets = (_type == LT_FOR) ? "}" : "]";
@@ -92,10 +88,10 @@ void LoopExpression::debug_description(int level)
                   << std::endl;
     }
     else {
-        std::cout << "LoopExpression: " << openedBrackets << std::endl;
+        std::cout << "LoopExpr: " << openedBrackets << std::endl;
     }
 
-    for (std::vector<Expression *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
+    for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
         std::cout << std::string(level * 2, ' ');
         (*it)->debug_description(level+1);
 

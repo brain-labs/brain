@@ -14,7 +14,7 @@
 #include <vector>
 #include <iostream>
 
-#include "Expression.h"
+#include "Expr.h"
 
 /**
  * @brief Enumerates the types of loops that exists in Brain.
@@ -29,18 +29,20 @@ typedef enum
 /**
  * @brief Class that represents the loop operator in Brain.
  */
-class LoopExpression : public Expression
+class LoopExpr : public Expr
 {
 protected:
-    std::vector<Expression *> _exprs;
+    std::vector<Expr *> _exprs;
     LoopType _type;
 public:
-    LoopExpression(std::vector<Expression *> exprs, LoopType type) : _exprs(exprs), _type(type) { }
-    ~LoopExpression();
+    LoopExpr(std::vector<Expr *> exprs, LoopType type) : _exprs(exprs),
+        _type(type) {}
+    ~LoopExpr() {}
     /**
      * @brief
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
      * @param level

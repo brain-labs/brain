@@ -14,7 +14,7 @@
 #include <iostream>
 #include <string>
 
-#include "Expression.h"
+#include "Expr.h"
 
 /**
  * @brief The three kinds of arithmetic operations used in Brain: multiplication,
@@ -31,13 +31,15 @@ typedef enum
  * @brief Represents the three arithmetic operations that you can use and abuse
  * in Brain.
  */
-class ArithmeticExpression : public Expression
+class ArithmeticExpr : public Expr
 {
 protected:
     ArithmeticType _type;
     std::string type_to_string();
 public:
-    ArithmeticExpression(ArithmeticType type) : _type(type) { }
+    ArithmeticExpr(ArithmeticType type) : _type(type) {}
+    ~ArithmeticExpr() {}
+
     /**
      * @brief
      * @param M
@@ -45,13 +47,13 @@ public:
      * @param index
      * @param cells
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
      * @param level
      */
     void debug_description(int level);
-    ~ArithmeticExpression() {};
 };
 
 #endif // ARITHMETIC_EXPR_H

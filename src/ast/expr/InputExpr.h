@@ -14,20 +14,21 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expression.h"
+#include "Expr.h"
 
 /**
  * @brief
  */
-class InputExpression : public Expression
+class InputExpr : public Expr
 {
 public:
-    InputExpression();
-    ~InputExpression();
+    InputExpr() {}
+    ~InputExpr() {}
     /**
      * @brief
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
      * @param level

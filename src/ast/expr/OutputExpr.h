@@ -14,16 +14,16 @@
 
 #include <iostream>
 
-#include "Expression.h"
+#include "Expr.h"
 
 /**
  * @brief Class that represents the output operator in Brain.
  */
-class OutputExpression : public Expression
+class OutputExpr : public Expr
 {
 public:
-    OutputExpression();
-    ~OutputExpression();
+    OutputExpr() {}
+    ~OutputExpr() {}
     /**
      * @brief
      */

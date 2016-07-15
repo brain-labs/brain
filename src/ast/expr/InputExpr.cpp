@@ -7,15 +7,7 @@
 
 #include "InputExpr.h"
 
-InputExpression::InputExpression()
-{
-}
-
-InputExpression::~InputExpression()
-{
-}
-
-void InputExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void InputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Type* GetCharArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
@@ -29,7 +21,7 @@ void InputExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Glob
     B.CreateCall(GetCharF, ArgsArr);
 }
 
-void InputExpression::debug_description(int level)
+void InputExpr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
@@ -38,7 +30,7 @@ void InputExpression::debug_description(int level)
                   << std::endl;
     }
     else {
-        std::cout << "InputExpression" << std::endl;
+        std::cout << "InputExpr" << std::endl;
     }
 }
 

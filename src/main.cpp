@@ -5,12 +5,10 @@
  * Copyright Luiz Peres, 2016.
  */
 
-#include "utils/Bootstrap.hpp"
+#include "utils/Bootstrap.h"
 
 int main(int argc, char **argv)
 {
-    Bootstrap brain;
-    
-    return brain.init(argc, argv);
+    return Bootstrap::instance()->init(argc, argv);
 }
 

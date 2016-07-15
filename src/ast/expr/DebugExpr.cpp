@@ -7,7 +7,7 @@
 
 #include "DebugExpr.h"
 
-void DebugExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void DebugExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
   llvm::Type* DebugArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
@@ -21,7 +21,7 @@ void DebugExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Glob
   B.CreateCall(DebugF, ArgsArr);
 }
 
-void DebugExpression::debug_description(int level)
+void DebugExpr::debug_description(int level)
 {
   std::cout.width(level);
   if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
@@ -30,7 +30,7 @@ void DebugExpression::debug_description(int level)
               << std::endl;
   }
   else {
-    std::cout << "DebugExpression" << std::endl;
+    std::cout << "DebugExpr" << std::endl;
   }
 }
 

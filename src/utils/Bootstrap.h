@@ -49,10 +49,21 @@ private:
 
     llvm::ExecutionEngine *execution_engine;
     llvm::EngineBuilder *engine_builder;
-public:
+    /**
+     * @brief Private constructor of ASTInfo, denoting that this is a Singleton.
+     */
     Bootstrap();
-    ~Bootstrap();
 
+    static Bootstrap* _instance;
+public:
+    ~Bootstrap() {}
+
+    /**
+     * @brief Returns the instance of Bootstrap class if the member _instance is
+     * nullptr, otherwise it creates a new Bootstrap object and returns it.
+     * @return A pointer to the Bootstrap instance.
+     */
+    static Bootstrap* instance();
     /**
      * @brief Initializes Brain by passing the arguments to be handled and
      * parsing the source file.

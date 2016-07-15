@@ -7,11 +7,7 @@
 
 #include "IncrementExpr.h"
 
-IncrementExpression::~IncrementExpression()
-{
-}
-
-void IncrementExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(index) };
     llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
@@ -22,7 +18,7 @@ void IncrementExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::
     B.CreateStore(B.CreateAdd(CellV, B.getInt32(_increment)), CellPtr);
 }
 
-void IncrementExpression::debug_description(int level)
+void IncrementExpr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
@@ -34,11 +30,11 @@ void IncrementExpression::debug_description(int level)
     }
     else
     {
-        std::cout << "IncrementExpression (" << _increment << ")" << std::endl;
+        std::cout << "IncrementExpr (" << _increment << ")" << std::endl;
     }
 }
 
-bool IncrementExpression::update_expression(char update)
+bool IncrementExpr::update_expression(char update)
 {
     switch (update)
     {

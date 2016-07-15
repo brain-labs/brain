@@ -7,7 +7,9 @@
 
 #include "ShiftExpr.h"
 
-void ShiftExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void ShiftExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                         llvm::GlobalVariable *index,
+                         llvm::GlobalVariable *cells)
 {
     // Load index value
     llvm::Value *IdxV = B.CreateLoad(index);
@@ -15,7 +17,7 @@ void ShiftExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Glob
     B.CreateStore(B.CreateAdd(IdxV, B.getInt32(_step)), index);
 }
 
-void ShiftExpression::debug_description(int level)
+void ShiftExpr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
@@ -29,13 +31,13 @@ void ShiftExpression::debug_description(int level)
                   << std::endl;
     }
     else {
-        std::cout << "ShiftExpression (" << _step << ")" << std::endl;
+        std::cout << "ShiftExpr (" << _step << ")" << std::endl;
     }
 
     ASTInfo::instance()->debug_index += _step;
 }
 
-bool ShiftExpression::update_expression(char update)
+bool ShiftExpr::update_expression(char update)
 {
     switch(update)
     {

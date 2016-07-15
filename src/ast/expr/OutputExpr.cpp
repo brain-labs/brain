@@ -7,15 +7,9 @@
 
 #include "OutputExpr.h"
 
-OutputExpression::OutputExpression()
-{
-}
-
-OutputExpression::~OutputExpression()
-{
-}
-
-void OutputExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void OutputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                          llvm::GlobalVariable *index,
+                          llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Type* PutCharArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
@@ -29,7 +23,7 @@ void OutputExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Glo
     B.CreateCall(PutCharF, ArgsArr);
 }
 
-void OutputExpression::debug_description(int level)
+void OutputExpr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {

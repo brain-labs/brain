@@ -1,4 +1,7 @@
-#include "Bootstrap.hpp"
+#include "Bootstrap.h"
+
+// forward declaration of static member.
+Bootstrap* Bootstrap::_instance = nullptr;
 
 Bootstrap::Bootstrap()
 {
@@ -6,8 +9,13 @@ Bootstrap::Bootstrap()
     IO_LIB = "/usr/local/include/brain/io.ll";
 }
 
-Bootstrap::~Bootstrap()
+Bootstrap* Bootstrap::instance()
 {
+    if (_instance == nullptr) {
+        _instance = new Bootstrap;
+    }
+
+    return _instance;
 }
 
 bool Bootstrap::init(int argc, char** argv)
@@ -98,4 +106,3 @@ bool Bootstrap::init(int argc, char** argv)
 
     return 0;
 }
-

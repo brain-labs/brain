@@ -14,23 +14,24 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expression.h"
+#include "Expr.h"
 
 /**
  * @brief Class that represents the if operator in Brain.
  */
-class IfExpression : public Expression
+class IfExpr : public Expr
 {
 protected:
-    std::vector<Expression *> _exprs_then;
-    std::vector<Expression *> _exprs_else;
+    std::vector<Expr *> _exprs_then;
+    std::vector<Expr *> _exprs_else;
 public:
-    IfExpression(std::vector<Expression *> exprs_then) : _exprs_then(exprs_then) { }
+    IfExpr(std::vector<Expr *> exprs_then) : _exprs_then(exprs_then) {}
+    ~IfExpr() {}
     /**
      * @brief
      * @param exprs_else
      */
-    void set_else(std::vector<Expression *> exprs_else) { _exprs_else = exprs_else; }
+    void set_else(std::vector<Expr *> exprs_else) { _exprs_else = exprs_else; }
     /**
      * @brief
      * @param M
@@ -38,7 +39,8 @@ public:
      * @param index
      * @param cells
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
      */
@@ -48,7 +50,6 @@ public:
      * @param level
      */
     void debug_description(int level);
-    ~IfExpression() {};
 };
 
 #endif // IF_EXPR_H

@@ -7,7 +7,7 @@
 
 #include "IfExpr.h"
 
-void IfExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Function *F = B.GetInsertBlock()->getParent();
@@ -34,7 +34,7 @@ void IfExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalV
 
     B.SetInsertPoint(ThenBB);
     llvm::IRBuilder<> ThenB(ThenBB);
-    for (std::vector<Expression *>::iterator it = _exprs_then.begin(); it != _exprs_then.end(); ++it) {
+    for (std::vector<Expr *>::iterator it = _exprs_then.begin(); it != _exprs_then.end(); ++it) {
         if ((*it)->expression_category() == ET_TERMINAL) {
             break;
         }
@@ -48,7 +48,7 @@ void IfExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalV
     {
         B.SetInsertPoint(ElseBB);
         llvm::IRBuilder<> ElseB(ElseBB);
-        for (std::vector<Expression *>::iterator it = _exprs_else.begin(); it != _exprs_else.end(); ++it) {
+        for (std::vector<Expr *>::iterator it = _exprs_else.begin(); it != _exprs_else.end(); ++it) {
             if ((*it)->expression_category() == ET_TERMINAL) {
                 break;
             }
@@ -62,7 +62,7 @@ void IfExpression::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalV
     B.SetInsertPoint(ContBB);
 }
 
-void IfExpression::debug_description(int level)
+void IfExpr::debug_description(int level)
 {
      if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
          std::cout << "If Expression - THEN - if cell "
@@ -71,10 +71,10 @@ void IfExpression::debug_description(int level)
                    << std::endl;
      }
      else {
-         std::cout << "IfExpression (THEN) [" << std::endl;
+         std::cout << "IfExpr (THEN) [" << std::endl;
      }
 
-     for (std::vector<Expression *>::iterator it = _exprs_then.begin(); it != _exprs_then.end(); ++it) {
+     for (std::vector<Expr *>::iterator it = _exprs_then.begin(); it != _exprs_then.end(); ++it) {
          std::cout << std::string(level * 2, ' ');
          (*it)->debug_description(level+1);
 
@@ -92,10 +92,10 @@ void IfExpression::debug_description(int level)
                        << std::endl;
          }
          else {
-             std::cout << std::string(level, ' ') << "IfExpression (ELSE) [" << std::endl;
+             std::cout << std::string(level, ' ') << "IfExpr (ELSE) [" << std::endl;
          }
 
-         for (std::vector<Expression *>::iterator it = _exprs_else.begin(); it != _exprs_else.end(); ++it) {
+         for (std::vector<Expr *>::iterator it = _exprs_else.begin(); it != _exprs_else.end(); ++it) {
              std::cout << std::string(level * 2, ' ');
              (*it)->debug_description(level+1);
 
@@ -108,7 +108,7 @@ void IfExpression::debug_description(int level)
      }
 }
 
-ExpressionType IfExpression::expression_category()
+ExpressionType IfExpr::expression_category()
 {
     return ET_BRANCH;
 }

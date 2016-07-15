@@ -14,15 +14,16 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expression.h"
+#include "Expr.h"
 
 /**
  * @brief Class that represents the debug operator in Brain.
  */
-class DebugExpression : public Expression
+class DebugExpr : public Expr
 {
 public:
-    DebugExpression() { }
+    DebugExpr() {}
+    ~DebugExpr() {}
     /**
      * @brief
      * @param M
@@ -30,13 +31,13 @@ public:
      * @param index
      * @param cells
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
      * @param level
      */
     void debug_description(int level);
-    ~DebugExpression() {};
 };
 
 #endif // DEBUG_EXPR_H
