@@ -19,20 +19,21 @@
 /**
  * @brief
  */
-class InputExpression : public Expression
+class InputExpr : public Expr
 {
 public:
-    InputExpression() { }
+    InputExpr() {}
+    ~InputExpr() {}
     /**
      * @brief
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
     /**
      * @brief
-     * @param level 
+     * @param level
      */
     void debug_description(int level);
-    ~InputExpression() {};
 };
 
-#endif // INPUT_EXPR_H
+#endif  // INPUT_EXPR_H

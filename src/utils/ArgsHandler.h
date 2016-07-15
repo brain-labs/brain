@@ -8,15 +8,15 @@
 #ifndef ARGS_HANDLER_H
 #define ARGS_HANDLER_H
 
-#include <string>
-
 #include "ArgsOptions.h"
 
+#include <string>
+
 /**
- * @brief Consumes the arguments passed to brain and do whatever actions it's 
+ * @brief Consumes the arguments passed to brain and do whatever actions it's
  * supposed to.
  */
-class ArgsHandler 
+class ArgsHandler
 {
 protected:
     /// The source file passed to Brain.
@@ -29,7 +29,8 @@ protected:
 public:
     ArgsHandler(int argc, char *argv[]) { handle(argc, argv); }
     /**
-     * @brief Returns the name of the source file passed to Brain.
+     * @brief Returns the content of the source file passed to Brain as a
+     * string.
      */
     std::string get_string_file();
 };

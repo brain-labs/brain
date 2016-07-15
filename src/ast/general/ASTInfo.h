@@ -9,23 +9,26 @@
 #define AST_INFO_H
 
 /**
- * @brief
+ * @brief The abstract syntax tree.
  */
-class ASTInfo 
+class ASTInfo
 {
 private:
     /**
      * @brief Private constructor of ASTInfo, denoting that this is a Singleton.
      */
     ASTInfo() : debug_index(0) {}
+
     static ASTInfo *_instance;
 public:
+    ///
     long debug_index;
     ASTInfo(ASTInfo const&) = delete;
     ASTInfo& operator=(ASTInfo const&) = delete;
     /**
-     * @brief Returns the instance of ASTInfo class if the member _instance is 
+     * @brief Returns the instance of ASTInfo class if the member _instance is
      * nullptr, otherwise it creates a new ASTInfo object and returns it.
+     * @return A pointer to the ASTInfo instance.
      */
     static ASTInfo* instance();
 };

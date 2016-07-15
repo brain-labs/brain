@@ -8,11 +8,11 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include <string>
-#include <vector>
-
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
+
+#include <string>
+#include <vector>
 
 #include "../ast/expr/Expr.h"
 #include "../utils/ArgsOptions.h"
@@ -22,34 +22,44 @@
  */
 class Parser
 {
+private:
+    /// Number of cells available to Brain interpreter.
+    int _k_cells_count;
 protected:
+    /// The content of the source file passed to Brain.
     std::string _data;
+    /// Variable that holds the current index read by the parser.
     int _index;
-    std::vector<Expression *> _exprs;
+    ///
+    std::vector<Expr *> _exprs;
 
     /**
-     * @brief
-     * @param c
+     * @brief Returns whether of not a character is skippable by the parser, if
+     * it is, it returns true, false otherwise.
+     * @param c The character to be tested against.
      */
     static bool is_skippable(char c);
     /**
-     * @brief
+     * @brief Returns the token of the _data at _index.
      */
     char get_token();
     /**
-     * @brief
-     * @param exprs
+     * @brief It parses the Brain code.
+     * @param exprs The vector of expressions read by the constructor
      * @param level
      */
-    void parse(std::vector<Expression *> &exprs, int level);
+    void parse(std::vector<Expr *> &exprs, int level);
 public:
     /**
-     * @brief
-     * @param s
+     * @brief Calls parse to <i>create</i> all expressions found in the source
+     * code.
+     * @param source The source file as a string of characters.
+     * @param cells_count The number of available cells for the Brain interpreter
      */
-    Parser(std::string s) : _data(s), _index(0) { parse(_exprs, 0); }
+    explicit Parser(std::string source, int cells_count = 100) :
+    _k_cells_count(cells_count), _data(source), _index(0) { parse(_exprs, 0); }
     /**
-     * @brief
+     * @brief Generate IR code based on the Brain file passed to the parser.
      * @param M
      * @param B
      */
@@ -61,4 +71,4 @@ public:
     void debug_description(int level);
 };
 
-#endif // PARSER_H 
+#endif  // PARSER_H

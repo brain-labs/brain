@@ -22,169 +22,170 @@ static bool has_done_then = false;
 
 bool Parser::is_skippable(char c)
 {
-  return (c != '<' && c != '>' &&
-          c != '+' && c != '-' &&
-          c != '.' && c != ',' &&
-          c != '[' && c != ']' &&
-          c != '*' && c != '/' &&
-          c != '%' && c != '#' &&
-          c != '!' && c != '{' &&
-          c != '}' && c != '?' &&
-          c != ':' && c != ';');
+    return (c != '<' && c != '>' &&
+	    c != '+' && c != '-' &&
+	    c != '.' && c != ',' &&
+	    c != '[' && c != ']' &&
+	    c != '*' && c != '/' &&
+	    c != '%' && c != '#' &&
+	    c != '!' && c != '{' &&
+	    c != '}' && c != '?' &&
+	    c != ':' && c != ';');
 }
 
 char Parser::get_token()
 {
-  char c = 0;
-  while ( (c = _data[_index++]) && is_skippable(c) ) { }
-  return c;
+    char c = 0;
+    while ( (c = _data[_index++]) && is_skippable(c) ) { }
+    return c;
 }
 
-void Parser::parse(std::vector<Expression *> &exprs, int level)
+void Parser::parse(std::vector<Expr *> &exprs, int level)
 {
     char c = 0;
     while ((c = get_token()))  {
-	Expression *expr = NULL;
-	if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 && !exprs.empty()) {
-	    Expression *lastExpr = exprs.back();
-	    if (lastExpr->update_expression(c)) {
-		continue;
-	    }
-	}
-
-	switch (c)
-	{
-	case '<':
-	    expr = new ShiftExpression(-1); 
-	    break;
-	case '>':
-	    expr = new ShiftExpression(1); 
-	    break;
-	case '+':
-	    expr = new IncrementExpression(1);
-	    break;
-	case '-':
-	    expr = new IncrementExpression(-1);
-	    break;
-	case '.':
-	    expr = new OutputExpression();
-	    break;
-	case ',':
-	    expr = new InputExpression();
-	    break;
-	case '[':
-	{
-	    std::vector<Expression *> loopExpr;
-	    parse(loopExpr, level + 1);
-	    expr = new LoopExpression(loopExpr, LT_WHILE);
-	    break;
-	}
-	case ']':
-	    if (level > 0) {
-		return; // exit the recursivity
-	    }
-	    break; 
-	case '{':
-	{
-	    std::vector<Expression *> loopExpr;
-	    parse(loopExpr, level + 1);
-	    expr = new LoopExpression(loopExpr, LT_FOR);
-	    break;
-	}
-	case '}':
-	    if (level > 0) {
-		return; // exit the recursivity
-	    }
-	    break;
-	case '?':
-	{
-	    std::vector<Expression *> ifExpr;
-	    parse(ifExpr, level + 1);
-	    expr = new IfExpression(ifExpr);
-	    break;
-	}
-	case ':':
-	    if (!has_done_then) {
-		if (level == 0) {
-		    break;
+        Expr *expr = nullptr;
+		if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 && !exprs.empty()) {
+            Expr *last_expression = exprs.back();
+			if (last_expression->update_expression(c)) {
+				continue;
+			}
 		}
 
-		_index--; // move one step back to read the ':' again
-		has_done_then = true;
-		return; // return to exit the 'then' recursivity
-	    }
-
-	    // do the else
-	    if (!exprs.empty()) {
-		Expression *expr = exprs.back();
-		if (expr->expression_category() == ET_BRANCH) {
-		    std::vector<Expression *> elseExpr;
-		    parse(elseExpr, level + 1);
-		    ((IfExpression *)expr)->set_else(elseExpr);
+		switch (c)
+		{
+		case '<':
+            expr = new ShiftExpr(-1);
+			break;
+		case '>':
+            expr = new ShiftExpr(1);
+			break;
+		case '+':
+            expr = new IncrementExpr(1);
+			break;
+		case '-':
+            expr = new IncrementExpr(-1);
+			break;
+		case '.':
+            expr = new OutputExpr();
+			break;
+		case ',':
+            expr = new InputExpr();
+			break;
+		case '[':
+		{
+            std::vector<Expr *> loop_expression;
+			parse(loop_expression, level + 1);
+            expr = new LoopExpr(loop_expression, LT_WHILE);
+			break;
 		}
-	    }
-        
-	    has_done_then = false; // reset the flag
-	    break;
-	case ';':
-	    if (level > 0) {
-		return;
-	    }
-	    break;
-	case '*':
-	    expr = new ArithmeticExpression(AT_MUL);
-	    break;
-	case '/':
-	    expr = new ArithmeticExpression(AT_DIV);
-	    break;
-	case '%':
-	    expr = new ArithmeticExpression(AT_REM);
-	    break;
-	case '#':
-	    expr = new DebugExpression();
-	    break;
-	case '!':
-	    expr = new BreakExpression();
-	    break;
-	default:
-	    // Ignored character
-	    break;
-	}
-    
-	if (expr) {
-	    exprs.push_back(expr);
-	}
+		case ']':
+			if (level > 0) {
+				// exit the recursivity.
+				return;
+			}
+			break; 
+		case '{':
+		{
+            std::vector<Expr *> loop_expression;
+			parse(loop_expression, level + 1);
+            expr = new LoopExpr(loop_expression, LT_FOR);
+			break;
+		}
+		case '}':
+			if (level > 0) {
+				// exit the recursivity.
+				return;
+			}
+			break;
+		case '?':
+		{
+            std::vector<Expr *> if_expression;
+			parse(if_expression, level + 1);
+            expr = new IfExpr(if_expression);
+			break;
+		}
+		case ':':
+			if (!has_done_then) {
+				if (level == 0) {
+					break;
+				}
+
+				_index--; // move one step back to read the ':' again
+				has_done_then = true;
+				return; // return to exit the 'then' recursivity
+			}
+
+			// do the else
+			if (!exprs.empty()) {
+                Expr *expr = exprs.back();
+				if (expr->expression_category() == ET_BRANCH) {
+                    std::vector<Expr *> else_expression;
+					parse(else_expression, level + 1);
+                    ((IfExpr *)expr)->set_else(else_expression);
+				}
+			}
+
+			has_done_then = false; // reset the flag
+			break;
+		case ';':
+			if (level > 0) {
+				return;
+			}
+			break;
+		case '*':
+            expr = new ArithmeticExpr(AT_MUL);
+			break;
+		case '/':
+            expr = new ArithmeticExpr(AT_DIV);
+			break;
+		case '%':
+            expr = new ArithmeticExpr(AT_REM);
+			break;
+		case '#':
+            expr = new DebugExpr();
+			break;
+		case '!':
+            expr = new BreakExpr();
+			break;
+		default:
+			// Ignored character
+			break;
+		}
+
+		if (expr) {
+			exprs.push_back(expr);
+		}
     }
 }
 
 void Parser::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
-    llvm::LLVMContext &C = M->getContext();
-  
+    llvm::LLVMContext &context = M->getContext();
+
     if (!__brain_index_ptr) {
 	// Create global variable |brainf.index|
-	llvm::Type *Ty = llvm::Type::getInt32Ty(C);
+	llvm::Type *Ty = llvm::Type::getInt32Ty(context);
 	const llvm::APInt Zero = llvm::APInt(32, 0); // int32 0
 	llvm::Constant *InitV = llvm::Constant::getIntegerValue(Ty, Zero);
 	__brain_index_ptr = new llvm::GlobalVariable(*M, Ty, false /* non-constant */,
                                            llvm::GlobalValue::WeakAnyLinkage, // Keep one copy when linking (weak)
                                            InitV, "brainf.index");
-  }
-  
+    }
+
     if (!__brain_cells_ptr) {
-#define kCellsCount 100
 	// Create |brainf.cells|
-	llvm::ArrayType *ArrTy = llvm::ArrayType::get(llvm::Type::getInt32Ty(C), kCellsCount);
-	std::vector<llvm::Constant *> constants(kCellsCount, B.getInt32(0)); // Create a vector of kCellsCount items equal to 0
+	llvm::ArrayType *ArrTy = llvm::ArrayType::get(llvm::Type::getInt32Ty(context), _k_cells_count);
+	std::vector<llvm::Constant *> constants(_k_cells_count, B.getInt32(0)); // Create a vector of _k_cells_count items equal to 0
 	llvm::ArrayRef<llvm::Constant *> Constants = llvm::ArrayRef<llvm::Constant *>(constants);
 	llvm::Constant *InitPtr = llvm::ConstantArray::get(ArrTy, Constants);
 	__brain_cells_ptr = new llvm::GlobalVariable(*M, ArrTy, false /* non-constant */,
 						llvm::GlobalValue::WeakAnyLinkage,
 // Keep one copy when linking (weak)
                                            InitPtr, "brainf.cells");
-  }
+    }
 
-    for (std::vector<Expression *>::iterator it = _exprs.begin();
+    for (std::vector<Expr *>::iterator it = _exprs.begin();
 	 it != _exprs.end(); ++it) {
 	(*it)->code_gen(M, B, __brain_index_ptr, __brain_cells_ptr);
     }
@@ -192,9 +193,9 @@ void Parser::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 
 void Parser::debug_description(int level)
 {
-    for (std::vector<Expression *>::iterator it = _exprs.begin();
+    for (std::vector<Expr *>::iterator it = _exprs.begin();
 	 it != _exprs.end(); ++it) {
-	std::cout << std::string(level * 2, ' ');
-	(*it)->debug_description(level+1);
+        std::cout << std::string(level * 2, ' ');
+        (*it)->debug_description(level+1);
     }
 }

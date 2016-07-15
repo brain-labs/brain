@@ -5,11 +5,12 @@
  * Copyright Luiz Peres, 2016.
  */
 
+
 #ifndef ARGS_OPTIONS_H
 #define ARGS_OPTIONS_H
 
 /**
- * @brief
+ * @brief Enumerates all the options that Brain handles.
  */
 typedef enum
 {
@@ -22,36 +23,42 @@ typedef enum
 } BrainOption;
 
 /**
- * @brief Handles all the options passed as arguments to Brain.
- *
+ * @brief This class handles all the options passed as arguments to Brain.   It
+ * does so by using an enum of  all options accepted  by  Brain  and an integer
+ * which stores by bitwise comparation the values of options used at the moment
+ * of execution.
  */
 class ArgsOptions
 {
 private:
     ArgsOptions() : _options(BO_NONE) {}
+    /// The singleton object.
     static ArgsOptions *_instance;
+    /// Integer value corresponding to the options passed to Brain.
     int _options;
 public:
     ArgsOptions(ArgsOptions const&) = delete;
     ArgsOptions& operator=(ArgsOptions const&) = delete;
     /**
-     * @brief Returns the AST instance.
+     * @brief Returns the ArgsOptions instance.
      */
     static ArgsOptions* instance();
     /**
-     * @brief
-     * @param option
+     * @brief Add an option to be used by Brain, it does a bitwise OR on the
+     * value to add it to an integer.
+     * @param option The option to be added in.
      */
     void add_option(BrainOption option);
     /**
-     * @brief
-     * @param option
+     * @brief Verifies and returns true if an option is present (being used) at
+     * the moment of execution, otherwise it returns false.
+     * @param option The option to be tested against.
      */
     bool has_option(BrainOption option);
     /**
-     * @brief
+     * @brief Returns the optimization level to compile Brain files.
      */
     BrainOption get_optimization();
 };
 
-#endif // ARGS_OPTIONS_H
+#endif  // ARGS_OPTIONS_H
