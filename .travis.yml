@@ -35,17 +35,20 @@
 # MMMMMMMMMMMMMMMMMQ>:::::::>?O$OC7:-:::::!!!!:::::!>>7ONMMMMMMMMMMMMMMM
 
 language: cpp
+
 compiler:
   - clang
 
-services:
-  - docker
-
 sudo: required
 
-before_install:
-  - docker pull luizperes/brain
-  - docker run -i luizperes/brain /bin/sh -c "cd /root/ && rm -rf brain && git clone https://github.com/luizperes/brain.git && cd /root/brain/src && make docker-build && cd /root/brain/tests && make test_scripts && ./test_scripts" 
+install:
+
+  - apt-get install -y \ llvm-3.6 \ llvm-3.6-doc \ llvm \ clang-3.6 \ clang-3.6-doc \ clang \ lldb-3.6 \ lldb \ libstdc++-4.9-doc \ glibc-doc \
+  - apt-get install -y \ make \ patch \ file \ bzip2
+  - apt-get install -y zlib1g-dev
+  - apt-get install -y libedit-dev
+  - export PATH=$PATH:$(pwd)/bin
 
 script:
-  - echo OK
+  - make docker-build
+  - make tests
