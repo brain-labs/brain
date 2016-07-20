@@ -38,31 +38,26 @@ dist: trusty
 sudo: required
 language: cpp
 
-addons: &addons
-  apt:
-    packages: &packages
-      - g++-4.9
-      - clang-format-3.8
-    sources: &sources
-      - ubuntu-toolchain-r-test
-      - llvm-toolchain-precise-3.8
-
 matrix:
   include:
-    # Clang 3.8
-    - env: COMPILER=clang++-3.8 CCOMPILER=clang-3.8
-      addons:
-        apt:
-          packages: clang-3.8
-          sources: *sources
+    # from https://github.com/travis-ci/travis-ci/issues/6120
+    - os: linux
+      env:
+        - LLVM_VERSION=3.8.0
+        - LLVM_ARCHIVE_PATH=$HOME/clang+llvm.tar.xz
+        - COMPILER=clang++
+        - CPPFLAGS="-I $HOME/clang-$LLVM_VERSION/include/c++/v1"
+        - CXXFLAGS=-lc++
+        - PATH=$HOME/clang-$LLVM_VERSION/bin:$PATH
+        - LD_LIBRARY_PATH=$HOME/clang-$LLVM_VERSION/lib:$LD_LIBRARY_PATH
+      before_install:
+       - wget http://llvm.org/releases/$LLVM_VERSION/clang+llvm-$LLVM_VERSION-x86_64-linux-gnu-ubuntu-14.04.tar.xz -O $LLVM_ARCHIVE_PATH
+       - mkdir $HOME/clang-$LLVM_VERSION
+       - tar xf $LLVM_ARCHIVE_PATH -C $HOME/clang-$LLVM_VERSION --strip-components 1
 
 install:
-
-  - alias clang="clang-3.8"
-  - alias clang++="clang++-3.8"
   - export PATH=$PATH:$(pwd)/bin
 
 script:
   - make
   - make tests
-
