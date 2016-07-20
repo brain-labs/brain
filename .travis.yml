@@ -34,21 +34,35 @@
 # MMMMMMMMMMMMMHQO>:!>>>>!:?O$$QQ$$?;    ..;;-::!!::::::>MMMMM MMMMMMMMM
 # MMMMMMMMMMMMMMMMMQ>:::::::>?O$OC7:-:::::!!!!:::::!>>7ONMMMMMMMMMMMMMMM
 
+dist: trusty
+sudo: required
 language: cpp
 
-compiler:
-  - clang
+addons: &addons
+  apt:
+    packages: &packages
+      - g++-4.9
+      - clang-format-3.8
+    sources: &sources
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.8
 
-sudo: required
+matrix:
+  include:
+    # Clang 3.8
+    - env: COMPILER=clang++-3.8 CCOMPILER=clang-3.8
+      addons:
+        apt:
+          packages: clang-3.8
+          sources: *sources
 
 install:
 
-  - apt-get install -y \ llvm-3.6 \ llvm-3.6-doc \ llvm \ clang-3.6 \ clang-3.6-doc \ clang \ lldb-3.6 \ lldb \ libstdc++-4.9-doc \ glibc-doc \
-  - apt-get install -y \ make \ patch \ file \ bzip2
-  - apt-get install -y zlib1g-dev
-  - apt-get install -y libedit-dev
+  - alias clang="clang-3.8"
+  - alias clang++="clang++-3.8"
   - export PATH=$PATH:$(pwd)/bin
 
 script:
-  - make docker-build
+  - make
   - make tests
+
