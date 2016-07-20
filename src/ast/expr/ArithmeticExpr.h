@@ -17,8 +17,8 @@
 #include "Expr.h"
 
 /**
- * @brief The three kinds of arithmetic operations used in Brain: multiplication,
- * division and modulus.
+ * @brief The three kinds of arithmetic operations used in Brain:
+ * multiplication, division and modulus.
  */
 typedef enum
 {

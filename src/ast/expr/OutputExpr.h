@@ -25,13 +25,19 @@ public:
     OutputExpr() {}
     ~OutputExpr() {}
     /**
-     * @brief
+     * @brief code_gen
+     * @param M
+     * @param B
+     * @param index
+     * @param cells
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::GlobalVariable *index,
+                  llvm::GlobalVariable *cells);
     /**
      * @brief
      * @param level
-     */ 
+     */
     void debug_description(int level);
 };
 

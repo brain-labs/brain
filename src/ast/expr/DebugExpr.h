@@ -8,11 +8,11 @@
 #ifndef DEBUG_EXPR_H
 #define DEBUG_EXPR_H
 
-#include <iostream>
-
 #include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
+
+#include <iostream>
 
 #include "Expr.h"
 
