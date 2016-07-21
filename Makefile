@@ -4,7 +4,8 @@ CFLAGS=-O3 -Wall -std=c++1y
 CFLAGS-DEBUG=-O0 -Wall
 BIN=./bin
 
-MKLIB=sudo bash ./libs/install.sh ./libs
+SUDO=sudo
+MKLIB=$(SUDO) bash ./libs/install.sh ./libs
 MKTST=bash ./tests/test_scripts.sh ./tests
 MKBIN=mkdir -p bin && $(MKLIB)
 ROOT=src
