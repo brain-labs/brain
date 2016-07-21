@@ -1,33 +1,16 @@
-FROM buildpack-deps:vivid-scm
+FROM jbrooker/clang-toolchain:latest
 
-RUN apt-get update
-
-RUN apt-get install -y \
-    llvm-3.6 \
-    llvm-3.6-doc \
-    llvm \
-    clang-3.6 \
-    clang-3.6-doc \
-    clang \
-    lldb-3.6 \
-    lldb \
-    libstdc++-4.9-doc \
-    glibc-doc \
-    man
-
-RUN apt-get install -y \
-    make \
-    patch \
-    file \
-    bzip2
-
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y ssh-client
+RUN apt-get install -y git
+RUN apt-get install -y build-essential
+RUN apt-get install libtinfo-dev
 RUN apt-get install -y zlib1g-dev
 RUN apt-get install -y libedit-dev
-RUN apt-get install -y vim
 
-RUN git clone https://github.com/luizperes/brain.git /root/brain 
-RUN cd /root/brain/src && make 
+RUN git clone https://github.com/luizperes/brain.git /root/brain
+RUN cd /root/brain && git checkout dev && make SUDO?=
 
-ENV PATH $PATH:/root/brain/src
-RUN alias brain=/root/brain/src/brain
+ENV PATH $PATH:/root/brain/bin
+RUN alias brain=/root/brain/bin/brain
 
