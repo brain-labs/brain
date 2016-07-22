@@ -66,9 +66,11 @@ bool Bootstrap::init(int argc, char** argv)
 
     if(ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
         std::cout << "\n" << "=== LLVM IR ===" << "\n";
-        // Print (dump) the io_module.
-        module->dump();
-        io_module->dump();
+        std::string dumpStr;
+        llvm::raw_string_ostream dumpStrOstream(dumpStr);
+        module->print(dumpStrOstream, nullptr);
+	io_module->print(dumpStrOstream, nullptr);
+        std::cout << dumpStr;
     }
 
     // Default initialization.
