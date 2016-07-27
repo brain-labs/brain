@@ -1,0 +1,360 @@
+=== Debug Information ===
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+IncrementExpr (1)
+ShiftExpr (1)
+IncrementExpr (1)
+ShiftExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+ShiftExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+  ShiftExpr (1)
+  LoopExpr: [
+    IncrementExpr (-1)
+    ShiftExpr (1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    ShiftExpr (-1)
+    ShiftExpr (-1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    ShiftExpr (1)
+  ]
+  ShiftExpr (-1)
+  ShiftExpr (-1)
+ ]
+ShiftExpr (1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+OutputExpr
+ShiftExpr (1)
+IncrementExpr (-1)
+ShiftExpr (1)
+IncrementExpr (1)
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+ShiftExpr (-1)
+IncrementExpr (1)
+LoopExpr: [
+ ]
+LoopExpr: [
+  InputExpr
+ ]
+LoopExpr: [
+  ShiftExpr (1)
+  IncrementExpr (1)
+  ShiftExpr (1)
+  IncrementExpr (1)
+  ShiftExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  ShiftExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  ShiftExpr (-1)
+  LoopExpr: [
+    ShiftExpr (1)
+    LoopExpr: [
+      IncrementExpr (-1)
+      ShiftExpr (1)
+      IncrementExpr (1)
+      IncrementExpr (1)
+      IncrementExpr (1)
+      IncrementExpr (1)
+      ShiftExpr (-1)
+      ShiftExpr (-1)
+      IncrementExpr (1)
+      IncrementExpr (1)
+      IncrementExpr (1)
+      ShiftExpr (1)
+   ]
+    ShiftExpr (-1)
+    ShiftExpr (-1)
+  ]
+  ShiftExpr (1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  OutputExpr
+  ShiftExpr (1)
+  ShiftExpr (1)
+  IncrementExpr (1)
+  OutputExpr
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  OutputExpr
+  OutputExpr
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+ ]
+LoopExpr: [
+  OutputExpr
+  ShiftExpr (1)
+  OutputExpr
+  ShiftExpr (-1)
+  ShiftExpr (-1)
+  ShiftExpr (-1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  OutputExpr
+  ShiftExpr (1)
+  ShiftExpr (1)
+  OutputExpr
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  OutputExpr
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  OutputExpr
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  OutputExpr
+  ShiftExpr (1)
+  IncrementExpr (1)
+  OutputExpr
+  ShiftExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  OutputExpr
+ ]
+LoopExpr: [
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+  IncrementExpr (-1)
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (1)
+OutputExpr
+ShiftExpr (-1)
+ShiftExpr (-1)
+ShiftExpr (-1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+ShiftExpr (1)
+ShiftExpr (1)
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+OutputExpr
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+OutputExpr
+ShiftExpr (1)
+IncrementExpr (1)
+OutputExpr
+IncrementExpr (1)
+ShiftExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+ShiftExpr (-1)
+ShiftExpr (-1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+LoopExpr: [
+ ]
+ShiftExpr (1)
+ShiftExpr (-1)
+LoopExpr: [
+ ]
+=== Program Output ===
+Hello World!

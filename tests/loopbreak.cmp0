@@ -1,0 +1,33 @@
+=== Debug Information ===
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+LoopExpr: [
+  DebugExpr
+  IfExpr (THEN) [
+    IncrementExpr (-1)
+  ]
+  IfExpr (ELSE) [
+    BreakExpr
+  ]
+ ]
+DebugExpr
+=== Program Output ===
+Index Pointer: 0 Value at Index Pointer: 10
+Index Pointer: 0 Value at Index Pointer: 9
+Index Pointer: 0 Value at Index Pointer: 8
+Index Pointer: 0 Value at Index Pointer: 7
+Index Pointer: 0 Value at Index Pointer: 6
+Index Pointer: 0 Value at Index Pointer: 5
+Index Pointer: 0 Value at Index Pointer: 4
+Index Pointer: 0 Value at Index Pointer: 3
+Index Pointer: 0 Value at Index Pointer: 2
+Index Pointer: 0 Value at Index Pointer: 1
+Index Pointer: 0 Value at Index Pointer: 0

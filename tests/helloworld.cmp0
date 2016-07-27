@@ -1,0 +1,109 @@
+=== Debug Information ===
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+LoopExpr: [
+  ShiftExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  LoopExpr: [
+    ShiftExpr (1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    ShiftExpr (1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    ShiftExpr (1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    IncrementExpr (1)
+    ShiftExpr (1)
+    IncrementExpr (1)
+    ShiftExpr (-1)
+    ShiftExpr (-1)
+    ShiftExpr (-1)
+    ShiftExpr (-1)
+    IncrementExpr (-1)
+  ]
+  ShiftExpr (1)
+  IncrementExpr (1)
+  ShiftExpr (1)
+  IncrementExpr (1)
+  ShiftExpr (1)
+  IncrementExpr (-1)
+  ShiftExpr (1)
+  ShiftExpr (1)
+  IncrementExpr (1)
+  LoopExpr: [
+    ShiftExpr (-1)
+  ]
+  ShiftExpr (-1)
+  IncrementExpr (-1)
+ ]
+ShiftExpr (1)
+ShiftExpr (1)
+OutputExpr
+ShiftExpr (1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+ShiftExpr (1)
+ShiftExpr (1)
+OutputExpr
+ShiftExpr (-1)
+IncrementExpr (-1)
+OutputExpr
+ShiftExpr (-1)
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+OutputExpr
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+OutputExpr
+ShiftExpr (1)
+ShiftExpr (1)
+IncrementExpr (1)
+OutputExpr
+ShiftExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+=== Program Output ===
+Hello World!

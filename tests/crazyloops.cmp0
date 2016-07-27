@@ -1,0 +1,26 @@
+=== Debug Information ===
+IncrementExpr (1)
+LoopExpr: [
+  IncrementExpr (1)
+  IncrementExpr (1)
+  IncrementExpr (1)
+  ShiftExpr (1)
+ ]
+ShiftExpr (-1)
+LoopExpr: {
+  IfExpr (THEN) [
+    DebugExpr
+    IncrementExpr (1)
+  ]
+  IfExpr (ELSE) [
+    IncrementExpr (-1)
+    IncrementExpr (-1)
+    IncrementExpr (-1)
+    IncrementExpr (-1)
+  ]
+ }
+=== Program Output ===
+Index Pointer: 0 Value at Index Pointer: 4
+Index Pointer: 0 Value at Index Pointer: 5
+Index Pointer: 0 Value at Index Pointer: 6
+Index Pointer: 0 Value at Index Pointer: 7

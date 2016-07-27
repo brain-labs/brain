@@ -33,8 +33,19 @@ int main()
         execToFile(dir->d_name, fWithNoExt);
         compareFiles(fCmp, fWithNoExt);
 
+        // do not do comparison for read expr
+        if (strncmp(dir->d_name, "read", 4) == 0) {
+          continue;
+        }
+
         char *fCmp0 = callocString(strlen(dir->d_name) + 5);
-        appendExtToFile(fCmp0, fWithNoExt, ".cmp0");        
+        appendExtToFile(fCmp0, fWithNoExt, ".cmp0");
+        char *options = callocString(strlen(dir->d_name) + strlen(" -O0 -emit-ast") + 1);
+        strcat(options, dir->d_name);
+        strcat(options, " -O0 -emit-ast");
+        execToFile(options, fWithNoExt);
+        compareFiles(fCmp0, fWithNoExt);
+        free(options);
 
         char *fCmp1 = callocString(strlen(dir->d_name) + 5);
         appendExtToFile(fCmp1, fWithNoExt, ".cmp1");
