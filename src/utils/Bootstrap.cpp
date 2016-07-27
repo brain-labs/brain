@@ -60,12 +60,12 @@ bool Bootstrap::init(int argc, char** argv)
     builder.CreateRet(builder.getInt32(0));
 
     if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST)) {
-        std::cout << "\n" << "=== Debug Information ===" << "\n";
+        std::cout << "=== Debug Information ===" << "\n";
         parser.debug_description(0);
     }
 
     if(ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
-        std::cout << "\n" << "=== LLVM IR ===" << "\n";
+        std::cout << "=== LLVM IR ===" << "\n";
         std::string dumpStr;
         llvm::raw_string_ostream dumpStrOstream(dumpStr);
         module->print(dumpStrOstream, nullptr);
@@ -97,7 +97,7 @@ bool Bootstrap::init(int argc, char** argv)
     if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) ||
 	ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
         // Run the program
-        std::cout << "\n" << "=== Program Output ===" << "\n";
+        std::cout << "=== Program Output ===" << "\n";
     }
 
     // No args.
