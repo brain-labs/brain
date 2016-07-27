@@ -2,7 +2,7 @@
 
 - [x] Fix file ```testscripts.c```.
   - [x] Linux.
-  - [ ] Mac.
+  - [x] Mac.
 - [x] Implement `?`, `:`, `;`.
 - [x] Ignore else's without if's.
 - [x] Improve the methods IsBranch, IsTerminator and so on.

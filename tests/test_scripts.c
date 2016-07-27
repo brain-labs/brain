@@ -76,7 +76,7 @@ void compareFiles(char *filename1, char *filename2)
   FILE *f2 = fopen(filename2, "r");
   if (!f1 || !f2 )
   {
-    printf("%sImpossible to open file %s or %s%s\n", \
+    printf("%simpossible to open file %s or %s%s\n", \
                                           RED_COLOR, \
                                           filename1, \
                                           filename2, \
@@ -98,14 +98,14 @@ void compareFiles(char *filename1, char *filename2)
 
   if (ch1 != ch2)
   {
-    printf("%sFile %s does not match !%s\n", \
+    printf("%sfile %s does not match !%s\n", \
                                   RED_COLOR, \
                                   filename1, \
                                   END_COLOR);
     exit(2);
   }
 
-   printf("%sFile %s passed !%s\n", \
+   printf("%sfile %s passed !%s\n", \
                        GREEN_COLOR, \
                          filename1, \
                          END_COLOR);
@@ -120,7 +120,7 @@ void execToFile(char *options, char *destFile)
 
   if (system(cmd) != 0)
   {
-    printf("%sImpossible to run command %s %s\n", \
+    printf("%simpossible to run command %s %s\n", \
                                        RED_COLOR, \
                                              cmd, \
                                        END_COLOR);
