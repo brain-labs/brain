@@ -11,6 +11,11 @@ void ShiftExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::GlobalVariable *index,
                          llvm::GlobalVariable *cells)
 {
+    if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
+       _step == 0) {
+        return;
+    }
+
     // Load index value
     llvm::Value *IdxV = B.CreateLoad(index);
     // Add |_step| to index and save the value
@@ -19,6 +24,11 @@ void ShiftExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
 
 void ShiftExpr::debug_description(int level)
 {
+    if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
+       _step == 0) {
+        return;
+    }
+
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         std::cout << "Shift Expression - move data pointer from "

@@ -10,8 +10,8 @@
 - [x] Code refactoring for the whole project. Improve readability (CodeGen params too).
 - [x] Create verbose mode describe on https://github.com/luizperes/brain/issues/2
 - [x] Fix InputExpression
-- [ ] Implement optimization for empty whiles `[ ]`. Ignore them (For Else too).
-- [ ] Implement optimization for empty moves `ShiftExpr(0)` and `IncrementExpression(0)`.
+- [x] Implement optimization for empty whiles `[ ]`. Ignore them (For Else too).
+- [x] Implement optimization for empty moves `ShiftExpr(0)` and `IncrementExpression(0)`.
 - [ ] Implement a `delete comments` option for the compiler.
 - [ ] Implement a `generate optimized code` option for the compiler.
 - [ ] Improve the `return` at the method `Parser::isSkippable`. Check switch at the parser.

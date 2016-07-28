@@ -9,6 +9,11 @@
 
 void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
+    if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
+       _increment == 0) {
+        return;
+    }
+
     llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(index) };
     llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
     llvm::Value *CellPtr = B.CreateGEP(cells, IdxsArr);
@@ -20,6 +25,11 @@ void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Global
 
 void IncrementExpr::debug_description(int level)
 {
+    if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
+       _increment == 0) {
+        return;
+    }
+
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         std::cout << "Increment Expression - increment of "

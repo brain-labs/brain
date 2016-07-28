@@ -36,6 +36,9 @@ OutputExpr
 ShiftExpr (-1)
 IncrementExpr (1)
 LoopExpr: [
+  InputExpr
+ ]
+LoopExpr: [
   ShiftExpr (1)
   IncrementExpr (1)
   ShiftExpr (1)

@@ -12,8 +12,15 @@ IncrementExpr (1)
 IncrementExpr (1)
 IncrementExpr (1)
 DebugExpr
+IfExpr (THEN) [
+  IncrementExpr (1)
+  DebugExpr
+ ]
+ IfExpr (ELSE) [
+ ]
 === Program Output ===
 Index Pointer: 0 Value at Index Pointer: 5
 Index Pointer: 0 Value at Index Pointer: 5
 Index Pointer: 0 Value at Index Pointer: 5
 Index Pointer: 0 Value at Index Pointer: 9
+Index Pointer: 0 Value at Index Pointer: 10

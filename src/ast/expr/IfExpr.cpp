@@ -24,7 +24,8 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariabl
     llvm::Value *SGZeroCond = B.CreateICmpSGT(B.CreateLoad(CellPtr),
                                               B.getInt32(0)); // is cell Signed Int Greater than Zero?
 
-    if (!_exprs_else.empty()) {
+    if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
+        !_exprs_else.empty()) {
         ElseBB = llvm::BasicBlock::Create(C, "ElseBody", F);
         B.CreateCondBr(SGZeroCond, ThenBB, ElseBB);
     }
@@ -44,8 +45,8 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariabl
 
     ThenB.CreateBr(ContBB); // uncoditional jump
 
-    if (!_exprs_else.empty())
-    {
+    if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
+        !_exprs_else.empty()) {
         B.SetInsertPoint(ElseBB);
         llvm::IRBuilder<> ElseB(ElseBB);
         for (std::vector<Expr *>::iterator it = _exprs_else.begin(); it != _exprs_else.end(); ++it) {
@@ -85,7 +86,8 @@ void IfExpr::debug_description(int level)
 
      std::cout << std::string(level, ' ') << "]" << std::endl;
 
-     if (!_exprs_else.empty()) {
+     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
+         !_exprs_else.empty()) {
          if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
              std::cout << std::string(level, ' ')
                        << "If Expression - ELSE - ["

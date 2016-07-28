@@ -20,6 +20,8 @@ IfExpr (THEN) [
     IncrementExpr (1)
     IncrementExpr (1)
   ]
+  IfExpr (ELSE) [
+  ]
  ]
 DebugExpr
 === Program Output ===

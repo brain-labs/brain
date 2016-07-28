@@ -6,9 +6,15 @@
  */
 
 #include "LoopExpr.h"
+#include "../../utils/ArgsOptions.h"
 
 void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
+    if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
+       _exprs.empty()) {
+        return;
+    }
+
     llvm::LLVMContext &C = M->getContext();
 
     // Create a basic block for loop
@@ -77,6 +83,11 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
 
 void LoopExpr::debug_description(int level)
 {
+    if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
+       _exprs.empty()) {
+        return;
+    }
+
     std::string openedBrackets = (_type == LT_FOR) ? "{" : "[";
     std::string closedBrackets = (_type == LT_FOR) ? "}" : "]";
 
