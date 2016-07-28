@@ -21,16 +21,16 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariabl
     llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
                                                            llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                                        IdxV);
-    llvm::Value *SGZeroCond = B.CreateICmpSGT(B.CreateLoad(CellPtr),
-                                              B.getInt32(0)); // is cell Signed Int Greater than Zero?
+    llvm::Value *NEZeroCond = B.CreateICmpNE(B.CreateLoad(CellPtr),
+                                              B.getInt32(0)); // is cell Signed Int Not Equal to Zero?
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
         !_exprs_else.empty()) {
         ElseBB = llvm::BasicBlock::Create(C, "ElseBody", F);
-        B.CreateCondBr(SGZeroCond, ThenBB, ElseBB);
+        B.CreateCondBr(NEZeroCond, ThenBB, ElseBB);
     }
     else {
-        B.CreateCondBr(SGZeroCond, ThenBB, ContBB);
+        B.CreateCondBr(NEZeroCond, ThenBB, ContBB);
     }
 
     B.SetInsertPoint(ThenBB);

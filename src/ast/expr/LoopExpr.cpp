@@ -44,10 +44,10 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
     llvm::BasicBlock *LoopBB = llvm::BasicBlock::Create(C, "LoopBody", F);
     llvm::BasicBlock *EndBB = llvm::BasicBlock::Create(C, "LoopEnd", F);
 
-    llvm::Value *SGZeroCond = nullptr;
+    llvm::Value *NEZeroCond = nullptr;
     if (_type == LT_FOR) {
-        SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CounterV),
-                                          StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
+        NEZeroCond = StartB.CreateICmpNE(StartB.CreateLoad(CounterV),
+                                         StartB.getInt32(0)); // is cell Signed Int Not Equal to Zero?
     }
     else {
         // Get the current cell adress
@@ -55,11 +55,11 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
         CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                               IdxV);
-        SGZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CellPtr),
-                                          StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
+        NEZeroCond = StartB.CreateICmpNE(StartB.CreateLoad(CellPtr),
+                                          StartB.getInt32(0)); // is cell Signed Int Not Equal to Zero?
     }
 
-    StartB.CreateCondBr(SGZeroCond, LoopBB, EndBB);
+    StartB.CreateCondBr(NEZeroCond, LoopBB, EndBB);
 
     B.SetInsertPoint(LoopBB);
     llvm::IRBuilder<> LoopB(LoopBB);
