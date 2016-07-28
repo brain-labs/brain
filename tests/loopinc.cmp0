@@ -14,4 +14,4 @@ LoopExpr: {
  }
 DebugExpr
 === Program Output ===
-Index Pointer: 0 Value at Index Pointer: -2147483643
+Index Pointer: 0 Value at Index Pointer: 0

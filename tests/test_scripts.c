@@ -8,6 +8,8 @@
 #define GREEN_COLOR "\e[92m"
 #define END_COLOR "\e[0m"
 
+static int returnValue = 0;
+
 bool hasExt(char *ext);
 char* callocString(int size);
 void appendExtToFile(char *dest, char *source, char *ext);
@@ -54,13 +56,15 @@ int main()
         free(fCmp);
         free(fCmp0);
         free(fCmp1);
+
+	printf("====================\n");
       }
     }
 
     closedir(d);
   }
 
-  return 0;
+  return returnValue;
 }
 
 bool hasExt(char *ext)
@@ -92,7 +96,8 @@ void compareFiles(char *filename1, char *filename2)
                                           filename1, \
                                           filename2, \
                                           END_COLOR);
-    exit(1);
+    returnValue = 1;
+    return;
   }
     
   int ch1 = getc(f1);
@@ -113,13 +118,14 @@ void compareFiles(char *filename1, char *filename2)
                                   RED_COLOR, \
                                   filename1, \
                                   END_COLOR);
-    exit(2);
+    returnValue = 1;
+    return;
   }
 
-   printf("%sfile %s passed !%s\n", \
-                       GREEN_COLOR, \
-                         filename1, \
-                         END_COLOR);
+  printf("%sfile %s passed !%s\n", \
+                      GREEN_COLOR, \
+                        filename1, \
+                        END_COLOR);
 }
 
 void execToFile(char *options, char *destFile)
@@ -136,7 +142,8 @@ void execToFile(char *options, char *destFile)
                                              cmd, \
                                        END_COLOR);
     free(cmd);
-    exit(-2);
+    returnValue = 1;
+    return;
   }
 
   printf("%s%s%s\n", GREEN_COLOR, cmd, END_COLOR);
