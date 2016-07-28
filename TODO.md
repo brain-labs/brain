@@ -16,7 +16,7 @@
 - [ ] Implement a `generate optimized code` option for the compiler.
 - [ ] Improve the `return` at the method `Parser::isSkippable`. Check switch at the parser.
 - [ ] Change module's name.
-- [ ] Change the if and while.`if (*ptr != 0)`, not `if (*ptr > 0)`. Although for is going to work only for positive numbers.
+- [x] Change the if and while.`if (*ptr != 0)`, not `if (*ptr > 0)`. Although for is going to work only for positive numbers.
 - [ ] Code's refactoring:
   - [ ] Move the content of brain.cpp to a boostrap file.
   - [ ] Refactor parser.cpp.
