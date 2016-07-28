@@ -5,7 +5,7 @@ test comments
 hdushdsuhhdsu dsudshuidshuihuids
 
 go to next cells 
->>++>+*****# debug(3^5=32)
+>>++>+*****# debug(2^5=32)
 
 /# debug (32\2=16)
 

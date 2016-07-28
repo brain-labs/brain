@@ -1,0 +1,25 @@
+=== Debug Information ===
+IncrementExpr (3)
+ShiftExpr (1)
+IncrementExpr (2)
+ArithmeticExpr ( multiplication )
+DebugExpr
+ShiftExpr (2)
+IncrementExpr (2)
+ShiftExpr (1)
+IncrementExpr (1)
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+DebugExpr
+ArithmeticExpr ( division )
+DebugExpr
+ArithmeticExpr ( remainder )
+DebugExpr
+=== Program Output ===
+Index Pointer: 1 Value at Index Pointer: 6
+Index Pointer: 4 Value at Index Pointer: 32
+Index Pointer: 4 Value at Index Pointer: 16
+Index Pointer: 4 Value at Index Pointer: 0

@@ -1,0 +1,12 @@
+=== Debug Information ===
+IncrementExpr (5)
+DebugExpr
+DebugExpr
+DebugExpr
+IncrementExpr (4)
+DebugExpr
+=== Program Output ===
+Index Pointer: 0 Value at Index Pointer: 5
+Index Pointer: 0 Value at Index Pointer: 5
+Index Pointer: 0 Value at Index Pointer: 5
+Index Pointer: 0 Value at Index Pointer: 9

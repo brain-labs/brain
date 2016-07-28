@@ -1,0 +1,62 @@
+=== Debug Information ===
+IncrementExpr (8)
+LoopExpr: [
+  ShiftExpr (1)
+  IncrementExpr (4)
+  LoopExpr: [
+    ShiftExpr (1)
+    IncrementExpr (2)
+    ShiftExpr (1)
+    IncrementExpr (3)
+    ShiftExpr (1)
+    IncrementExpr (3)
+    ShiftExpr (1)
+    IncrementExpr (1)
+    ShiftExpr (-4)
+    IncrementExpr (-1)
+  ]
+  ShiftExpr (1)
+  IncrementExpr (1)
+  ShiftExpr (1)
+  IncrementExpr (1)
+  ShiftExpr (1)
+  IncrementExpr (-1)
+  ShiftExpr (2)
+  IncrementExpr (1)
+  LoopExpr: [
+    ShiftExpr (-1)
+  ]
+  ShiftExpr (-1)
+  IncrementExpr (-1)
+ ]
+ShiftExpr (2)
+OutputExpr
+ShiftExpr (1)
+IncrementExpr (-3)
+OutputExpr
+IncrementExpr (7)
+OutputExpr
+OutputExpr
+IncrementExpr (3)
+OutputExpr
+ShiftExpr (2)
+OutputExpr
+ShiftExpr (-1)
+IncrementExpr (-1)
+OutputExpr
+ShiftExpr (-1)
+OutputExpr
+IncrementExpr (3)
+OutputExpr
+IncrementExpr (-6)
+OutputExpr
+IncrementExpr (-8)
+OutputExpr
+ShiftExpr (2)
+IncrementExpr (1)
+OutputExpr
+ShiftExpr (1)
+IncrementExpr (2)
+OutputExpr
+=== Program Output ===
+Hello World!

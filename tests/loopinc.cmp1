@@ -1,0 +1,11 @@
+=== Debug Information ===
+IncrementExpr (2)
+LoopExpr: {
+  IncrementExpr (4)
+  LoopExpr: [
+    IncrementExpr (3)
+  ]
+ }
+DebugExpr
+=== Program Output ===
+Index Pointer: 0 Value at Index Pointer: 0
