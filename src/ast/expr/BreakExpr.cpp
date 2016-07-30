@@ -8,8 +8,7 @@
 #include "BreakExpr.h"
 
 void BreakExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                         llvm::GlobalVariable *index,
-                         llvm::GlobalVariable *cells)
+                               llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   // it is not needed to create code gen for the BreakExpression
   // it is a terminator, so the code will stop inside the loop.

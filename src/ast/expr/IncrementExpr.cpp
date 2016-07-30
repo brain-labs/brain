@@ -7,9 +7,7 @@
 
 #include "IncrementExpr.h"
 
-void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                             llvm::GlobalVariable *index,
-                             llvm::GlobalVariable *cells)
+void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _increment == 0) {
@@ -40,7 +38,8 @@ void IncrementExpr::debug_description(int level)
                   << ASTInfo::instance()->debug_index
                   << std::endl;
     }
-    else {
+    else
+    {
         std::cout << "IncrementExpr (" << _increment << ")" << std::endl;
     }
 }

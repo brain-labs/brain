@@ -8,9 +8,7 @@
 
 #include "ArithmeticExpr.h"
 
-void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                              llvm::GlobalVariable *index,
-                              llvm::GlobalVariable *cells)
+void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::Value *IdxV = B.CreateLoad(index);
     llvm::Value* Idxs[] = { B.getInt32(0), IdxV };

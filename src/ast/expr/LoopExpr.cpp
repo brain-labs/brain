@@ -8,9 +8,7 @@
 #include "LoopExpr.h"
 #include "../../utils/ArgsOptions.h"
 
-void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                        llvm::GlobalVariable *index,
-                        llvm::GlobalVariable *cells)
+void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _exprs.empty()) {
@@ -66,21 +64,19 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     B.SetInsertPoint(LoopBB);
     llvm::IRBuilder<> LoopB(LoopBB);
     // Recursively generate code (into "LoopBody" block)
-    for (auto& expr : _exprs) {
-        if (expr->expression_category() == ET_TERMINAL) {
+    for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
+        if ((*it)->expression_category() == ET_TERMINAL) {
             break;
         }
 
-        expr->code_gen(M, LoopB, index, cells);
+        (*it)->code_gen(M, LoopB, index, cells);
     }
 
     if (_type == LT_FOR) {
-        LoopB.CreateStore(LoopB.CreateAdd(LoopB.CreateLoad(CounterV),
-                                          LoopB.getInt32(-1)), CounterV);
+        LoopB.CreateStore(LoopB.CreateAdd(LoopB.CreateLoad(CounterV), LoopB.getInt32(-1)), CounterV);
     }
 
-    // Restart loop (will next exit if current cell value > 0)
-    LoopB.CreateBr(StartBB);
+    LoopB.CreateBr(StartBB); // Restart loop (will next exit if current cell value > 0)
 
     B.SetInsertPoint(EndBB);
 }
@@ -106,11 +102,11 @@ void LoopExpr::debug_description(int level)
         std::cout << "LoopExpr: " << openedBrackets << std::endl;
     }
 
-    for (auto& expr : _exprs) {
+    for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
         std::cout << std::string(level * 2, ' ');
-        expr->debug_description(level+1);
+        (*it)->debug_description(level+1);
 
-        if (expr->expression_category() == ET_TERMINAL) {
+        if ((*it)->expression_category() == ET_TERMINAL) {
             break;
         }
     }
