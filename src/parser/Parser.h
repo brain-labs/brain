@@ -30,7 +30,7 @@ protected:
     std::string _data;
     /// Variable that holds the current index read by the parser.
     int _index;
-    /// Vector used to store expressions read from the file by the parser.
+    ///
     std::vector<Expr *> _exprs;
 
     /**
@@ -54,8 +54,7 @@ public:
      * @brief Calls parse to <i>create</i> all expressions found in the source
      * code.
      * @param source The source file as a string of characters.
-     * @param cells_count The number of available cells for the Brain
-     * interpreter
+     * @param cells_count The number of available cells for the Brain interpreter
      */
     explicit Parser(std::string source, int cells_count = 100) :
     _k_cells_count(cells_count), _data(source), _index(0) { parse(_exprs, 0); }

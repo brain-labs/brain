@@ -7,9 +7,7 @@
 
 #include "IfExpr.h"
 
-void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                      llvm::GlobalVariable *index,
-                      llvm::GlobalVariable *cells)
+void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Function *F = B.GetInsertBlock()->getParent();
@@ -24,10 +22,10 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                                                            llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                                        IdxV);
     llvm::Value *NEZeroCond = B.CreateICmpNE(B.CreateLoad(CellPtr),
-                                             B.getInt32(0)); // is cell Signed Int Not Equal to Zero?
+                                              B.getInt32(0)); // is cell Signed Int Not Equal to Zero?
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
-            !_exprs_else.empty()) {
+        !_exprs_else.empty()) {
         ElseBB = llvm::BasicBlock::Create(C, "ElseBody", F);
         B.CreateCondBr(NEZeroCond, ThenBB, ElseBB);
     }
@@ -37,25 +35,26 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
 
     B.SetInsertPoint(ThenBB);
     llvm::IRBuilder<> ThenB(ThenBB);
-    for (auto& expr : _exprs_else) {
-        if (expr->expression_category() == ET_TERMINAL) {
+    for (std::vector<Expr *>::iterator it = _exprs_then.begin(); it != _exprs_then.end(); ++it) {
+        if ((*it)->expression_category() == ET_TERMINAL) {
             break;
         }
 
-        expr->code_gen(M, ThenB, index, cells);
+        (*it)->code_gen(M, ThenB, index, cells);
     }
 
     ThenB.CreateBr(ContBB); // uncoditional jump
 
-    if (!_exprs_else.empty()) {
+    if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
+        !_exprs_else.empty()) {
         B.SetInsertPoint(ElseBB);
         llvm::IRBuilder<> ElseB(ElseBB);
-        for (auto& expr : _exprs_else) {
-            if (expr->expression_category() == ET_TERMINAL) {
+        for (std::vector<Expr *>::iterator it = _exprs_else.begin(); it != _exprs_else.end(); ++it) {
+            if ((*it)->expression_category() == ET_TERMINAL) {
                 break;
             }
 
-            expr->code_gen(M, ElseB, index, cells);
+            (*it)->code_gen(M, ElseB, index, cells);
         }
 
         ElseB.CreateBr(ContBB); // uncoditional jump
@@ -66,51 +65,49 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
 
 void IfExpr::debug_description(int level)
 {
-    if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "If Expression - THEN - if cell "
-                  << ASTInfo::instance()->debug_index
-                  << " != 0 ["
-                  << std::endl;
-    }
-    else {
-        std::cout << "IfExpr (THEN) [" << std::endl;
-    }
+     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
+         std::cout << "If Expression - THEN - if cell "
+                   << ASTInfo::instance()->debug_index
+                   << " != 0 ["
+                   << std::endl;
+     }
+     else {
+         std::cout << "IfExpr (THEN) [" << std::endl;
+     }
 
-    for (auto& expr : _exprs_else) {
-        std::cout << std::string(level * 2, ' ');
-        expr->debug_description(level+1);
+     for (std::vector<Expr *>::iterator it = _exprs_then.begin(); it != _exprs_then.end(); ++it) {
+         std::cout << std::string(level * 2, ' ');
+         (*it)->debug_description(level+1);
 
-        if (expr->expression_category() == ET_TERMINAL) {
-            break;
-        }
-    }
+         if ((*it)->expression_category() == ET_TERMINAL) {
+             break;
+         }
+     }
 
-    std::cout << std::string(level, ' ') << "]" << std::endl;
+     std::cout << std::string(level, ' ') << "]" << std::endl;
 
-    if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
-            !_exprs_else.empty()) {
-        if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-            std::cout << std::string(level, ' ')
-                      << "If Expression - ELSE - ["
-                      << std::endl;
-        }
-        else {
-            std::cout << std::string(level, ' ')
-                      << "IfExpr (ELSE) ["
-                      << std::endl;
-        }
+     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
+         !_exprs_else.empty()) {
+         if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
+             std::cout << std::string(level, ' ')
+                       << "If Expression - ELSE - ["
+                       << std::endl;
+         }
+         else {
+             std::cout << std::string(level, ' ') << "IfExpr (ELSE) [" << std::endl;
+         }
 
-        for (auto& expr : _exprs_else) {
-            std::cout << std::string(level * 2, ' ');
-            expr->debug_description(level+1);
+         for (std::vector<Expr *>::iterator it = _exprs_else.begin(); it != _exprs_else.end(); ++it) {
+             std::cout << std::string(level * 2, ' ');
+             (*it)->debug_description(level+1);
 
-            if (expr->expression_category() == ET_TERMINAL) {
-                break;
-            }
-        }
+             if ((*it)->expression_category() == ET_TERMINAL) {
+                 break;
+             }
+         }
 
-        std::cout << std::string(level, ' ') << "]" << std::endl;
-    }
+         std::cout << std::string(level, ' ') << "]" << std::endl;
+     }
 }
 
 ExpressionType IfExpr::expression_category()
