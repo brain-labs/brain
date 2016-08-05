@@ -2,7 +2,7 @@
  * It is licensed under GNU GPL v. 3 or later.
  * You should have received a copy of the license in this archive (see LICENSE).
  *
- * Copyright Luiz Peres, 2016.
+ * Copyright Brain, 2016.
  */
 
 #include "IfExpr.h"
@@ -37,7 +37,8 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
 
     B.SetInsertPoint(ThenBB);
     llvm::IRBuilder<> ThenB(ThenBB);
-    for (auto& expr : _exprs_else) {
+
+    for (auto& expr : _exprs_then) {
         if (expr->expression_category() == ET_TERMINAL) {
             break;
         }
@@ -47,7 +48,8 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
 
     ThenB.CreateBr(ContBB); // uncoditional jump
 
-    if (!_exprs_else.empty()) {
+    if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
+            !_exprs_else.empty()) {
         B.SetInsertPoint(ElseBB);
         llvm::IRBuilder<> ElseB(ElseBB);
         for (auto& expr : _exprs_else) {
@@ -76,7 +78,7 @@ void IfExpr::debug_description(int level)
         std::cout << "IfExpr (THEN) [" << std::endl;
     }
 
-    for (auto& expr : _exprs_else) {
+    for (auto& expr : _exprs_then) {
         std::cout << std::string(level * 2, ' ');
         expr->debug_description(level+1);
 
