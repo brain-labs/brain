@@ -2,7 +2,7 @@
  * It is licensed under GNU GPL v. 3 or later.
  * You should have received a copy of the license in this archive (see LICENSE).
  *
- * Copyright Luiz Peres, 2016.
+ * Copyright Brain, 2016.
  */
 
 #ifndef EXPR_H
@@ -59,7 +59,7 @@ public:
      */
     virtual bool update_expression(char update) { return false; }
     /**
-     * @brief
+     * @brief Returns the category of the expression given by the caller.
      */
     virtual ExpressionType expression_category() { return ET_NOT_IMPORTANT; }
 };
