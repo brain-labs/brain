@@ -6,16 +6,17 @@
  */
 
 #include "DebugExpr.h"
+#include "../general/ASTInfo.h"
 
-void DebugExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void DebugExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
   llvm::LLVMContext &C = M->getContext();
   llvm::Type* DebugArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
   llvm::FunctionType *DebugTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C), DebugArgs, false);
   llvm::Function *DebugF = llvm::cast<llvm::Function>(M->getOrInsertFunction("b_debug", DebugTy));
   llvm::Value* Args[] = {
-    B.CreateLoad(index),
-    B.CreatePointerCast(cells, llvm::Type::getInt32Ty(C)->getPointerTo())
+    B.CreateLoad(ASTInfo::instance()->get_index_ptr()),
+    B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(), llvm::Type::getInt32Ty(C)->getPointerTo())
   };
   llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
   B.CreateCall(DebugF, ArgsArr);
@@ -25,8 +26,7 @@ void DebugExpr::debug_description(int level)
 {
   std::cout.width(level);
   if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-    std::cout << "Debug Expression - data pointer at cell " 
-              << ASTInfo::instance()->debug_index
+    std::cout << "Debug Expression" 
               << std::endl;
   }
   else {
@@ -34,3 +34,7 @@ void DebugExpr::debug_description(int level)
   }
 }
 
+void DebugExpr::ast_code_gen()
+{
+    std::cout << (char)TT_DEBUG;
+}

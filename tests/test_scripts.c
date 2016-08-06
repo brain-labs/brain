@@ -37,6 +37,7 @@ int main()
 
         // does not compare InputExpr for 0O and O1
         if (strncmp(dir->d_name, "read", 4) == 0) {
+          printf("====================\n");
           continue;
         }
 
@@ -58,12 +59,22 @@ int main()
         compareFiles(fCmp1, fWithNoExt);
         free(options);
 
+        char *fCmpCode = callocString(strlen(dir->d_name) + 5);
+        appendExtToFile(fCmpCode, fWithNoExt, ".code");
+        options = callocString(strlen(dir->d_name) + strlen(" -O1 -emit-code") + 1);
+        strcat(options, dir->d_name);
+        strcat(options, " -O1 -emit-code");
+        execToFile(options, fWithNoExt);
+        compareFiles(fCmpCode, fWithNoExt);
+        free(options);
+
 	printf("====================\n");
 
         free(fWithNoExt);
         free(fCmp);
         free(fCmp0);
         free(fCmp1);
+        free(fCmpCode);
       }
     }
 

@@ -28,11 +28,8 @@ public:
      * @brief
      * @param M
      * @param B
-     * @param index
-     * @param cells
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
     /**
      * @brief
      * @param level
@@ -42,6 +39,10 @@ public:
      * @brief
      */
     ExpressionType expression_category();
+    /**
+     * @brief
+     */
+    void ast_code_gen();
 };
 
 #endif // BREAK_EXPR_H

@@ -7,13 +7,14 @@
  */
 
 #include "ArithmeticExpr.h"
+#include "../general/ASTInfo.h"
 
-void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
-    llvm::Value *IdxV = B.CreateLoad(index);
+    llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
     llvm::Value* Idxs[] = { B.getInt32(0), IdxV };
     llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
-    llvm::Value *CellPtr = B.CreateGEP(cells, IdxsArr);
+    llvm::Value *CellPtr = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(), IdxsArr);
     // Load cell value
     llvm::Value *CellV = B.CreateLoad(CellPtr);
 
@@ -21,7 +22,7 @@ void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Globa
     llvm::Value *IdxPreV = B.CreateAdd(IdxV, B.getInt32(-1));
     llvm::Value* Idxs2[] = { B.getInt32(0), IdxPreV };
     llvm::ArrayRef<llvm::Value *> IdxsArr2(Idxs2);
-    llvm::Value *CellPtr2 = B.CreateGEP(cells, IdxsArr2);
+    llvm::Value *CellPtr2 = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(), IdxsArr2);
     // Load cell value
     llvm::Value *CellV2 = B.CreateLoad(CellPtr2);
 
@@ -46,18 +47,32 @@ void ArithmeticExpr::debug_description(int level)
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         std::cout << "Arithmetic Expression - " << type_to_string()
-                  << " with the cells "
-                  << ASTInfo::instance()->debug_index
-                  << " and "
-                  << (ASTInfo::instance()->debug_index - 1)
-                  << " with data pointer at cell "
-                  << ASTInfo::instance()->debug_index
                   << std::endl;
     }
     else {
         std::cout << "ArithmeticExpr ( " << type_to_string() << " )"
                   << std::endl;
     }
+}
+
+void ArithmeticExpr::ast_code_gen()
+{
+    char arithmetic_char = '\0';
+
+    switch (_type)
+    {
+    case AT_MUL:
+        arithmetic_char = TT_MUL;
+        break;
+    case AT_DIV:
+        arithmetic_char = TT_DIV;
+        break;
+    case AT_REM:
+        arithmetic_char = TT_REM;
+        break;
+    }
+    
+    std::cout << (char)arithmetic_char;
 }
 
 std::string ArithmeticExpr::type_to_string()

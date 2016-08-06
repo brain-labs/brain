@@ -28,16 +28,17 @@ public:
      * @brief
      * @param M
      * @param B
-     * @param index
-     * @param cells
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
     /**
      * @brief
      * @param level
      */
     void debug_description(int level);
+    /**
+     * @brief
+     */
+    void ast_code_gen();
 };
 
 #endif // DEBUG_EXPR_H

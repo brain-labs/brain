@@ -8,6 +8,11 @@
 #ifndef AST_INFO_H
 #define AST_INFO_H
 
+#include <llvm/IR/LLVMContext.h>
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
+#include <llvm/IR/Value.h>
+
 /**
  * @brief The abstract syntax tree.
  */
@@ -17,12 +22,11 @@ private:
     /**
      * @brief Private constructor of ASTInfo, denoting that this is a Singleton.
      */
-    ASTInfo() : debug_index(0) {}
+    ASTInfo() {}
 
+    ///
     static ASTInfo *_instance;
 public:
-    ///
-    long debug_index;
     ASTInfo(ASTInfo const&) = delete;
     ASTInfo& operator=(ASTInfo const&) = delete;
     /**
@@ -31,6 +35,20 @@ public:
      * @return A pointer to the ASTInfo instance.
      */
     static ASTInfo* instance();
+    /**
+     * @brief
+     * @param M
+     * @param B
+     */
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
+    /**
+     * @brief
+     */
+    llvm::GlobalVariable* get_index_ptr();
+    /**
+     * @brief
+     */
+    llvm::GlobalVariable* get_cells_ptr(); 
 };
 
 #endif // AST_INFO_H

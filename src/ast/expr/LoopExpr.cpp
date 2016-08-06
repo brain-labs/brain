@@ -8,7 +8,7 @@
 #include "LoopExpr.h"
 #include "../../utils/ArgsOptions.h"
 
-void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _exprs.empty()) {
@@ -27,8 +27,8 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
 
     if (_type == LT_FOR) {
         // Get the current cell adress
-        IdxV = B.CreateLoad(index);
-        CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+        IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
+        CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                               IdxV);
         CounterV = B.CreateAlloca(llvm::Type::getInt32Ty(C), 0, "counter");
@@ -51,8 +51,8 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
     }
     else {
         // Get the current cell adress
-        IdxV = B.CreateLoad(index);
-        CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+        IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
+        CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                               IdxV);
         NEZeroCond = StartB.CreateICmpNE(StartB.CreateLoad(CellPtr),
@@ -64,12 +64,12 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
     B.SetInsertPoint(LoopBB);
     llvm::IRBuilder<> LoopB(LoopBB);
     // Recursively generate code (into "LoopBody" block)
-    for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
-        if ((*it)->expression_category() == ET_TERMINAL) {
+    for (auto& expr : _exprs) {
+        if (expr->expression_category() == ET_TERMINAL) {
             break;
         }
 
-        (*it)->code_gen(M, LoopB, index, cells);
+        expr->code_gen(M, LoopB);
     }
 
     if (_type == LT_FOR) {
@@ -88,13 +88,11 @@ void LoopExpr::debug_description(int level)
         return;
     }
 
-    std::string openedBrackets = (_type == LT_FOR) ? "{" : "[";
-    std::string closedBrackets = (_type == LT_FOR) ? "}" : "]";
+    char openedBrackets = (_type == LT_FOR) ? TT_BEGIN_FOR : TT_BEGIN_WHILE;
+    char closedBrackets = (_type == LT_FOR) ? TT_END_FOR : TT_END_WHILE;
 
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         std::cout << "Loop Expression - "
-                  << "data point at cell "
-                  << ASTInfo::instance()->debug_index
                   << openedBrackets
                   << std::endl;
     }
@@ -102,14 +100,35 @@ void LoopExpr::debug_description(int level)
         std::cout << "LoopExpr: " << openedBrackets << std::endl;
     }
 
-    for (std::vector<Expr *>::iterator it = _exprs.begin(); it != _exprs.end(); ++it) {
+    for (auto& expr : _exprs) {
         std::cout << std::string(level * 2, ' ');
-        (*it)->debug_description(level+1);
+        expr->debug_description(level+1);
 
-        if ((*it)->expression_category() == ET_TERMINAL) {
+        if (expr->expression_category() == ET_TERMINAL) {
             break;
         }
     }
 
     std::cout << std::string(level, ' ') << closedBrackets << std::endl;
+}
+
+void LoopExpr::ast_code_gen()
+{
+    if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
+       _exprs.empty()) {
+        return;
+    }
+
+    char openedBrackets = (_type == LT_FOR) ? TT_BEGIN_FOR : TT_BEGIN_WHILE;
+    char closedBrackets = (_type == LT_FOR) ? TT_END_FOR : TT_END_WHILE;
+
+    std::cout << openedBrackets;
+    for (auto& expr : _exprs) {
+        expr->ast_code_gen();
+        if (expr->expression_category() == ET_TERMINAL) {
+            break;
+        }
+    }
+
+    std::cout << closedBrackets;
 }

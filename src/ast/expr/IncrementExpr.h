@@ -28,8 +28,7 @@ public:
     /**
      * @brief
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                  llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
     /**
      * @brief
      * @param level
@@ -40,6 +39,10 @@ public:
      * @param update
      */
     bool update_expression(char update);
+    /**
+     * @brief
+     */
+    void ast_code_gen();
 };
 
 #endif  // INCREMENT_EXPR_H

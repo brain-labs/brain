@@ -40,6 +40,7 @@ void ArgsHandler::handle(int argc, char **argv)
 the interpreter\n"
                       << "-emit-llvm\tEmits LLVM IR code for the given input\n"
                       << "-emit-ast\tEmits the AST for the given input\n"
+                      << "-emit-code\tEmits an optimized code for the given input\n"
                       << "-v\t\tUses verbose mode for the output\n"
                       << "-O0\t\tGenerates output code with no optmizations\n"
                       << "-O1\t\tOptimizes Brain generated output code (Default)\n"
@@ -56,6 +57,9 @@ the interpreter\n"
         }
         else if (str.compare("-emit-ast") == 0) {
             ArgsOptions::instance()->add_option(BO_IS_EMITTING_AST);
+        }
+        else if (str.compare("-emit-code") == 0) {
+            ArgsOptions::instance()->add_option(BO_IS_EMITTING_CODE);
         }
         else if (str.compare("-v") == 0) {
             ArgsOptions::instance()->add_option(BO_IS_VERBOSE);
