@@ -2,7 +2,7 @@
  * It is licensed under GNU GPL v. 3 or later.
  * You should have received a copy of the license in this archive (see LICENSE).
  *
- * Copyright Luiz Peres, 2016.
+ * Copyright Brain, 2016.
  */
 
 #ifndef PARSER_H
@@ -18,13 +18,11 @@
 #include "../utils/ArgsOptions.h"
 
 /**
- * @brief The parser of the Brain language, it interpretes *.b files.
+ * @brief The parser of the Brain language, it interpretes *.b, *.br or
+ * *.brain files.
  */
 class Parser
 {
-private:
-    /// Number of cells available to Brain interpreter.
-    int _k_cells_count;
 protected:
     /// The content of the source file passed to Brain.
     std::string _data;
@@ -54,10 +52,10 @@ public:
      * @brief Calls parse to <i>create</i> all expressions found in the source
      * code.
      * @param source The source file as a string of characters.
-     * @param cells_count The number of available cells for the Brain interpreter
+     * interpreter
      */
-    explicit Parser(std::string source, int cells_count = 100) :
-    _k_cells_count(cells_count), _data(source), _index(0) { parse(_exprs, 0); }
+    explicit Parser(std::string source) :
+        _data(source), _index(0) { parse(_exprs, 0); }
     /**
      * @brief Generate IR code based on the Brain file passed to the parser.
      * @param M
@@ -69,6 +67,7 @@ public:
      * @param level
      */
     void debug_description(int level);
+
 };
 
 #endif  // PARSER_H

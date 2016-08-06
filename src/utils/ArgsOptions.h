@@ -2,7 +2,7 @@
  * It is licensed under GNU GPL v. 3 or later.
  * You should have received a copy of the license in this archive (see LICENSE).
  *
- * Copyright Luiz Peres, 2016.
+ * Copyright Brain, 2016.
  */
 
 
@@ -36,6 +36,8 @@ private:
     static ArgsOptions *_instance;
     /// Integer value corresponding to the options passed to Brain.
     int _options;
+    /// Number of cells available to Brain interpreter.
+    int _k_cells_size;
 public:
     ArgsOptions(ArgsOptions const&) = delete;
     ArgsOptions& operator=(ArgsOptions const&) = delete;
@@ -56,7 +58,18 @@ public:
      */
     bool has_option(BrainOption option);
     /**
+     * @brief set_cells_size Sets
+     * @param cells_size
+     */
+    void set_cells_size(int cells_size);
+    /**
+     * @brief get_cells_size
+     * @return
+     */
+    int get_cells_size();
+    /**
      * @brief Returns the optimization level to compile Brain files.
+     * @returns
      */
     BrainOption get_optimization();
 };

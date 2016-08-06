@@ -2,7 +2,7 @@
  * It is licensed under GNU GPL v. 3 or later.
  * You should have received a copy of the license in this archive (see LICENSE).
  *
- * Copyright Luiz Peres, 2016.
+ * Copyright Brain, 2016.
  */
 
 #ifndef BOOTSTRAP_H
@@ -42,10 +42,10 @@
 class Bootstrap
 {
 private:
-    /// The name of the main module
-    std::string MODULE_NAME;
     /// The path to the default lib in Brain.
-    std::string IO_LIB;
+    std::string io_lib;
+    /// The name of the main module
+    std::string module_name;
 
     llvm::ExecutionEngine *execution_engine;
     llvm::EngineBuilder *engine_builder;

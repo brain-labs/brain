@@ -46,3 +46,5 @@
 # QtCreator files
 *.pro
 *.pro.user
+*.pro.user.*
+

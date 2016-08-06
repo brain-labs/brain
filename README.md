@@ -81,7 +81,7 @@ After running ```make``` on it, you can execute:```./brain your_brain_file.b```.
 Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types.
 
 ### Technical Information
-Brain is __not yet__ a Turing Complete language, once its ```memory``` is limited to ```100 * 32 bytes``` for now (only for testing purposes). That will be changed on the future.
+Brain is now a Turing Complete language. You can now extend the tape size by using the flag `--size=<tape size>`.
 
 ### Commands
 __Implemented__

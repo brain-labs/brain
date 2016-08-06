@@ -1,3 +1,10 @@
+/* This is the source code of Brain Programming Language.
+ * It is licensed under GNU GPL v. 3 or later.
+ * You should have received a copy of the license in this archive (see LICENSE).
+ *
+ * Copyright Brain, 2016.
+ */
+
 #include "Bootstrap.h"
 
 // forward declaration of static member.
@@ -5,8 +12,7 @@ Bootstrap* Bootstrap::_instance = nullptr;
 
 Bootstrap::Bootstrap()
 {
-    MODULE_NAME = "brainModule";
-    IO_LIB = "/usr/local/include/brain/io.ll";
+    io_lib = "/usr/local/include/brain/io.ll";
 }
 
 Bootstrap* Bootstrap::instance()
@@ -23,19 +29,23 @@ bool Bootstrap::init(int argc, char** argv)
     ArgsHandler args_handler(argc, argv);
     Parser parser(args_handler.get_string_file());
 
+    module_name = args_handler.get_file_name();
+
     // Create the context and the module
     llvm::LLVMContext llvm_context;
 
     llvm::SMDiagnostic err;
     std::unique_ptr<llvm::Module> io_module =
-        llvm::parseIRFile(llvm::StringRef(IO_LIB), err, llvm_context);
+        llvm::parseIRFile(llvm::StringRef(io_lib), err, llvm_context);
 
     if (!io_module) {
         err.print(argv[0], llvm::errs());
         return -1;
     }
 
-    llvm::ErrorOr<llvm::Module *> module_or_err = new llvm::Module(MODULE_NAME, llvm_context);
+
+    llvm::ErrorOr<llvm::Module *> module_or_err = new llvm::Module(module_name,
+                                                                   llvm_context);
     auto Owner = std::unique_ptr<llvm::Module>(module_or_err.get());
     auto *module = Owner.get();
 

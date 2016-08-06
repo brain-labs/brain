@@ -2,7 +2,7 @@
  * It is licensed under GNU GPL v. 3 or later.
  * You should have received a copy of the license in this archive (see LICENSE).
  *
- * Copyright Luiz Peres, 2016.
+ * Copyright Brain, 2016.
  */
 
 #ifndef IF_EXPR_H
@@ -22,7 +22,9 @@
 class IfExpr : public Expr
 {
 protected:
+    ///
     std::vector<Expr *> _exprs_then;
+    ///
     std::vector<Expr *> _exprs_else;
 public:
     IfExpr(std::vector<Expr *> exprs_then) : _exprs_then(exprs_then) {}
