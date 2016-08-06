@@ -43,24 +43,20 @@ bool Bootstrap::init(int argc, char** argv)
         return -1;
     }
 
+
     llvm::ErrorOr<llvm::Module *> module_or_err = new llvm::Module(module_name,
                                                                    llvm_context);
     auto Owner = std::unique_ptr<llvm::Module>(module_or_err.get());
     auto *module = Owner.get();
 
     // Create the main function: "i32 @main()"
-    auto *MainF = llvm::cast<llvm::Function>(
-                module->getOrInsertFunction("main",
-                                            llvm::Type::getInt32Ty(llvm_context),
-                                            (llvm::Type *)0));
+    auto *MainF = llvm::cast<llvm::Function>(module->getOrInsertFunction("main", llvm::Type::getInt32Ty(llvm_context), (llvm::Type *)0));
 
     // Create the entry block
     auto *basic_block = llvm::BasicBlock::Create(llvm_context,
-                                                 // Conventionnaly called:
-                                                 "EntryBlock",
-                                                 // Add it to "main" function
-                                                 MainF);
-
+                                      "EntryBlock", // Conventionnaly called "EntryBlock"
+                                      MainF // Add it to "main" function
+                                      );
 
     // Create a builder to add instructions.
     llvm::IRBuilder<> builder(basic_block);
@@ -95,8 +91,8 @@ bool Bootstrap::init(int argc, char** argv)
     std::string error_str;
     engine_builder = new llvm::EngineBuilder(std::move(Owner));
     execution_engine = engine_builder->setErrorStr(&error_str)
-        .setMCJITMemoryManager(std::unique_ptr<llvm::SectionMemoryManager>
-                               (new llvm::SectionMemoryManager())).create();
+		.setMCJITMemoryManager(std::unique_ptr<llvm::SectionMemoryManager>
+							   (new llvm::SectionMemoryManager())).create();
 
     execution_engine->addModule(std::move(io_module));
 
@@ -109,7 +105,7 @@ bool Bootstrap::init(int argc, char** argv)
     execution_engine->finalizeObject();
 
     if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) ||
-    ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
+	ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
         // Run the program
         std::cout << "=== Program Output ===" << "\n";
     }

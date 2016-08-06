@@ -8,11 +8,11 @@
 #ifndef IF_EXPR_H
 #define IF_EXPR_H
 
-#include <llvm/IR/IRBuilder.h>
-#include <llvm/IR/Module.h>
-
 #include <vector>
 #include <iostream>
+
+#include <llvm/IR/IRBuilder.h>
+#include <llvm/IR/Module.h>
 
 #include "Expr.h"
 

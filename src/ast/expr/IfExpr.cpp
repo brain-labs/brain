@@ -7,9 +7,7 @@
 
 #include "IfExpr.h"
 
-void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                      llvm::GlobalVariable *index,
-                      llvm::GlobalVariable *cells)
+void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Function *F = B.GetInsertBlock()->getParent();
@@ -24,10 +22,10 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                                                            llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                                        IdxV);
     llvm::Value *NEZeroCond = B.CreateICmpNE(B.CreateLoad(CellPtr),
-                                             B.getInt32(0)); // is cell Signed Int Not Equal to Zero?
+                                              B.getInt32(0)); // is cell Signed Int Not Equal to Zero?
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
-            !_exprs_else.empty()) {
+        !_exprs_else.empty()) {
         ElseBB = llvm::BasicBlock::Create(C, "ElseBody", F);
         B.CreateCondBr(NEZeroCond, ThenBB, ElseBB);
     }

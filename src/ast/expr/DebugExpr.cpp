@@ -7,9 +7,7 @@
 
 #include "DebugExpr.h"
 
-void DebugExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                         llvm::GlobalVariable *index,
-                         llvm::GlobalVariable *cells)
+void DebugExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
 {
   llvm::LLVMContext &C = M->getContext();
   llvm::Type* DebugArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
@@ -27,7 +25,7 @@ void DebugExpr::debug_description(int level)
 {
   std::cout.width(level);
   if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-    std::cout << "Debug Expression - data pointer at cell "
+    std::cout << "Debug Expression - data pointer at cell " 
               << ASTInfo::instance()->debug_index
               << std::endl;
   }

@@ -24,14 +24,14 @@ static bool has_done_then = false;
 bool Parser::is_skippable(char c)
 {
     return (c != '<' && c != '>' &&
-            c != '+' && c != '-' &&
-            c != '.' && c != ',' &&
-            c != '[' && c != ']' &&
-            c != '*' && c != '/' &&
-            c != '%' && c != '#' &&
-            c != '!' && c != '{' &&
-            c != '}' && c != '?' &&
-            c != ':' && c != ';');
+	    c != '+' && c != '-' &&
+	    c != '.' && c != ',' &&
+	    c != '[' && c != ']' &&
+	    c != '*' && c != '/' &&
+	    c != '%' && c != '#' &&
+	    c != '!' && c != '{' &&
+	    c != '}' && c != '?' &&
+	    c != ':' && c != ';');
 }
 
 char Parser::get_token()
@@ -46,117 +46,117 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
     char c = 0;
     while ((c = get_token()))  {
         Expr *expr = nullptr;
-        if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 && !exprs.empty()) {
+		if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 && !exprs.empty()) {
             Expr *last_expression = exprs.back();
-            if (last_expression->update_expression(c)) {
-                continue;
-            }
-        }
+			if (last_expression->update_expression(c)) {
+				continue;
+			}
+		}
 
-        switch (c)
-        {
-        case '<':
+		switch (c)
+		{
+		case '<':
             expr = new ShiftExpr(-1);
-            break;
-        case '>':
+			break;
+		case '>':
             expr = new ShiftExpr(1);
-            break;
-        case '+':
+			break;
+		case '+':
             expr = new IncrementExpr(1);
-            break;
-        case '-':
+			break;
+		case '-':
             expr = new IncrementExpr(-1);
-            break;
-        case '.':
+			break;
+		case '.':
             expr = new OutputExpr();
-            break;
-        case ',':
+			break;
+		case ',':
             expr = new InputExpr();
-            break;
-        case '[':
-        {
+			break;
+		case '[':
+		{
             std::vector<Expr *> loop_expression;
-            parse(loop_expression, level + 1);
+			parse(loop_expression, level + 1);
             expr = new LoopExpr(loop_expression, LT_WHILE);
-            break;
-        }
-        case ']':
-            if (level > 0) {
-                // exit the recursivity.
-                return;
-            }
-            break;
-        case '{':
-        {
+			break;
+		}
+		case ']':
+			if (level > 0) {
+				// exit the recursivity.
+				return;
+			}
+			break; 
+		case '{':
+		{
             std::vector<Expr *> loop_expression;
-            parse(loop_expression, level + 1);
+			parse(loop_expression, level + 1);
             expr = new LoopExpr(loop_expression, LT_FOR);
-            break;
-        }
-        case '}':
-            if (level > 0) {
-                // exit the recursivity.
-                return;
-            }
-            break;
-        case '?':
-        {
+			break;
+		}
+		case '}':
+			if (level > 0) {
+				// exit the recursivity.
+				return;
+			}
+			break;
+		case '?':
+		{
             std::vector<Expr *> if_expression;
-            parse(if_expression, level + 1);
+			parse(if_expression, level + 1);
             expr = new IfExpr(if_expression);
-            break;
-        }
-        case ':':
-            if (!has_done_then) {
-                if (level == 0) {
-                    break;
-                }
+			break;
+		}
+		case ':':
+			if (!has_done_then) {
+				if (level == 0) {
+					break;
+				}
 
-                _index--; // move one step back to read the ':' again
-                has_done_then = true;
-                return; // return to exit the 'then' recursivity
-            }
+				_index--; // move one step back to read the ':' again
+				has_done_then = true;
+				return; // return to exit the 'then' recursivity
+			}
 
-            // do the else
-            if (!exprs.empty()) {
+			// do the else
+			if (!exprs.empty()) {
                 Expr *expr = exprs.back();
-                if (expr->expression_category() == ET_BRANCH) {
+				if (expr->expression_category() == ET_BRANCH) {
                     std::vector<Expr *> else_expression;
-                    parse(else_expression, level + 1);
+					parse(else_expression, level + 1);
                     ((IfExpr *)expr)->set_else(else_expression);
-                }
-            }
+				}
+			}
 
-            has_done_then = false;  // reset the flag
-            break;
-        case ';':
-            if (level > 0) {
-                return;
-            }
-            break;
-        case '*':
+			has_done_then = false; // reset the flag
+			break;
+		case ';':
+			if (level > 0) {
+				return;
+			}
+			break;
+		case '*':
             expr = new ArithmeticExpr(AT_MUL);
-            break;
-        case '/':
+			break;
+		case '/':
             expr = new ArithmeticExpr(AT_DIV);
-            break;
-        case '%':
+			break;
+		case '%':
             expr = new ArithmeticExpr(AT_REM);
-            break;
-        case '#':
+			break;
+		case '#':
             expr = new DebugExpr();
-            break;
-        case '!':
+			break;
+		case '!':
             expr = new BreakExpr();
-            break;
-        default:
-            // Ignored character
-            break;
-        }
+			break;
+		default:
+			// Ignored character
+			break;
+		}
 
-        if (expr) {
-            exprs.push_back(expr);
-        }
+		if (expr) {
+			exprs.push_back(expr);
+		}
     }
 }
 
@@ -189,16 +189,17 @@ void Parser::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
                                                      InitPtr, "brainf.cells");
     }
 
-    // Calls the code_gen function of each expression.
-    for (auto& expr : _exprs) {
-        expr->code_gen(M, B, __brain_index_ptr, __brain_cells_ptr);
+    for (std::vector<Expr *>::iterator it = _exprs.begin();
+	 it != _exprs.end(); ++it) {
+	(*it)->code_gen(M, B, __brain_index_ptr, __brain_cells_ptr);
     }
 }
 
 void Parser::debug_description(int level)
 {
-    for (auto& expr : _exprs) {
+    for (std::vector<Expr *>::iterator it = _exprs.begin();
+	 it != _exprs.end(); ++it) {
         std::cout << std::string(level * 2, ' ');
-        expr->debug_description(level+1);
+        (*it)->debug_description(level+1);
     }
 }

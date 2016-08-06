@@ -25,11 +25,7 @@ public:
     InputExpr() {}
     ~InputExpr() {}
     /**
-     * @brief code_gen
-     * @param M
-     * @param B
-     * @param index
-     * @param cells
+     * @brief
      */
     void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                   llvm::GlobalVariable *index, llvm::GlobalVariable *cells);

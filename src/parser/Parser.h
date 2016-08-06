@@ -28,7 +28,7 @@ protected:
     std::string _data;
     /// Variable that holds the current index read by the parser.
     int _index;
-    /// Vector used to store expressions read from the file by the parser.
+    ///
     std::vector<Expr *> _exprs;
 
     /**
