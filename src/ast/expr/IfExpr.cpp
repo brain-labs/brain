@@ -68,7 +68,6 @@ void IfExpr::debug_description(int level)
 {
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         std::cout << "If Expression - THEN - if cell "
-                  << ASTInfo::instance()->debug_index
                   << " != 0 ["
                   << std::endl;
     }

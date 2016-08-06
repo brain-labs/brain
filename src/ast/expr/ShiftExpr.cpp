@@ -31,11 +31,7 @@ void ShiftExpr::debug_description(int level)
 
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Shift Expression - move data pointer from "
-                  << ASTInfo::instance()->debug_index
-                  << " to "
-                  << ASTInfo::instance()->debug_index + _step
-                  << " - "
+        std::cout << "Shift Expression - move data pointer "
                   << _step
                   << " step(s)"
                   << std::endl;
@@ -43,8 +39,6 @@ void ShiftExpr::debug_description(int level)
     else {
         std::cout << "ShiftExpr (" << _step << ")" << std::endl;
     }
-
-    ASTInfo::instance()->debug_index += _step;
 }
 
 void ShiftExpr::ast_code_gen()

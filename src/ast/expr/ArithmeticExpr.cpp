@@ -46,12 +46,6 @@ void ArithmeticExpr::debug_description(int level)
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         std::cout << "Arithmetic Expression - " << type_to_string()
-                  << " with the cells "
-                  << ASTInfo::instance()->debug_index
-                  << " and "
-                  << (ASTInfo::instance()->debug_index - 1)
-                  << " with data pointer at cell "
-                  << ASTInfo::instance()->debug_index
                   << std::endl;
     }
     else {

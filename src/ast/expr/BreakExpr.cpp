@@ -18,8 +18,7 @@ void BreakExpr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Break Expression - data pointer at cell "
-                  << ASTInfo::instance()->debug_index
+        std::cout << "Break Expression"
                   << std::endl;
     }
     else {

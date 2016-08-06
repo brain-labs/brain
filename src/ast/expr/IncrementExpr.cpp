@@ -34,8 +34,6 @@ void IncrementExpr::debug_description(int level)
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         std::cout << "Increment Expression - increment of "
                   << _increment
-                  << " with data pointer at cell "
-                  << ASTInfo::instance()->debug_index
                   << std::endl;
     }
     else

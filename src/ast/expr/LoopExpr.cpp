@@ -93,8 +93,6 @@ void LoopExpr::debug_description(int level)
 
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         std::cout << "Loop Expression - "
-                  << "data point at cell "
-                  << ASTInfo::instance()->debug_index
                   << openedBrackets
                   << std::endl;
     }
