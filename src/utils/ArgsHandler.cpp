@@ -2,7 +2,7 @@
  * It is licensed under GNU GPL v. 3 or later.
  * You should have received a copy of the license in this archive (see LICENSE).
  *
- * Copyright Luiz Peres, 2016.
+ * Copyright Brain, 2016.
  */
 
 #include <iostream>
@@ -12,9 +12,12 @@
 #include "ArgsHandler.h"
 
 const std::string BRAIN_VERSION =  "0.8";
-const std::string BRAIN_FORMAT = "Please execute Brain with the command: brain <options...> <filename>\n";
-const std::string BRAIN_HELP = "Use the identifier '--help' to get information about the settings\n";
-const std::string BRAIN_OPT_ERR = "You can not use more than one type of optimization at time.\n";
+const std::string BRAIN_FORMAT = "Please execute Brain with the command: brain \
+<options...> <filename>\n";
+const std::string BRAIN_HELP = "Use the identifier '--help' to get information \
+about the settings\n";
+const std::string BRAIN_OPT_ERR = "You can not use more than one type of \
+optimization at time.\n";
 
 void ArgsHandler::handle(int argc, char **argv)
 {
@@ -31,7 +34,10 @@ void ArgsHandler::handle(int argc, char **argv)
 
         if (str.compare("--help") == 0 || str.compare("-help") == 0) {
             std::cout << "\n"
-                      << "-version\tShows the current version of Brain\n"
+                      << BRAIN_FORMAT << "\n\n"
+                      << "--version\tShows the current version of Brain\n"
+                      << "--size=<number>\tSets the number of cells used by \
+the interpreter\n"
                       << "-emit-llvm\tEmits LLVM IR code for the given input\n"
                       << "-emit-ast\tEmits the AST for the given input\n"
                       << "-v\t\tUses verbose mode for the output\n"
@@ -40,8 +46,7 @@ void ArgsHandler::handle(int argc, char **argv)
                       << "\n";
             exit(0);
         }
-        else if (str.compare("--version") == 0 ||
-                 str.compare("-version") == 0) {
+        else if (str.compare("--version") == 0) {
             std::cout << "Brain version " << BRAIN_VERSION << ".\n"
                       << BRAIN_HELP;
             exit(0);
@@ -63,14 +68,20 @@ void ArgsHandler::handle(int argc, char **argv)
 
             ArgsOptions::instance()->add_option(BO_IS_OPTIMIZING_O0);
         }
-        else if (str.compare("-O1") == 0)
-        {
+        else if (str.compare("-O1") == 0) {
             if (ArgsOptions::instance()->has_option(BO_IS_OPTIMIZING_O0)) {
                 std::cout << BRAIN_OPT_ERR;
                 exit(-1);
             }
 
             ArgsOptions::instance()->add_option(BO_IS_OPTIMIZING_O1);
+        }
+        else if (str.size() > 6 && str.compare(0, 7, "--size=") == 0) {
+            /* Specified a size, Brain will create its arrays with the next
+             * parameter.
+             */
+            int cells_size = std::atoi(str.substr(7, str.size()-7).c_str());
+            ArgsOptions::instance()->set_cells_size(cells_size);
         }
         else if ((str.size() > 2 && str.substr(str.size()-2, 2) == ".b") ||
                  (str.size() > 3 && str.substr(str.size()-3, 3) == ".br") ||

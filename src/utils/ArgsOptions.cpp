@@ -2,17 +2,19 @@
  * It is licensed under GNU GPL v. 3 or later.
  * You should have received a copy of the license in this archive (see LICENSE).
  *
- * Copyright Luiz Peres, 2016.
+ * Copyright Brain, 2016.
  */
 
 #include "ArgsOptions.h"
 
+// Forward declarations
 ArgsOptions *ArgsOptions::_instance = nullptr;
 
 ArgsOptions* ArgsOptions::instance()
 {
     if (!ArgsOptions::_instance) {
         ArgsOptions::_instance = new ArgsOptions();
+        ArgsOptions::_instance->set_cells_size(100);
     }
 
     return _instance;
@@ -41,4 +43,14 @@ BrainOption ArgsOptions::get_optimization()
     else {
         return BO_IS_OPTIMIZING_O0;
     }
+}
+
+void ArgsOptions::set_cells_size(int cells_size)
+{
+    _k_cells_size = cells_size;
+}
+
+int ArgsOptions::get_cells_size()
+{
+    return _k_cells_size;
 }
