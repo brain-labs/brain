@@ -117,22 +117,20 @@ void IfExpr::ast_code_gen()
 {
     std::cout << static_cast<char>(TT_IF_THEN);
     for (auto& expr : _exprs_then) {
+        expr->ast_code_gen();
         if (expr->expression_category() == ET_TERMINAL) {
             break;
         }
-
-        expr->ast_code_gen();
     }
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
             !_exprs_else.empty()) {
         std::cout << static_cast<char>(TT_IF_ELSE);
         for (auto& expr : _exprs_else) {
-           if (expr->expression_category() == ET_TERMINAL) {
-               break;
-           }
- 
-           expr->ast_code_gen();
+            expr->ast_code_gen();
+            if (expr->expression_category() == ET_TERMINAL) {
+                break;
+            }
         }
     }
 

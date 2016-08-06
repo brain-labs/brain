@@ -124,11 +124,10 @@ void LoopExpr::ast_code_gen()
 
     std::cout << openedBrackets;
     for (auto& expr : _exprs) {
+        expr->ast_code_gen();
         if (expr->expression_category() == ET_TERMINAL) {
             break;
         }
-
-        expr->ast_code_gen();
     }
 
     std::cout << closedBrackets;
