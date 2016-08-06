@@ -34,6 +34,10 @@ public:
      * @param level
      */
     void debug_description(int level);
+    /**
+     * @brief
+     */
+    void ast_code_gen();
 };
 
 #endif  // INPUT_EXPR_H

@@ -60,6 +60,26 @@ void ArithmeticExpr::debug_description(int level)
     }
 }
 
+void ArithmeticExpr::ast_code_gen()
+{
+    char arithmetic_char = '\0';
+
+    switch (_type)
+    {
+    case AT_MUL:
+        arithmetic_char = TT_MUL;
+        break;
+    case AT_DIV:
+        arithmetic_char = TT_DIV;
+        break;
+    case AT_REM:
+        arithmetic_char = TT_REM;
+        break;
+    }
+    
+    std::cout << (char)arithmetic_char;
+}
+
 std::string ArithmeticExpr::type_to_string()
 {
     std::string type = "";

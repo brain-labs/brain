@@ -34,3 +34,7 @@ void InputExpr::debug_description(int level)
     }
 }
 
+void InputExpr::ast_code_gen()
+{
+    std::cout << (char)TT_INPUT;
+}

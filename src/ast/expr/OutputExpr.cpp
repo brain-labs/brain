@@ -36,3 +36,7 @@ void OutputExpr::debug_description(int level)
     }
 }
 
+void OutputExpr::ast_code_gen()
+{
+    std::cout << (char)TT_OUTPUT;
+}

@@ -41,6 +41,10 @@ public:
      * @param level
      */
     bool update_expression(char update);
+    /**
+     * @brief
+     */
+    void ast_code_gen();
 };
 
 #endif  // SHIFT_EXPR_H

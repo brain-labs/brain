@@ -48,6 +48,10 @@ public:
      * @param level
      */
     void debug_description(int level);
+    /**
+     * @brief
+     */
+    void ast_code_gen();
 };
 
 #endif  // LOOP_EXPR_H

@@ -21,7 +21,32 @@
 #endif // __cast_capital__
 
 /**
- * @brief
+ * @brief Tokens brain.
+ */
+typedef enum 
+{
+    TT_SHIFT_LEFT  = '<',
+    TT_SHIFT_RIGHT = '>',
+    TT_INCREMENT   = '+',
+    TT_DECREMENT   = '-',
+    TT_OUTPUT      = '.',
+    TT_INPUT       = ',',
+    TT_BEGIN_WHILE = '[',
+    TT_END_WHILE   = ']',
+    TT_BEGIN_FOR   = '{',
+    TT_END_FOR     = '}',
+    TT_MUL         = '*',
+    TT_DIV         = '/',
+    TT_REM         = '%',
+    TT_DEBUG       = '#',
+    TT_BREAK       = '!',
+    TT_IF_THEN     = '?',
+    TT_IF_ELSE     = ':',
+    TT_IF_END      = ';',
+} TokenType;
+
+/**
+ * @brief Type of a given expression.
  */
 typedef enum
 {
@@ -39,23 +64,27 @@ public:
     virtual ~Expr() {}
 
     /**
-     * @brief
-     * @param M
-     * @param B
-     * @param index
+     * @brief Virtual method for code generation.
+     * @param M The current Module.
+     * @param B The current IR Builder.
+     * @param index 
      * @param cells
      */
     virtual void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                           llvm::GlobalVariable *index,
                           llvm::GlobalVariable *cells) = 0;
     /**
-     * @brief
-     * @param level
+     * @brief Virtual method for the AST's emission.
+     * @param level Depth within the AST.
      */
     virtual void debug_description(int level) = 0;
     /**
-     * @brief
-     * @param update
+     * @brief Virtual method for the reverse code generation from the AST.
+     */
+    virtual void ast_code_gen() = 0;
+    /**
+     * @brief Virtual method for updating the AST exprs.
+     * @param update The char whose expression will be updated.
      */
     virtual bool update_expression(char update) { return false; }
     /**

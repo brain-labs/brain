@@ -40,6 +40,10 @@ public:
      * @param update
      */
     bool update_expression(char update);
+    /**
+     * @brief
+     */
+    void ast_code_gen();
 };
 
 #endif  // INCREMENT_EXPR_H

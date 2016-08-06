@@ -42,6 +42,10 @@ public:
      * @brief
      */
     ExpressionType expression_category();
+    /**
+     * @brief
+     */
+    void ast_code_gen();
 };
 
 #endif // BREAK_EXPR_H

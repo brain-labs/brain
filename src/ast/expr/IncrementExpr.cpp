@@ -44,14 +44,33 @@ void IncrementExpr::debug_description(int level)
     }
 }
 
+void IncrementExpr::ast_code_gen()
+{
+    if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
+        _increment == 0) {
+        return;
+    }
+ 
+    if (_increment > 0) {
+       for (int i = 0; i < _increment; ++i) {
+           std::cout << (char)TT_INCREMENT;
+       } 
+    }
+    else {
+       for (int i = _increment; i < 0; ++i) {
+           std::cout << (char)TT_DECREMENT;
+       }
+    }
+}
+
 bool IncrementExpr::update_expression(char update)
 {
     switch (update)
     {
-    case '+':
+    case TT_INCREMENT:
         _increment++;
         return true;
-    case '-':
+    case TT_DECREMENT:
         _increment--;
         return true;
     default :

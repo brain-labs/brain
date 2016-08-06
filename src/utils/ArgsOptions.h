@@ -14,12 +14,13 @@
  */
 typedef enum
 {
-  BO_NONE = 0,
-  BO_IS_EMITTING_LLVM = 1,
-  BO_IS_EMITTING_AST = 2,
-  BO_IS_VERBOSE = 4,
-  BO_IS_OPTIMIZING_O0 = 8,
-  BO_IS_OPTIMIZING_O1 = 16
+    BO_NONE = 0,
+    BO_IS_EMITTING_LLVM = 1,
+    BO_IS_EMITTING_AST = 2,
+    BO_IS_EMITTING_CODE = 4,
+    BO_IS_VERBOSE = 8,
+    BO_IS_OPTIMIZING_O0 = 16,
+    BO_IS_OPTIMIZING_O1 = 32,
 } BrainOption;
 
 /**

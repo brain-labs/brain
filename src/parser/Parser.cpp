@@ -189,17 +189,23 @@ void Parser::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
                                                      InitPtr, "brainf.cells");
     }
 
-    for (std::vector<Expr *>::iterator it = _exprs.begin();
-	 it != _exprs.end(); ++it) {
-	(*it)->code_gen(M, B, __brain_index_ptr, __brain_cells_ptr);
+    for (auto& expr : _exprs) {
+	expr->code_gen(M, B, __brain_index_ptr, __brain_cells_ptr);
     }
 }
 
 void Parser::debug_description(int level)
 {
-    for (std::vector<Expr *>::iterator it = _exprs.begin();
-	 it != _exprs.end(); ++it) {
+    for (auto& expr : _exprs) {
         std::cout << std::string(level * 2, ' ');
-        (*it)->debug_description(level+1);
+        expr->debug_description(level+1);
     }
 }
+
+void Parser::ast_code_gen()
+{
+    for (auto& expr : _exprs) {
+        expr->ast_code_gen();
+    }
+}
+

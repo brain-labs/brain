@@ -24,10 +24,15 @@ Bootstrap* Bootstrap::instance()
     return _instance;
 }
 
-bool Bootstrap::init(int argc, char** argv)
+int Bootstrap::init(int argc, char** argv)
 {
     ArgsHandler args_handler(argc, argv);
     Parser parser(args_handler.get_string_file());
+
+    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_CODE)) {
+        parser.ast_code_gen();
+        return 0;
+    }
 
     module_name = args_handler.get_file_name();
 
@@ -98,7 +103,7 @@ bool Bootstrap::init(int argc, char** argv)
 
     if (!error_str.empty()) {
         std::cout << error_str << "\n";
-        exit(0);
+        return -1;
     }
 
     // Finalize the execution engine before use it

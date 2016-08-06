@@ -34,3 +34,7 @@ void DebugExpr::debug_description(int level)
   }
 }
 
+void DebugExpr::ast_code_gen()
+{
+    std::cout << (char)TT_DEBUG;
+}

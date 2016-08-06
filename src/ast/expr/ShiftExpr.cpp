@@ -47,14 +47,33 @@ void ShiftExpr::debug_description(int level)
     ASTInfo::instance()->debug_index += _step;
 }
 
+void ShiftExpr::ast_code_gen()
+{
+    if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
+       _step == 0) {
+        return;
+    }
+
+    if (_step > 0) {
+       for (int i = 0; i < _step; ++i) {
+           std::cout << (char)TT_SHIFT_RIGHT;
+       }
+    }
+    else {
+       for (int i = _step; i < 0; ++i) {
+           std::cout << (char)TT_SHIFT_LEFT;
+       }
+    }
+}
+
 bool ShiftExpr::update_expression(char update)
 {
     switch(update)
     {
-    case '>':
+    case TT_SHIFT_RIGHT:
         _step++;
         return true;
-    case '<':
+    case TT_SHIFT_LEFT:
         _step--;
         return true;
     default :

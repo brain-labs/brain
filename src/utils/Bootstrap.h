@@ -70,7 +70,7 @@ public:
      * @param argc The integer representing how many arguments were passed.
      * @param argv The array of characters representing the arguments passed.
      */
-    bool init(int argc, char** argv);
+    int init(int argc, char** argv);
 };
 
 #endif // BOOTSTRAP_H

@@ -27,6 +27,11 @@ void BreakExpr::debug_description(int level)
     }
 }
 
+void BreakExpr::ast_code_gen()
+{
+    std::cout << (char)TT_BREAK;
+}
+
 ExpressionType BreakExpr::expression_category()
 {
     return ET_TERMINAL;

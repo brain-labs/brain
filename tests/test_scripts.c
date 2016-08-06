@@ -37,6 +37,7 @@ int main()
 
         // does not compare InputExpr for 0O and O1
         if (strncmp(dir->d_name, "read", 4) == 0) {
+          printf("====================\n");
           continue;
         }
 
