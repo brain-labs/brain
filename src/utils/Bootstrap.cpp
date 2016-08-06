@@ -29,7 +29,7 @@ bool Bootstrap::init(int argc, char** argv)
     ArgsHandler args_handler(argc, argv);
     Parser parser(args_handler.get_string_file());
 
-    module_name = args_handler.get_string_file();
+    module_name = args_handler.get_file_name();
 
     // Create the context and the module
     llvm::LLVMContext llvm_context;

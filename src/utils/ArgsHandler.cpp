@@ -95,6 +95,7 @@ the interpreter\n"
                 exit(-1);
             }
             _string_file = str_file;
+            _file_name = str;
         }
         else if (str.find("-") == 0) {
             std::cout << "Unsupported option \"" << str << "\"\n"
@@ -121,3 +122,8 @@ std::string ArgsHandler::get_string_file()
   return _string_file;
 }
 
+
+std::string ArgsHandler::get_file_name()
+{
+    return _file_name;
+}
