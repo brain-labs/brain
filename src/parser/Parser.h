@@ -32,16 +32,6 @@ protected:
     std::vector<Expr *> _exprs;
 
     /**
-     * @brief Returns whether of not a character is skippable by the parser, if
-     * it is, it returns true, false otherwise.
-     * @param c The character to be tested against.
-     */
-    static bool is_skippable(char c);
-    /**
-     * @brief Returns the token of the _data at _index.
-     */
-    char get_token();
-    /**
      * @brief It parses the Brain code.
      * @param exprs The vector of expressions read by the constructor
      * @param level
