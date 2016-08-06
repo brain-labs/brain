@@ -7,19 +7,19 @@
 
 #include "IncrementExpr.h"
 
-void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _increment == 0) {
         return;
     }
 
-    llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(index) };
+    llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(ASTInfo::instance()->get_index_ptr()) };
     llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
-    llvm::Value *CellPtr = B.CreateGEP(cells, IdxsArr);
+    llvm::Value *CellPtr = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(), IdxsArr);
     // Load cell value
     llvm::Value *CellV = B.CreateLoad(CellPtr);
-    // Add |_step| to cell value and save the value
+    // Add |_increment| to cell value and save the value
     B.CreateStore(B.CreateAdd(CellV, B.getInt32(_increment)), CellPtr);
 }
 

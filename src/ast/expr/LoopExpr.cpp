@@ -8,7 +8,7 @@
 #include "LoopExpr.h"
 #include "../../utils/ArgsOptions.h"
 
-void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _exprs.empty()) {
@@ -27,8 +27,8 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
 
     if (_type == LT_FOR) {
         // Get the current cell adress
-        IdxV = B.CreateLoad(index);
-        CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+        IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
+        CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                               IdxV);
         CounterV = B.CreateAlloca(llvm::Type::getInt32Ty(C), 0, "counter");
@@ -51,8 +51,8 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
     }
     else {
         // Get the current cell adress
-        IdxV = B.CreateLoad(index);
-        CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+        IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
+        CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
                                                   llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                               IdxV);
         NEZeroCond = StartB.CreateICmpNE(StartB.CreateLoad(CellPtr),
@@ -69,7 +69,7 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVaria
             break;
         }
 
-        expr->code_gen(M, LoopB, index, cells);
+        expr->code_gen(M, LoopB);
     }
 
     if (_type == LT_FOR) {

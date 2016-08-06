@@ -7,13 +7,14 @@
  */
 
 #include "ArithmeticExpr.h"
+#include "../general/ASTInfo.h"
 
-void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
-    llvm::Value *IdxV = B.CreateLoad(index);
+    llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
     llvm::Value* Idxs[] = { B.getInt32(0), IdxV };
     llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
-    llvm::Value *CellPtr = B.CreateGEP(cells, IdxsArr);
+    llvm::Value *CellPtr = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(), IdxsArr);
     // Load cell value
     llvm::Value *CellV = B.CreateLoad(CellPtr);
 
@@ -21,7 +22,7 @@ void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::Globa
     llvm::Value *IdxPreV = B.CreateAdd(IdxV, B.getInt32(-1));
     llvm::Value* Idxs2[] = { B.getInt32(0), IdxPreV };
     llvm::ArrayRef<llvm::Value *> IdxsArr2(Idxs2);
-    llvm::Value *CellPtr2 = B.CreateGEP(cells, IdxsArr2);
+    llvm::Value *CellPtr2 = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(), IdxsArr2);
     // Load cell value
     llvm::Value *CellV2 = B.CreateLoad(CellPtr2);
 

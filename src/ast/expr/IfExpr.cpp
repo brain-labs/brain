@@ -6,8 +6,9 @@
  */
 
 #include "IfExpr.h"
+#include "../general/ASTInfo.h"
 
-void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells)
+void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Function *F = B.GetInsertBlock()->getParent();
@@ -17,8 +18,8 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariabl
     llvm::BasicBlock *ContBB = llvm::BasicBlock::Create(C, "IfCont", F);
 
     // Get the current cell adress
-    llvm::Value *IdxV = B.CreateLoad(index);
-    llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(cells,
+    llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
+    llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
                                                            llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
                                        IdxV);
     llvm::Value *NEZeroCond = B.CreateICmpNE(B.CreateLoad(CellPtr),
@@ -41,7 +42,7 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariabl
             break;
         }
 
-        expr->code_gen(M, ThenB, index, cells);
+        expr->code_gen(M, ThenB);
     }
 
     ThenB.CreateBr(ContBB); // uncoditional jump
@@ -55,7 +56,7 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariabl
                 break;
             }
 
-            expr->code_gen(M, ElseB, index, cells);
+            expr->code_gen(M, ElseB);
         }
 
         ElseB.CreateBr(ContBB); // uncoditional jump

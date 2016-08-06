@@ -154,7 +154,7 @@ void Parser::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
     ASTInfo::instance()->code_gen(M, B);   
 
     for (auto& expr : _exprs) {
-	expr->code_gen(M, B, ASTInfo::instance()->get_index_ptr(), ASTInfo::instance()->get_cells_ptr());
+	expr->code_gen(M, B);
     }
 }
 

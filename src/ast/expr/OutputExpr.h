@@ -27,7 +27,7 @@ public:
     /**
      * @brief
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B, llvm::GlobalVariable *index, llvm::GlobalVariable *cells);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
     /**
      * @brief
      * @param level

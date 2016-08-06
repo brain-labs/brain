@@ -7,9 +7,7 @@
 
 #include "ShiftExpr.h"
 
-void ShiftExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                         llvm::GlobalVariable *index,
-                         llvm::GlobalVariable *cells)
+void ShiftExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _step == 0) {
@@ -17,9 +15,9 @@ void ShiftExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     }
 
     // Load index value
-    llvm::Value *IdxV = B.CreateLoad(index);
+    llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
     // Add |_step| to index and save the value
-    B.CreateStore(B.CreateAdd(IdxV, B.getInt32(_step)), index);
+    B.CreateStore(B.CreateAdd(IdxV, B.getInt32(_step)), ASTInfo::instance()->get_index_ptr());
 }
 
 void ShiftExpr::debug_description(int level)

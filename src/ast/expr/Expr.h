@@ -70,9 +70,7 @@ public:
      * @param index 
      * @param cells
      */
-    virtual void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                          llvm::GlobalVariable *index,
-                          llvm::GlobalVariable *cells) = 0;
+    virtual void code_gen(llvm::Module *M, llvm::IRBuilder<> &B) = 0;
     /**
      * @brief Virtual method for the AST's emission.
      * @param level Depth within the AST.
