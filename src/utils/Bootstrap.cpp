@@ -31,6 +31,7 @@ int Bootstrap::init(int argc, char** argv)
 
     if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_CODE)) {
         parser.ast_code_gen();
+        std::cout << "\n";
         return 0;
     }
 
