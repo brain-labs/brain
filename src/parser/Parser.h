@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 
+#include "../ast/general/ASTInfo.h"
 #include "../ast/expr/Expr.h"
 #include "../utils/ArgsOptions.h"
 

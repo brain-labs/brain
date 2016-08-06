@@ -14,12 +14,12 @@
 - [x] Implement optimization for empty moves `ShiftExpr(0)` and `IncrementExpression(0)`.
 - [x] Implement a `delete comments` option for the compiler.
 - [x] Implement a `generate optimized code` option for the compiler.
-- [ ] Improve the `return` at the method `Parser::isSkippable`. Check switch at the parser.
+- [x] Improve the `return` at the method `Parser::isSkippable`. Check switch at the parser.
 - [x] Change module's name.
 - [x] Change the if and while.`if (*ptr != 0)`, not `if (*ptr > 0)`. Although for is going to work only for positive numbers.
-- [ ] Code's refactoring:
+- [x] Code's refactoring:
   - [x] Move the content of brain.cpp to a boostrap file.
-  - [ ] Refactor parser.cpp.
+  - [x] Refactor parser.cpp.
 - [ ] Make sure you are deleting objects from the heap.
 - [ ] Implement `@` for function calls
 - [ ] Implement `$` as a print for number / 100.
@@ -31,7 +31,7 @@
 
 # Documentation
 
-- [ ] Utils
+- [x] Utils
 - [ ] Parser
 - [ ] Expressions
 - [ ] AST
