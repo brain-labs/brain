@@ -5,8 +5,8 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef OUTPUT_EXPR_H
-#define OUTPUT_EXPR_H
+#ifndef FLOAT_EXPR_H
+#define FLOAT_EXPR_H
 
 #include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
@@ -17,13 +17,15 @@
 #include "Expr.h"
 
 /**
- * @brief Class that represents the output operator in Brain.
+ * @brief The FloatExpr class behaves just like the output expression, but it
+ * instead of print an integer number it will use io.c to divide the number by
+ * 100 and print it.
  */
-class OutputExpr : public Expr
+class FloatExpr : public Expr
 {
 public:
-    OutputExpr() {}
-    ~OutputExpr() {}
+    FloatExpr() {}
+    ~FloatExpr() {}
     /**
      * @brief code_gen
      * @param M
@@ -31,14 +33,14 @@ public:
      */
     void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
     /**
-     * @brief
+     * @brief debug_description
      * @param level
-     */ 
+     */
     void debug_description(int level);
     /**
-     * @brief
+     * @brief ast_code_gen
      */
     void ast_code_gen();
 };
 
-#endif  // OUTPUT_EXPR_H
+#endif // FLOAT_EXPR_H

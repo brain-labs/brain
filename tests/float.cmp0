@@ -1,0 +1,95 @@
+=== Debug Information ===
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+FloatExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+LoopExpr: [
+  IncrementExpr (-1)
+ ]
+IncrementExpr (-1)
+IncrementExpr (-1)
+IncrementExpr (-1)
+FloatExpr
+ShiftExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+LoopExpr: [
+  IncrementExpr (-1)
+ ]
+ShiftExpr (-1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+FloatExpr
+ShiftExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+LoopExpr: [
+  IncrementExpr (-1)
+ ]
+ShiftExpr (-1)
+IncrementExpr (1)
+IncrementExpr (1)
+ShiftExpr (1)
+IncrementExpr (1)
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+ArithmeticExpr ( multiplication )
+FloatExpr
+ShiftExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+OutputExpr
+=== Program Output ===
+0.03
+-0.03
+0.00
+10.24

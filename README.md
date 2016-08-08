@@ -28,7 +28,7 @@ In spite of implementing new commands and features, __Brain__ is **completely co
 ### Current Status
 Brain is running just like __Brainfuck__ so far, so feel free to use its tag [version 0.5](https://github.com/luizperes/brain/blob/v0.5/README.md)
 
-Obs.: To use __Project Status__ (the "Kanban" below), please visit:```https://github.com/luizperes/status-projects/blob/master/README.md``` and ```http://luizperes.github.io/status-projects/```
+Obs.: To use __Project Status__ (the "Kanban" below), please visit:`https://github.com/luizperes/status-projects/blob/master/README.md` and `http://luizperes.github.io/status-projects/`
 
 | Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
 | ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
@@ -50,7 +50,7 @@ __Brain__ runs on the top of __LLVM__, thus, you are required to install the las
 ### How to install pre-commit
 This project uses __pre-commit__ to help us to check our commits in order to minimize bugs and other problems on the project, therefore is strongly recommended that you use it, if you are intending to contribute to the project. For that, you can install by:
 
-if you have ```pip``` installed:
+if you have `pip` installed:
 
 __Mac__
 ```
@@ -73,9 +73,9 @@ To build it, after [installing LLVM](#how-to-build-llvm), execute:
 $ cd /path/to/brain/src
 $ make
 ```
-You can also change the compiler (tested on ```g++``` and ```clang++```) on the ```Makefile``` inside the ```src``` directory.
+You can also change the compiler (tested on `g++` and `clang++`) on the `Makefile` inside the `src` directory.
 
-After running ```make``` on it, you can execute:```./brain your_brain_file.b```. Please check the [current status](#current-status) of the project.
+After running `make` on it, you can execute:`./brain your_brain_file.b`. Please check the [current status](#current-status) of the project.
 
 ### How it has been built
 Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types.
@@ -85,40 +85,42 @@ Brain is now a Turing Complete language. You can now extend the tape size by usi
 
 ### Commands
 __Implemented__
-- ```>``` increment the data pointer (to point to the next cell to the right).
-- ```<``` decrement the data pointer (to point to the next cell to the left).
-- ```+``` increment (increase by one) the value at the data pointer.
-- ```-``` decrement (decrease by one) the value at the data pointer.
-- ```.``` output the value at the data pointer.
-- ```,``` accept one value of input, storing its value in the value at the data pointer.
-- ```[``` if the value at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
-- ```]``` jump to its correspondent [ .
-- ```*``` multiply ```*ptr``` with ```*(ptr-1)```. Store result in *ptr _// format: 2 3 *_
-- ```/``` divide ```*ptr``` with ```*(ptr-1)```. Store the result in *ptr _// format: 2 3 /_
-- ```%``` divide ```*ptr``` with ```*(ptr-1)```. Store the remainder in *ptr _// format: 2 3 %_
-- ```#``` prints out the current debug information.
-- ```{``` (__for__ loop) iterates ```'value-at-the-data-pointer' times``` and needs to be closed with a matching } command. It __does not decrease__ the ```value``` at the data pointer. It will __only__ work for positive values.
-- ```}``` jump to its correspondent { .
-- ```!``` (__break__) jumps to the end of a loop (__[ ]__ or __{ }__)
-- ```?``` if the value at the data pointer is ```zero``` , jumps to the block with ```:``` or ```;``` and executes the commands one by one up to its correlative ```;```, otherwise, it executes the code until it finds a ```:``` or ```;```.
-- ```:``` it works as an ```otherwise``` (or ```else```) for ```?```.
-- ```;``` ends a statement.
+- `>` increment the data pointer (to point to the next cell to the righ.
+- `<` decrement the data pointer (to point to the next cell to the left).
+- `+` increment (increase by one) the value at the data pointer.
+- `-` decrement (decrease by one) the value at the data pointer.
+- `.` output the value at the data pointer.
+- `,` accept one value of input, storing its value in the value at the data pointer.
+- `[` if the value at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
+- `]` jump to its correspondent [ .
+- `*` multiply `*ptr` with `*(ptr-1)`. Store result in *ptr _// format: 2 3 *_
+- `/` divide `*ptr` with `*(ptr-1)`. Store the result in *ptr _// format: 2 3 /_
+- `%` divide `*ptr` with `*(ptr-1)`. Store the remainder in *ptr _// format: 2 3 %_
+- `#` prints out the current debug information.
+- `{` (__for__ loop) iterates `'value-at-the-data-pointer' times` and needs to be closed with a matching } command. It __does not decrease__ the `value` at the data pointer. It will __only__ work for positive values.
+- `}` jump to its correspondent { .
+- `!` (__break__) jumps to the end of a loop (__[ ]__ or __{ }__)
+- `?` if the value at the data pointer is `zero` , jumps to the block with `:` or `;` and executes the commands one by one up to its correlative `;`, otherwise, it executes the code until it finds a `:` or `;`.
+- `:` it works as an `otherwise` (or `else`) for `?`.
+- `;` ends a statement.
+- `$` prints out the value at the data pointer **divided** by 100.
 
 __Not Implemented__
-- ```$``` prints out the value at the data pointer `divided` by `100`.
-- ```@``` calls a function according to the value at the data pointer.
+
+__Not Implemented__
+- `@` calls a function according to the value at the data pointer.
 
 Example of the instructions above:
-- ___if-else___: ```? +++ : --- ;``` _// if (*ptr) { *ptr += 3; } else { *ptr -= 3; }_
-- __for__: ```++++ { commands }``` _// makes four iterations 4 through 0 (excluded)_
+- ___if-else___: `? +++ : --- ;` _// if (*ptr) { *ptr += 3; } else { *ptr -= 3; }_
+- __for__: `++++ { commands }` _// makes four iterations 4 through 0 (excluded)_
 
 ### Compiler Options
 
-- ```--help``` or ```-help```: Lists all compiler options.
-- ```-emit-llvm```: Dumps the LLVM IR code before executing the output.
-- ```-emit-expr```: Dumps the Expressions generated before executing the output.
-- ```-O0```: Generates output code with no optmizations.
-- ```-O1```: Optimizes Brain generated output code (Default).
+- `--help` or `-help`: Lists all compiler options.
+- `-emit-llvm`: Dumps the LLVM IR code before executing the output.
+- `-emit-expr`: Dumps the Expressions generated before executing the output.
+- `-O0`: Generates output code with no optmizations.
+- `-O1`: Optimizes Brain generated output code (Default).
 
 ### Applications on real life
 

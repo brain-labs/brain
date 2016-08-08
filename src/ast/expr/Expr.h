@@ -43,6 +43,7 @@ typedef enum
     TT_IF_THEN     = '?',
     TT_IF_ELSE     = ':',
     TT_IF_END      = ';',
+    TT_FLOAT       = '$'
 } TokenType;
 
 /**

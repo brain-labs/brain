@@ -7,7 +7,7 @@ All the flow can be done that way (and recommended):
     hub fork
     git checkout -b dev origin/dev
     git checkout -b your-feature-branch
-    git add --all  
+    git add --all
     git commit
     hub pull-request
 
@@ -15,15 +15,15 @@ All the flow can be done that way (and recommended):
 
 ### Master
 
-The main branch (stable) is the `master` branch. Just code compilable and passing the tests will be in that branch. 
+The main branch (stable) is the `master` branch. Just code compilable and passing the tests will be in that branch.
 
 ### Dev
 
-The main development branch is `dev`. We can add another temporary branches while developing new features. 
+The main development branch is `dev`. We can add another temporary branches while developing new features.
 
 ### Features Branchs
 
-You would do that by creating (for instance) a new branch named `for-loop` (do not forget to branch the `dev` branch). 
+You would do that by creating (for instance) a new branch named `for-loop` (do not forget to branch the `dev` branch).
 
 ## Test System
 
@@ -51,6 +51,8 @@ Examples:
 
 ## Dependencies for Development
 
+* C/C++ compiler
+* [llvm](http://www.llvm.org)
 * [git](https://git-scm.com/downloads)
 * [llvm](http://llvm.org/releases/download.html)
 * [hub](https://github.com/github/hub) **(wishful)**
