@@ -10,7 +10,7 @@ MKTST=bash ./tests/test_scripts.sh ./tests
 MKBIN=mkdir -p bin && $(MKLIB)
 ROOT=src
 
-SRCS=$(ROOT)/utils/ArgsOptions.cpp $(ROOT)/utils/ArgsHandler.cpp $(ROOT)/utils/Bootstrap.cpp $(ROOT)/parser/Parser.cpp $(ROOT)/ast/general/ASTInfo.cpp $(ROOT)/ast/expr/Expr.cpp $(ROOT)/ast/expr/ShiftExpr.cpp $(ROOT)/ast/expr/IncrementExpr.cpp $(ROOT)/ast/expr/InputExpr.cpp $(ROOT)/ast/expr/OutputExpr.cpp $(ROOT)/ast/expr/LoopExpr.cpp $(ROOT)/ast/expr/ArithmeticExpr.cpp $(ROOT)/ast/expr/DebugExpr.cpp $(ROOT)/ast/expr/BreakExpr.cpp $(ROOT)/ast/expr/IfExpr.cpp $(ROOT)/main.cpp
+SRCS=$(ROOT)/utils/ArgsOptions.cpp $(ROOT)/utils/ArgsHandler.cpp $(ROOT)/utils/Bootstrap.cpp $(ROOT)/parser/Parser.cpp $(ROOT)/ast/general/ASTInfo.cpp $(ROOT)/ast/expr/Expr.cpp $(ROOT)/ast/expr/ShiftExpr.cpp $(ROOT)/ast/expr/IncrementExpr.cpp $(ROOT)/ast/expr/InputExpr.cpp $(ROOT)/ast/expr/OutputExpr.cpp $(ROOT)/ast/expr/LoopExpr.cpp $(ROOT)/ast/expr/ArithmeticExpr.cpp $(ROOT)/ast/expr/DebugExpr.cpp $(ROOT)/ast/expr/BreakExpr.cpp $(ROOT)/ast/expr/IfExpr.cpp $(ROOT)/ast/expr/FloatExpr.cpp $(ROOT)/main.cpp
 CONFIG=`llvm-config --cxxflags --ldflags --system-libs --libs core mcjit native nativecodegen irreader linker`
 
 all: build
