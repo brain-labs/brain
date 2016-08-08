@@ -7,7 +7,9 @@ We use a suite of tests described in each `*.b` file. The `*.b` files are ran wi
 ### In sum:
 
 `brain file.b` is the `*.cmp`
+
 `brain -O0 -emit-ast file.b` is the `*.cmp0`
+
 `brain -O1 -emit-ast file.b` is the `*.cmp1`
 
 ### How to test?
