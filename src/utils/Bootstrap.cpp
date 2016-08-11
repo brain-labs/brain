@@ -41,14 +41,18 @@ int Bootstrap::init(int argc, char** argv)
     llvm::LLVMContext llvm_context;
 
     llvm::SMDiagnostic err;
-    std::unique_ptr<llvm::Module> io_module =
-        llvm::parseIRFile(llvm::StringRef(io_lib), err, llvm_context);
+    std::unique_ptr<llvm::Module> io_module;
 
-    if (!io_module) {
-        err.print(argv[0], llvm::errs());
-        return -1;
+    if (ASTInfo::instance()->is_using_io_lib) {
+        io_module = llvm::parseIRFile(llvm::StringRef(io_lib),
+   							  err,
+						 llvm_context);
+
+    	if (!io_module) {
+            err.print(argv[0], llvm::errs());
+            return -1;
+    	}
     }
-
 
     llvm::ErrorOr<llvm::Module *> module_or_err = new llvm::Module(module_name,
                                                                    llvm_context);
@@ -85,7 +89,9 @@ int Bootstrap::init(int argc, char** argv)
         std::string dumpStr;
         llvm::raw_string_ostream dumpStrOstream(dumpStr);
         module->print(dumpStrOstream, nullptr);
-	io_module->print(dumpStrOstream, nullptr);
+        if (io_module) {
+	    io_module->print(dumpStrOstream, nullptr);
+        }
         std::cout << dumpStr;
     }
 
@@ -100,7 +106,9 @@ int Bootstrap::init(int argc, char** argv)
 		.setMCJITMemoryManager(std::unique_ptr<llvm::SectionMemoryManager>
 							   (new llvm::SectionMemoryManager())).create();
 
-    execution_engine->addModule(std::move(io_module));
+    if (io_module) {
+        execution_engine->addModule(std::move(io_module));
+    }
 
     if (!error_str.empty()) {
         std::cout << error_str << "\n";

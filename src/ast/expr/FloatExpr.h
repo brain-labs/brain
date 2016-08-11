@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include "Expr.h"
+#include "../general/ASTInfo.h"
 
 /**
  * @brief The FloatExpr class behaves just like the output expression, but it
@@ -24,7 +25,7 @@
 class FloatExpr : public Expr
 {
 public:
-    FloatExpr() {}
+    FloatExpr() { ASTInfo::instance()->is_using_io_lib = true; }
     ~FloatExpr() {}
     /**
      * @brief code_gen

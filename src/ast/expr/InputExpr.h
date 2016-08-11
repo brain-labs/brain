@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include "Expr.h"
+#include "../general/ASTInfo.h"
 
 /**
  * @brief
@@ -22,7 +23,7 @@
 class InputExpr : public Expr
 {
 public:
-    InputExpr() {}
+    InputExpr() { ASTInfo::instance()->is_using_io_lib = true; }
     ~InputExpr() {}
     /**
      * @brief

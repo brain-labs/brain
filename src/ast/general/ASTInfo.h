@@ -49,6 +49,10 @@ public:
      * @brief
      */
     llvm::GlobalVariable* get_cells_ptr(); 
+    /**
+     * @brief
+     */
+    bool is_using_io_lib;
 };
 
 #endif // AST_INFO_H

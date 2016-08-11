@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include "Expr.h"
+#include "../general/ASTInfo.h"
 
 /**
  * @brief Class that represents the output operator in Brain.
@@ -22,7 +23,7 @@
 class OutputExpr : public Expr
 {
 public:
-    OutputExpr() {}
+    OutputExpr() { ASTInfo::instance()->is_using_io_lib = true; }
     ~OutputExpr() {}
     /**
      * @brief code_gen

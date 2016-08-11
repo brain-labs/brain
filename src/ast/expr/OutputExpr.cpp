@@ -6,7 +6,6 @@
  */
 
 #include "OutputExpr.h"
-#include "../general/ASTInfo.h"
 
 void OutputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {

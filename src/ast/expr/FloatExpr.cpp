@@ -6,7 +6,6 @@
  */
 
 #include "FloatExpr.h"
-#include "../general/ASTInfo.h"
 
 void FloatExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
