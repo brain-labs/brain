@@ -7,10 +7,13 @@
 
 #include "BreakExpr.h"
 
-void BreakExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
+void BreakExpr::code_gen(llvm::Module *M,
+                    llvm::IRBuilder<> &B,
+               llvm::BasicBlock *BreakBB)
 {
-  // it is not needed to create code gen for the BreakExpression
-  // it is a terminator, so the code will stop inside the loop.
+    if (BreakBB) {
+        B.CreateBr(BreakBB);
+    }
 }
 
 void BreakExpr::debug_description(int level)

@@ -40,8 +40,13 @@ public:
     ~LoopExpr() {}
     /**
      * @brief
+     * @param M
+     * @param B
+     * @param BreakBB
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
+    void code_gen(llvm::Module *M,
+             llvm::IRBuilder<> &B,
+        llvm::BasicBlock *BreakBB);
     /**
      * @brief
      * @param level

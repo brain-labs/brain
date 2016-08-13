@@ -7,7 +7,9 @@
 
 #include "OutputExpr.h"
 
-void OutputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
+void OutputExpr::code_gen(llvm::Module *M,
+                     llvm::IRBuilder<> &B,
+                llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Type* PutCharArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
