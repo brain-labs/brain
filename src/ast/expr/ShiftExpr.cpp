@@ -7,7 +7,9 @@
 
 #include "ShiftExpr.h"
 
-void ShiftExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
+void ShiftExpr::code_gen(llvm::Module *M,
+                    llvm::IRBuilder<> &B,
+               llvm::BasicBlock *BreakBB)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _step == 0) {

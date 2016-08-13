@@ -6,9 +6,10 @@
  */
 
 #include "DebugExpr.h"
-#include "../general/ASTInfo.h"
 
-void DebugExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
+void DebugExpr::code_gen(llvm::Module *M,
+                    llvm::IRBuilder<> &B,
+               llvm::BasicBlock *BreakBB)
 {
   llvm::LLVMContext &C = M->getContext();
   llvm::Type* DebugArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };

@@ -7,7 +7,9 @@
 
 #include "IncrementExpr.h"
 
-void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
+void IncrementExpr::code_gen(llvm::Module *M,
+                        llvm::IRBuilder<> &B,
+                    llvm::BasicBlock *BreakBB)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _increment == 0) {

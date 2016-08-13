@@ -32,7 +32,7 @@ Obs.: To use __Project Status__ (the "Kanban" below), please visit:`https://gith
 
 | Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
 | ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
-| [Brain](#brain)         | ![Progress](http://progressed.io/bar/80)  | C/C++/LLVM  | Low      |              |
+| [Brain](#brain)         | ![Progress](http://progressed.io/bar/90)  | C/C++/LLVM  | Low      |              |
 
 | To Do | In Progress | Done  |
 | :---: | :---------: | :---: |
@@ -106,21 +106,26 @@ __Implemented__
 - `$` prints out the value at the data pointer **divided** by 100.
 
 __Not Implemented__
-
-__Not Implemented__
 - `@` calls a function according to the value at the data pointer.
 
 Example of the instructions above:
+
+- __if-then__: `? +++ ;` _// if (*ptr) { *ptr += 3; }_
 - ___if-else___: `? +++ : --- ;` _// if (*ptr) { *ptr += 3; } else { *ptr -= 3; }_
 - __for__: `++++ { commands }` _// makes four iterations 4 through 0 (excluded)_
+- __float numbers__: `++>+********$` __cell 0__`[2]` __cell 1__`[256]` _// '$' prints out 256 / 100_
+- __break loop__: `+[+++++!]` _// *ptr = 1; while(*ptr) { *ptr += 5; break; }_
 
 ### Compiler Options
 
-- `--help` or `-help`: Lists all compiler options.
-- `-emit-llvm`: Dumps the LLVM IR code before executing the output.
-- `-emit-expr`: Dumps the Expressions generated before executing the output.
-- `-O0`: Generates output code with no optmizations.
-- `-O1`: Optimizes Brain generated output code (Default).
+- `--version`	Shows the current version of Brain
+- `--size=<number>`	Sets the number of cells used by the interpreter
+- `-emit-llvm`	Emits LLVM IR code for the given input
+- `-emit-ast`	Emits the AST for the given input
+- `-emit-code`	Emits an optimized code for the given input
+- `-v`		Uses verbose mode for the output
+- `-O0`		Generates output code with no optmizations
+- `-O1`		Optimizes Brain generated output code (Default)
 
 ### Applications on real life
 
@@ -133,3 +138,4 @@ Feel free to send your pull requests. :)
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
+

@@ -15,6 +15,7 @@
 #include <llvm/IR/Module.h>
 
 #include "Expr.h"
+#include "../general/ASTInfo.h"
 
 /**
  * @brief Class that represents the debug operator in Brain.
@@ -22,14 +23,17 @@
 class DebugExpr : public Expr
 {
 public:
-    DebugExpr() {}
+    DebugExpr() { ASTInfo::instance()->is_using_io_lib = true; }
     ~DebugExpr() {}
     /**
      * @brief
      * @param M
      * @param B
+     * @param BreakBB
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
+    void code_gen(llvm::Module *M,
+             llvm::IRBuilder<> &B,
+        llvm::BasicBlock *BreakBB);
     /**
      * @brief
      * @param level

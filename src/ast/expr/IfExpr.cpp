@@ -8,7 +8,9 @@
 #include "IfExpr.h"
 #include "../general/ASTInfo.h"
 
-void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
+void IfExpr::code_gen(llvm::Module *M,
+                 llvm::IRBuilder<> &B,
+            llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Function *F = B.GetInsertBlock()->getParent();
@@ -37,29 +39,35 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
     B.SetInsertPoint(ThenBB);
     llvm::IRBuilder<> ThenB(ThenBB);
 
+    bool hasTerminal = false;
     for (auto& expr : _exprs_then) {
+        expr->code_gen(M, ThenB, BreakBB);
         if (expr->expression_category() == ET_TERMINAL) {
+            hasTerminal = true;
             break;
         }
-
-        expr->code_gen(M, ThenB);
     }
 
-    ThenB.CreateBr(ContBB); // uncoditional jump
+    if (!hasTerminal) {
+        ThenB.CreateBr(ContBB); // uncoditional jump
+    }
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
             !_exprs_else.empty()) {
         B.SetInsertPoint(ElseBB);
         llvm::IRBuilder<> ElseB(ElseBB);
+        hasTerminal = false;
         for (auto& expr : _exprs_else) {
+            expr->code_gen(M, ElseB, BreakBB);
             if (expr->expression_category() == ET_TERMINAL) {
+                hasTerminal = true;
                 break;
             }
-
-            expr->code_gen(M, ElseB);
         }
 
-        ElseB.CreateBr(ContBB); // uncoditional jump
+        if (!hasTerminal) {
+            ElseB.CreateBr(ContBB); // uncoditional jump
+        }
     }
 
     B.SetInsertPoint(ContBB);
@@ -79,7 +87,6 @@ void IfExpr::debug_description(int level)
     for (auto& expr : _exprs_then) {
         std::cout << std::string(level * 2, ' ');
         expr->debug_description(level+1);
-
         if (expr->expression_category() == ET_TERMINAL) {
             break;
         }
@@ -103,7 +110,6 @@ void IfExpr::debug_description(int level)
         for (auto& expr : _exprs_else) {
             std::cout << std::string(level * 2, ' ');
             expr->debug_description(level+1);
-
             if (expr->expression_category() == ET_TERMINAL) {
                 break;
             }

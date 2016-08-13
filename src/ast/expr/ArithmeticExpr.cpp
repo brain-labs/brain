@@ -9,7 +9,9 @@
 #include "ArithmeticExpr.h"
 #include "../general/ASTInfo.h"
 
-void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
+void ArithmeticExpr::code_gen(llvm::Module *M,
+                         llvm::IRBuilder<> &B,
+                    llvm::BasicBlock *BreakBB)
 {
     llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
     llvm::Value* Idxs[] = { B.getInt32(0), IdxV };

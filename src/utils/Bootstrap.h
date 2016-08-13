@@ -32,8 +32,10 @@
 #include <memory>
 
 #include "../parser/Parser.h"
+#include "../ast/general/ASTInfo.h"
 #include "ArgsHandler.h"
 #include "ArgsOptions.h"
+
 
 /**
  * @brief Class that starts Brain, it has all the needed components to

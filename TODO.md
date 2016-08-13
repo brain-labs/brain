@@ -21,11 +21,11 @@
   - [x] Move the content of brain.cpp to a boostrap file.
   - [x] Refactor parser.cpp.
 - [x] Make sure you are deleting objects from the heap.
-- [ ] Implement `$` as a print for number / 100.
-  - [ ] Implement test cases for `$`
+- [x] Implement `$` as a print for number / 100.
+  - [x] Implement test cases for `$`
 - [x] Allow the compiler to have cells larger than 100 x 4
-- [ ] Check if required functions (LLVM IR) are implemented.
-- [ ] Breaks are not working inside if (they are going back to the beginning of the loop)
+- [x] Check if required functions (LLVM IR) are implemented.
+- [x] Breaks are not working inside if (they are going back to the beginning of the loop)
 - [x] Fix verbose mode and levels for the debug mode
 - [ ] Create install script. (remember to install the libs)
 

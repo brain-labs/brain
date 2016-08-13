@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include "Expr.h"
+#include "../general/ASTInfo.h"
 
 /**
  * @brief
@@ -22,12 +23,17 @@
 class InputExpr : public Expr
 {
 public:
-    InputExpr() {}
+    InputExpr() { ASTInfo::instance()->is_using_io_lib = true; }
     ~InputExpr() {}
     /**
      * @brief
+     * @param M
+     * @param B
+     * @param BreakBB
      */
-    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
+    void code_gen(llvm::Module *M,
+             llvm::IRBuilder<> &B,
+        llvm::BasicBlock *BreakBB);
     /**
      * @brief
      * @param level

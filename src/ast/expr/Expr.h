@@ -68,10 +68,13 @@ public:
      * @brief Virtual method for code generation.
      * @param M The current Module.
      * @param B The current IR Builder.
+     * @param BreakBB The outter Basic Block that continues after a loop.
      * @param index 
      * @param cells
      */
-    virtual void code_gen(llvm::Module *M, llvm::IRBuilder<> &B) = 0;
+    virtual void code_gen(llvm::Module *M,
+                     llvm::IRBuilder<> &B,
+                  llvm::BasicBlock *BreakBB) = 0;
     /**
      * @brief Virtual method for the AST's emission.
      * @param level Depth within the AST.

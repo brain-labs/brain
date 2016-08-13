@@ -8,7 +8,9 @@
 #include "LoopExpr.h"
 #include "../../utils/ArgsOptions.h"
 
-void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
+void LoopExpr::code_gen(llvm::Module *M,
+                   llvm::IRBuilder<> &B,
+              llvm::BasicBlock *BreakBB)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _exprs.empty()) {
@@ -63,20 +65,23 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 
     B.SetInsertPoint(LoopBB);
     llvm::IRBuilder<> LoopB(LoopBB);
+    bool hasTerminal = false;
     // Recursively generate code (into "LoopBody" block)
     for (auto& expr : _exprs) {
+        expr->code_gen(M, LoopB, EndBB);
         if (expr->expression_category() == ET_TERMINAL) {
+            hasTerminal = true;
             break;
         }
-
-        expr->code_gen(M, LoopB);
     }
 
-    if (_type == LT_FOR) {
-        LoopB.CreateStore(LoopB.CreateAdd(LoopB.CreateLoad(CounterV), LoopB.getInt32(-1)), CounterV);
-    }
+    if (!hasTerminal) {
+        if (_type == LT_FOR) {
+            LoopB.CreateStore(LoopB.CreateAdd(LoopB.CreateLoad(CounterV), LoopB.getInt32(-1)), CounterV);
+        }
 
-    LoopB.CreateBr(StartBB); // Restart loop (will next exit if current cell value > 0)
+        LoopB.CreateBr(StartBB); // Restart loop (will next exit if current cell value > 0)
+    }
 
     B.SetInsertPoint(EndBB);
 }
