@@ -11,7 +11,7 @@
 
 #include "ArgsHandler.h"
 
-const std::string BRAIN_VERSION =  "0.8";
+const std::string BRAIN_VERSION =  "1.0";
 const std::string BRAIN_FORMAT = "Please execute Brain with the command: brain \
 <options...> <filename>\n";
 const std::string BRAIN_HELP = "Use the identifier '--help' to get information \
@@ -40,10 +40,12 @@ void ArgsHandler::handle(int argc, char **argv)
 the interpreter\n"
                       << "-emit-llvm\tEmits LLVM IR code for the given input\n"
                       << "-emit-ast\tEmits the AST for the given input\n"
-                      << "-emit-code\tEmits an optimized code for the given input\n"
+                      << "-emit-code\tEmits an optimized code for the given \
+input\n"
                       << "-v\t\tUses verbose mode for the output\n"
                       << "-O0\t\tGenerates output code with no optmizations\n"
-                      << "-O1\t\tOptimizes Brain generated output code (Default)\n"
+                      << "-O1\t\tOptimizes Brain generated output code \
+(Default)\n"
                       << "\n";
             exit(0);
         }

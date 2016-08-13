@@ -24,7 +24,7 @@ private:
      */
     ASTInfo() {}
 
-    ///
+    /// Singleton object.
     static ASTInfo *_instance;
 public:
     ASTInfo(ASTInfo const&) = delete;
@@ -43,10 +43,12 @@ public:
     void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
     /**
      * @brief
+     * @return
      */
     llvm::GlobalVariable* get_index_ptr();
     /**
      * @brief
+     * @return
      */
     llvm::GlobalVariable* get_cells_ptr(); 
     /**
