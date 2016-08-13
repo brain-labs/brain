@@ -11,7 +11,7 @@
 
 #include "ArgsHandler.h"
 
-const std::string BRAIN_VERSION =  "0.8";
+const std::string BRAIN_VERSION =  "1.0";
 const std::string BRAIN_FORMAT = "Please execute Brain with the command: brain \
 <options...> <filename>\n";
 const std::string BRAIN_HELP = "Use the identifier '--help' to get information \
