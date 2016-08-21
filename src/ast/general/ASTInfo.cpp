@@ -9,8 +9,8 @@
 #include "../../utils/ArgsOptions.h"
 
 ASTInfo *ASTInfo::_instance = nullptr;
-static llvm::GlobalVariable *__brain_index_ptr = nullptr;
-static llvm::GlobalVariable *__brain_cells_ptr = nullptr;
+llvm::GlobalVariable *ASTInfo::__brain_index_ptr = nullptr;
+llvm::GlobalVariable *ASTInfo::__brain_cells_ptr = nullptr;
 
 ASTInfo* ASTInfo::instance()
 {
@@ -40,12 +40,11 @@ void ASTInfo::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
         llvm::Type *Ty = llvm::Type::getInt32Ty(context);
         const llvm::APInt Zero = llvm::APInt(32, 0); // int32 0
         llvm::Constant *InitV = llvm::Constant::getIntegerValue(Ty, Zero);
-        __brain_index_ptr = new llvm::GlobalVariable(*M,
-                                                     Ty,
-                                                  false, // non-constant
-                      llvm::GlobalValue::WeakAnyLinkage, // Keep one copy when linking (weak)
-                                                  InitV,
-                                         "brain.index");
+        ASTInfo::__brain_index_ptr = new llvm::GlobalVariable(*M, Ty, false,
+                                          // Keep one copy when linking (weak)
+                                          llvm::GlobalValue::WeakAnyLinkage, 
+                                          InitV,
+                                          "brain.index");
     }
 
     if (!__brain_cells_ptr) {
@@ -57,11 +56,10 @@ void ASTInfo::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
                                                 B.getInt32(0));
         llvm::ArrayRef<llvm::Constant *> Constants = llvm::ArrayRef<llvm::Constant *>(constants);
         llvm::Constant *InitPtr = llvm::ConstantArray::get(ArrTy, Constants);
-        __brain_cells_ptr = new llvm::GlobalVariable(*M,
-                                                  ArrTy,
-                                                  false, /* non-constant */
-                      llvm::GlobalValue::WeakAnyLinkage, // Keep one copy when linking (weak)
-                                                InitPtr,
+        ASTInfo::__brain_cells_ptr = new llvm::GlobalVariable(*M, ArrTy, false,
+                                          // Keep one copy when linking (weak)
+                                          llvm::GlobalValue::WeakAnyLinkage, 
+                                          InitPtr,
                                           "brain.cells");
     }
 }

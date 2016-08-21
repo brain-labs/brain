@@ -59,18 +59,20 @@ public:
      */
     bool has_option(BrainOption option);
     /**
-     * @brief set_cells_size Sets
-     * @param cells_size
+     * @brief set_cells_size Sets the size of Brain's cells.
+     * @param cells_size An integer representing the size of the cells to be
+     * set.
      */
     void set_cells_size(int cells_size);
     /**
      * @brief get_cells_size
-     * @return
+     * @return An integer corresponding with the size of the Brain cells known
+     * as the Brain memory.
      */
     int get_cells_size();
     /**
      * @brief Returns the optimization level to compile Brain files.
-     * @returns
+     * @returns A BrainOption representing the level of optimization.
      */
     BrainOption get_optimization();
 };

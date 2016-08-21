@@ -8,9 +8,8 @@
 #include "LoopExpr.h"
 #include "../../utils/ArgsOptions.h"
 
-void LoopExpr::code_gen(llvm::Module *M,
-                   llvm::IRBuilder<> &B,
-              llvm::BasicBlock *BreakBB)
+void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                        llvm::BasicBlock *BreakBB)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _exprs.empty()) {

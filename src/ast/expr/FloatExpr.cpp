@@ -7,9 +7,8 @@
 
 #include "FloatExpr.h"
 
-void FloatExpr::code_gen(llvm::Module *M,
-                    llvm::IRBuilder<> &B,
-               llvm::BasicBlock *BreakBB)
+void FloatExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                         llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Type* PutCharArgs[] = { llvm::Type::getInt32Ty(C),

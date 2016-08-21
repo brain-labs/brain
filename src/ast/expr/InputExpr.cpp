@@ -7,18 +7,22 @@
 
 #include "InputExpr.h"
 
-void InputExpr::code_gen(llvm::Module *M,
-                    llvm::IRBuilder<> &B,
-               llvm::BasicBlock *BreakBB)
+void InputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                         llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
-    llvm::Type* GetCharArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };
-    llvm::FunctionType *GetCharTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C), GetCharArgs, false);
+    llvm::Type* GetCharArgs[] = { llvm::Type::getInt32Ty(C), 
+                                  llvm::Type::getInt32PtrTy(C) };
+    llvm::FunctionType *GetCharTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C), 
+                                                            GetCharArgs, false);
     llvm::Function *GetCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("b_getchar", GetCharTy));
+    
     llvm::Value* Args[] = {
         B.CreateLoad(ASTInfo::instance()->get_index_ptr()),
-        B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(), llvm::Type::getInt32Ty(C)->getPointerTo())
+        B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(), 
+                            llvm::Type::getInt32Ty(C)->getPointerTo())
     };
+
     llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
     B.CreateCall(GetCharF, ArgsArr);
 }

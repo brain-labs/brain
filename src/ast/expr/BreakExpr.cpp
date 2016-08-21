@@ -7,9 +7,8 @@
 
 #include "BreakExpr.h"
 
-void BreakExpr::code_gen(llvm::Module *M,
-                    llvm::IRBuilder<> &B,
-               llvm::BasicBlock *BreakBB)
+void BreakExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                         llvm::BasicBlock *BreakBB)
 {
     if (BreakBB) {
         B.CreateBr(BreakBB);

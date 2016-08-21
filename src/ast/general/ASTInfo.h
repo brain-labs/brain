@@ -26,6 +26,10 @@ private:
 
     /// Singleton object.
     static ASTInfo *_instance;
+    /// An index that points to a Brain's cells position.
+    static llvm::GlobalVariable *__brain_index_ptr;
+    /// The cells - or memory - of Brain.
+    static llvm::GlobalVariable *__brain_cells_ptr;
 public:
     ASTInfo(ASTInfo const&) = delete;
     ASTInfo& operator=(ASTInfo const&) = delete;
@@ -36,23 +40,24 @@ public:
      */
     static ASTInfo* instance();
     /**
-     * @brief
-     * @param M
-     * @param B
+     * @brief Generates the IR (Intermediate Representation) code to be
+     * executed by llvm.
+     * @param M A pointer to the Brain's module.
+     * @param B A reference to the Brain's IR builder.
      */
     void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
     /**
-     * @brief
-     * @return
+     * @returns A pointer to the actual index used by Brain parser.
      */
     llvm::GlobalVariable* get_index_ptr();
     /**
-     * @brief
-     * @return
+     * @returns  A pointer to the array of cells used as the Brain's memory.
      */
     llvm::GlobalVariable* get_cells_ptr(); 
     /**
-     * @brief
+     * @brief Controls if the io.ll module is included within the module which
+     * is being interpreted, if the module does not uses any function defined in
+     * io.c so it won't include io.ll in their .ll code.
      */
     bool is_using_io_lib;
 };

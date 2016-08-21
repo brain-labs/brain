@@ -29,7 +29,10 @@ protected:
     std::string _data;
     /// Variable that holds the current index read by the parser.
     int _index;
-    ///
+    /**
+     * Store pointers of expressions to later call code_gen on each one of
+     * them.
+     */
     std::vector<Expr *> _exprs;
 
     /**
@@ -48,18 +51,22 @@ public:
     explicit Parser(std::string source) :
         _data(source), _index(0) { parse(_exprs, 0); }
     /**
-     * @brief Generate IR code based on the Brain file passed to the parser.
-     * @param M
-     * @param B
+     * @brief Generates the IR (Intermediate Representation) code to be
+     * executed by llvm.
+     * @param M A pointer to the Brain's module.
+     * @param B A reference to the Brain's IR builder.
      */
     void code_gen(llvm::Module *M, llvm::IRBuilder<> &B);
     /**
-     * @brief
-     * @param level
+     * @brief Prints debug information when Brain's compiler has the active
+     * flags: -v | -emit-ast.
+     * @param level The width used to display the debug information (to mimic
+     * identation).
      */
     void debug_description(int level);
     /**
-     * @brief
+     * @brief Method for the reverse code generation from the AST. It prints
+     * out to the stdout the token itself.
      */
     void ast_code_gen();
 };

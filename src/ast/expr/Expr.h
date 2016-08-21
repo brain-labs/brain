@@ -69,19 +69,17 @@ public:
      * @param M The current Module.
      * @param B The current IR Builder.
      * @param BreakBB The outter Basic Block that continues after a loop.
-     * @param index 
-     * @param cells
      */
-    virtual void code_gen(llvm::Module *M,
-                     llvm::IRBuilder<> &B,
-                  llvm::BasicBlock *BreakBB) = 0;
+    virtual void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                          llvm::BasicBlock *BreakBB) = 0;
     /**
      * @brief Virtual method for the AST's emission.
      * @param level Depth within the AST.
      */
     virtual void debug_description(int level) = 0;
     /**
-     * @brief Virtual method for the reverse code generation from the AST.
+     * @brief Virtual method for the reverse code generation from the AST. It
+     * prints out to the stdout the token itself.
      */
     virtual void ast_code_gen() = 0;
     /**
