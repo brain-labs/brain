@@ -8,9 +8,8 @@
 #include "IfExpr.h"
 #include "../general/ASTInfo.h"
 
-void IfExpr::code_gen(llvm::Module *M,
-                 llvm::IRBuilder<> &B,
-            llvm::BasicBlock *BreakBB)
+void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                      llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Function *F = B.GetInsertBlock()->getParent();
@@ -22,10 +21,13 @@ void IfExpr::code_gen(llvm::Module *M,
     // Get the current cell adress
     llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
     llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
-                                                           llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
+                                                           // Cast to int32*
+                                                           llvm::Type::getInt32Ty(C)->getPointerTo()), 
                                        IdxV);
     llvm::Value *NEZeroCond = B.CreateICmpNE(B.CreateLoad(CellPtr),
-                                              B.getInt32(0)); // is cell Signed Int Not Equal to Zero?
+                                             // is cell signed int not equal
+                                             // to zero?
+                                             B.getInt32(0)); 
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
         !_exprs_else.empty()) {

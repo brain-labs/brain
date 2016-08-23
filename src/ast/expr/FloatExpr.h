@@ -28,21 +28,24 @@ public:
     FloatExpr() { ASTInfo::instance()->is_using_io_lib = true; }
     ~FloatExpr() {}
     /**
-     * @brief code_gen
-     * @param M
-     * @param B
-     * @param BreakBB
+     * @brief Generates the IR (Intermediate Representation) code to be
+     * executed by llvm.
+     * @param M A pointer to the Brain's module.
+     * @param B A reference to the Brain's IR builder.
+     * @param BreakBB A pointer to the Brain's basic block.
      */
-    void code_gen(llvm::Module *M,
-             llvm::IRBuilder<> &B,
-        llvm::BasicBlock *BreakBB);
+    void code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                  llvm::BasicBlock *BreakBB);
     /**
-     * @brief debug_description
-     * @param level
+     * @brief Prints debug information when Brain's compiler has the active
+     * flags: -v | -emit-ast.
+     * @param level The width used to display the debug information (to mimic
+     * identation).
      */
     void debug_description(int level);
     /**
-     * @brief ast_code_gen
+     * @brief Method for the reverse code generation from the AST. It prints
+     * out to the stdout the token itself.
      */
     void ast_code_gen();
 };

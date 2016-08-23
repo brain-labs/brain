@@ -48,8 +48,9 @@ private:
     std::string io_lib;
     /// The name of the main module
     std::string module_name;
-
+    ///
     llvm::ExecutionEngine *execution_engine;
+    ///
     llvm::EngineBuilder *engine_builder;
     /**
      * @brief Private constructor of ASTInfo, denoting that this is a Singleton.

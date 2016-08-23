@@ -7,9 +7,8 @@
 
 #include "DebugExpr.h"
 
-void DebugExpr::code_gen(llvm::Module *M,
-                    llvm::IRBuilder<> &B,
-               llvm::BasicBlock *BreakBB)
+void DebugExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                         llvm::BasicBlock *BreakBB)
 {
   llvm::LLVMContext &C = M->getContext();
   llvm::Type* DebugArgs[] = { llvm::Type::getInt32Ty(C), llvm::Type::getInt32PtrTy(C) };

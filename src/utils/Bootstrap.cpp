@@ -44,9 +44,8 @@ int Bootstrap::init(int argc, char** argv)
     std::unique_ptr<llvm::Module> io_module;
 
     if (ASTInfo::instance()->is_using_io_lib) {
-        io_module = llvm::parseIRFile(llvm::StringRef(io_lib),
-   							  err,
-						 llvm_context);
+        io_module = llvm::parseIRFile(llvm::StringRef(io_lib), err,
+                                      llvm_context);
 
     	if (!io_module) {
             err.print(argv[0], llvm::errs());
@@ -64,9 +63,10 @@ int Bootstrap::init(int argc, char** argv)
 
     // Create the entry block
     auto *basic_block = llvm::BasicBlock::Create(llvm_context,
-                                      "EntryBlock", // Conventionnaly called "EntryBlock"
-                                      MainF // Add it to "main" function
-                                      );
+                                                 // Conventionnaly called:
+                                                 "EntryBlock",
+                                                 // Add it to "main" function
+                                                 MainF);
 
     // Create a builder to add instructions.
     llvm::IRBuilder<> builder(basic_block);
