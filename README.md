@@ -6,6 +6,7 @@ A computer language based on Brainfuck.
 ## Table of Contents
 
 - [About](#about)
+- [Documentation](#documentation)
 - [Current Status](#current-status)
 - __How to build Brain__
   - [How to build LLVM (Required)](#how-to-build-llvm)
@@ -23,7 +24,11 @@ __Brain__ wants to improve the performance of the Brainfuck programming language
 
 One of the main ideas of __Brain__ is saving some operations in machine language, creating an instruction optmizer due to the excess of instructions that Brainfuck would generate. Brain aims to implement it by using current technology __(LLVM)__.
 
-In spite of implementing new commands and features, __Brain__ is **completely compatible** with Brainfuck.
+In spite of implementing new commands and features, __Brain__ is **completely compatible** with Brainfuck (but the opposite is not true).
+
+### Documentation
+
+You can check this repository documentation on https://brain-labs.github.io/brain/docs/html/index.html
 
 ### Current Status
 Brain is running just like __Brainfuck__ so far, so feel free to use its tag [version 0.5](https://github.com/luizperes/brain/blob/v0.5/README.md)
@@ -32,20 +37,20 @@ Obs.: To use __Project Status__ (the "Kanban" below), please visit:`https://gith
 
 | Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
 | ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
-| [Brain](#brain)         | ![Progress](http://progressed.io/bar/90)  | C/C++/LLVM  | Low      |              |
+| [Brain](#brain)         | ![Progress](http://progressed.io/bar/95)  | C/C++/LLVM  | Low      |              |
 
 | To Do | In Progress | Done  |
 | :---: | :---------: | :---: |
-|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%239&desc=Implement%20Brain%20Commands(@,$))|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%238&desc=Code%20Refactoring.)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
-|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%239&desc=Implement%20REPL)|| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
+|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%2311&desc=Implement%20Brain%20Commands(@)%20v1.1)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%239&desc=Implement%20REPL)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
+|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%2310&desc=Implement%20Command%20(^)%20v.1.1)|| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
 |||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%235&desc=Optmize%20generated%20code.%20Include%20-O0%20and%20-O1%20options.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20(*,%20/%20%).)|
-|||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!).)|
+|||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!,%20$).)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%238&desc=Code%20Refactoring.)|
 
 ### TODO List
 If you want to check the micro TODO list, please see this [issue](https://github.com/luizperes/brain/issues/12).
 
 ### How to build LLVM
-__Brain__ runs on the top of __LLVM__, thus, you are required to install the lastest versions of LLVM. You can do that by following this http://apt.llvm.org/
+__Brain__ runs on the top of __LLVM__, thus, you are required to install the lastest versions of LLVM. You can do that by following this http://llvm.org/releases/download.html
 
 ### How to install pre-commit
 This project uses __pre-commit__ to help us to check our commits in order to minimize bugs and other problems on the project, therefore is strongly recommended that you use it, if you are intending to contribute to the project. For that, you can install by:
@@ -107,6 +112,7 @@ __Implemented__
 
 __Not Implemented__
 - `@` calls a function according to the value at the data pointer.
+- `^` move the data pointer (jump) on the tape. _Ex.: ++++++++++^ // the data pointer will jump to cell 10._
 
 Example of the instructions above:
 
@@ -138,4 +144,3 @@ Feel free to send your pull requests. :)
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
-
