@@ -22,12 +22,12 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
     llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
                                                            // Cast to int32*
-                                                           llvm::Type::getInt32Ty(C)->getPointerTo()), 
+                                                           llvm::Type::getInt32Ty(C)->getPointerTo()),
                                        IdxV);
     llvm::Value *NEZeroCond = B.CreateICmpNE(B.CreateLoad(CellPtr),
                                              // is cell signed int not equal
                                              // to zero?
-                                             B.getInt32(0)); 
+                                             B.getInt32(0));
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
         !_exprs_else.empty()) {
@@ -142,7 +142,7 @@ void IfExpr::ast_code_gen()
         }
     }
 
-    std::cout << (char)TT_IF_END; 
+    std::cout << (char)TT_IF_END;
 }
 
 ExpressionType IfExpr::expression_category()

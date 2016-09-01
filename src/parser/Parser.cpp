@@ -158,7 +158,7 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
 
 void Parser::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
-    ASTInfo::instance()->code_gen(M, B);   
+    ASTInfo::instance()->code_gen(M, B);
 
     for (auto& expr : _exprs) {
         expr->code_gen(M, B, nullptr);

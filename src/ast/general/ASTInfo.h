@@ -53,7 +53,7 @@ public:
     /**
      * @returns  A pointer to the array of cells used as the Brain's memory.
      */
-    llvm::GlobalVariable* get_cells_ptr(); 
+    llvm::GlobalVariable* get_cells_ptr();
     /**
      * @brief Controls if the io.ll module is included within the module which
      * is being interpreted, if the module does not uses any function defined in

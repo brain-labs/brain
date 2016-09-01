@@ -19,7 +19,7 @@
 
 /**
  * @brief Represents the input operator in Brain, aka as: .
- * It calls b_getchar of io.c to interpret input. 
+ * It calls b_getchar of io.c to interpret input.
  */
 class InputExpr : public Expr
 {

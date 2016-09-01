@@ -6,7 +6,7 @@ void b_getchar(int idx, int *cells) {
   cells[idx] = getchar();
 }
 
-void b_putchar(int idx, int *cells) { 
+void b_putchar(int idx, int *cells) {
   putchar(cells[idx]);
 }
 

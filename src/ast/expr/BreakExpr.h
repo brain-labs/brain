@@ -24,9 +24,9 @@ class BreakExpr : public Expr
 public:
     BreakExpr() {}
     ~BreakExpr() {}
-	/**
+    /**
      * @brief Generates the IR (Intermediate Representation) code to be
-	 * executed by llvm.
+     * executed by llvm.
      * @param M A pointer to the Brain's module.
      * @param B A reference to the Brain's IR builder.
      * @param BreakBB A pointer to the Brain's basic block.
@@ -35,9 +35,9 @@ public:
                   llvm::BasicBlock *BreakBB);
     /**
      * @brief Prints debug information when Brain's compiler has the active
-	 * flags: -v | -emit-ast.
+     * flags: -v | -emit-ast.
      * @param level The width used to display the debug information (to mimic
-	 * identation).
+     * identation).
      */
     void debug_description(int level);
     /**
@@ -45,7 +45,7 @@ public:
      * out to the stdout the token itself.
      */
     void ast_code_gen();
-	/**
+    /**
      * @brief Returns the category of the expression given by the caller.
      */
     ExpressionType expression_category();

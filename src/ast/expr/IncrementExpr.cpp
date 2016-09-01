@@ -49,11 +49,11 @@ void IncrementExpr::ast_code_gen()
         _increment == 0) {
         return;
     }
- 
+
     if (_increment > 0) {
        for (int i = 0; i < _increment; ++i) {
            std::cout << (char)TT_INCREMENT;
-       } 
+       }
     }
     else {
        for (int i = _increment; i < 0; ++i) {

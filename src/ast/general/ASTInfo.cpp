@@ -17,7 +17,7 @@ ASTInfo* ASTInfo::instance()
     if (!ASTInfo::_instance) {
         ASTInfo::_instance = new ASTInfo();
     }
-  
+
     return ASTInfo::_instance;
 }
 
@@ -42,7 +42,7 @@ void ASTInfo::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
         llvm::Constant *InitV = llvm::Constant::getIntegerValue(Ty, Zero);
         ASTInfo::__brain_index_ptr = new llvm::GlobalVariable(*M, Ty, false,
                                           // Keep one copy when linking (weak)
-                                          llvm::GlobalValue::WeakAnyLinkage, 
+                                          llvm::GlobalValue::WeakAnyLinkage,
                                           InitV,
                                           "brain.index");
     }
@@ -58,7 +58,7 @@ void ASTInfo::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
         llvm::Constant *InitPtr = llvm::ConstantArray::get(ArrTy, Constants);
         ASTInfo::__brain_cells_ptr = new llvm::GlobalVariable(*M, ArrTy, false,
                                           // Keep one copy when linking (weak)
-                                          llvm::GlobalValue::WeakAnyLinkage, 
+                                          llvm::GlobalValue::WeakAnyLinkage,
                                           InitPtr,
                                           "brain.cells");
     }
