@@ -31,17 +31,18 @@ In spite of implementing new commands and features, __Brain__ is **completely co
 You can check this repository documentation on https://brain-labs.github.io/brain/docs/html/index.html
 
 ### Current Status
-Brain is running just like __Brainfuck__ so far, so feel free to use its tag [version 0.5](https://github.com/luizperes/brain/blob/v0.5/README.md)
+Brain is stable on its tag [version 1.0](https://github.com/luizperes/brain/blob/v1.0/README.md)
 
 Obs.: To use __Project Status__ (the "Kanban" below), please visit:`https://github.com/luizperes/status-projects/blob/master/README.md` and `http://luizperes.github.io/status-projects/`
 
 | Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
 | ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
-| [Brain](#brain)         | ![Progress](http://progressed.io/bar/95)  | C/C++/LLVM  | Low      |              |
+| [Brain 1.0](#brain)         | ![Progress](http://progressed.io/bar/100)  | C/C++/LLVM  | Low      |              |
+| [Brain 1.1](#brain) | ![Progress](http://progressed.io/bar/0)  | C/C++/LLVM  | Low      |              |
 
 | To Do | In Progress | Done  |
 | :---: | :---------: | :---: |
-|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%2311&desc=Implement%20Brain%20Commands(@)%20v1.1)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%239&desc=Implement%20REPL)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
+|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%2311&desc=Implement%20Brain%20Commands(@)%20v1.1)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%239&desc=Implement%20REPL%20v1.1)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
 |![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%2310&desc=Implement%20Command%20(^)%20v.1.1)|| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
 |||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%235&desc=Optmize%20generated%20code.%20Include%20-O0%20and%20-O1%20options.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20(*,%20/%20%).)|
 |||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!,%20$).)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%238&desc=Code%20Refactoring.)|
@@ -144,3 +145,4 @@ Feel free to send your pull requests. :)
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
+
