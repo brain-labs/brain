@@ -27,7 +27,7 @@ protected:
 public:
     IfExpr(std::vector<Expr *> exprs_then) : _exprs_then(exprs_then) {}
     ~IfExpr() {}
-    
+
     void set_else(std::vector<Expr *> exprs_else) { _exprs_else = exprs_else; }
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
