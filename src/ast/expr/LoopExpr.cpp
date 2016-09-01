@@ -47,8 +47,8 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
 
     llvm::Value *NEZeroCond = nullptr;
     if (_type == LT_FOR) {
-        NEZeroCond = StartB.CreateICmpNE(StartB.CreateLoad(CounterV),
-                                         StartB.getInt32(0)); // is cell Signed Int Not Equal to Zero?
+        NEZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CounterV),
+                                         StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
     }
     else {
         // Get the current cell adress
