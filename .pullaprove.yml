@@ -1,0 +1,10 @@
+approve_by_comment: true
+approve_regex: (^Approved)|(^LGTM)
+reject_regex: (^Rejected)|(^LBTM)
+reset_on_push: false
+reviewers:
+  members:
+  - rafaelcn
+  - luizperes
+  name: pullapprove
+  required: 2
