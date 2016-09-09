@@ -37,9 +37,13 @@ void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
         B.CreateStore(B.CreateMul(CellV, CellV2), CellPtr);
         break;
     case AT_DIV:
+        // Divides the value at the current index with the value
+        // at index - 1 and stores it at the current index.
         B.CreateStore(B.CreateSDiv(CellV, CellV2), CellPtr);
         break;
     case AT_REM:
+        // Divides the value at the current index with the value
+        // at index - 1 and stores the remainder at the current index.
         B.CreateStore(B.CreateSRem(CellV, CellV2), CellPtr);
         break;
     }
