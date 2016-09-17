@@ -1,5 +1,11 @@
+<p align="center">
+  <a href="">
+    <img alt="Logo" src="https://brain-labs.github.io/brain-visualizer/img/brain.png" width="100px">
+  </a>
+</p>
+
 # Brain
-[![Build Status](https://travis-ci.org/luizperes/brain.svg?branch=master)](https://travis-ci.org/luizperes/brain)
+[![Build Status](https://travis-ci.org/brain-labs/brain.svg?branch=master)](https://travis-ci.org/brain-labs/brain)
 
 A computer language based on Brainfuck.
 
