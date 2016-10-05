@@ -32,6 +32,14 @@ One of the main ideas of __Brain__ is saving some operations in machine language
 
 In spite of implementing new commands and features, __Brain__ is **completely compatible** with Brainfuck (but the opposite is not true).
 
+### Install
+
+#### Arch Linux via AUR
+
+```
+yaourt -S brain
+```
+
 ### Documentation
 
 You can check this repository documentation on https://brain-labs.github.io/brain/docs/html/index.html
