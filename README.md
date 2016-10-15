@@ -40,6 +40,12 @@ In spite of implementing new commands and features, __Brain__ is **completely co
 yaourt -S brain
 ```
 
+#### Docker
+```
+docker pull luizperes/brain:1.0
+docker run -it luizperes/brain:1.0
+```
+
 ### Documentation
 
 You can check this repository documentation on https://brain-labs.github.io/brain/docs/html/index.html
