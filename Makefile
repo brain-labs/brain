@@ -5,7 +5,7 @@ CFLAGS-DEBUG=-O0 -Wall
 BIN=./bin
 
 SUDO=sudo
-MKLIB=$(SUDO) bash ./libs/install.sh ./libs
+MKLIB=bash ./libs/install.sh ./libs
 MKTST=bash ./tests/test_scripts.sh ./tests
 MKBIN=mkdir -p bin && $(MKLIB)
 ROOT=src

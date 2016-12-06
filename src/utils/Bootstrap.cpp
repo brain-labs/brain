@@ -12,7 +12,8 @@ Bootstrap* Bootstrap::_instance = nullptr;
 
 Bootstrap::Bootstrap()
 {
-    io_lib = "/usr/local/include/brain/io.ll";
+    std::string home = std::string(getenv("HOME"));
+    io_lib = home + "/local/lib/brain/io.ll";
 }
 
 Bootstrap* Bootstrap::instance()
