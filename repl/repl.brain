@@ -1,0 +1,28 @@
+this code stops when the user press the space key
+the only chars accepted are the brain chars | tabs and spaces
+
+[65][65][32] continue loop
+[32][32][32] end program
+
++ add one to the 0th cell to start the while
+[ while (true)
+  , read input at 1st cell
+
+  >[-] clean 2nd cell
+
+  +* copy value from 1st to 2nd cell
+
+  >+++
+  {
+    ++++++++++ make number 33 at 3rd cell (3 plus (3 times 10))
+  }
+  - subtract one for the space char
+
+  % gets 3rd cell mod 2nd cell
+
+  ?
+    [-]<< if the value is not zero clean the cell and move to 1st cell
+  :
+    !
+  ;
+]

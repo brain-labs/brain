@@ -15,6 +15,7 @@ ArgsOptions* ArgsOptions::instance()
     if (!ArgsOptions::_instance) {
         ArgsOptions::_instance = new ArgsOptions();
         ArgsOptions::_instance->set_cells_size(100);
+        ArgsOptions::_instance->set_io_option(IO_REGULAR);
     }
 
     return _instance;
@@ -54,3 +55,14 @@ int ArgsOptions::get_cells_size()
 {
     return _k_cells_size;
 }
+
+void ArgsOptions::set_io_option(int type_io)
+{
+    _type_io = type_io;
+}
+
+int ArgsOptions::get_io_option()
+{
+    return _type_io;
+}
+

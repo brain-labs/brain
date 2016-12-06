@@ -12,8 +12,6 @@ Bootstrap* Bootstrap::_instance = nullptr;
 
 Bootstrap::Bootstrap()
 {
-    std::string home = std::string(getenv("HOME"));
-    io_lib = home + "/.brain/lib/io.ll";
 }
 
 Bootstrap* Bootstrap::instance()
@@ -29,6 +27,9 @@ int Bootstrap::init(int argc, char** argv)
 {
     ArgsHandler args_handler(argc, argv);
     Parser parser(args_handler.get_string_file());
+
+    io_lib = std::string(getenv("HOME")) + "/.brain/lib/";
+    io_lib += ArgsOptions::instance()->get_io_option() == IO_REPL ? "io_repl.ll" : "io.ll"; 
 
     if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_CODE)) {
         parser.ast_code_gen();
