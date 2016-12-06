@@ -1,0 +1,27 @@
+=== Debug Information ===
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+IncrementExpr (1)
+ShiftExpr (jump)
+DebugExpr
+ShiftExpr (jump)
+DebugExpr
+ShiftExpr (jump)
+DebugExpr
+ShiftExpr (1)
+ShiftExpr (1)
+ShiftExpr (1)
+IncrementExpr (1)
+DebugExpr
+=== Program Output ===
+Index Pointer: 10 Value at Index Pointer: 0
+Index Pointer: 0 Value at Index Pointer: 10
+Index Pointer: 10 Value at Index Pointer: 0
+Index Pointer: 13 Value at Index Pointer: 1

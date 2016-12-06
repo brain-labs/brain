@@ -29,7 +29,8 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
                 BO_IS_OPTIMIZING_O1 && !exprs.empty()) {
 
             Expr *last_expression = exprs.back();
-            if (last_expression->update_expression(c)) {
+            if (last_expression->should_update() &&
+                last_expression->update_expression(c)) {
                 continue;
             }
         }
@@ -40,7 +41,10 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
             expr = new ShiftExpr(-1);
             break;
         case TT_SHIFT_RIGHT:
-             expr = new ShiftExpr(1);
+            expr = new ShiftExpr(1);
+            break;
+        case TT_SHIFT_JUMP:
+            expr = new ShiftExpr();
             break;
         case TT_INCREMENT:
             expr = new IncrementExpr(1);

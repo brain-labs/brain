@@ -27,6 +27,7 @@ typedef enum
 {
     TT_SHIFT_LEFT  = '<',
     TT_SHIFT_RIGHT = '>',
+    TT_SHIFT_JUMP  = '^',
     TT_INCREMENT   = '+',
     TT_DECREMENT   = '-',
     TT_OUTPUT      = '.',
@@ -87,6 +88,7 @@ public:
      * @param update The char whose expression will be updated.
      */
     virtual bool update_expression(char update) { return false; }
+    virtual bool should_update() { return true; }
     /**
      * @brief Returns the category of the expression given by the caller.
      */
