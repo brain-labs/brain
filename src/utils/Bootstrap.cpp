@@ -13,7 +13,7 @@ Bootstrap* Bootstrap::_instance = nullptr;
 Bootstrap::Bootstrap()
 {
     std::string home = std::string(getenv("HOME"));
-    io_lib = home + "/local/lib/brain/io.ll";
+    io_lib = home + "/.brain/lib/io.ll";
 }
 
 Bootstrap* Bootstrap::instance()
