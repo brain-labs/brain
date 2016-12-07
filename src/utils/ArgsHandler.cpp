@@ -35,6 +35,7 @@ void ArgsHandler::handle(int argc, char **argv)
         if (str.compare("--help") == 0 || str.compare("-help") == 0) {
             std::cout << "\n"
                       << BRAIN_FORMAT << "\n\n"
+                      << "--code=<\"inline code\">\tSets inline brain code\n"
                       << "--io=repl\tSets the IO module to REPLs style\n"
                       << "--version\tShows the current version of Brain\n"
                       << "--size=<number>\tSets the number of cells used by \
@@ -90,6 +91,9 @@ input\n"
              */
             int cells_size = std::atoi(str.substr(7, str.size()-7).c_str());
             ArgsOptions::instance()->set_cells_size(cells_size);
+        }
+        else if (str.size() > 6 && str.compare(0, 7, "--code=") == 0) {
+            _string_file = str.substr(7, str.size()-7);
         }
         else if (str.size() > 4 && str.compare(0, 5, "--io=") == 0) {
             if (str.substr(5, str.size()-5).compare("repl") == 0) {
