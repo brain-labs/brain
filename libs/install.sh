@@ -2,7 +2,7 @@
 
 echo "Creating libraries..."
 
-inc_path=$HOME/.brain/lib/
+inc_path=$HOME/.brain/lib
 
 mkdir -p $inc_path
 if [ $? -ne 0 ] ; then

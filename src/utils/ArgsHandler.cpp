@@ -35,6 +35,7 @@ void ArgsHandler::handle(int argc, char **argv)
         if (str.compare("--help") == 0 || str.compare("-help") == 0) {
             std::cout << "\n"
                       << BRAIN_FORMAT << "\n\n"
+                      << "--io=repl\tSets the IO module to REPLs style\n"
                       << "--version\tShows the current version of Brain\n"
                       << "--size=<number>\tSets the number of cells used by \
 the interpreter\n"
@@ -50,7 +51,8 @@ input\n"
             exit(0);
         }
         else if (str.compare("--version") == 0) {
-            std::cout << "Brain version " << BRAIN_VERSION << ".\n"
+            std::cout << "Brain version " << BRAIN_VERSION << "."
+                      << std::endl
                       << BRAIN_HELP;
             exit(0);
         }
@@ -89,6 +91,14 @@ input\n"
             int cells_size = std::atoi(str.substr(7, str.size()-7).c_str());
             ArgsOptions::instance()->set_cells_size(cells_size);
         }
+        else if (str.size() > 4 && str.compare(0, 5, "--io=") == 0) {
+            if (str.substr(5, str.size()-5).compare("repl") == 0) {
+                ArgsOptions::instance()->set_io_option(IO_REPL);
+            } else {
+                std::cout << "Unknown IO option." << std::endl;
+                exit(-1);
+            }
+        }
         else if ((str.size() > 2 && str.substr(str.size()-2, 2) == ".b") ||
                  (str.size() > 3 && str.substr(str.size()-3, 3) == ".bf") ||
                  (str.size() > 3 && str.substr(str.size()-3, 3) == ".br") ||
@@ -98,7 +108,7 @@ input\n"
             std::string str_file((std::istreambuf_iterator<char>(t)),
                                  std::istreambuf_iterator<char>());
             if (str_file.empty()) {
-                std::cout << "No such file '" << str << "'\n"
+                std::cout << "No such file '" << str << std::endl
                           << BRAIN_FORMAT;
                 exit(-1);
             }
@@ -106,12 +116,14 @@ input\n"
             _file_name = str;
         }
         else if (str.find("-") == 0) {
-            std::cout << "Unsupported option \"" << str << "\"\n"
+            std::cout << "Unsupported option \"" << str << "\"" 
+                      << std::endl
                       << BRAIN_HELP;
             exit(-1);
         }
         else {
-            std::cout << "No such file '" << str << "'\n"
+            std::cout << "No such file '" << str << "'"
+                      << std::endl
                       << BRAIN_FORMAT
                       << BRAIN_HELP;
             exit(-1);
@@ -119,8 +131,9 @@ input\n"
     }
 
     if (_string_file.empty()) {
-        std::cout << "No input files\n"
-                  << BRAIN_FORMAT;
+        std::cout << "No input files"
+                 << std::endl
+                 << BRAIN_FORMAT;
         exit(-1);
     }
 }
