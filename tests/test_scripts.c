@@ -86,8 +86,10 @@ int main()
 
 bool hasExt(char *ext)
 {
-  return ext && (strcmp(ext, ".b") == 0 || 
-                 strcmp(ext, ".br") == 0 || 
+  return ext && (strcmp(ext, ".b") == 0 ||
+                 strcmp(ext, ".bf") == 0 || 
+                 strcmp(ext, ".br") == 0 ||
+                 strcmp(ext, ".wit") == 0 || 
                  strcmp(ext, ".brain") == 0); 
 }
 

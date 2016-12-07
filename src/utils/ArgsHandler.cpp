@@ -90,7 +90,9 @@ input\n"
             ArgsOptions::instance()->set_cells_size(cells_size);
         }
         else if ((str.size() > 2 && str.substr(str.size()-2, 2) == ".b") ||
+                 (str.size() > 3 && str.substr(str.size()-3, 3) == ".bf") ||
                  (str.size() > 3 && str.substr(str.size()-3, 3) == ".br") ||
+                 (str.size() > 4 && str.substr(str.size()-4, 4) == ".wit") ||
                  (str.size() > 6 && str.substr(str.size()-6, 6) == ".brain")) {
             std::ifstream t(str);
             std::string str_file((std::istreambuf_iterator<char>(t)),
