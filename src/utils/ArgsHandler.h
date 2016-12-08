@@ -30,6 +30,11 @@ protected:
      * Brain.
      */
     void handle(int argc, char *argv[]);
+    /**
+     * @brief Solves the output filename, checking if the user passed a value
+     * not.
+     */
+    void solve_output_file_name();
 public:
     ArgsHandler(int argc, char *argv[]) { handle(argc, argv); }
     /**

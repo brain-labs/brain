@@ -146,13 +146,16 @@ Example of the instructions above:
 
 ### Compiler Options
 
-- `--version`	Shows the current version of Brain
 - `--code=<"inline code">`	Sets inline brain code
 - `--io=repl`	Sets the IO module to REPLs style
+- `--out=<filename>`	Sets the output filename
 - `--size=<number>`	Sets the number of cells used by the interpreter
+- `--version`   Shows the current version of Brain
 - `-emit-llvm`	Emits LLVM IR code for the given input
 - `-emit-ast`	Emits the AST for the given input
 - `-emit-code`	Emits an optimized code for the given input
+- `-c`		Generates object file
+- `-S`		Generates assembly file
 - `-v`		Uses verbose mode for the output
 - `-O0`		Generates output code with no optmizations
 - `-O1`		Optimizes Brain generated output code (Default)

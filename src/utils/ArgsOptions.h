@@ -21,6 +21,8 @@ typedef enum
     BO_IS_VERBOSE = 8,
     BO_IS_OPTIMIZING_O0 = 16,
     BO_IS_OPTIMIZING_O1 = 32,
+    BO_IS_GEN_OBJ = 64,
+    BO_IS_GEN_ASM = 128,
 } BrainOption;
 
 /**

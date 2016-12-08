@@ -37,14 +37,16 @@ void ArgsHandler::handle(int argc, char **argv)
                       << BRAIN_FORMAT << "\n\n"
                       << "--code=<\"inline code\">\tSets inline brain code\n"
                       << "--io=repl\tSets the IO module to REPLs style\n"
+                      << "--out=<filename>\tSets the output filename\n"
                       << "--version\tShows the current version of Brain\n"
                       << "--size=<number>\tSets the number of cells used by \
 the interpreter\n"
-                      << "--out=<filename>\tSet the output filename\n"
                       << "-emit-llvm\tEmits LLVM IR code for the given input\n"
                       << "-emit-ast\tEmits the AST for the given input\n"
                       << "-emit-code\tEmits an optimized code for the given \
 input\n"
+                      << "-c\tGenerates object file\n"
+                      << "-S\tGenerates assembly file\n"
                       << "-v\t\tUses verbose mode for the output\n"
                       << "-O0\t\tGenerates output code with no optmizations\n"
                       << "-O1\t\tOptimizes Brain generated output code \
@@ -70,12 +72,11 @@ input\n"
         else if (str.compare("-v") == 0) {
             ArgsOptions::instance()->add_option(BO_IS_VERBOSE);
         }
-        else if (str.size() > 5 && str.compare(0, 6, "--out=") == 0) {
-            _output_file_name = str.substr(6, str.size()-6);
-            if(_output_file_name.empty()) {
-                std::cout << "Output filename missing." << std::endl;
-                exit(-1);
-            }
+        else if (str.compare("-c") == 0) {
+            ArgsOptions::instance()->add_option(BO_IS_GEN_OBJ);
+        }
+        else if (str.compare("-S") == 0) {
+            ArgsOptions::instance()->add_option(BO_IS_GEN_ASM);
         }
         else if (str.compare("-O0") == 0) {
             if (ArgsOptions::instance()->has_option(BO_IS_OPTIMIZING_O1)) {
@@ -92,6 +93,13 @@ input\n"
             }
 
             ArgsOptions::instance()->add_option(BO_IS_OPTIMIZING_O1);
+        }
+        else if (str.size() > 5 && str.compare(0, 6, "--out=") == 0) {
+            _output_file_name = str.substr(6, str.size()-6);
+            if(_output_file_name.empty()) {
+                std::cout << "Output filename missing." << std::endl;
+                exit(-1);
+            }
         }
         else if (str.size() > 6 && str.compare(0, 7, "--size=") == 0) {
             /* Specified a size, Brain will create its arrays with the next
@@ -148,13 +156,14 @@ input\n"
                  << BRAIN_FORMAT;
         exit(-1);
     }
+
+    solve_output_file_name();
 }
 
 std::string ArgsHandler::get_string_file()
 {
   return _string_file;
 }
-
 
 std::string ArgsHandler::get_file_name()
 {
@@ -164,4 +173,30 @@ std::string ArgsHandler::get_file_name()
 std::string ArgsHandler::get_output_file_name()
 {
     return _output_file_name;
+}
+
+void ArgsHandler::solve_output_file_name()
+{
+    if (!_output_file_name.empty() &&
+        !ArgsOptions::instance()->has_option(BO_IS_GEN_ASM) &&
+        !ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ)) {
+        std::cout << "--out=<filename> must be used together with -c or -S\n"
+                  << BRAIN_HELP;
+        exit(-1);
+    } else if (!_output_file_name.empty()) {
+        return;
+    } else if (!ArgsOptions::instance()->has_option(BO_IS_GEN_ASM) &&
+               !ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ)) {
+        return;
+    }
+
+    std::string ext = ArgsOptions::instance()->has_option(BO_IS_GEN_ASM) ?
+                      "s" : "o";
+
+    if (_file_name.empty()) {
+        _output_file_name = "out." + ext;
+    } else {
+        _output_file_name = _file_name.substr(0,
+                                _file_name.find_last_of(".") + 1) + ext;
+    }
 }

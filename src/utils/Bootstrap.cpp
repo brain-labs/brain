@@ -104,7 +104,8 @@ int Bootstrap::init(int argc, char** argv)
     llvm::InitializeNativeTargetAsmPrinter();
     llvm::InitializeNativeTargetAsmParser();
 
-    if (!args_handler.get_output_file_name().empty()) {
+    if (ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ) ||
+        ArgsOptions::instance()->has_option(BO_IS_GEN_ASM)) {
         llvm::Module *module_c = new llvm::Module(module_name, llvm_context);
         Linker::linkModules(*module_c, std::move(Owner));
         if (io_module) {
@@ -124,7 +125,8 @@ int Bootstrap::init(int argc, char** argv)
         std::string features = "";
 
         TargetOptions opt;
-        auto the_target_machine = target->createTargetMachine(target_triple, cpu, features, opt);
+        Reloc::Model rm;
+        auto the_target_machine = target->createTargetMachine(target_triple, cpu, features, opt, rm);
 
         module_c->setDataLayout(the_target_machine->createDataLayout());
 
@@ -137,7 +139,9 @@ int Bootstrap::init(int argc, char** argv)
         }
 
         legacy::PassManager pass;
-        auto filetype = TargetMachine::CGFT_ObjectFile;
+        auto filetype = ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ) ?
+                            TargetMachine::CGFT_ObjectFile :
+                            TargetMachine::CGFT_AssemblyFile;
 
         if (the_target_machine->addPassesToEmitFile(pass, dest, filetype)) {
             llvm::errs() << "The target nachine can't emit a file of this type";
