@@ -105,50 +105,45 @@ int Bootstrap::init(int argc, char** argv)
     llvm::InitializeNativeTargetAsmParser();
 
     if (!args_handler.get_output_file_name().empty()) {
-        auto module1 = new llvm::Module(module_name, llvm_context);
-        Linker::linkModules(*module1, std::move(Owner));
-        Linker::linkModules(*module1, std::move(io_module));
-        auto mod = module1;
+        llvm::Module *module_c = new llvm::Module(module_name, llvm_context);
+        Linker::linkModules(*module_c, std::move(Owner));
+        Linker::linkModules(*module_c, std::move(io_module));
 
-        auto TargetTriple = sys::getDefaultTargetTriple();
-        mod->setTargetTriple(TargetTriple);
-        std::string Error;
-        auto Target = TargetRegistry::lookupTarget(TargetTriple, Error);
-        if (!Target) {
-            errs() << Error;
+        std::string target_triple = sys::getDefaultTargetTriple();
+        module_c->setTargetTriple(target_triple);
+        std::string error;
+        auto target = TargetRegistry::lookupTarget(target_triple, error);
+        if (!target) {
+            llvm::errs() << error;
             return 1;
         }
    
-        auto CPU = "generic";
-        auto Features = "";
+        std::string cpu = "generic";
+        std::string features = "";
 
         TargetOptions opt;
-        auto RM = Optional<Reloc::Model>();
-        auto TheTargetMachine = Target->createTargetMachine(TargetTriple, CPU, Features, opt, RM);
+        auto the_target_machine = target->createTargetMachine(target_triple, cpu, features, opt);
 
-        mod->setDataLayout(TheTargetMachine->createDataLayout());
+        module_c->setDataLayout(the_target_machine->createDataLayout());
 
-        auto Filename = args_handler.get_output_file_name();
-        std::error_code EC;
-        raw_fd_ostream dest(Filename, EC, sys::fs::F_None);
+        std::error_code ec;
+        raw_fd_ostream dest(args_handler.get_output_file_name(), ec, sys::fs::F_None);
 
-        if (EC) {
-            errs() << "Could not open file: " << EC.message();
+        if (ec) {
+            llvm::errs() << "Could not open file: " << ec.message();
             return 1;
         }
 
         legacy::PassManager pass;
-        auto FileType = TargetMachine::CGFT_ObjectFile;
+        auto filetype = TargetMachine::CGFT_ObjectFile;
 
-        if (TheTargetMachine->addPassesToEmitFile(pass, dest, FileType)) {
-            errs() << "TheTargetMachine can't emit a file of this type";
+        if (the_target_machine->addPassesToEmitFile(pass, dest, filetype)) {
+            llvm::errs() << "The target nachine can't emit a file of this type";
             return 1;
         }
 
-        pass.run(*mod);
+        pass.run(*module_c);
         dest.flush();
-
-        outs() << "Wrote " << Filename << "\n";    
     }
     else {
         // Create the execution engine.
