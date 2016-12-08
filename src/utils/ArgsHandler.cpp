@@ -70,8 +70,8 @@ input\n"
             ArgsOptions::instance()->add_option(BO_IS_VERBOSE);
         }
         else if (str.size() > 5 && str.compare(0, 6, "--out=") == 0) {
-            _output_file = str.substr(6, str.size()-6);
-            if(_output_file.empty()) {
+            _output_file_name = str.substr(6, str.size()-6);
+            if(_output_file_name.empty()) {
                 std::cout << "Output filename missing." << std::endl;
                 exit(-1);
             }
@@ -153,4 +153,9 @@ std::string ArgsHandler::get_string_file()
 std::string ArgsHandler::get_file_name()
 {
     return _file_name;
+}
+
+std::string ArgsHandler::get_output_file_name()
+{
+    return _output_file_name;
 }

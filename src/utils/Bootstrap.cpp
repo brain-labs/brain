@@ -7,6 +7,8 @@
 
 #include "Bootstrap.h"
 
+using namespace llvm;
+
 // forward declaration of static member.
 Bootstrap* Bootstrap::_instance = nullptr;
 
@@ -101,34 +103,83 @@ int Bootstrap::init(int argc, char** argv)
     llvm::InitializeNativeTarget();
     llvm::InitializeNativeTargetAsmPrinter();
     llvm::InitializeNativeTargetAsmParser();
-    // Create the execution engine.
-    std::string error_str;
-    engine_builder = new llvm::EngineBuilder(std::move(Owner));
-    execution_engine = engine_builder->setErrorStr(&error_str)
+
+    if (!args_handler.get_output_file_name().empty()) {
+        auto module1 = new llvm::Module(module_name, llvm_context);
+        Linker::linkModules(*module1, std::move(Owner));
+        Linker::linkModules(*module1, std::move(io_module));
+        auto mod = module1;
+
+        auto TargetTriple = sys::getDefaultTargetTriple();
+        mod->setTargetTriple(TargetTriple);
+        std::string Error;
+        auto Target = TargetRegistry::lookupTarget(TargetTriple, Error);
+        if (!Target) {
+            errs() << Error;
+            return 1;
+        }
+   
+        auto CPU = "generic";
+        auto Features = "";
+
+        TargetOptions opt;
+        auto RM = Optional<Reloc::Model>();
+        auto TheTargetMachine = Target->createTargetMachine(TargetTriple, CPU, Features, opt, RM);
+
+        mod->setDataLayout(TheTargetMachine->createDataLayout());
+
+        auto Filename = args_handler.get_output_file_name();
+        std::error_code EC;
+        raw_fd_ostream dest(Filename, EC, sys::fs::F_None);
+
+        if (EC) {
+            errs() << "Could not open file: " << EC.message();
+            return 1;
+        }
+
+        legacy::PassManager pass;
+        auto FileType = TargetMachine::CGFT_ObjectFile;
+
+        if (TheTargetMachine->addPassesToEmitFile(pass, dest, FileType)) {
+            errs() << "TheTargetMachine can't emit a file of this type";
+            return 1;
+        }
+
+        pass.run(*mod);
+        dest.flush();
+
+        outs() << "Wrote " << Filename << "\n";    
+    }
+    else {
+        // Create the execution engine.
+        std::string error_str;
+        engine_builder = new llvm::EngineBuilder(std::move(Owner));
+        execution_engine = engine_builder->setErrorStr(&error_str)
 		.setMCJITMemoryManager(std::unique_ptr<llvm::SectionMemoryManager>
-							   (new llvm::SectionMemoryManager())).create();
+                                          (new llvm::SectionMemoryManager())).create();
 
-    if (io_module) {
-        execution_engine->addModule(std::move(io_module));
+        if (io_module) {
+            execution_engine->addModule(std::move(io_module));
+        }
+
+        if (!error_str.empty()) {
+            std::cout << error_str << "\n";
+            return -1;
+        }
+
+        // Finalize the execution engine before use it
+        execution_engine->finalizeObject();
+
+        if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) ||
+	    ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
+            // Run the program
+            std::cout << "=== Program Output ===" << "\n";
+        }
+
+        // No args.
+        std::vector<llvm::GenericValue> Args(0);
+        llvm::GenericValue gv = execution_engine->runFunction(MainF, Args);
     }
-
-    if (!error_str.empty()) {
-        std::cout << error_str << "\n";
-        return -1;
-    }
-
-    // Finalize the execution engine before use it
-    execution_engine->finalizeObject();
-
-    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) ||
-	ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
-        // Run the program
-        std::cout << "=== Program Output ===" << "\n";
-    }
-
-    // No args.
-    std::vector<llvm::GenericValue> Args(0);
-    llvm::GenericValue gv = execution_engine->runFunction(MainF, Args);
 
     llvm::llvm_shutdown();
 
