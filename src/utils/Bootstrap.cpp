@@ -107,7 +107,9 @@ int Bootstrap::init(int argc, char** argv)
     if (!args_handler.get_output_file_name().empty()) {
         llvm::Module *module_c = new llvm::Module(module_name, llvm_context);
         Linker::linkModules(*module_c, std::move(Owner));
-        Linker::linkModules(*module_c, std::move(io_module));
+        if (io_module) {
+            Linker::linkModules(*module_c, std::move(io_module));
+        }
 
         std::string target_triple = sys::getDefaultTargetTriple();
         module_c->setTargetTriple(target_triple);
