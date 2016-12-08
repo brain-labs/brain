@@ -39,6 +39,7 @@ void ArgsHandler::handle(int argc, char **argv)
                       << "--version\tShows the current version of Brain\n"
                       << "--size=<number>\tSets the number of cells used by \
 the interpreter\n"
+                      << "--out=<filename>\tSet the output filename\n"
                       << "-emit-llvm\tEmits LLVM IR code for the given input\n"
                       << "-emit-ast\tEmits the AST for the given input\n"
                       << "-emit-code\tEmits an optimized code for the given \
@@ -67,6 +68,13 @@ input\n"
         }
         else if (str.compare("-v") == 0) {
             ArgsOptions::instance()->add_option(BO_IS_VERBOSE);
+        }
+        else if (str.size() > 5 && str.compare(0, 6, "--out=") == 0) {
+            _output_file = str.substr(6, str.size()-6);
+            if(_output_file.empty()) {
+                std::cout << "Output filename missing." << std::endl;
+                exit(-1);
+            }
         }
         else if (str.compare("-O0") == 0) {
             if (ArgsOptions::instance()->has_option(BO_IS_OPTIMIZING_O1)) {

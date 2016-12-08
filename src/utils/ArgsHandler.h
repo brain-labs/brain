@@ -23,6 +23,8 @@ protected:
     std::string _string_file;
     /// The name of the string file.
     std::string _file_name;
+    /// The name of the output file.
+    std::string _output_file;
     /**
      * @brief Called in the constructor to handle all the arguments passed to
      * Brain.
