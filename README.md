@@ -147,6 +147,8 @@ Example of the instructions above:
 ### Compiler Options
 
 - `--version`	Shows the current version of Brain
+- `--code=<"inline code">`	Sets inline brain code
+- `--io=repl`	Sets the IO module to REPLs style
 - `--size=<number>`	Sets the number of cells used by the interpreter
 - `-emit-llvm`	Emits LLVM IR code for the given input
 - `-emit-ast`	Emits the AST for the given input
