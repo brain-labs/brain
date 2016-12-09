@@ -21,6 +21,9 @@ build: $(SRCS)
 build-gcc: $(SRCS)
 	$(MKBIN) && $(GCC) $(CFLAGS) $(SRCS) $(CONFIG) -o $(BIN)/brain
 
+build-travis: $(SRCS)
+	$(MKBIN) && $(CC) $(CFLAGS) -DINCOMPATIBLE_LLVM $(SRCS) $(CONFIG) -o $(BIN)/brain
+
 debug: $(SRCS)
 	$(MKBIN) && $(CC) -g $(CFLAGS-DEBUG) $(SRCS) $(CONFIG) -o $(BIN)/brain_debug
 

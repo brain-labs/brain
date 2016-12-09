@@ -25,8 +25,10 @@
 #include <llvm/IR/Value.h>
 #include <llvm/IRReader/IRReader.h>
 
+#ifndef INCOMPATIBLE_LLVM
 #include "llvm/IR/LegacyPassManager.h"
 #include "llvm/Linker/Linker.h"
+#endif // INCOMPATIBLE_LLVM
 
 #include <string>
 #include <iostream>

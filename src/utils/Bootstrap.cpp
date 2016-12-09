@@ -104,6 +104,7 @@ int Bootstrap::init(int argc, char** argv)
     llvm::InitializeNativeTargetAsmPrinter();
     llvm::InitializeNativeTargetAsmParser();
 
+#ifndef INCOMPATIBLE_LLVM
     if (ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ) ||
         ArgsOptions::instance()->has_option(BO_IS_GEN_ASM)) {
         llvm::Module *module_c = new llvm::Module(module_name, llvm_context);
@@ -152,6 +153,8 @@ int Bootstrap::init(int argc, char** argv)
         dest.flush();
     }
     else {
+#endif // INCOMPATIBLE_LLVM
+
         // Create the execution engine.
         std::string error_str;
         engine_builder = new llvm::EngineBuilder(std::move(Owner));
@@ -180,7 +183,9 @@ int Bootstrap::init(int argc, char** argv)
         // No args.
         std::vector<llvm::GenericValue> Args(0);
         llvm::GenericValue gv = execution_engine->runFunction(MainF, Args);
+#ifndef INCOMPATIBLE_LLVM
     }
+#endif // INCOMPATIBLE_LLVM
 
     llvm::llvm_shutdown();
 

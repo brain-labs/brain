@@ -37,7 +37,9 @@ void ArgsHandler::handle(int argc, char **argv)
                       << BRAIN_FORMAT << "\n\n"
                       << "--code=<\"inline code\">\tSets inline brain code\n"
                       << "--io=repl\tSets the IO module to REPLs style\n"
+#ifndef INCOMPATIBLE_LLVM
                       << "--out=<filename>\tSets the output filename\n"
+#endif // INCOMPATIBLE_LLVM
                       << "--version\tShows the current version of Brain\n"
                       << "--size=<number>\tSets the number of cells used by \
 the interpreter\n"
@@ -45,8 +47,10 @@ the interpreter\n"
                       << "-emit-ast\tEmits the AST for the given input\n"
                       << "-emit-code\tEmits an optimized code for the given \
 input\n"
+#ifndef INCOMPATIBLE_LLVM
                       << "-c\tGenerates object file\n"
                       << "-S\tGenerates assembly file\n"
+#endif // INCOMPATIBLE_LLVM
                       << "-v\t\tUses verbose mode for the output\n"
                       << "-O0\t\tGenerates output code with no optmizations\n"
                       << "-O1\t\tOptimizes Brain generated output code \
@@ -72,12 +76,21 @@ input\n"
         else if (str.compare("-v") == 0) {
             ArgsOptions::instance()->add_option(BO_IS_VERBOSE);
         }
+#ifndef INCOMPATIBLE_LLVM
         else if (str.compare("-c") == 0) {
             ArgsOptions::instance()->add_option(BO_IS_GEN_OBJ);
         }
         else if (str.compare("-S") == 0) {
             ArgsOptions::instance()->add_option(BO_IS_GEN_ASM);
         }
+        else if (str.size() > 5 && str.compare(0, 6, "--out=") == 0) {
+            _output_file_name = str.substr(6, str.size()-6);
+            if(_output_file_name.empty()) {
+                std::cout << "Output filename missing." << std::endl;
+                exit(-1);
+            }
+        }
+#endif // INCOMPATIBLE_LLVM
         else if (str.compare("-O0") == 0) {
             if (ArgsOptions::instance()->has_option(BO_IS_OPTIMIZING_O1)) {
                 std::cout << BRAIN_OPT_ERR;
@@ -93,13 +106,6 @@ input\n"
             }
 
             ArgsOptions::instance()->add_option(BO_IS_OPTIMIZING_O1);
-        }
-        else if (str.size() > 5 && str.compare(0, 6, "--out=") == 0) {
-            _output_file_name = str.substr(6, str.size()-6);
-            if(_output_file_name.empty()) {
-                std::cout << "Output filename missing." << std::endl;
-                exit(-1);
-            }
         }
         else if (str.size() > 6 && str.compare(0, 7, "--size=") == 0) {
             /* Specified a size, Brain will create its arrays with the next
@@ -157,7 +163,9 @@ input\n"
         exit(-1);
     }
 
+#ifndef INCOMPATIBLE_LLVM
     solve_output_file_name();
+#endif // INCOMPATIBLE_LLVM
 }
 
 std::string ArgsHandler::get_string_file()
