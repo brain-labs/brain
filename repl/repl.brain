@@ -1,8 +1,5 @@
-this code stops when the user press the space key
+this code stops when the user presses the 'q' key
 the only chars accepted are the brain chars | tabs and spaces
-
-[65][65][32] continue loop
-[32][32][32] end program
 
 + add one to the 0th cell to start the while
 [ while (true)
@@ -10,15 +7,14 @@ the only chars accepted are the brain chars | tabs and spaces
 
   >[-] clean 2nd cell
 
+  make letter 'q' before copying at 3rd cell
+  ++++++++++>+++++++++++*+++
+
+  <[-] go back to 2nd cell and clean it
+
   +* copy value from 1st to 2nd cell
 
-  >+++
-  {
-    ++++++++++ make number 33 at 3rd cell (3 plus (3 times 10))
-  }
-  - subtract one for the space char
-
-  % gets 3rd cell mod 2nd cell
+  >% go to 3rd cell mod 2nd cell
 
   ?
     [-]<< if the value is not zero clean the cell and move to 1st cell

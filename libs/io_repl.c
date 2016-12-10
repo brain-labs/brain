@@ -18,8 +18,11 @@ void b_putchar(int idx, int *cells);
 void b_getchar(int idx, int *cells) {
   struct termios old,new;
   tcgetattr(fileno(stdin),&old);
-  tcgetattr(fileno(stdin),&new);
+  new = old;
   cfmakeraw(&new);
+  new.c_iflag &= ~(ICRNL);
+  new.c_iflag &= IGNCR ^ -1;
+  new.c_lflag &= ~(ECHO | ECHONL | ECHOE | ICANON);
   tcsetattr(fileno(stdin),TCSANOW,&new);
   fflush(NULL);
   int c = fgetc(stdin);
@@ -57,14 +60,24 @@ void b_getchar(int idx, int *cells) {
     case '}':
       color = KBLU;
     break;
+    case  13:
+    case 'q':
+    case 'r':
     case '\n':
-    case '\t':
-    case ' ':
-    putchar(c);
-    break;
+      putchar('\n');
+      cells[idx] = c;
+      return;
+    case 0x7f:
+      // go one char left
+      printf("\b");
+      // overwrite the char with whitespace
+      printf(" ");
+      // go back to "now removed char position"
+      printf("\b");
+      cells[idx] = c;
+      return;
     default:
       return;
-    break;
   }
 
   cells[idx] = c;
