@@ -1,6 +1,13 @@
-this code stops when the user presses the 'q' key
-the only chars accepted are the brain chars | tabs and spaces
+This is the REPL for the Brain Project
 
+The user can quit by pressing the 'q' key
+The user can execute the instructions by pression the 'r' key
+This REPL only accepts
+  Brain commands
+  New line and blank spaces
+  Keys 'q' and 'r'
+
+#
 + add one to the 0th cell to start the while
 [ while (true)
   , read input at 1st cell
