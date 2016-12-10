@@ -60,6 +60,10 @@ void b_getchar(int idx, int *cells) {
     case '}':
       color = KBLU;
     break;
+    case ' ':
+      putchar(' ');
+      cells[idx] = c;
+      return;
     case  13:
     case 'q':
     case 'r':
@@ -68,12 +72,9 @@ void b_getchar(int idx, int *cells) {
       cells[idx] = c;
       return;
     case 0x7f:
-      // go one char left
-      printf("\b");
-      // overwrite the char with whitespace
-      printf(" ");
-      // go back to "now removed char position"
-      printf("\b");
+      putchar('\b');
+      putchar(' ');
+      putchar('\b');
       cells[idx] = c;
       return;
     default:
