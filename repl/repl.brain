@@ -7,7 +7,9 @@ This REPL only accepts
   New line and blank spaces
   Keys 'q' and 'r'
 
-#
+  prints REPL information
+# the debug command was overriden
+
 + add one to the 0th cell to start the while
 [ while (true)
   , read input at 1st cell
