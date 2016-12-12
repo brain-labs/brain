@@ -7,8 +7,6 @@
 
 #include "Bootstrap.h"
 
-using namespace llvm;
-
 // forward declaration of static member.
 Bootstrap* Bootstrap::_instance = nullptr;
 
@@ -108,15 +106,15 @@ int Bootstrap::init(int argc, char** argv)
     if (ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ) ||
         ArgsOptions::instance()->has_option(BO_IS_GEN_ASM)) {
         llvm::Module *module_c = new llvm::Module(module_name, llvm_context);
-        Linker::linkModules(*module_c, std::move(Owner));
+        llvm::Linker::linkModules(*module_c, std::move(Owner));
         if (io_module) {
-            Linker::linkModules(*module_c, std::move(io_module));
+            llvm::Linker::linkModules(*module_c, std::move(io_module));
         }
 
-        std::string target_triple = sys::getDefaultTargetTriple();
+        std::string target_triple = llvm::sys::getDefaultTargetTriple();
         module_c->setTargetTriple(target_triple);
         std::string error;
-        auto target = TargetRegistry::lookupTarget(target_triple, error);
+        auto target = llvm::TargetRegistry::lookupTarget(target_triple, error);
         if (!target) {
             llvm::errs() << error;
             return 1;
@@ -125,24 +123,24 @@ int Bootstrap::init(int argc, char** argv)
         std::string cpu = "generic";
         std::string features = "";
 
-        TargetOptions opt;
-        Reloc::Model rm;
+        llvm::TargetOptions opt;
+        llvm::Reloc::Model rm;
         auto the_target_machine = target->createTargetMachine(target_triple, cpu, features, opt, rm);
 
         module_c->setDataLayout(the_target_machine->createDataLayout());
 
         std::error_code ec;
-        raw_fd_ostream dest(args_handler.get_output_file_name(), ec, sys::fs::F_None);
+        llvm::raw_fd_ostream dest(args_handler.get_output_file_name(), ec, llvm::sys::fs::F_None);
 
         if (ec) {
             llvm::errs() << "Could not open file: " << ec.message();
             return 1;
         }
 
-        legacy::PassManager pass;
+        llvm::legacy::PassManager pass;
         auto filetype = ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ) ?
-                            TargetMachine::CGFT_ObjectFile :
-                            TargetMachine::CGFT_AssemblyFile;
+                            llvm::TargetMachine::CGFT_ObjectFile :
+                            llvm::TargetMachine::CGFT_AssemblyFile;
 
         if (the_target_machine->addPassesToEmitFile(pass, dest, filetype)) {
             llvm::errs() << "The target nachine can't emit a file of this type";
