@@ -5,9 +5,9 @@ CFLAGS-DEBUG=-O0 -Wall
 BIN=./bin
 
 SUDO=sudo
-MKLIB=$(SUDO) bash ./libs/install.sh ./libs
+MKLIB=bash ./libs/install.sh ./libs
 MKTST=bash ./tests/test_scripts.sh ./tests
-MKBIN=mkdir -p bin && $(MKLIB)
+MKBIN=mkdir -p bin
 ROOT=src
 
 SRCS=$(ROOT)/utils/ArgsOptions.cpp $(ROOT)/utils/ArgsHandler.cpp $(ROOT)/utils/Bootstrap.cpp $(ROOT)/parser/Parser.cpp $(ROOT)/ast/general/ASTInfo.cpp $(ROOT)/ast/expr/Expr.cpp $(ROOT)/ast/expr/ShiftExpr.cpp $(ROOT)/ast/expr/IncrementExpr.cpp $(ROOT)/ast/expr/InputExpr.cpp $(ROOT)/ast/expr/OutputExpr.cpp $(ROOT)/ast/expr/LoopExpr.cpp $(ROOT)/ast/expr/ArithmeticExpr.cpp $(ROOT)/ast/expr/DebugExpr.cpp $(ROOT)/ast/expr/BreakExpr.cpp $(ROOT)/ast/expr/IfExpr.cpp $(ROOT)/ast/expr/FloatExpr.cpp $(ROOT)/main.cpp
@@ -21,6 +21,9 @@ build: $(SRCS)
 build-gcc: $(SRCS)
 	$(MKBIN) && $(GCC) $(CFLAGS) $(SRCS) $(CONFIG) -o $(BIN)/brain
 
+build-travis: $(SRCS)
+	$(MKBIN) && $(CC) $(CFLAGS) -DINCOMPATIBLE_LLVM $(SRCS) $(CONFIG) -o $(BIN)/brain
+
 debug: $(SRCS)
 	$(MKBIN) && $(CC) -g $(CFLAGS-DEBUG) $(SRCS) $(CONFIG) -o $(BIN)/brain_debug
 
@@ -33,4 +36,6 @@ build-libs:
 tests:
 	$(MKTST)
 
+install:
+	$(MKLIB)
 .PHONY: tests

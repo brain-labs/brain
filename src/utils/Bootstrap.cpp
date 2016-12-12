@@ -12,7 +12,6 @@ Bootstrap* Bootstrap::_instance = nullptr;
 
 Bootstrap::Bootstrap()
 {
-    io_lib = "/usr/local/include/brain/io.ll";
 }
 
 Bootstrap* Bootstrap::instance()
@@ -28,6 +27,9 @@ int Bootstrap::init(int argc, char** argv)
 {
     ArgsHandler args_handler(argc, argv);
     Parser parser(args_handler.get_string_file());
+
+    io_lib = std::string(getenv("HOME")) + "/.brain/lib/";
+    io_lib += ArgsOptions::instance()->get_io_option() == IO_REPL ? "io_repl.ll" : "io.ll"; 
 
     if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_CODE)) {
         parser.ast_code_gen();
@@ -99,34 +101,89 @@ int Bootstrap::init(int argc, char** argv)
     llvm::InitializeNativeTarget();
     llvm::InitializeNativeTargetAsmPrinter();
     llvm::InitializeNativeTargetAsmParser();
-    // Create the execution engine.
-    std::string error_str;
-    engine_builder = new llvm::EngineBuilder(std::move(Owner));
-    execution_engine = engine_builder->setErrorStr(&error_str)
+
+#ifndef INCOMPATIBLE_LLVM
+    if (ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ) ||
+        ArgsOptions::instance()->has_option(BO_IS_GEN_ASM)) {
+        llvm::Module *module_c = new llvm::Module(module_name, llvm_context);
+        llvm::Linker::linkModules(*module_c, std::move(Owner));
+        if (io_module) {
+            llvm::Linker::linkModules(*module_c, std::move(io_module));
+        }
+
+        std::string target_triple = llvm::sys::getDefaultTargetTriple();
+        module_c->setTargetTriple(target_triple);
+        std::string error;
+        auto target = llvm::TargetRegistry::lookupTarget(target_triple, error);
+        if (!target) {
+            llvm::errs() << error;
+            return 1;
+        }
+   
+        std::string cpu = "generic";
+        std::string features = "";
+
+        llvm::TargetOptions opt;
+        llvm::Reloc::Model rm;
+        auto the_target_machine = target->createTargetMachine(target_triple, cpu, features, opt, rm);
+
+        module_c->setDataLayout(the_target_machine->createDataLayout());
+
+        std::error_code ec;
+        llvm::raw_fd_ostream dest(args_handler.get_output_file_name(), ec, llvm::sys::fs::F_None);
+
+        if (ec) {
+            llvm::errs() << "Could not open file: " << ec.message();
+            return 1;
+        }
+
+        llvm::legacy::PassManager pass;
+        auto filetype = ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ) ?
+                            llvm::TargetMachine::CGFT_ObjectFile :
+                            llvm::TargetMachine::CGFT_AssemblyFile;
+
+        if (the_target_machine->addPassesToEmitFile(pass, dest, filetype)) {
+            llvm::errs() << "The target nachine can't emit a file of this type";
+            return 1;
+        }
+
+        pass.run(*module_c);
+        dest.flush();
+    }
+    else {
+#endif // INCOMPATIBLE_LLVM
+
+        // Create the execution engine.
+        std::string error_str;
+        engine_builder = new llvm::EngineBuilder(std::move(Owner));
+        execution_engine = engine_builder->setErrorStr(&error_str)
 		.setMCJITMemoryManager(std::unique_ptr<llvm::SectionMemoryManager>
-							   (new llvm::SectionMemoryManager())).create();
+                                          (new llvm::SectionMemoryManager())).create();
 
-    if (io_module) {
-        execution_engine->addModule(std::move(io_module));
+        if (io_module) {
+            execution_engine->addModule(std::move(io_module));
+        }
+
+        if (!error_str.empty()) {
+            std::cout << error_str << "\n";
+            return -1;
+        }
+
+        // Finalize the execution engine before use it
+        execution_engine->finalizeObject();
+
+        if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) ||
+	    ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
+            // Run the program
+            std::cout << "=== Program Output ===" << "\n";
+        }
+
+        // No args.
+        std::vector<llvm::GenericValue> Args(0);
+        llvm::GenericValue gv = execution_engine->runFunction(MainF, Args);
+#ifndef INCOMPATIBLE_LLVM
     }
-
-    if (!error_str.empty()) {
-        std::cout << error_str << "\n";
-        return -1;
-    }
-
-    // Finalize the execution engine before use it
-    execution_engine->finalizeObject();
-
-    if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST) ||
-	ArgsOptions::instance()->has_option(BO_IS_EMITTING_LLVM)) {
-        // Run the program
-        std::cout << "=== Program Output ===" << "\n";
-    }
-
-    // No args.
-    std::vector<llvm::GenericValue> Args(0);
-    llvm::GenericValue gv = execution_engine->runFunction(MainF, Args);
+#endif // INCOMPATIBLE_LLVM
 
     llvm::llvm_shutdown();
 

@@ -21,7 +21,20 @@ typedef enum
     BO_IS_VERBOSE = 8,
     BO_IS_OPTIMIZING_O0 = 16,
     BO_IS_OPTIMIZING_O1 = 32,
+    BO_IS_GEN_OBJ = 64,
+    BO_IS_GEN_ASM = 128,
 } BrainOption;
+
+/**
+ * @brief Enumerates all the options for the IO library.
+ */
+typedef enum
+{
+    IO_REGULAR = 0,
+    IO_REPL = 1,
+    IO_CUSTOM = 2
+} IOOption;
+
 
 /**
  * @brief This class handles all the options passed as arguments to Brain.   It
@@ -39,6 +52,8 @@ private:
     int _options;
     /// Number of cells available to Brain interpreter.
     int _k_cells_size;
+    /// Type for the io library
+    int _type_io;
 public:
     ArgsOptions(ArgsOptions const&) = delete;
     ArgsOptions& operator=(ArgsOptions const&) = delete;
@@ -75,6 +90,14 @@ public:
      * @returns A BrainOption representing the level of optimization.
      */
     BrainOption get_optimization();
+    /**
+     * @brief set_io_option Sets the IO style.
+     */
+    void set_io_option(int type_io);
+    /**
+     * @brief get_io_option Gets the the IO style.
+     */
+    int get_io_option();
 };
 
 #endif  // ARGS_OPTIONS_H

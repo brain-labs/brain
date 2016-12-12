@@ -45,7 +45,7 @@ sudo: required
 
 before_install:
   - docker pull luizperes/brain
-  - docker run -i luizperes/brain /bin/sh -c "cd /root/ && rm -rf brain && git clone https://github.com/luizperes/brain.git && cd /root/brain/ && git checkout dev && make SUDO?= && export PATH=$PATH:/root/brain/bin && make tests"
+  - docker run -i luizperes/brain /bin/sh -c "cd /root/ && rm -rf brain && git clone https://github.com/luizperes/brain.git && cd /root/brain/ && git checkout dev && make build-travis SUDO?= && export PATH=$PATH:/root/brain/bin && make install && make tests"
 
 script:
   - echo OK

@@ -21,10 +21,14 @@
 class ShiftExpr : public Expr
 {
 protected:
-    ///
+    /// steps to jump
     int _step;
+
+    /// should it jump?
+    bool _jump;
 public:
-    ShiftExpr(int step) : _step(step) {}
+    ShiftExpr(int step) : _step(step), _jump(false) {}
+    ShiftExpr() : _step(0), _jump(true) {}
     ~ShiftExpr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
@@ -52,6 +56,7 @@ public:
      * @param update The char whose expression will be updated.
      */
     bool update_expression(char update);
+    bool should_update();
 };
 
 #endif  // SHIFT_EXPR_H

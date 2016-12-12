@@ -23,11 +23,18 @@ protected:
     std::string _string_file;
     /// The name of the string file.
     std::string _file_name;
+    /// The name of the output file passed to Brain.
+    std::string _output_file_name;
     /**
      * @brief Called in the constructor to handle all the arguments passed to
      * Brain.
      */
     void handle(int argc, char *argv[]);
+    /**
+     * @brief Solves the output filename, checking if the user passed a value
+     * not.
+     */
+    void solve_output_file_name();
 public:
     ArgsHandler(int argc, char *argv[]) { handle(argc, argv); }
     /**
@@ -40,6 +47,11 @@ public:
      * string.
      */
     std::string get_file_name();
+    /**
+     * @brief Returns the name of the output file passed to Brain as a
+     * string.
+     */
+    std::string get_output_file_name();
 };
 
 #endif // ARGS_HANDLER_H

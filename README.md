@@ -58,14 +58,15 @@ Obs.: To use __Project Status__ (the "Kanban" below), please visit:`https://gith
 | Project Name                        | Status                                    | Technology  | Priority |  Deadline    |
 | ----------------------------------- |:-----------------------------------------:| ----------- | :------: |  :--------:  |
 | [Brain 1.0](#brain)         | ![Progress](http://progressed.io/bar/100)  | C/C++/LLVM  | Low      |              |
-| [Brain 1.1](#brain) | ![Progress](http://progressed.io/bar/0)  | C/C++/LLVM  | Low      |              |
+| [Brain 1.1](#brain) | ![Progress](http://progressed.io/bar/33)  | C/C++/LLVM  | Low      |              |
 
 | To Do | In Progress | Done  |
 | :---: | :---------: | :---: |
 |![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%2311&desc=Implement%20Brain%20Commands(@)%20v1.1)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%239&desc=Implement%20REPL%20v1.1)|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%233&desc=Make%20--debug%20and%20--help%20flags.%20Implement%20input%20files.) ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%232&desc=Implement%20Brainfuck%20commands.)|
-|![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%2310&desc=Implement%20Command%20(^)%20v.1.1)|| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
+||| ![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%231&desc=Make%20Brainfuck%20compatible%20with%20LLVM.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%234&desc=Think%20about%20new%20commands.)
 |||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%235&desc=Optmize%20generated%20code.%20Include%20-O0%20and%20-O1%20options.)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%236&desc=Implement%20First%20Brain%20Commands%20(*,%20/%20%).)|
 |||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%237&desc=Implement%20First%20Brain%20Commands%20({,%20},%20?,%20:,%20;,%20!,%20$).)![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%238&desc=Code%20Refactoring.)|
+|||![PostIt](http://api.ideiadoluiz.com.br/postit/?title=%20%2310&desc=Implement%20Command%20(^)%20v.1.1)|
 
 ### TODO List
 If you want to check the micro TODO list, please see this [issue](https://github.com/luizperes/brain/issues/12).
@@ -130,10 +131,10 @@ __Implemented__
 - `:` it works as an `otherwise` (or `else`) for `?`.
 - `;` ends a statement.
 - `$` prints out the value at the data pointer **divided** by 100.
+- `^` move the data pointer (jump) on the tape. _Ex.: ++++++++++^ // the data pointer will jump to cell 10._
 
 __Not Implemented__
 - `@` calls a function according to the value at the data pointer.
-- `^` move the data pointer (jump) on the tape. _Ex.: ++++++++++^ // the data pointer will jump to cell 10._
 
 Example of the instructions above:
 
@@ -145,11 +146,16 @@ Example of the instructions above:
 
 ### Compiler Options
 
-- `--version`	Shows the current version of Brain
+- `--code=<"inline code">`	Sets inline brain code
+- `--io=repl`	Sets the IO module to REPLs style
+- `--out=<filename>`	Sets the output filename
 - `--size=<number>`	Sets the number of cells used by the interpreter
+- `--version`   Shows the current version of Brain
 - `-emit-llvm`	Emits LLVM IR code for the given input
 - `-emit-ast`	Emits the AST for the given input
 - `-emit-code`	Emits an optimized code for the given input
+- `-c`		Generates object file
+- `-S`		Generates assembly file
 - `-v`		Uses verbose mode for the output
 - `-O0`		Generates output code with no optmizations
 - `-O1`		Optimizes Brain generated output code (Default)

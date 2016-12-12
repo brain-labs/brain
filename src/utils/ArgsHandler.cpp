@@ -35,6 +35,11 @@ void ArgsHandler::handle(int argc, char **argv)
         if (str.compare("--help") == 0 || str.compare("-help") == 0) {
             std::cout << "\n"
                       << BRAIN_FORMAT << "\n\n"
+                      << "--code=<\"inline code\">\tSets inline brain code\n"
+                      << "--io=repl\tSets the IO module to REPLs style\n"
+#ifndef INCOMPATIBLE_LLVM
+                      << "--out=<filename>\tSets the output filename\n"
+#endif // INCOMPATIBLE_LLVM
                       << "--version\tShows the current version of Brain\n"
                       << "--size=<number>\tSets the number of cells used by \
 the interpreter\n"
@@ -42,6 +47,10 @@ the interpreter\n"
                       << "-emit-ast\tEmits the AST for the given input\n"
                       << "-emit-code\tEmits an optimized code for the given \
 input\n"
+#ifndef INCOMPATIBLE_LLVM
+                      << "-c\tGenerates object file\n"
+                      << "-S\tGenerates assembly file\n"
+#endif // INCOMPATIBLE_LLVM
                       << "-v\t\tUses verbose mode for the output\n"
                       << "-O0\t\tGenerates output code with no optmizations\n"
                       << "-O1\t\tOptimizes Brain generated output code \
@@ -50,7 +59,8 @@ input\n"
             exit(0);
         }
         else if (str.compare("--version") == 0) {
-            std::cout << "Brain version " << BRAIN_VERSION << ".\n"
+            std::cout << "Brain version " << BRAIN_VERSION << "."
+                      << std::endl
                       << BRAIN_HELP;
             exit(0);
         }
@@ -66,6 +76,21 @@ input\n"
         else if (str.compare("-v") == 0) {
             ArgsOptions::instance()->add_option(BO_IS_VERBOSE);
         }
+#ifndef INCOMPATIBLE_LLVM
+        else if (str.compare("-c") == 0) {
+            ArgsOptions::instance()->add_option(BO_IS_GEN_OBJ);
+        }
+        else if (str.compare("-S") == 0) {
+            ArgsOptions::instance()->add_option(BO_IS_GEN_ASM);
+        }
+        else if (str.size() > 5 && str.compare(0, 6, "--out=") == 0) {
+            _output_file_name = str.substr(6, str.size()-6);
+            if(_output_file_name.empty()) {
+                std::cout << "Output filename missing." << std::endl;
+                exit(-1);
+            }
+        }
+#endif // INCOMPATIBLE_LLVM
         else if (str.compare("-O0") == 0) {
             if (ArgsOptions::instance()->has_option(BO_IS_OPTIMIZING_O1)) {
                 std::cout << BRAIN_OPT_ERR;
@@ -89,14 +114,27 @@ input\n"
             int cells_size = std::atoi(str.substr(7, str.size()-7).c_str());
             ArgsOptions::instance()->set_cells_size(cells_size);
         }
+        else if (str.size() > 6 && str.compare(0, 7, "--code=") == 0) {
+            _string_file = str.substr(7, str.size()-7);
+        }
+        else if (str.size() > 4 && str.compare(0, 5, "--io=") == 0) {
+            if (str.substr(5, str.size()-5).compare("repl") == 0) {
+                ArgsOptions::instance()->set_io_option(IO_REPL);
+            } else {
+                std::cout << "Unknown IO option." << std::endl;
+                exit(-1);
+            }
+        }
         else if ((str.size() > 2 && str.substr(str.size()-2, 2) == ".b") ||
+                 (str.size() > 3 && str.substr(str.size()-3, 3) == ".bf") ||
                  (str.size() > 3 && str.substr(str.size()-3, 3) == ".br") ||
+                 (str.size() > 4 && str.substr(str.size()-4, 4) == ".wit") ||
                  (str.size() > 6 && str.substr(str.size()-6, 6) == ".brain")) {
             std::ifstream t(str);
             std::string str_file((std::istreambuf_iterator<char>(t)),
                                  std::istreambuf_iterator<char>());
             if (str_file.empty()) {
-                std::cout << "No such file '" << str << "'\n"
+                std::cout << "No such file '" << str << std::endl
                           << BRAIN_FORMAT;
                 exit(-1);
             }
@@ -104,12 +142,14 @@ input\n"
             _file_name = str;
         }
         else if (str.find("-") == 0) {
-            std::cout << "Unsupported option \"" << str << "\"\n"
+            std::cout << "Unsupported option \"" << str << "\"" 
+                      << std::endl
                       << BRAIN_HELP;
             exit(-1);
         }
         else {
-            std::cout << "No such file '" << str << "'\n"
+            std::cout << "No such file '" << str << "'"
+                      << std::endl
                       << BRAIN_FORMAT
                       << BRAIN_HELP;
             exit(-1);
@@ -117,10 +157,15 @@ input\n"
     }
 
     if (_string_file.empty()) {
-        std::cout << "No input files\n"
-                  << BRAIN_FORMAT;
+        std::cout << "No input files"
+                 << std::endl
+                 << BRAIN_FORMAT;
         exit(-1);
     }
+
+#ifndef INCOMPATIBLE_LLVM
+    solve_output_file_name();
+#endif // INCOMPATIBLE_LLVM
 }
 
 std::string ArgsHandler::get_string_file()
@@ -128,8 +173,38 @@ std::string ArgsHandler::get_string_file()
   return _string_file;
 }
 
-
 std::string ArgsHandler::get_file_name()
 {
     return _file_name;
+}
+
+std::string ArgsHandler::get_output_file_name()
+{
+    return _output_file_name;
+}
+
+void ArgsHandler::solve_output_file_name()
+{
+    if (!_output_file_name.empty() &&
+        !ArgsOptions::instance()->has_option(BO_IS_GEN_ASM) &&
+        !ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ)) {
+        std::cout << "--out=<filename> must be used together with -c or -S\n"
+                  << BRAIN_HELP;
+        exit(-1);
+    } else if (!_output_file_name.empty()) {
+        return;
+    } else if (!ArgsOptions::instance()->has_option(BO_IS_GEN_ASM) &&
+               !ArgsOptions::instance()->has_option(BO_IS_GEN_OBJ)) {
+        return;
+    }
+
+    std::string ext = ArgsOptions::instance()->has_option(BO_IS_GEN_ASM) ?
+                      "s" : "o";
+
+    if (_file_name.empty()) {
+        _output_file_name = "out." + ext;
+    } else {
+        _output_file_name = _file_name.substr(0,
+                                _file_name.find_last_of(".") + 1) + ext;
+    }
 }
