@@ -66,6 +66,12 @@ void b_getchar(int idx, int *cells) {
       putchar(' ');
       cells[idx] = c;
       return;
+    case 0x7f:
+      putchar('\b');
+      putchar(' ');
+      putchar('\b');
+      cells[idx] = c;
+      return;
     case  13:
     case '\n':
       putchar('\n');
@@ -102,7 +108,7 @@ void b_debug(int idx, int *cells) {
 This program comes with ABSOLUTELY NO WARRANTY.\n\
 Type 'h' for help\n\
 Type 'c' for conditions\n\
-Type 'q' or ^C for quitting\n");
+Type 'q' for quitting\n");
 }
 
 void b_help()
