@@ -36,8 +36,12 @@ This REPL only accepts
     ;
 
     << go back to cell 1
+
+    todo 'COPY THE CODE'
   :
-    if input is equal to 'enter'
+    if input is equal to 'enter' then execute repl code
+    
+    for now we just quit
     !
   ;
 ]
