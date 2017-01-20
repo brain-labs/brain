@@ -1,11 +1,10 @@
 This is the REPL for the Brain Project
 
 The user can quit by pressing the 'q' key
-The user can execute the instructions by pression the 'r' key
 This REPL only accepts
   Brain commands
   New line and blank spaces
-  Keys 'q' and 'r'
+  Key 'q' for quitting
 
   prints REPL information
 # the debug command was overriden
@@ -30,12 +29,12 @@ This REPL only accepts
     >% go to cell 2 mod cell 1
 
     ?
-      [-] make 0 at cell 2
+      [-] make 0 at cell 2 
     :
       ! break out the loop if it is letter 'q'
     ;
 
-    << go back to cell 1
+    << go back to cell 0
 
     todo 'COPY THE CODE'
   :
