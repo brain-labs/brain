@@ -13,10 +13,10 @@ This REPL only accepts
 [ while (true)
   , read input at 1st cell
 
-  ------------- subtract 10 from the input
+  ------------- subtract 13 from the input
   ? if not equal to 'enter'
 
-    +++++++++++++ add 10 back
+    +++++++++++++ add 13 back
 
     >[-] clean cell 1
     make letter 'q' before copying at cell 2
