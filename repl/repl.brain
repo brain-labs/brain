@@ -6,6 +6,8 @@ This REPL only accepts
   New line and blank spaces
   Key 'q' for quitting
 
+>>>++++<<< go to cell 3 and set it to 4
+
   prints REPL information
 # the debug command was overriden
 
@@ -34,9 +36,17 @@ This REPL only accepts
       ! break out the loop if it is letter 'q'
     ;
 
-    << go back to cell 0
+    << go to cell 0 and copy it to any cell from the cell 3 to next 0 found
 
-    todo 'COPY THE CODE'
+    { enter in a loop
+      >>> go to cell 3
+      ^ jump to the cell value that represents the new char pos
+      + add one at the end of the forloop$
+      > go to the nearest zero
+      ^ and jump back to cell 0
+    }
+ 
+    >>>+<<< go to cell 3 and increment the value
   :
     if input is equal to 'enter' then execute repl code
     
