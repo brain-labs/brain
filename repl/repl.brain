@@ -52,7 +52,8 @@ This REPL only accepts
      
     >>>[>.] print the input
 
-    quit the program   
-    !
+    ^ go back to cell 0
+
+    ++++++++++. add one because it only enters here if the user typed new line
   ;
 ]
