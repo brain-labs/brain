@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="">
-    <img alt="Logo" src="../img/brain_repl_tape.png" width="500px">
+    <img alt="Logo" src="../img/brain_repl_tape.png" width="100%">
   </a>
 </p>
 
