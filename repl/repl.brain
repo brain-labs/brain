@@ -6,7 +6,7 @@ This REPL only accepts
   New line and blank spaces
   Key 'q' for quitting
 
->>>++++<<< go to cell 3 and set it to 4
+>>++++++++++>++++++++*-<[-]<< go to cell 3 and set it to 79
 
   prints REPL information
 # the debug command was overriden
@@ -50,7 +50,8 @@ This REPL only accepts
   :
     if input is equal to 'enter' then execute repl code
      
-    >>>[>.] print the input
+    >>>^<[<] go to the first char of the input typed
+    >[.>] print the input
 
     ^ go back to cell 0
 
