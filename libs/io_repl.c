@@ -8,6 +8,8 @@ void b_help();
 void b_conditions();
 void b_putchar(int idx, int *cells);
 
+#define DEL 0x7f
+
 #define KNRM  "\x1B[0m"
 #define KRED  "\x1B[31m"
 #define KGRN  "\x1B[32m"
@@ -66,7 +68,7 @@ void b_getchar(int idx, int *cells) {
       putchar(' ');
       cells[idx] = c;
       return;
-    case 0x7f:
+    case DEL:
       putchar('\b');
       putchar(' ');
       putchar('\b');
@@ -95,8 +97,13 @@ void b_putchar(int idx, int *cells) {
 }
 
 void b_float_print(int idx, int *cells) {
-  float value = cells[idx] / 100.0;
-  printf("%.2f", value);
+//  float value = cells[idx] / 100.0;
+//  printf("%.2f", value);
+printf(
+    "Index Pointer: %d Value at Index Pointer: %d\n",
+    idx,
+    cells[idx]
+  );
 }
 
 void b_debug(int idx, int *cells) {
