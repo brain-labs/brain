@@ -36,24 +36,24 @@ void ArgsHandler::handle(int argc, char **argv)
             std::cout << "\n"
                       << BRAIN_FORMAT << "\n\n"
                       << "--code=<\"inline code\">\tSets inline brain code\n"
-                      << "--io=repl\tSets the IO module to REPLs style\n"
+                      << "--io=repl\t\tSets the IO module to REPLs style\n"
 #ifndef INCOMPATIBLE_LLVM
                       << "--out=<filename>\tSets the output filename\n"
 #endif // INCOMPATIBLE_LLVM
-                      << "--version\tShows the current version of Brain\n"
-                      << "--size=<number>\tSets the number of cells used by \
+                      << "--version\t\tShows the current version of Brain\n"
+                      << "--size=<number>\t\tSets the number of cells used by \
 the interpreter\n"
-                      << "-emit-llvm\tEmits LLVM IR code for the given input\n"
-                      << "-emit-ast\tEmits the AST for the given input\n"
-                      << "-emit-code\tEmits an optimized code for the given \
+                      << "-emit-llvm\t\tEmits LLVM IR code for the given input\n"
+                      << "-emit-ast\t\tEmits the AST for the given input\n"
+                      << "-emit-code\t\tEmits an optimized code for the given \
 input\n"
 #ifndef INCOMPATIBLE_LLVM
-                      << "-c\tGenerates object file\n"
-                      << "-S\tGenerates assembly file\n"
+                      << "-c\t\t\tGenerates object file\n"
+                      << "-S\t\t\tGenerates assembly file\n"
 #endif // INCOMPATIBLE_LLVM
-                      << "-v\t\tUses verbose mode for the output\n"
-                      << "-O0\t\tGenerates output code with no optmizations\n"
-                      << "-O1\t\tOptimizes Brain generated output code \
+                      << "-v\t\t\tUses verbose mode for the output\n"
+                      << "-O0\t\t\tGenerates output code with no optmizations\n"
+                      << "-O1\t\t\tOptimizes Brain generated output code \
 (Default)\n"
                       << "\n";
             exit(0);

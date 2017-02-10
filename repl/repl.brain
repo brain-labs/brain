@@ -1,11 +1,12 @@
 This is the REPL for the Brain Project
 
 The user can quit by pressing the 'q' key
-The user can execute the instructions by pression the 'r' key
 This REPL only accepts
   Brain commands
   New line and blank spaces
-  Keys 'q' and 'r'
+  Key 'q' for quitting
+
+>>++++++++++>++++++++*-<[-]<< go to cell 3 and set it to 79
 
   prints REPL information
 # the debug command was overriden
@@ -14,20 +15,46 @@ This REPL only accepts
 [ while (true)
   , read input at 1st cell
 
-  >[-] clean 2nd cell
+  ------------- subtract 13 from the input
+  ? if not equal to 'enter'
 
-  make letter 'q' before copying at 3rd cell
-  ++++++++++>+++++++++++*+++
+    +++++++++++++ add 13 back
 
-  <[-] go back to 2nd cell and clean it
+    >[-] clean cell 1
+    make letter 'q' before copying at cell 2
+    ++++++++++>+++++++++++*+++
 
-  +* copy value from 1st to 2nd cell
+    <[-] go back to 1 cell and clean it
 
-  >% go to 3rd cell mod 2nd cell
+    +* copy value from cell 0 to cell 1
 
-  ?
-    [-]<< if the value is not zero clean the cell and move to 1st cell
+    >% go to cell 2 mod cell 1
+
+    ?
+      [-] make 0 at cell 2 
+    :
+      ! break out the loop if it is letter 'q'
+    ;
+
+    << go to cell 0 and copy it to any cell from the cell 3 to next 0 found
+
+    { enter in a loop
+      >>> go to cell 3
+      ^ jump to the cell value that represents the new char pos
+      + add one at the end of the forloop
+      > go to the nearest zero
+      ^ and jump back to cell 0
+    }
+ 
+    >>>+<<< go to cell 3 and increment the value
   :
-    !
+    if input is equal to 'enter' then execute repl code
+     
+    >>>^<[<] go to the first char of the input typed
+    >[.>] print the input
+
+    ^ go back to cell 0
+
+    ++++++++++. add one because it only enters here if the user typed new line
   ;
 ]
