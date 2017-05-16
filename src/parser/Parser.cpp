@@ -29,8 +29,7 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
                 BO_IS_OPTIMIZING_O1 && !exprs.empty()) {
 
             Expr *last_expression = exprs.back();
-            if (last_expression->should_update() &&
-                last_expression->update_expression(c)) {
+            if (last_expression->update_expression(c)) {
                 continue;
             }
         }
@@ -183,4 +182,3 @@ void Parser::ast_code_gen()
         expr->ast_code_gen();
     }
 }
-

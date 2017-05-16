@@ -56,7 +56,6 @@ public:
      * @param update The char whose expression will be updated.
      */
     bool update_expression(char update);
-    bool should_update();
 };
 
 #endif  // SHIFT_EXPR_H
