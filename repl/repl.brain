@@ -6,7 +6,10 @@ This REPL only accepts
   New line and blank spaces
   Key 'q' for quitting
 
->>++++++++++>++++++++*-<[-]<< go to cell 3 and set it to 79
+>>>>>++++++++++++++++++++++++++++ go to cell 5 and make brain index equals to 28
+<<<++++++++++>++++++++*-<[-] go to cell 3 and set it to 79
+>^<<++++++++++++++++++++++++++++ go to cell 77 and make number 28
+>^ go back to cell 0
 
   prints REPL information
 # the debug command was overriden
@@ -56,5 +59,10 @@ This REPL only accepts
     ^ go back to cell 0
 
     ++++++++++. add one because it only enters here if the user typed new line
+
+    >>>+ go to cell 3 and add 1 to give a space in the input
+    <<< go back to cell 0
+
+    plan to make the switch here
   ;
 ]

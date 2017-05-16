@@ -98,8 +98,3 @@ bool ShiftExpr::update_expression(char update)
         return false;
     }
 }
-
-bool ShiftExpr::should_update()
-{
-    return !_jump;
-}

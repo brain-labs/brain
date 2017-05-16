@@ -83,8 +83,12 @@ void b_getchar(int idx, int *cells) {
       b_help(); // fallthrough
     case 'c':
       b_conditions(); // fallthrough
-    default:
       cells[idx] = c;
+      return;
+    case 'q':
+      cells[idx] = c;
+      return;
+    default:
       return;
   }
 
