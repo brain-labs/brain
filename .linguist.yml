@@ -1,0 +1,43 @@
+---
+Brain:
+  extensions:
+    - ".br"
+    - ".brain"
+  default_color: "#969896"
+  
+  grammar:
+    - color: "#a71d5d"
+      operators:
+        - ">"
+        - "<"
+        - "^"
+        - "&lt;"
+        - "&gt;"
+        
+    - color: "#333333"
+      operators:
+        - "["
+        - "]"
+        - "{"
+        - "}"
+        - "?"
+        - ":"
+        - ";"
+        - "!"
+        
+    - color: "#0086b3"
+      operators:
+        - "+"
+        - "-"
+        - "*"
+        - "/"
+        - "%"
+        - "_"
+    
+    - color: "#795da3"
+      operators:
+        - "."
+        - ","
+        - "$"
+        - "#"
+
