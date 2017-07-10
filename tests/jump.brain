@@ -2,3 +2,9 @@
 ^# go to cell zero
 ^# go to cell 10
 >>>+# go to cell 13
+
+[>]^ go to cell 0
+[-]>[-]< clear cell 0 and 1
+^ jump from cell 0 to zero
+>^ go to cell 1 and jump it back to cell 0
+>+# go to cell 1 and add 1

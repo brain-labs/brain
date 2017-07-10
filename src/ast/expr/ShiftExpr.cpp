@@ -86,6 +86,11 @@ void ShiftExpr::ast_code_gen()
 
 bool ShiftExpr::update_expression(char update)
 {
+    if (_jump) {
+      // no optimizations when there is a jump
+      return false;
+    }
+
     switch(update)
     {
     case TT_SHIFT_RIGHT:
