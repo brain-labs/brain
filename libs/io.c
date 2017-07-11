@@ -24,6 +24,11 @@ void b_show_tape(int idx, int *cells, int size) {
         if (!found_idx && i == idx) {
             idx_position = tape_idx;
             found_idx = true;
+
+            if (!*cells) {
+                idx_length = 1;
+                found_idx_length = true;
+            }
         }
 
         tape[tape_idx++] = ' ';
