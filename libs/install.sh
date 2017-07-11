@@ -19,7 +19,7 @@ for lib in $files
 do
   filename=$(basename "$lib")
   filename="${filename%.*}"
-  clang -S -emit-llvm $lib -o $inc_path/$filename.ll
+  clang-3.8 -S -emit-llvm $lib -o $inc_path/$filename.ll
   if [ $? -ne 0 ] ; then
     exit
   else
