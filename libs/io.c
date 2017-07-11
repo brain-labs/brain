@@ -47,7 +47,7 @@ void b_show_tape(int idx, int *cells, int size) {
                 found_idx_length = true;
             }
         } else {
-            tape[tape_idx++] = '_';
+            tape[tape_idx++] = i == idx ? '0' : '_';
         }
 
         tape[tape_idx++] = ' ';
