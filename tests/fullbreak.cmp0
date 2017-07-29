@@ -29,4 +29,7 @@ LoopExpr: {
  }
 DebugExpr
 === Program Output ===
-Index Pointer: 1 Value at Index Pointer: 5
+-------------------------------------------------
+[ 4 | 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+     ^^^
+     *(1)
