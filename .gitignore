@@ -35,8 +35,10 @@
 # Debug files
 *.dSYM/
 
+# Swap files
 *.swp
 *.swo
+*.dwo
 
 *_r2
 *.ll
