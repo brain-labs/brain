@@ -9,8 +9,27 @@ DebugExpr
 ShiftExpr (3)
 IncrementExpr (1)
 DebugExpr
+LoopExpr: [
+  ShiftExpr (1)
+ ]
+ShiftExpr (jump)
+LoopExpr: [
+  IncrementExpr (-1)
+ ]
+ShiftExpr (1)
+LoopExpr: [
+  IncrementExpr (-1)
+ ]
+ShiftExpr (-1)
+ShiftExpr (jump)
+ShiftExpr (1)
+ShiftExpr (jump)
+ShiftExpr (1)
+IncrementExpr (1)
+DebugExpr
 === Program Output ===
 Index Pointer: 10 Value at Index Pointer: 0
 Index Pointer: 0 Value at Index Pointer: 10
 Index Pointer: 10 Value at Index Pointer: 0
 Index Pointer: 13 Value at Index Pointer: 1
+Index Pointer: 1 Value at Index Pointer: 1

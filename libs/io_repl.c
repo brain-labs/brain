@@ -6,7 +6,7 @@
 
 void b_help();
 void b_conditions();
-void b_putchar(int idx, int *cells);
+void b_putchar(int idx, int *cells, int size);
 
 #define DEL 0x7f
 
@@ -19,7 +19,7 @@ void b_putchar(int idx, int *cells);
 #define KCYN  "\x1B[36m"
 #define KWHT  "\x1B[37m"
 
-void b_getchar(int idx, int *cells) {
+void b_getchar(int idx, int *cells, int size) {
   struct termios old,new;
   tcgetattr(fileno(stdin),&old);
   new = old;
@@ -96,11 +96,11 @@ void b_getchar(int idx, int *cells) {
   printf("%s%c%s", color, c, KNRM);
 }
 
-void b_putchar(int idx, int *cells) {
+void b_putchar(int idx, int *cells, int size) {
   putchar(cells[idx]);
 }
 
-void b_float_print(int idx, int *cells) {
+void b_float_print(int idx, int *cells, int size) {
 //  float value = cells[idx] / 100.0;
 //  printf("%.2f", value);
 printf(
@@ -110,7 +110,7 @@ printf(
   );
 }
 
-void b_debug(int idx, int *cells) {
+void b_debug(int idx, int *cells, int size) {
   /* overriding the debug 
    * in order to minimize the size
    * the final repl size.
