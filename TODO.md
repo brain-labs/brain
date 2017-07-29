@@ -27,11 +27,12 @@
 - [x] Check if required functions (LLVM IR) are implemented.
 - [x] Breaks are not working inside if (they are going back to the beginning of the loop)
 - [x] Fix verbose mode and levels for the debug mode
-- [ ] Create install script. (remember to install the libs)
+- [x] Create install script. (remember to install the libs)
+- [ ] Create a code generator file to store common code shared by the expressions.
 
 # Documentation
 
 - [x] Utils
-- [ ] Parser
-- [ ] Expressions
-- [ ] AST
+- [x] Parser
+- [x] Expressions
+- [x] AST
