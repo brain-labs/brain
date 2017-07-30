@@ -8,4 +8,7 @@ LoopExpr: {
  }
 DebugExpr
 === Program Output ===
-Index Pointer: 0 Value at Index Pointer: 0
+-------------------------------------------------
+[ 0 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
