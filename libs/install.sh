@@ -19,8 +19,9 @@ for lib in $files
 do
   filename=$(basename "$lib")
   filename="${filename%.*}"
-  clang-3.8 -S -emit-llvm $lib -o $inc_path/$filename.ll
+  $2 -S -emit-llvm $lib -o $inc_path/$filename.ll
   if [ $? -ne 0 ] ; then
+    echo "Did you pass CLANG as an argument?"
     exit
   else
     echo "Library '$inc_path/$filename' done....."
