@@ -19,7 +19,19 @@ DebugExpr
 ArithmeticExpr ( remainder )
 DebugExpr
 === Program Output ===
-Index Pointer: 1 Value at Index Pointer: 6
-Index Pointer: 4 Value at Index Pointer: 32
-Index Pointer: 4 Value at Index Pointer: 16
-Index Pointer: 4 Value at Index Pointer: 0
+-------------------------------------------------
+[ 3 | 6 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+     ^^^
+     *(1)
+--------------------------------------------------
+[ 3 | 6 | _ | 2 | 32 | _ | _ | _ | _ | _ | _ | _ ]
+                 ^^^^
+                 *(4)
+--------------------------------------------------
+[ 3 | 6 | _ | 2 | 16 | _ | _ | _ | _ | _ | _ | _ ]
+                 ^^^^
+                 *(4)
+-------------------------------------------------
+[ 3 | 6 | _ | 2 | 0 | _ | _ | _ | _ | _ | _ | _ ]
+                 ^^^
+                 *(4)

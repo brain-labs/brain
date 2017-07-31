@@ -1,4 +1,4 @@
-CC=clang++
+CC=clang++-3.8
 GCC=g++
 CFLAGS=-O3 -Wall -std=c++1y
 CFLAGS-DEBUG=-O0 -Wall
@@ -11,7 +11,7 @@ MKBIN=mkdir -p bin
 ROOT=src
 
 SRCS=$(ROOT)/utils/ArgsOptions.cpp $(ROOT)/utils/ArgsHandler.cpp $(ROOT)/utils/Bootstrap.cpp $(ROOT)/parser/Parser.cpp $(ROOT)/ast/general/ASTInfo.cpp $(ROOT)/ast/expr/Expr.cpp $(ROOT)/ast/expr/ShiftExpr.cpp $(ROOT)/ast/expr/IncrementExpr.cpp $(ROOT)/ast/expr/InputExpr.cpp $(ROOT)/ast/expr/OutputExpr.cpp $(ROOT)/ast/expr/LoopExpr.cpp $(ROOT)/ast/expr/ArithmeticExpr.cpp $(ROOT)/ast/expr/DebugExpr.cpp $(ROOT)/ast/expr/BreakExpr.cpp $(ROOT)/ast/expr/IfExpr.cpp $(ROOT)/ast/expr/FloatExpr.cpp $(ROOT)/main.cpp
-CONFIG=`llvm-config --cxxflags --ldflags --system-libs --libs core mcjit native nativecodegen irreader linker`
+CONFIG=`llvm-config-3.8 --cxxflags --ldflags --system-libs --libs core mcjit native nativecodegen irreader linker`
 
 all: build
 

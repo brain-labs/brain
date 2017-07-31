@@ -25,5 +25,11 @@ IfExpr (THEN) [
  ]
 DebugExpr
 === Program Output ===
-Index Pointer: 0 Value at Index Pointer: 6
-Index Pointer: 0 Value at Index Pointer: 6
+-------------------------------------------------
+[ 6 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 6 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
