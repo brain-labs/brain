@@ -20,7 +20,7 @@ GCC=g++
 CLANG=clang
 LLVM_CONFIG=llvm-config
 
-CFLAGS=-O3 -Wall -std=c++1y
+CFLAGS=-O3 -Wall -Wno-unknown-warning-option -std=c++1y
 CFLAGS-DEBUG=-O0 -Wall
 BIN=./bin
 
