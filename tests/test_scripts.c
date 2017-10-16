@@ -16,8 +16,11 @@ void appendExtToFile(char *dest, char *source, char *ext);
 void compareFiles(char *filename1, char *filename2);
 void execToFile(char *options, char *destFile);
 
-int main()
-{
+int main(void) {
+#if !__unix__
+#error "This shouldn't work on any non unix platform. Please, make it portable."
+#endif
+
   char *execProg = "brain";
 
   DIR *d;
