@@ -14,6 +14,10 @@ Bootstrap::Bootstrap()
 {
 }
 
+Bootstrap::~Bootstrap() {
+    delete _instance;
+}
+
 Bootstrap* Bootstrap::instance()
 {
     if (_instance == nullptr) {
