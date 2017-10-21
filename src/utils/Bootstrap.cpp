@@ -124,7 +124,7 @@ int Bootstrap::init(int argc, char** argv)
         std::string features = "";
 
         llvm::TargetOptions opt;
-        llvm::Reloc::Model rm;
+        llvm::Reloc::Model rm = llvm::Reloc::Model::Default;
         auto the_target_machine = target->createTargetMachine(target_triple, cpu, features, opt, rm);
 
         module_c->setDataLayout(the_target_machine->createDataLayout());
