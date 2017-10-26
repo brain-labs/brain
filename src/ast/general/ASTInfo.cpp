@@ -22,6 +22,10 @@ ASTInfo* ASTInfo::instance()
     return ASTInfo::_instance;
 }
 
+ASTInfo::~ASTInfo() {
+  delete _instance;
+}
+
 llvm::GlobalVariable* ASTInfo::get_index_ptr()
 {
     return __brain_index_ptr;
