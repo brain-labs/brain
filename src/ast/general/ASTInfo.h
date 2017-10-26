@@ -35,6 +35,7 @@ private:
 public:
     ASTInfo(ASTInfo const&) = delete;
     ASTInfo& operator=(ASTInfo const&) = delete;
+    ~ASTInfo();
     /**
      * @brief Returns the instance of ASTInfo class if the member _instance is
      * nullptr, otherwise it creates a new ASTInfo object and returns it.
