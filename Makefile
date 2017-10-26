@@ -37,9 +37,11 @@ all: build
 
 build: $(SRCS)
 	$(MKBIN) && $(CC) $(CFLAGS) $(SRCS) $(CONFIG) -o $(BIN)/brain
+	rm *.dwo
 
 build-gcc: $(SRCS)
 	$(MKBIN) && $(GCC) $(CFLAGS) $(SRCS) $(CONFIG) -o $(BIN)/brain
+	rm *.dwo
 
 build-travis: $(SRCS)
 	$(MKBIN) && $(CC) $(CFLAGS) -DINCOMPATIBLE_LLVM $(SRCS) $(CONFIG) -o $(BIN)/brain
@@ -54,6 +56,7 @@ build-3.9: all
 
 debug: $(SRCS)
 	$(MKBIN) && $(CC) -g $(CFLAGS-DEBUG) $(SRCS) $(CONFIG) -o $(BIN)/brain_debug
+	rm *.dwo
 
 debug-gcc: $(SRCS)
 	$(MKBIN) && $(GCC) -g $(CFLAGS-DEBUG) $(SRCS) $(CONFIG) -o $(BIN)/brain_debug
@@ -66,4 +69,5 @@ tests:
 
 install:
 	$(MKLIB)
+
 .PHONY: tests
