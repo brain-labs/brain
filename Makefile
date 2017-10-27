@@ -20,8 +20,8 @@ GCC=g++
 CLANG=clang
 LLVM_CONFIG=llvm-config
 
-CFLAGS=-O3 -Wall -Wno-unknown-warning-option -std=c++1y
-CFLAGS-DEBUG=-O0 -Wno-unknown-warning-option -Wall
+CFLAGS=-O3 -Wall -Wno-unknown-warning-option -std=c++14
+CFLAGS-DEBUG=-O0 -Wall -Wno-unknown-warning-option -std=c++14
 BIN=./bin
 
 SUDO=sudo
