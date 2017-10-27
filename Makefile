@@ -21,7 +21,7 @@ CLANG=clang
 LLVM_CONFIG=llvm-config
 
 CFLAGS=-O3 -Wall -Wno-unknown-warning-option -std=c++1y
-CFLAGS-DEBUG=-O0 -Wall
+CFLAGS-DEBUG=-O0 -Wno-unknown-warning-option -Wall
 BIN=./bin
 
 SUDO=sudo
@@ -56,7 +56,7 @@ build-3.9: all
 
 debug: $(SRCS)
 	$(MKBIN) && $(CC) -g $(CFLAGS-DEBUG) $(SRCS) $(CONFIG) -o $(BIN)/brain_debug
-	rm *.dwo
+	mv *.dwo bin/
 
 debug-gcc: $(SRCS)
 	$(MKBIN) && $(GCC) -g $(CFLAGS-DEBUG) $(SRCS) $(CONFIG) -o $(BIN)/brain_debug
