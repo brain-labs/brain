@@ -1,13 +1,8 @@
 #include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 // you can overwrite those functions! :)
-
-int number_size(int number) {
-    return floor(log10(abs(number))) + 1 + (number > 0 ? 0 : 1);
-}
 
 void b_show_tape(int idx, int *cells, int size) {
     // TODO: ellipsize values based on index
@@ -34,9 +29,9 @@ void b_show_tape(int idx, int *cells, int size) {
         tape[tape_idx++] = ' ';
         // Has a value allocated on register
         if (*cells) {
-            unsigned int value_size = number_size(*cells);
-            char number[value_size];
-            sprintf(number, "%d", *cells);
+            unsigned int value_size;
+            char number[sizeof(*cells)*241/100+3];
+            value_size = sprintf(number, "%d", *cells);
             // Append each number character
             for (j = 0; j < value_size; j++) {
                 tape[tape_idx++] = number[j];
