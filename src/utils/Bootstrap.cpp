@@ -61,7 +61,9 @@ int Bootstrap::init(int argc, char** argv)
     auto *module = Owner.get();
 
     // Create the main function: "i32 @main()"
-    auto *MainF = llvm::cast<llvm::Function>(module->getOrInsertFunction("main", llvm::Type::getInt32Ty(llvm_context), (llvm::Type *)0));
+    auto *MainF = llvm::cast<llvm::Function>(module->getOrInsertFunction("main",
+                                                                        llvm::Type::getInt32Ty(llvm_context),
+                                                                        (llvm::Type *)0));
 
     // Create the entry block
     auto *basic_block = llvm::BasicBlock::Create(llvm_context,

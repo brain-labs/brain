@@ -18,6 +18,7 @@ const std::string BRAIN_HELP = "Use the identifier '--help' to get information \
 about the settings\n";
 const std::string BRAIN_OPT_ERR = "You can not use more than one type of \
 optimization at time.\n";
+const std::string BRAIN_DEFAULT_FILE_NAME = "a";
 
 void ArgsHandler::handle(int argc, char **argv)
 {
@@ -28,6 +29,8 @@ void ArgsHandler::handle(int argc, char **argv)
                   << BRAIN_HELP;
         exit(-1);
     }
+
+    _file_name = BRAIN_DEFAULT_FILE_NAME;
 
     for (int i = 1; i < argc; i++) {
         std::string str(argv[i]);
