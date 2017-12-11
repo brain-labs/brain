@@ -29,6 +29,7 @@ MKLIB=bash ./libs/install.sh ./libs $(CLANG)
 MKTST=bash ./tests/test_scripts.sh ./tests $(CLANG)
 MKBIN=mkdir -p bin
 ROOT=src
+CLEANUP=rm -f *.dwo
 
 SRCS=$(ROOT)/utils/ArgsOptions.cpp $(ROOT)/utils/ArgsHandler.cpp $(ROOT)/utils/Bootstrap.cpp $(ROOT)/parser/Parser.cpp $(ROOT)/ast/general/ASTInfo.cpp $(ROOT)/ast/expr/Expr.cpp $(ROOT)/ast/expr/ShiftExpr.cpp $(ROOT)/ast/expr/IncrementExpr.cpp $(ROOT)/ast/expr/InputExpr.cpp $(ROOT)/ast/expr/OutputExpr.cpp $(ROOT)/ast/expr/LoopExpr.cpp $(ROOT)/ast/expr/ArithmeticExpr.cpp $(ROOT)/ast/expr/DebugExpr.cpp $(ROOT)/ast/expr/BreakExpr.cpp $(ROOT)/ast/expr/IfExpr.cpp $(ROOT)/ast/expr/FloatExpr.cpp $(ROOT)/main.cpp
 CONFIG=`$(LLVM_CONFIG) --cxxflags --ldflags --system-libs --libs core mcjit native nativecodegen irreader linker`
@@ -37,11 +38,11 @@ all: build
 
 build: $(SRCS)
 	$(MKBIN) && $(CC) $(CFLAGS) $(SRCS) $(CONFIG) -o $(BIN)/brain
-	rm *.dwo
+	$(CLEANUP)
 
 build-gcc: $(SRCS)
 	$(MKBIN) && $(GCC) $(CFLAGS) $(SRCS) $(CONFIG) -o $(BIN)/brain
-	rm *.dwo
+	$(CLEANUP)
 
 build-travis: $(SRCS)
 	$(MKBIN) && $(CC) $(CFLAGS) -DINCOMPATIBLE_LLVM $(SRCS) $(CONFIG) -o $(BIN)/brain
