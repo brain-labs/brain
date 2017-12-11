@@ -21,7 +21,7 @@ CLANG=clang
 LLVM_CONFIG=llvm-config
 
 CFLAGS=-O3 -Wall -Wno-unknown-warning-option -std=c++14
-CFLAGS-DEBUG=-O0 -Wall -Wno-unknown-warning-option -std=c++14
+CFLAGS-DEBUG=-O0 -Wall -Wno-unknown-warning-option -std=c++14 -DIS_DEBUG
 BIN=./bin
 
 SUDO=sudo
