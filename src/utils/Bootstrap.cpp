@@ -60,8 +60,16 @@ int Bootstrap::init(int argc, char** argv)
     auto Owner = std::unique_ptr<llvm::Module>(module_or_err.get());
     auto *module = Owner.get();
 
+#ifdef IS_DEBUG
+    std::string dumpStrDebug;
+    llvm::raw_string_ostream dumpStrOstreamDebug(dumpStrDebug);
+    llvm::verifyModule(*module, &dumpStrOstreamDebug);
+    std::cout << dumpStrDebug;
+#endif // IS_DEBUG
+
     // Create the main function: "i32 @main()"
-    auto *MainF = llvm::cast<llvm::Function>(module->getOrInsertFunction("main", llvm::Type::getInt32Ty(llvm_context), (llvm::Type *)0));
+    auto *MainF = llvm::cast<llvm::Function>(module->getOrInsertFunction("main",
+                                                                        llvm::Type::getInt32Ty(llvm_context)));
 
     // Create the entry block
     auto *basic_block = llvm::BasicBlock::Create(llvm_context,
@@ -80,6 +88,11 @@ int Bootstrap::init(int argc, char** argv)
 
     // Return 0 to the "main" function.
     builder.CreateRet(builder.getInt32(0));
+
+#ifdef IS_DEBUG
+    llvm::verifyModule(*module, &dumpStrOstreamDebug);
+    std::cout << dumpStrDebug;
+#endif // IS_DEBUG
 
     if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_AST)) {
         std::cout << "=== Debug Information ===" << "\n";
@@ -156,9 +169,11 @@ int Bootstrap::init(int argc, char** argv)
         // Create the execution engine.
         std::string error_str;
         engine_builder = new llvm::EngineBuilder(std::move(Owner));
-        execution_engine = engine_builder->setErrorStr(&error_str)
-		.setMCJITMemoryManager(std::unique_ptr<llvm::SectionMemoryManager>
-                                          (new llvm::SectionMemoryManager())).create();
+        auto manager = std::unique_ptr<llvm::SectionMemoryManager>(new llvm::SectionMemoryManager());
+        execution_engine = engine_builder->setErrorStr(&error_str).
+                                           setMCJITMemoryManager(std::move(manager)).
+                                           setVerifyModules(true).
+                                           create();
 
         if (io_module) {
             execution_engine->addModule(std::move(io_module));

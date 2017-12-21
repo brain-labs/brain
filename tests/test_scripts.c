@@ -17,7 +17,7 @@ void compareFiles(char *filename1, char *filename2);
 void execToFile(char *options, char *destFile);
 
 int main(void) {
-#if !__unix__
+#if !__unix__ && !__APPLE__
 #error "This shouldn't work on any non unix platform. Please, make it portable."
 #endif
 

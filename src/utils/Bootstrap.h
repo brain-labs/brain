@@ -19,11 +19,14 @@
 #include <llvm/Support/SourceMgr.h>
 #include "llvm/Support/TargetRegistry.h"
 
+#include <llvm/IRReader/IRReader.h>
 #include <llvm/IR/LLVMContext.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 #include <llvm/IR/Value.h>
-#include <llvm/IRReader/IRReader.h>
+#ifdef IS_DEBUG
+#include <llvm/IR/Verifier.h>
+#endif // IS_DEBUG
 
 #ifndef INCOMPATIBLE_LLVM
 #include "llvm/IR/LegacyPassManager.h"
@@ -41,7 +44,6 @@
 #include "../ast/general/ASTInfo.h"
 #include "ArgsHandler.h"
 #include "ArgsOptions.h"
-
 
 /**
  * @brief Class that starts Brain, it has all the needed components to
