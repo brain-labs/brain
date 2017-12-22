@@ -31,7 +31,7 @@ MKBIN=mkdir -p bin
 ROOT=src
 CLEANUP=rm -f *.dwo
 
-SRCS=$(ROOT)/utils/ArgsOptions.cpp $(ROOT)/utils/ArgsHandler.cpp $(ROOT)/utils/Bootstrap.cpp $(ROOT)/parser/Parser.cpp $(ROOT)/ast/general/ASTInfo.cpp $(ROOT)/ast/expr/Expr.cpp $(ROOT)/ast/expr/ShiftExpr.cpp $(ROOT)/ast/expr/IncrementExpr.cpp $(ROOT)/ast/expr/InputExpr.cpp $(ROOT)/ast/expr/OutputExpr.cpp $(ROOT)/ast/expr/LoopExpr.cpp $(ROOT)/ast/expr/ArithmeticExpr.cpp $(ROOT)/ast/expr/DebugExpr.cpp $(ROOT)/ast/expr/BreakExpr.cpp $(ROOT)/ast/expr/IfExpr.cpp $(ROOT)/ast/expr/FloatExpr.cpp $(ROOT)/main.cpp
+SRCS=$(ROOT)/utils/ArgsOptions.cpp $(ROOT)/utils/ArgsHandler.cpp $(ROOT)/utils/Bootstrap.cpp $(ROOT)/parser/Parser.cpp $(ROOT)/ast/general/ASTInfo.cpp $(ROOT)/ast/instr/Instr.cpp $(ROOT)/ast/instr/ShiftInstr.cpp $(ROOT)/ast/instr/IncrementInstr.cpp $(ROOT)/ast/instr/InputInstr.cpp $(ROOT)/ast/instr/OutputInstr.cpp $(ROOT)/ast/instr/LoopInstr.cpp $(ROOT)/ast/instr/ArithmeticInstr.cpp $(ROOT)/ast/instr/DebugInstr.cpp $(ROOT)/ast/instr/BreakInstr.cpp $(ROOT)/ast/instr/IfInstr.cpp $(ROOT)/ast/instr/FloatInstr.cpp $(ROOT)/main.cpp
 CONFIG=`$(LLVM_CONFIG) --cxxflags --ldflags --system-libs --libs core mcjit native nativecodegen irreader linker`
 
 all: build
@@ -51,9 +51,21 @@ build-3.8: CC=clang++-3.8
 build-3.8: LLVM_CONFIG=llvm-config-3.8
 build-3.8: all
 
-build-3.9: CC=clang++-3.9
+build-3.9: CC=clang++-3.9 
 build-3.9: LLVM_CONFIG=llvm-config-3.9
 build-3.9: all
+
+build-4.0: CC=clang++-4.0
+build-4.0: LLVM_CONFIG=llvm-config-4.0
+build-4.0: all
+
+build-5.0: CC=clang++-5.0
+build-5.0: LLVM_CONFIG=llvm-config-5.0
+build-5.0: all
+
+build-6.0: CC=clang++-6.0
+build-6.0: LLVM_CONFIG=llvm-config-6.0
+build-6.0: all
 
 debug: $(SRCS)
 	$(MKBIN) && $(CC) -g $(CFLAGS-DEBUG) $(SRCS) $(CONFIG) -o $(BIN)/brain_debug

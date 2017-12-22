@@ -1,13 +1,13 @@
 === Debug Information ===
-IncrementExpr (5)
-DebugExpr
-DebugExpr
-DebugExpr
-IncrementExpr (4)
-DebugExpr
-IfExpr (THEN) [
-  IncrementExpr (1)
-  DebugExpr
+IncrementInstr (5)
+DebugInstr
+DebugInstr
+DebugInstr
+IncrementInstr (4)
+DebugInstr
+IfInstr (THEN) [
+  IncrementInstr (1)
+  DebugInstr
  ]
 === Program Output ===
 -------------------------------------------------

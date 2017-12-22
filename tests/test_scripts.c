@@ -38,7 +38,7 @@ int main(void) {
         execToFile(dir->d_name, fWithNoExt);
         compareFiles(fCmp, fWithNoExt);
 
-        // does not compare InputExpr for 0O and O1
+        // does not compare InputInstr for 0O and O1
         if (strncmp(dir->d_name, "read", 4) == 0) {
           printf("====================\n");
           continue;

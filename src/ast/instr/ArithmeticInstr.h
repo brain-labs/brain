@@ -5,26 +5,40 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef DEBUG_EXPR_H
-#define DEBUG_EXPR_H
+#ifndef ARITHMETIC_EXPR_H
+#define ARITHMETIC_EXPR_H
 
-#include <iostream>
-
-#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expr.h"
-#include "../general/ASTInfo.h"
+#include <iostream>
+#include <string>
+
+#include "Instr.h"
 
 /**
- * @brief Class that represents the debug operator in Brain.
+ * @brief The three kinds of arithmetic operations used in Brain: multiplication,
+ * division and modulus.
  */
-class DebugExpr : public Expr
+typedef enum
 {
+  AT_MUL,
+  AT_DIV,
+  AT_REM
+} ArithmeticType;
+
+/**
+ * @brief Represents the three arithmetic operations that you can use and abuse
+ * in Brain.
+ */
+class ArithmeticInstr : public Instr
+{
+protected:
+    ArithmeticType _type;
+    std::string type_to_string();
 public:
-    DebugExpr() { ASTInfo::instance()->is_using_io_lib = true; }
-    ~DebugExpr() {}
+    ArithmeticInstr(ArithmeticType type) : _type(type) {}
+    ~ArithmeticInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -48,4 +62,4 @@ public:
     void ast_code_gen();
 };
 
-#endif // DEBUG_EXPR_H
+#endif // ARITHMETIC_EXPR_H

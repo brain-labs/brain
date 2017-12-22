@@ -15,7 +15,7 @@
 #include <vector>
 
 #include "../ast/general/ASTInfo.h"
-#include "../ast/expr/Expr.h"
+#include "../ast/instr/Instr.h"
 #include "../utils/ArgsOptions.h"
 
 /**
@@ -30,26 +30,26 @@ protected:
     /// Variable that holds the current index read by the parser.
     int _index;
     /**
-     * Store pointers of expressions to later call code_gen on each one of
+     * Store pointers of instructions to later call code_gen on each one of
      * them.
      */
-    std::vector<Expr *> _exprs;
+    std::vector<Instr *> _instrs;
 
     /**
      * @brief It parses the Brain code.
-     * @param exprs The vector of expressions read by the constructor
+     * @param instrs The vector of instructions read by the constructor
      * @param level
      */
-    void parse(std::vector<Expr *> &exprs, int level);
+    void parse(std::vector<Instr *> &instrs, int level);
 public:
     /**
-     * @brief Calls parse to <i>create</i> all expressions found in the source
+     * @brief Calls parse to <i>create</i> all instructions found in the source
      * code.
      * @param source The source file as a string of characters.
      * interpreter
      */
     explicit Parser(std::string source) :
-        _data(source), _index(0) { parse(_exprs, 0); }
+        _data(source), _index(0) { parse(_instrs, 0); }
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.

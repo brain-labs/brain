@@ -5,10 +5,10 @@
  * Copyright Brain, 2016.
  */
 
-#include "IfExpr.h"
+#include "IfInstr.h"
 #include "../general/ASTInfo.h"
 
-void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void IfInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                       llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
@@ -30,7 +30,7 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                                              B.getInt32(0));
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
-        !_exprs_else.empty()) {
+        !_instrs_else.empty()) {
         ElseBB = llvm::BasicBlock::Create(C, "ElseBody", F);
         B.CreateCondBr(NEZeroCond, ThenBB, ElseBB);
     }
@@ -42,9 +42,9 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     llvm::IRBuilder<> ThenB(ThenBB);
 
     bool hasTerminal = false;
-    for (auto& expr : _exprs_then) {
-        expr->code_gen(M, ThenB, BreakBB);
-        if (expr->expression_category() == ET_TERMINAL) {
+    for (auto& instr : _instrs_then) {
+        instr->code_gen(M, ThenB, BreakBB);
+        if (instr->instruction_category() == ET_TERMINAL) {
             hasTerminal = true;
             break;
         }
@@ -55,13 +55,13 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     }
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
-            !_exprs_else.empty()) {
+            !_instrs_else.empty()) {
         B.SetInsertPoint(ElseBB);
         llvm::IRBuilder<> ElseB(ElseBB);
         hasTerminal = false;
-        for (auto& expr : _exprs_else) {
-            expr->code_gen(M, ElseB, BreakBB);
-            if (expr->expression_category() == ET_TERMINAL) {
+        for (auto& instr : _instrs_else) {
+            instr->code_gen(M, ElseB, BreakBB);
+            if (instr->instruction_category() == ET_TERMINAL) {
                 hasTerminal = true;
                 break;
             }
@@ -75,21 +75,21 @@ void IfExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     B.SetInsertPoint(ContBB);
 }
 
-void IfExpr::debug_description(int level)
+void IfInstr::debug_description(int level)
 {
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "If Expression - THEN - if cell "
+        std::cout << "If Instression - THEN - if cell "
                   << " != 0 ["
                   << std::endl;
     }
     else {
-        std::cout << "IfExpr (THEN) [" << std::endl;
+        std::cout << "IfInstr (THEN) [" << std::endl;
     }
 
-    for (auto& expr : _exprs_then) {
+    for (auto& instr : _instrs_then) {
         std::cout << std::string(level * 2, ' ');
-        expr->debug_description(level+1);
-        if (expr->expression_category() == ET_TERMINAL) {
+        instr->debug_description(level+1);
+        if (instr->instruction_category() == ET_TERMINAL) {
             break;
         }
     }
@@ -97,22 +97,22 @@ void IfExpr::debug_description(int level)
     std::cout << std::string(level, ' ') << "]" << std::endl;
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
-            !_exprs_else.empty()) {
+            !_instrs_else.empty()) {
         if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
             std::cout << std::string(level, ' ')
-                      << "If Expression - ELSE - ["
+                      << "If Instression - ELSE - ["
                       << std::endl;
         }
         else {
             std::cout << std::string(level, ' ')
-                      << "IfExpr (ELSE) ["
+                      << "IfInstr (ELSE) ["
                       << std::endl;
         }
 
-        for (auto& expr : _exprs_else) {
+        for (auto& instr : _instrs_else) {
             std::cout << std::string(level * 2, ' ');
-            expr->debug_description(level+1);
-            if (expr->expression_category() == ET_TERMINAL) {
+            instr->debug_description(level+1);
+            if (instr->instruction_category() == ET_TERMINAL) {
                 break;
             }
         }
@@ -121,22 +121,22 @@ void IfExpr::debug_description(int level)
     }
 }
 
-void IfExpr::ast_code_gen()
+void IfInstr::ast_code_gen()
 {
     std::cout << static_cast<char>(TT_IF_THEN);
-    for (auto& expr : _exprs_then) {
-        expr->ast_code_gen();
-        if (expr->expression_category() == ET_TERMINAL) {
+    for (auto& instr : _instrs_then) {
+        instr->ast_code_gen();
+        if (instr->instruction_category() == ET_TERMINAL) {
             break;
         }
     }
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
-            !_exprs_else.empty()) {
+            !_instrs_else.empty()) {
         std::cout << static_cast<char>(TT_IF_ELSE);
-        for (auto& expr : _exprs_else) {
-            expr->ast_code_gen();
-            if (expr->expression_category() == ET_TERMINAL) {
+        for (auto& instr : _instrs_else) {
+            instr->ast_code_gen();
+            if (instr->instruction_category() == ET_TERMINAL) {
                 break;
             }
         }
@@ -145,7 +145,7 @@ void IfExpr::ast_code_gen()
     std::cout << (char)TT_IF_END;
 }
 
-ExpressionType IfExpr::expression_category()
+InstressionType IfInstr::instruction_category()
 {
     return ET_BRANCH;
 }

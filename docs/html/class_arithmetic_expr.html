@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Brain: ArithmeticExpr Class Reference</title>
+<title>Brain: ArithmeticInstr Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('class_arithmetic_expr.html','');});
+$(document).ready(function(){initNavTree('class_arithmetic_instr.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -110,56 +110,56 @@ $(document).ready(function(){initNavTree('class_arithmetic_expr.html','');});
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="class_arithmetic_expr-members.html">List of all members</a>  </div>
+<a href="class_arithmetic_instr-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ArithmeticExpr Class Reference</div>  </div>
+<div class="title">ArithmeticInstr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Represents the three arithmetic operations that you can use and abuse in Brain.
- <a href="class_arithmetic_expr.html#details">More...</a></p>
+ <a href="class_arithmetic_instr.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_arithmetic_expr_8h_source.html">ArithmeticExpr.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_arithmetic_instr_8h_source.html">ArithmeticInstr.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for ArithmeticExpr:</div>
+Inheritance diagram for ArithmeticInstr:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_arithmetic_expr__inherit__graph.png" border="0" usemap="#_arithmetic_expr_inherit__map" alt="Inheritance graph"/></div>
-<map name="_arithmetic_expr_inherit__map" id="_arithmetic_expr_inherit__map">
-<area shape="rect" id="node2" href="class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="35,5,84,32"/>
+<div class="center"><img src="class_arithmetic_instr__inherit__graph.png" border="0" usemap="#_arithmetic_instr_inherit__map" alt="Inheritance graph"/></div>
+<map name="_arithmetic_instr_inherit__map" id="_arithmetic_instr_inherit__map">
+<area shape="rect" id="node2" href="class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="35,5,84,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for ArithmeticExpr:</div>
+Collaboration diagram for ArithmeticInstr:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_arithmetic_expr__coll__graph.png" border="0" usemap="#_arithmetic_expr_coll__map" alt="Collaboration graph"/></div>
-<map name="_arithmetic_expr_coll__map" id="_arithmetic_expr_coll__map">
-<area shape="rect" id="node2" href="class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="35,5,84,32"/>
+<div class="center"><img src="class_arithmetic_instr__coll__graph.png" border="0" usemap="#_arithmetic_instr_coll__map" alt="Collaboration graph"/></div>
+<map name="_arithmetic_instr_coll__map" id="_arithmetic_instr_coll__map">
+<area shape="rect" id="node2" href="class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="35,5,84,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aae45d54c19da0037ec5f064fa6147441"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae45d54c19da0037ec5f064fa6147441"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ArithmeticExpr</b> (ArithmeticType type)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ArithmeticInstr</b> (ArithmeticType type)</td></tr>
 <tr class="separator:aae45d54c19da0037ec5f064fa6147441"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fc3b7bf888c002769bb78be7d08347b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arithmetic_expr.html#a7fc3b7bf888c002769bb78be7d08347b">code_gen</a> (llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td></tr>
+<tr class="memitem:a7fc3b7bf888c002769bb78be7d08347b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arithmetic_instr.html#a7fc3b7bf888c002769bb78be7d08347b">code_gen</a> (llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td></tr>
 <tr class="memdesc:a7fc3b7bf888c002769bb78be7d08347b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the IR (Intermediate Representation) code to be executed by llvm.  <a href="#a7fc3b7bf888c002769bb78be7d08347b">More...</a><br /></td></tr>
 <tr class="separator:a7fc3b7bf888c002769bb78be7d08347b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad82dffc7c742be70b1da75916e177e9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arithmetic_expr.html#ad82dffc7c742be70b1da75916e177e9c">debug_description</a> (int level)</td></tr>
+<tr class="memitem:ad82dffc7c742be70b1da75916e177e9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arithmetic_instr.html#ad82dffc7c742be70b1da75916e177e9c">debug_description</a> (int level)</td></tr>
 <tr class="memdesc:ad82dffc7c742be70b1da75916e177e9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints debug information when Brain's compiler has the active flags: -v | -emit-ast.  <a href="#ad82dffc7c742be70b1da75916e177e9c">More...</a><br /></td></tr>
 <tr class="separator:ad82dffc7c742be70b1da75916e177e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1613dda30d61292df6a35f1febdbbf2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1613dda30d61292df6a35f1febdbbf2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arithmetic_expr.html#ac1613dda30d61292df6a35f1febdbbf2">ast_code_gen</a> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arithmetic_instr.html#ac1613dda30d61292df6a35f1febdbbf2">ast_code_gen</a> ()</td></tr>
 <tr class="memdesc:ac1613dda30d61292df6a35f1febdbbf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for the reverse code generation from the AST. It prints out to the stdout the token itself. <br /></td></tr>
 <tr class="separator:ac1613dda30d61292df6a35f1febdbbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_expr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_expr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_expr.html">Expr</a></td></tr>
-<tr class="memitem:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_expression</a> (char update)</td></tr>
-<tr class="memdesc:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method for updating the AST exprs.  <a href="#a9ce45bb336b7c54bcacfe52f6aa14b7d">More...</a><br /></td></tr>
-<tr class="separator:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_expr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afaf1581533c12ddb3c71874921ed8eba"></a>
-virtual ExpressionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr.html#afaf1581533c12ddb3c71874921ed8eba">expression_category</a> ()</td></tr>
-<tr class="memdesc:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_expr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the category of the expression given by the caller. <br /></td></tr>
-<tr class="separator:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_expr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_instr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_instr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_instr.html">Instr</a></td></tr>
+<tr class="memitem:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_instr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_instruction</a> (char update)</td></tr>
+<tr class="memdesc:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method for updating the AST instrs.  <a href="#a9ce45bb336b7c54bcacfe52f6aa14b7d">More...</a><br /></td></tr>
+<tr class="separator:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_instr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afaf1581533c12ddb3c71874921ed8eba"></a>
+virtual InstressionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_instr.html#afaf1581533c12ddb3c71874921ed8eba">instruction_category</a> ()</td></tr>
+<tr class="memdesc:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_instr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the category of the instruction given by the caller. <br /></td></tr>
+<tr class="separator:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_instr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -184,7 +184,7 @@ ArithmeticType&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void ArithmeticExpr::code_gen </td>
+          <td class="memname">void ArithmeticInstr::code_gen </td>
           <td>(</td>
           <td class="paramtype">llvm::Module *&#160;</td>
           <td class="paramname"><em>M</em>, </td>
@@ -224,7 +224,7 @@ ArithmeticType&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_expr.html#adf036e4ffa9c8f043380f5e884e1005a">Expr</a>.</p>
+<p>Implements <a class="el" href="class_instr.html#adf036e4ffa9c8f043380f5e884e1005a">Instr</a>.</p>
 
 </div>
 </div>
@@ -236,7 +236,7 @@ ArithmeticType&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void ArithmeticExpr::debug_description </td>
+          <td class="memname">void ArithmeticInstr::debug_description </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>level</em></td><td>)</td>
@@ -258,20 +258,20 @@ ArithmeticType&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_expr.html#aade8823eaa45f0df7873dfcd03e12ba8">Expr</a>.</p>
+<p>Implements <a class="el" href="class_instr.html#aade8823eaa45f0df7873dfcd03e12ba8">Instr</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/ast/expr/<a class="el" href="_arithmetic_expr_8h_source.html">ArithmeticExpr.h</a></li>
-<li>src/ast/expr/ArithmeticExpr.cpp</li>
+<li>src/ast/instr/<a class="el" href="_arithmetic_instr_8h_source.html">ArithmeticInstr.h</a></li>
+<li>src/ast/instr/ArithmeticInstr.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="class_arithmetic_expr.html">ArithmeticExpr</a></li>
+    <li class="navelem"><a class="el" href="class_arithmetic_instr.html">ArithmeticInstr</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>

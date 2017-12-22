@@ -1,54 +1,54 @@
 === Debug Information ===
-IncrementExpr (3)
-FloatExpr
-IncrementExpr (7)
-OutputExpr
-IncrementExpr (3)
-OutputExpr
-LoopExpr: [
-  IncrementExpr (-1)
+IncrementInstr (3)
+FloatInstr
+IncrementInstr (7)
+OutputInstr
+IncrementInstr (3)
+OutputInstr
+LoopInstr: [
+  IncrementInstr (-1)
  ]
-IncrementExpr (-3)
-FloatExpr
-ShiftExpr (1)
-IncrementExpr (7)
-OutputExpr
-IncrementExpr (3)
-OutputExpr
-LoopExpr: [
-  IncrementExpr (-1)
+IncrementInstr (-3)
+FloatInstr
+ShiftInstr (1)
+IncrementInstr (7)
+OutputInstr
+IncrementInstr (3)
+OutputInstr
+LoopInstr: [
+  IncrementInstr (-1)
  ]
-ShiftExpr (-1)
-IncrementExpr (3)
-FloatExpr
-ShiftExpr (1)
-IncrementExpr (7)
-OutputExpr
-IncrementExpr (3)
-OutputExpr
-LoopExpr: [
-  IncrementExpr (-1)
+ShiftInstr (-1)
+IncrementInstr (3)
+FloatInstr
+ShiftInstr (1)
+IncrementInstr (7)
+OutputInstr
+IncrementInstr (3)
+OutputInstr
+LoopInstr: [
+  IncrementInstr (-1)
  ]
-ShiftExpr (-1)
-IncrementExpr (2)
-ShiftExpr (1)
-IncrementExpr (1)
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-FloatExpr
-ShiftExpr (1)
-IncrementExpr (7)
-OutputExpr
-IncrementExpr (3)
-OutputExpr
+ShiftInstr (-1)
+IncrementInstr (2)
+ShiftInstr (1)
+IncrementInstr (1)
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+FloatInstr
+ShiftInstr (1)
+IncrementInstr (7)
+OutputInstr
+IncrementInstr (3)
+OutputInstr
 === Program Output ===
 0.03
 -0.03

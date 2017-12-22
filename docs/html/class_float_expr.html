@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Brain: FloatExpr Class Reference</title>
+<title>Brain: FloatInstr Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('class_float_expr.html','');});
+$(document).ready(function(){initNavTree('class_float_instr.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -108,56 +108,56 @@ $(document).ready(function(){initNavTree('class_float_expr.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="class_float_expr-members.html">List of all members</a>  </div>
+<a href="class_float_instr-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">FloatExpr Class Reference</div>  </div>
+<div class="title">FloatInstr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="class_float_expr.html" title="The FloatExpr class behaves just like the output expression, but it instead of print an integer numbe...">FloatExpr</a> class behaves just like the output expression, but it instead of print an integer number it will use io.c to divide the number by 100 and print it.
- <a href="class_float_expr.html#details">More...</a></p>
+<p>The <a class="el" href="class_float_instr.html" title="The FloatInstr class behaves just like the output instruction, but it instead of print an integer numbe...">FloatInstr</a> class behaves just like the output instruction, but it instead of print an integer number it will use io.c to divide the number by 100 and print it.
+ <a href="class_float_instr.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_float_expr_8h_source.html">FloatExpr.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_float_instr_8h_source.html">FloatInstr.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for FloatExpr:</div>
+Inheritance diagram for FloatInstr:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_float_expr__inherit__graph.png" border="0" usemap="#_float_expr_inherit__map" alt="Inheritance graph"/></div>
-<map name="_float_expr_inherit__map" id="_float_expr_inherit__map">
-<area shape="rect" id="node2" href="class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="20,5,69,32"/>
+<div class="center"><img src="class_float_instr__inherit__graph.png" border="0" usemap="#_float_instr_inherit__map" alt="Inheritance graph"/></div>
+<map name="_float_instr_inherit__map" id="_float_instr_inherit__map">
+<area shape="rect" id="node2" href="class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="20,5,69,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for FloatExpr:</div>
+Collaboration diagram for FloatInstr:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_float_expr__coll__graph.png" border="0" usemap="#_float_expr_coll__map" alt="Collaboration graph"/></div>
-<map name="_float_expr_coll__map" id="_float_expr_coll__map">
-<area shape="rect" id="node2" href="class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="20,5,69,32"/>
+<div class="center"><img src="class_float_instr__coll__graph.png" border="0" usemap="#_float_instr_coll__map" alt="Collaboration graph"/></div>
+<map name="_float_instr_coll__map" id="_float_instr_coll__map">
+<area shape="rect" id="node2" href="class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="20,5,69,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8ab109bb330397843cf352ec62301e61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_float_expr.html#a8ab109bb330397843cf352ec62301e61">code_gen</a> (llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td></tr>
+<tr class="memitem:a8ab109bb330397843cf352ec62301e61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_float_instr.html#a8ab109bb330397843cf352ec62301e61">code_gen</a> (llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td></tr>
 <tr class="memdesc:a8ab109bb330397843cf352ec62301e61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the IR (Intermediate Representation) code to be executed by llvm.  <a href="#a8ab109bb330397843cf352ec62301e61">More...</a><br /></td></tr>
 <tr class="separator:a8ab109bb330397843cf352ec62301e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a01510c81cb9281f7012d7881369d72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_float_expr.html#a6a01510c81cb9281f7012d7881369d72">debug_description</a> (int level)</td></tr>
+<tr class="memitem:a6a01510c81cb9281f7012d7881369d72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_float_instr.html#a6a01510c81cb9281f7012d7881369d72">debug_description</a> (int level)</td></tr>
 <tr class="memdesc:a6a01510c81cb9281f7012d7881369d72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints debug information when Brain's compiler has the active flags: -v | -emit-ast.  <a href="#a6a01510c81cb9281f7012d7881369d72">More...</a><br /></td></tr>
 <tr class="separator:a6a01510c81cb9281f7012d7881369d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee6c9290a2465b0caad481a53f03cffc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee6c9290a2465b0caad481a53f03cffc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_float_expr.html#aee6c9290a2465b0caad481a53f03cffc">ast_code_gen</a> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_float_instr.html#aee6c9290a2465b0caad481a53f03cffc">ast_code_gen</a> ()</td></tr>
 <tr class="memdesc:aee6c9290a2465b0caad481a53f03cffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for the reverse code generation from the AST. It prints out to the stdout the token itself. <br /></td></tr>
 <tr class="separator:aee6c9290a2465b0caad481a53f03cffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_expr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_expr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_expr.html">Expr</a></td></tr>
-<tr class="memitem:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_expression</a> (char update)</td></tr>
-<tr class="memdesc:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method for updating the AST exprs.  <a href="#a9ce45bb336b7c54bcacfe52f6aa14b7d">More...</a><br /></td></tr>
-<tr class="separator:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_expr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afaf1581533c12ddb3c71874921ed8eba"></a>
-virtual ExpressionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr.html#afaf1581533c12ddb3c71874921ed8eba">expression_category</a> ()</td></tr>
-<tr class="memdesc:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_expr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the category of the expression given by the caller. <br /></td></tr>
-<tr class="separator:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_expr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_instr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_instr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_instr.html">Instr</a></td></tr>
+<tr class="memitem:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_instr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_instruction</a> (char update)</td></tr>
+<tr class="memdesc:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method for updating the AST instrs.  <a href="#a9ce45bb336b7c54bcacfe52f6aa14b7d">More...</a><br /></td></tr>
+<tr class="separator:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_instr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afaf1581533c12ddb3c71874921ed8eba"></a>
+virtual InstressionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_instr.html#afaf1581533c12ddb3c71874921ed8eba">instruction_category</a> ()</td></tr>
+<tr class="memdesc:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_instr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the category of the instruction given by the caller. <br /></td></tr>
+<tr class="separator:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_instr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="class_float_expr.html" title="The FloatExpr class behaves just like the output expression, but it instead of print an integer numbe...">FloatExpr</a> class behaves just like the output expression, but it instead of print an integer number it will use io.c to divide the number by 100 and print it. </p>
+<div class="textblock"><p>The <a class="el" href="class_float_instr.html" title="The FloatInstr class behaves just like the output instruction, but it instead of print an integer numbe...">FloatInstr</a> class behaves just like the output instruction, but it instead of print an integer number it will use io.c to divide the number by 100 and print it. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a8ab109bb330397843cf352ec62301e61"></a>
 <div class="memitem">
@@ -167,7 +167,7 @@ virtual ExpressionType&#160;</td><td class="memItemRight" valign="bottom"><a cla
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void FloatExpr::code_gen </td>
+          <td class="memname">void FloatInstr::code_gen </td>
           <td>(</td>
           <td class="paramtype">llvm::Module *&#160;</td>
           <td class="paramname"><em>M</em>, </td>
@@ -207,7 +207,7 @@ virtual ExpressionType&#160;</td><td class="memItemRight" valign="bottom"><a cla
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_expr.html#adf036e4ffa9c8f043380f5e884e1005a">Expr</a>.</p>
+<p>Implements <a class="el" href="class_instr.html#adf036e4ffa9c8f043380f5e884e1005a">Instr</a>.</p>
 
 </div>
 </div>
@@ -219,7 +219,7 @@ virtual ExpressionType&#160;</td><td class="memItemRight" valign="bottom"><a cla
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void FloatExpr::debug_description </td>
+          <td class="memname">void FloatInstr::debug_description </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>level</em></td><td>)</td>
@@ -241,20 +241,20 @@ virtual ExpressionType&#160;</td><td class="memItemRight" valign="bottom"><a cla
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_expr.html#aade8823eaa45f0df7873dfcd03e12ba8">Expr</a>.</p>
+<p>Implements <a class="el" href="class_instr.html#aade8823eaa45f0df7873dfcd03e12ba8">Instr</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/ast/expr/<a class="el" href="_float_expr_8h_source.html">FloatExpr.h</a></li>
-<li>src/ast/expr/FloatExpr.cpp</li>
+<li>src/ast/instr/<a class="el" href="_float_instr_8h_source.html">FloatInstr.h</a></li>
+<li>src/ast/instr/FloatInstr.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="class_float_expr.html">FloatExpr</a></li>
+    <li class="navelem"><a class="el" href="class_float_instr.html">FloatInstr</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>

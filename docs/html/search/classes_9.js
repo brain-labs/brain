@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shiftexpr',['ShiftExpr',['../class_shift_expr.html',1,'']]]
+  ['shiftinstr',['ShiftInstr',['../class_shift_instr.html',1,'']]]
 ];

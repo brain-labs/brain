@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Brain: IfExpr Class Reference</title>
+<title>Brain: IfInstr Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('class_if_expr.html','');});
+$(document).ready(function(){initNavTree('class_if_instr.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -109,67 +109,67 @@ $(document).ready(function(){initNavTree('class_if_expr.html','');});
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="class_if_expr-members.html">List of all members</a>  </div>
+<a href="class_if_instr-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">IfExpr Class Reference</div>  </div>
+<div class="title">IfInstr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Class that represents the if operator in Brain.
- <a href="class_if_expr.html#details">More...</a></p>
+ <a href="class_if_instr.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_if_expr_8h_source.html">IfExpr.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_if_instr_8h_source.html">IfInstr.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for IfExpr:</div>
+Inheritance diagram for IfInstr:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_if_expr__inherit__graph.png" border="0" usemap="#_if_expr_inherit__map" alt="Inheritance graph"/></div>
-<map name="_if_expr_inherit__map" id="_if_expr_inherit__map">
-<area shape="rect" id="node2" href="class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="9,5,59,32"/>
+<div class="center"><img src="class_if_instr__inherit__graph.png" border="0" usemap="#_if_instr_inherit__map" alt="Inheritance graph"/></div>
+<map name="_if_instr_inherit__map" id="_if_instr_inherit__map">
+<area shape="rect" id="node2" href="class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="9,5,59,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for IfExpr:</div>
+Collaboration diagram for IfInstr:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_if_expr__coll__graph.png" border="0" usemap="#_if_expr_coll__map" alt="Collaboration graph"/></div>
-<map name="_if_expr_coll__map" id="_if_expr_coll__map">
-<area shape="rect" id="node2" href="class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="9,5,59,32"/>
+<div class="center"><img src="class_if_instr__coll__graph.png" border="0" usemap="#_if_instr_coll__map" alt="Collaboration graph"/></div>
+<map name="_if_instr_coll__map" id="_if_instr_coll__map">
+<area shape="rect" id="node2" href="class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="9,5,59,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a38ee41515689d500f8c10c629594725a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38ee41515689d500f8c10c629594725a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>IfExpr</b> (std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt; exprs_then)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>IfInstr</b> (std::vector&lt; <a class="el" href="class_instr.html">Instr</a> * &gt; instrs_then)</td></tr>
 <tr class="separator:a38ee41515689d500f8c10c629594725a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a988b46cc537b2188ab63f37b1e50a9c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a988b46cc537b2188ab63f37b1e50a9c8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_else</b> (std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt; exprs_else)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_else</b> (std::vector&lt; <a class="el" href="class_instr.html">Instr</a> * &gt; instrs_else)</td></tr>
 <tr class="separator:a988b46cc537b2188ab63f37b1e50a9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad645e42e9f4e78a663ac0cd9c05ee4e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_if_expr.html#ad645e42e9f4e78a663ac0cd9c05ee4e9">code_gen</a> (llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td></tr>
+<tr class="memitem:ad645e42e9f4e78a663ac0cd9c05ee4e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_if_instr.html#ad645e42e9f4e78a663ac0cd9c05ee4e9">code_gen</a> (llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td></tr>
 <tr class="memdesc:ad645e42e9f4e78a663ac0cd9c05ee4e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the IR (Intermediate Representation) code to be executed by llvm.  <a href="#ad645e42e9f4e78a663ac0cd9c05ee4e9">More...</a><br /></td></tr>
 <tr class="separator:ad645e42e9f4e78a663ac0cd9c05ee4e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a718cad053000419d5ed558935fbddb60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_if_expr.html#a718cad053000419d5ed558935fbddb60">debug_description</a> (int level)</td></tr>
+<tr class="memitem:a718cad053000419d5ed558935fbddb60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_if_instr.html#a718cad053000419d5ed558935fbddb60">debug_description</a> (int level)</td></tr>
 <tr class="memdesc:a718cad053000419d5ed558935fbddb60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints debug information when Brain's compiler has the active flags: -v | -emit-ast.  <a href="#a718cad053000419d5ed558935fbddb60">More...</a><br /></td></tr>
 <tr class="separator:a718cad053000419d5ed558935fbddb60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6546893cd7b5b3fcaed753377b3ddf2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6546893cd7b5b3fcaed753377b3ddf2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_if_expr.html#aa6546893cd7b5b3fcaed753377b3ddf2">ast_code_gen</a> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_if_instr.html#aa6546893cd7b5b3fcaed753377b3ddf2">ast_code_gen</a> ()</td></tr>
 <tr class="memdesc:aa6546893cd7b5b3fcaed753377b3ddf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for the reverse code generation from the AST. It prints out to the stdout the token itself. <br /></td></tr>
 <tr class="separator:aa6546893cd7b5b3fcaed753377b3ddf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0cbc4c80183f27c9c7c4be8bb983129"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0cbc4c80183f27c9c7c4be8bb983129"></a>
-ExpressionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_if_expr.html#ae0cbc4c80183f27c9c7c4be8bb983129">expression_category</a> ()</td></tr>
-<tr class="memdesc:ae0cbc4c80183f27c9c7c4be8bb983129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the category of the expression given by the caller. <br /></td></tr>
+InstressionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_if_instr.html#ae0cbc4c80183f27c9c7c4be8bb983129">instruction_category</a> ()</td></tr>
+<tr class="memdesc:ae0cbc4c80183f27c9c7c4be8bb983129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the category of the instruction given by the caller. <br /></td></tr>
 <tr class="separator:ae0cbc4c80183f27c9c7c4be8bb983129"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_expr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_expr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_expr.html">Expr</a></td></tr>
-<tr class="memitem:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_expression</a> (char update)</td></tr>
-<tr class="memdesc:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method for updating the AST exprs.  <a href="#a9ce45bb336b7c54bcacfe52f6aa14b7d">More...</a><br /></td></tr>
-<tr class="separator:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_instr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_instr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_instr.html">Instr</a></td></tr>
+<tr class="memitem:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_instr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_instruction</a> (char update)</td></tr>
+<tr class="memdesc:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method for updating the AST instrs.  <a href="#a9ce45bb336b7c54bcacfe52f6aa14b7d">More...</a><br /></td></tr>
+<tr class="separator:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ace010fc9b429254a29685331d8e1ad20"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace010fc9b429254a29685331d8e1ad20"></a>
-std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_exprs_then</b></td></tr>
+std::vector&lt; <a class="el" href="class_instr.html">Instr</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_instrs_then</b></td></tr>
 <tr class="separator:ace010fc9b429254a29685331d8e1ad20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbc88da1bc2d2421c8667e3b3e5d75b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbc88da1bc2d2421c8667e3b3e5d75b9"></a>
-std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_exprs_else</b></td></tr>
+std::vector&lt; <a class="el" href="class_instr.html">Instr</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_instrs_else</b></td></tr>
 <tr class="separator:acbc88da1bc2d2421c8667e3b3e5d75b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -183,7 +183,7 @@ std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt;&#160;</td><
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void IfExpr::code_gen </td>
+          <td class="memname">void IfInstr::code_gen </td>
           <td>(</td>
           <td class="paramtype">llvm::Module *&#160;</td>
           <td class="paramname"><em>M</em>, </td>
@@ -223,7 +223,7 @@ std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt;&#160;</td><
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_expr.html#adf036e4ffa9c8f043380f5e884e1005a">Expr</a>.</p>
+<p>Implements <a class="el" href="class_instr.html#adf036e4ffa9c8f043380f5e884e1005a">Instr</a>.</p>
 
 </div>
 </div>
@@ -235,7 +235,7 @@ std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt;&#160;</td><
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void IfExpr::debug_description </td>
+          <td class="memname">void IfInstr::debug_description </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>level</em></td><td>)</td>
@@ -257,20 +257,20 @@ std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt;&#160;</td><
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_expr.html#aade8823eaa45f0df7873dfcd03e12ba8">Expr</a>.</p>
+<p>Implements <a class="el" href="class_instr.html#aade8823eaa45f0df7873dfcd03e12ba8">Instr</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/ast/expr/<a class="el" href="_if_expr_8h_source.html">IfExpr.h</a></li>
-<li>src/ast/expr/IfExpr.cpp</li>
+<li>src/ast/instr/<a class="el" href="_if_instr_8h_source.html">IfInstr.h</a></li>
+<li>src/ast/instr/IfInstr.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="class_if_expr.html">IfExpr</a></li>
+    <li class="navelem"><a class="el" href="class_if_instr.html">IfInstr</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>

@@ -5,14 +5,14 @@
  * Copyright Brain, 2016.
  */
 
-#include "LoopExpr.h"
+#include "LoopInstr.h"
 #include "../../utils/ArgsOptions.h"
 
-void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void LoopInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                         llvm::BasicBlock *BreakBB)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
-       _exprs.empty()) {
+       _instrs.empty()) {
         return;
     }
 
@@ -66,9 +66,9 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     llvm::IRBuilder<> LoopB(LoopBB);
     bool hasTerminal = false;
     // Recursively generate code (into "LoopBody" block)
-    for (auto& expr : _exprs) {
-        expr->code_gen(M, LoopB, EndBB);
-        if (expr->expression_category() == ET_TERMINAL) {
+    for (auto& instr : _instrs) {
+        instr->code_gen(M, LoopB, EndBB);
+        if (instr->instruction_category() == ET_TERMINAL) {
             hasTerminal = true;
             break;
         }
@@ -85,10 +85,10 @@ void LoopExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     B.SetInsertPoint(EndBB);
 }
 
-void LoopExpr::debug_description(int level)
+void LoopInstr::debug_description(int level)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
-       _exprs.empty()) {
+       _instrs.empty()) {
         return;
     }
 
@@ -96,19 +96,19 @@ void LoopExpr::debug_description(int level)
     char closedBrackets = (_type == LT_FOR) ? TT_END_FOR : TT_END_WHILE;
 
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Loop Expression - "
+        std::cout << "Loop Instression - "
                   << openedBrackets
                   << std::endl;
     }
     else {
-        std::cout << "LoopExpr: " << openedBrackets << std::endl;
+        std::cout << "LoopInstr: " << openedBrackets << std::endl;
     }
 
-    for (auto& expr : _exprs) {
+    for (auto& instr : _instrs) {
         std::cout << std::string(level * 2, ' ');
-        expr->debug_description(level+1);
+        instr->debug_description(level+1);
 
-        if (expr->expression_category() == ET_TERMINAL) {
+        if (instr->instruction_category() == ET_TERMINAL) {
             break;
         }
     }
@@ -116,10 +116,10 @@ void LoopExpr::debug_description(int level)
     std::cout << std::string(level, ' ') << closedBrackets << std::endl;
 }
 
-void LoopExpr::ast_code_gen()
+void LoopInstr::ast_code_gen()
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
-       _exprs.empty()) {
+       _instrs.empty()) {
         return;
     }
 
@@ -127,9 +127,9 @@ void LoopExpr::ast_code_gen()
     char closedBrackets = (_type == LT_FOR) ? TT_END_FOR : TT_END_WHILE;
 
     std::cout << openedBrackets;
-    for (auto& expr : _exprs) {
-        expr->ast_code_gen();
-        if (expr->expression_category() == ET_TERMINAL) {
+    for (auto& instr : _instrs) {
+        instr->ast_code_gen();
+        if (instr->instruction_category() == ET_TERMINAL) {
             break;
         }
     }

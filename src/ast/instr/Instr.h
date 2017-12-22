@@ -48,22 +48,22 @@ typedef enum
 } TokenType;
 
 /**
- * @brief Type of a given expression.
+ * @brief Type of a given instruction.
  */
 typedef enum
 {
   ET_NOT_IMPORTANT,
   ET_BRANCH,
   ET_TERMINAL
-} ExpressionType;
+} InstressionType;
 
 /**
- * @brief Abstract class in which all expressions in Brain implement from.
+ * @brief Abstract class in which all instructions in Brain implement from.
  */
-class Expr
+class Instr
 {
 public:
-    virtual ~Expr() {}
+    virtual ~Instr() {}
 
     /**
      * @brief Virtual method for code generation.
@@ -84,14 +84,14 @@ public:
      */
     virtual void ast_code_gen() = 0;
     /**
-     * @brief Virtual method for updating the AST exprs.
-     * @param update The char whose expression will be updated.
+     * @brief Virtual method for updating the AST instrs.
+     * @param update The char whose instruction will be updated.
      */
-    virtual bool update_expression(char update) { return false; }
+    virtual bool update_instruction(char update) { return false; }
     /**
-     * @brief Returns the category of the expression given by the caller.
+     * @brief Returns the category of the instruction given by the caller.
      */
-    virtual ExpressionType expression_category() { return ET_NOT_IMPORTANT; }
+    virtual InstressionType instruction_category() { return ET_NOT_IMPORTANT; }
 };
 
 #endif  // EXPR_H

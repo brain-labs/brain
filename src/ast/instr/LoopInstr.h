@@ -5,26 +5,39 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef OUTPUT_EXPR_H
-#define OUTPUT_EXPR_H
+#ifndef LOOP_EXPR_H
+#define LOOP_EXPR_H
 
-#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
+#include <vector>
 #include <iostream>
 
-#include "Expr.h"
-#include "../general/ASTInfo.h"
+#include "Instr.h"
 
 /**
- * @brief Class that represents the output operator in Brain.
+ * @brief Enumerates the types of loops that exists in Brain.
  */
-class OutputExpr : public Expr
+typedef enum
 {
+  LT_WHILE,
+  LT_FOR
+} LoopType;
+
+
+/**
+ * @brief Class that represents the loop operator in Brain.
+ */
+class LoopInstr : public Instr
+{
+protected:
+    std::vector<Instr *> _instrs;
+    LoopType _type;
 public:
-    OutputExpr() { ASTInfo::instance()->is_using_io_lib = true; }
-    ~OutputExpr() {}
+    LoopInstr(std::vector<Instr *> instrs, LoopType type) : _instrs(instrs),
+        _type(type) {}
+    ~LoopInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -48,4 +61,4 @@ public:
     void ast_code_gen();
 };
 
-#endif  // OUTPUT_EXPR_H
+#endif  // LOOP_EXPR_H

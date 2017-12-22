@@ -5,9 +5,9 @@
  * Copyright Brain, 2016.
  */
 
-#include "OutputExpr.h"
+#include "OutputInstr.h"
 
-void OutputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void OutputInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                           llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
@@ -26,19 +26,19 @@ void OutputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     B.CreateCall(PutCharF, ArgsArr);
 }
 
-void OutputExpr::debug_description(int level)
+void OutputInstr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Output Expression - print out char"
+        std::cout << "Output Instression - print out char"
                   << std::endl;
     }
     else {
-        std::cout << "OutputExpr" << std::endl;
+        std::cout << "OutputInstr" << std::endl;
     }
 }
 
-void OutputExpr::ast_code_gen()
+void OutputInstr::ast_code_gen()
 {
     std::cout << (char)TT_OUTPUT;
 }

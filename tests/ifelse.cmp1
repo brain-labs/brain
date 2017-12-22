@@ -1,20 +1,20 @@
 === Debug Information ===
-IncrementExpr (1)
-LoopExpr: [
-  IncrementExpr (5)
-  ShiftExpr (1)
+IncrementInstr (1)
+LoopInstr: [
+  IncrementInstr (5)
+  ShiftInstr (1)
  ]
-ShiftExpr (-1)
-IfExpr (THEN) [
-  DebugExpr
+ShiftInstr (-1)
+IfInstr (THEN) [
+  DebugInstr
  ]
- IfExpr (ELSE) [
-  ShiftExpr (1)
-  IfExpr (THEN) [
-    IncrementExpr (4)
+ IfInstr (ELSE) [
+  ShiftInstr (1)
+  IfInstr (THEN) [
+    IncrementInstr (4)
   ]
  ]
-DebugExpr
+DebugInstr
 === Program Output ===
 -------------------------------------------------
 [ 6 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]

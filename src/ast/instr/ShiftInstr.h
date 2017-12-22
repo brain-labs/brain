@@ -5,25 +5,31 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef BREAK_EXPR_H
-#define BREAK_EXPR_H
+#ifndef SHIFT_EXPR_H
+#define SHIFT_EXPR_H
 
-#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
 #include <iostream>
 
-#include "Expr.h"
+#include "Instr.h"
 
 /**
- * @brief Class that represents the break operator in Brain.
+ * @brief Class that represents the shift operator in Brain.
  */
-class BreakExpr : public Expr
+class ShiftInstr : public Instr
 {
+protected:
+    /// steps to jump
+    int _step;
+
+    /// should it jump?
+    bool _jump;
 public:
-    BreakExpr() {}
-    ~BreakExpr() {}
+    ShiftInstr(int step) : _step(step), _jump(false) {}
+    ShiftInstr() : _step(0), _jump(true) {}
+    ~ShiftInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -46,9 +52,10 @@ public:
      */
     void ast_code_gen();
     /**
-     * @brief Returns the category of the expression given by the caller.
+     * @brief Virtual method for updating the AST instrs.
+     * @param update The char whose instruction will be updated.
      */
-    ExpressionType expression_category();
+    bool update_instruction(char update);
 };
 
-#endif // BREAK_EXPR_H
+#endif  // SHIFT_EXPR_H

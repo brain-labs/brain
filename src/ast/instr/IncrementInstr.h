@@ -5,28 +5,26 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef FLOAT_EXPR_H
-#define FLOAT_EXPR_H
+#ifndef INCREMENT_EXPR_H
+#define INCREMENT_EXPR_H
 
-#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
 #include <iostream>
 
-#include "Expr.h"
-#include "../general/ASTInfo.h"
+#include "Instr.h"
 
 /**
- * @brief The FloatExpr class behaves just like the output expression, but it
- * instead of print an integer number it will use io.c to divide the number by
- * 100 and print it.
+ * @brief Class that represent the increment operator in Brain.
  */
-class FloatExpr : public Expr
+class IncrementInstr : public Instr
 {
+protected:
+    int _increment;
 public:
-    FloatExpr() { ASTInfo::instance()->is_using_io_lib = true; }
-    ~FloatExpr() {}
+    explicit IncrementInstr(int increment) : _increment(increment) { }
+    ~IncrementInstr() { }
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -48,6 +46,11 @@ public:
      * out to the stdout the token itself.
      */
     void ast_code_gen();
+    /**
+     * @brief Virtual method for updating the AST instrs.
+     * @param update The char whose instruction will be updated.
+     */
+    bool update_instruction(char update);
 };
 
-#endif // FLOAT_EXPR_H
+#endif  // INCREMENT_EXPR_H

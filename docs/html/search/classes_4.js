@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['floatexpr',['FloatExpr',['../class_float_expr.html',1,'']]]
+  ['floatinstr',['FloatInstr',['../class_float_instr.html',1,'']]]
 ];

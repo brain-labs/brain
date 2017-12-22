@@ -5,9 +5,9 @@
  * Copyright Brain, 2016.
  */
 
-#include "FloatExpr.h"
+#include "FloatInstr.h"
 
-void FloatExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void FloatInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
@@ -35,19 +35,19 @@ void FloatExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     B.CreateCall(FloatPrintF, ArgsArr);
 }
 
-void FloatExpr::ast_code_gen()
+void FloatInstr::ast_code_gen()
 {
     std::cout << (char)TT_FLOAT;
 }
 
-void FloatExpr::debug_description(int level)
+void FloatInstr::debug_description(int level)
 {
     std::cout.width(level);
 
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Float Expression - print out float numbers" << std::endl;
+        std::cout << "Float Instression - print out float numbers" << std::endl;
     }
     else {
-        std::cout << "FloatExpr" << std::endl;
+        std::cout << "FloatInstr" << std::endl;
     }
 }

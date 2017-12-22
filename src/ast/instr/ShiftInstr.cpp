@@ -6,9 +6,9 @@
  */
 
 #include <string>
-#include "ShiftExpr.h"
+#include "ShiftInstr.h"
 
-void ShiftExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void ShiftInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
@@ -36,7 +36,7 @@ void ShiftExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     }
 }
 
-void ShiftExpr::debug_description(int level)
+void ShiftInstr::debug_description(int level)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
         _step == 0 && !_jump) {
@@ -46,10 +46,10 @@ void ShiftExpr::debug_description(int level)
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         if (_jump) {
-            std::cout << "Shift Expression - jump to the data pointer value"
+            std::cout << "Shift Instression - jump to the data pointer value"
                       << std::endl;
         } else {
-            std::cout << "Shift Expression - move data pointer "
+            std::cout << "Shift Instression - move data pointer "
                       << _step
                       << " step(s)"
                       << std::endl;
@@ -57,13 +57,13 @@ void ShiftExpr::debug_description(int level)
     }
     else {
         const char *step_str = std::to_string(_step).c_str();
-        std::cout << "ShiftExpr ("
+        std::cout << "ShiftInstr ("
                   << (_jump ? "jump" : step_str) << ")"
                   << std::endl;
     }
 }
 
-void ShiftExpr::ast_code_gen()
+void ShiftInstr::ast_code_gen()
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _step == 0 && !_jump) {
@@ -84,7 +84,7 @@ void ShiftExpr::ast_code_gen()
     }
 }
 
-bool ShiftExpr::update_expression(char update)
+bool ShiftInstr::update_instruction(char update)
 {
     if (_jump) {
       // no optimizations when there is a jump

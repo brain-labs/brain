@@ -5,9 +5,9 @@
  * Copyright Brain, 2016.
  */
 
-#include "BreakExpr.h"
+#include "BreakInstr.h"
 
-void BreakExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void BreakInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)
 {
     if (BreakBB) {
@@ -15,24 +15,24 @@ void BreakExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     }
 }
 
-void BreakExpr::debug_description(int level)
+void BreakInstr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Break Expression"
+        std::cout << "Break Instression"
                   << std::endl;
     }
     else {
-        std::cout << "BreakExpr" << std::endl;
+        std::cout << "BreakInstr" << std::endl;
     }
 }
 
-void BreakExpr::ast_code_gen()
+void BreakInstr::ast_code_gen()
 {
     std::cout << (char)TT_BREAK;
 }
 
-ExpressionType BreakExpr::expression_category()
+InstressionType BreakInstr::instruction_category()
 {
     return ET_TERMINAL;
 }

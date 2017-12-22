@@ -5,26 +5,26 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef INCREMENT_EXPR_H
-#define INCREMENT_EXPR_H
+#ifndef OUTPUT_EXPR_H
+#define OUTPUT_EXPR_H
 
+#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
 #include <iostream>
 
-#include "Expr.h"
+#include "Instr.h"
+#include "../general/ASTInfo.h"
 
 /**
- * @brief Class that represent the increment operator in Brain.
+ * @brief Class that represents the output operator in Brain.
  */
-class IncrementExpr : public Expr
+class OutputInstr : public Instr
 {
-protected:
-    int _increment;
 public:
-    explicit IncrementExpr(int increment) : _increment(increment) { }
-    ~IncrementExpr() { }
+    OutputInstr() { ASTInfo::instance()->is_using_io_lib = true; }
+    ~OutputInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -46,11 +46,6 @@ public:
      * out to the stdout the token itself.
      */
     void ast_code_gen();
-    /**
-     * @brief Virtual method for updating the AST exprs.
-     * @param update The char whose expression will be updated.
-     */
-    bool update_expression(char update);
 };
 
-#endif  // INCREMENT_EXPR_H
+#endif  // OUTPUT_EXPR_H

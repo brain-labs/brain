@@ -14,21 +14,21 @@
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expr.h"
+#include "Instr.h"
 
 /**
  * @brief Class that represents the if operator in Brain.
  */
-class IfExpr : public Expr
+class IfInstr : public Instr
 {
 protected:
-    std::vector<Expr *> _exprs_then;
-    std::vector<Expr *> _exprs_else;
+    std::vector<Instr *> _instrs_then;
+    std::vector<Instr *> _instrs_else;
 public:
-    IfExpr(std::vector<Expr *> exprs_then) : _exprs_then(exprs_then) {}
-    ~IfExpr() {}
+    IfInstr(std::vector<Instr *> instrs_then) : _instrs_then(instrs_then) {}
+    ~IfInstr() {}
 
-    void set_else(std::vector<Expr *> exprs_else) { _exprs_else = exprs_else; }
+    void set_else(std::vector<Instr *> instrs_else) { _instrs_else = instrs_else; }
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -51,9 +51,9 @@ public:
      */
     void ast_code_gen();
     /**
-     * @brief Returns the category of the expression given by the caller.
+     * @brief Returns the category of the instruction given by the caller.
      */
-    ExpressionType expression_category();
+    InstressionType instruction_category();
 };
 
 #endif // IF_EXPR_H

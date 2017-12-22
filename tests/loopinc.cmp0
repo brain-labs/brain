@@ -1,18 +1,18 @@
 === Debug Information ===
-IncrementExpr (1)
-IncrementExpr (1)
-LoopExpr: {
-  IncrementExpr (1)
-  IncrementExpr (1)
-  IncrementExpr (1)
-  IncrementExpr (1)
-  LoopExpr: [
-    IncrementExpr (1)
-    IncrementExpr (1)
-    IncrementExpr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+LoopInstr: {
+  IncrementInstr (1)
+  IncrementInstr (1)
+  IncrementInstr (1)
+  IncrementInstr (1)
+  LoopInstr: [
+    IncrementInstr (1)
+    IncrementInstr (1)
+    IncrementInstr (1)
   ]
  }
-DebugExpr
+DebugInstr
 === Program Output ===
 -------------------------------------------------
 [ 0 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
