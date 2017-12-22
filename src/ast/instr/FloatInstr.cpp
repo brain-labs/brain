@@ -45,7 +45,7 @@ void FloatInstr::debug_description(int level)
     std::cout.width(level);
 
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Float Instression - print out float numbers" << std::endl;
+        std::cout << "Float Instruction - print out float numbers" << std::endl;
     }
     else {
         std::cout << "FloatInstr" << std::endl;

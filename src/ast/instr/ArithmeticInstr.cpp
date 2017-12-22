@@ -53,7 +53,7 @@ void ArithmeticInstr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Arithmetic Instression - " << type_to_string()
+        std::cout << "Arithmetic Instruction - " << type_to_string()
                   << std::endl;
     }
     else {

@@ -78,7 +78,7 @@ void IfInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
 void IfInstr::debug_description(int level)
 {
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "If Instression - THEN - if cell "
+        std::cout << "If Instruction - THEN - if cell "
                   << " != 0 ["
                   << std::endl;
     }
@@ -100,7 +100,7 @@ void IfInstr::debug_description(int level)
             !_instrs_else.empty()) {
         if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
             std::cout << std::string(level, ' ')
-                      << "If Instression - ELSE - ["
+                      << "If Instruction - ELSE - ["
                       << std::endl;
         }
         else {
@@ -145,7 +145,7 @@ void IfInstr::ast_code_gen()
     std::cout << (char)TT_IF_END;
 }
 
-InstressionType IfInstr::instruction_category()
+InstructionType IfInstr::instruction_category()
 {
     return ET_BRANCH;
 }

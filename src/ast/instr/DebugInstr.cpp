@@ -30,7 +30,7 @@ void DebugInstr::debug_description(int level)
 {
   std::cout.width(level);
   if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-    std::cout << "Debug Instression"
+    std::cout << "Debug Instruction"
               << std::endl;
   }
   else {

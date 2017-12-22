@@ -46,10 +46,10 @@ void ShiftInstr::debug_description(int level)
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
         if (_jump) {
-            std::cout << "Shift Instression - jump to the data pointer value"
+            std::cout << "Shift Instruction - jump to the data pointer value"
                       << std::endl;
         } else {
-            std::cout << "Shift Instression - move data pointer "
+            std::cout << "Shift Instruction - move data pointer "
                       << _step
                       << " step(s)"
                       << std::endl;

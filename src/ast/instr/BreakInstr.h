@@ -48,7 +48,7 @@ public:
     /**
      * @brief Returns the category of the instruction given by the caller.
      */
-    InstressionType instruction_category();
+    InstructionType instruction_category();
 };
 
 #endif // BREAK_EXPR_H

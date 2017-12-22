@@ -9,9 +9,9 @@
 - [x] Code refactoring for the return methods inside the recursivity.
 - [x] Code refactoring for the whole project. Improve readability (CodeGen params too).
 - [x] Create verbose mode describe on https://github.com/luizperes/brain/issues/2
-- [x] Fix InputInstression
+- [x] Fix InputInstruction
 - [x] Implement optimization for empty whiles `[ ]`. Ignore them (For Else too).
-- [x] Implement optimization for empty moves `ShiftInstr(0)` and `IncrementInstression(0)`.
+- [x] Implement optimization for empty moves `ShiftInstr(0)` and `IncrementInstruction(0)`.
 - [x] Implement a `delete comments` option for the compiler.
 - [x] Implement a `generate optimized code` option for the compiler.
 - [x] Improve the `return` at the method `Parser::isSkippable`. Check switch at the parser.
@@ -34,5 +34,5 @@
 
 - [x] Utils
 - [x] Parser
-- [x] Instressions
+- [x] Instructions
 - [x] AST

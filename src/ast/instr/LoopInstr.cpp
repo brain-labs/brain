@@ -96,7 +96,7 @@ void LoopInstr::debug_description(int level)
     char closedBrackets = (_type == LT_FOR) ? TT_END_FOR : TT_END_WHILE;
 
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Loop Instression - "
+        std::cout << "Loop Instruction - "
                   << openedBrackets
                   << std::endl;
     }

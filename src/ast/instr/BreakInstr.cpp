@@ -19,7 +19,7 @@ void BreakInstr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Break Instression"
+        std::cout << "Break Instruction"
                   << std::endl;
     }
     else {
@@ -32,7 +32,7 @@ void BreakInstr::ast_code_gen()
     std::cout << (char)TT_BREAK;
 }
 
-InstressionType BreakInstr::instruction_category()
+InstructionType BreakInstr::instruction_category()
 {
     return ET_TERMINAL;
 }

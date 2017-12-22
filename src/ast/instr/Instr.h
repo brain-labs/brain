@@ -55,7 +55,7 @@ typedef enum
   ET_NOT_IMPORTANT,
   ET_BRANCH,
   ET_TERMINAL
-} InstressionType;
+} InstructionType;
 
 /**
  * @brief Abstract class in which all instructions in Brain implement from.
@@ -91,7 +91,7 @@ public:
     /**
      * @brief Returns the category of the instruction given by the caller.
      */
-    virtual InstressionType instruction_category() { return ET_NOT_IMPORTANT; }
+    virtual InstructionType instruction_category() { return ET_NOT_IMPORTANT; }
 };
 
 #endif  // EXPR_H
