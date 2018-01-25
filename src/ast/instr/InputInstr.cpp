@@ -5,9 +5,9 @@
  * Copyright Brain, 2016.
  */
 
-#include "InputExpr.h"
+#include "InputInstr.h"
 
-void InputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void InputInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
@@ -29,19 +29,19 @@ void InputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     B.CreateCall(GetCharF, ArgsArr);
 }
 
-void InputExpr::debug_description(int level)
+void InputInstr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Input Expression - read char"
+        std::cout << "Input Instruction - read char"
                   << std::endl;
     }
     else {
-        std::cout << "InputExpr" << std::endl;
+        std::cout << "InputInstr" << std::endl;
     }
 }
 
-void InputExpr::ast_code_gen()
+void InputInstr::ast_code_gen()
 {
     std::cout << (char)TT_INPUT;
 }

@@ -5,31 +5,28 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef SHIFT_EXPR_H
-#define SHIFT_EXPR_H
+#ifndef FLOAT_EXPR_H
+#define FLOAT_EXPR_H
 
+#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
 #include <iostream>
 
-#include "Expr.h"
+#include "Instr.h"
+#include "../general/ASTInfo.h"
 
 /**
- * @brief Class that represents the shift operator in Brain.
+ * @brief The FloatInstr class behaves just like the output instruction, but it
+ * instead of print an integer number it will use io.c to divide the number by
+ * 100 and print it.
  */
-class ShiftExpr : public Expr
+class FloatInstr : public Instr
 {
-protected:
-    /// steps to jump
-    int _step;
-
-    /// should it jump?
-    bool _jump;
 public:
-    ShiftExpr(int step) : _step(step), _jump(false) {}
-    ShiftExpr() : _step(0), _jump(true) {}
-    ~ShiftExpr() {}
+    FloatInstr() { ASTInfo::instance()->is_using_io_lib = true; }
+    ~FloatInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -51,11 +48,6 @@ public:
      * out to the stdout the token itself.
      */
     void ast_code_gen();
-    /**
-     * @brief Virtual method for updating the AST exprs.
-     * @param update The char whose expression will be updated.
-     */
-    bool update_expression(char update);
 };
 
-#endif  // SHIFT_EXPR_H
+#endif // FLOAT_EXPR_H

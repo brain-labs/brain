@@ -5,40 +5,49 @@
  * Copyright Brain, 2016.
  */
 
-#include "OutputExpr.h"
+#include "FloatInstr.h"
 
-void OutputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
-                          llvm::BasicBlock *BreakBB)
+void FloatInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+                         llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
     llvm::Type* PutCharArgs[] = { llvm::Type::getInt32Ty(C),
                                   llvm::Type::getInt32PtrTy(C),
                                   llvm::Type::getInt32Ty(C) };
-    llvm::FunctionType *PutCharTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C), PutCharArgs, false);
-    llvm::Function *PutCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("b_putchar", PutCharTy));
+
+    llvm::FunctionType *FloatPrintTy =
+            llvm::FunctionType::get(llvm::Type::getVoidTy(C), PutCharArgs,
+                                    false);
+    llvm::Function *FloatPrintF =
+            llvm::cast<llvm::Function>(M->getOrInsertFunction("b_float_print",
+                                                              FloatPrintTy));
+
+    // Creating the arguments which will be passed to the called function in
+    // io.c
     llvm::Value* Args[] = {
         B.CreateLoad(ASTInfo::instance()->get_index_ptr()),
         B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
                             llvm::Type::getInt32Ty(C)->getPointerTo()),
         B.CreateLoad(ASTInfo::instance()->get_cells_size())
     };
+
     llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
-    B.CreateCall(PutCharF, ArgsArr);
+    B.CreateCall(FloatPrintF, ArgsArr);
 }
 
-void OutputExpr::debug_description(int level)
+void FloatInstr::ast_code_gen()
+{
+    std::cout << (char)TT_FLOAT;
+}
+
+void FloatInstr::debug_description(int level)
 {
     std::cout.width(level);
+
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Output Expression - print out char"
-                  << std::endl;
+        std::cout << "Float Instruction - print out float numbers" << std::endl;
     }
     else {
-        std::cout << "OutputExpr" << std::endl;
+        std::cout << "FloatInstr" << std::endl;
     }
-}
-
-void OutputExpr::ast_code_gen()
-{
-    std::cout << (char)TT_OUTPUT;
 }

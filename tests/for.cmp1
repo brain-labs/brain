@@ -1,20 +1,20 @@
 === Debug Information ===
-IncrementExpr (-5)
-LoopExpr: {
-  IncrementExpr (5)
+IncrementInstr (-5)
+LoopInstr: {
+  IncrementInstr (5)
  }
-DebugExpr
-ShiftExpr (1)
-LoopExpr: {
-  IncrementExpr (6)
+DebugInstr
+ShiftInstr (1)
+LoopInstr: {
+  IncrementInstr (6)
  }
-DebugExpr
-ShiftExpr (1)
-IncrementExpr (3)
-LoopExpr: {
-  IncrementExpr (1)
+DebugInstr
+ShiftInstr (1)
+IncrementInstr (3)
+LoopInstr: {
+  IncrementInstr (1)
  }
-DebugExpr
+DebugInstr
 === Program Output ===
 --------------------------------------------------
 [ -5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]

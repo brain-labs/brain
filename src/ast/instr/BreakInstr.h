@@ -5,8 +5,8 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef OUTPUT_EXPR_H
-#define OUTPUT_EXPR_H
+#ifndef BREAK_EXPR_H
+#define BREAK_EXPR_H
 
 #include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
@@ -14,17 +14,16 @@
 
 #include <iostream>
 
-#include "Expr.h"
-#include "../general/ASTInfo.h"
+#include "Instr.h"
 
 /**
- * @brief Class that represents the output operator in Brain.
+ * @brief Class that represents the break operator in Brain.
  */
-class OutputExpr : public Expr
+class BreakInstr : public Instr
 {
 public:
-    OutputExpr() { ASTInfo::instance()->is_using_io_lib = true; }
-    ~OutputExpr() {}
+    BreakInstr() {}
+    ~BreakInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -46,6 +45,10 @@ public:
      * out to the stdout the token itself.
      */
     void ast_code_gen();
+    /**
+     * @brief Returns the category of the instruction given by the caller.
+     */
+    InstructionType instruction_category();
 };
 
-#endif  // OUTPUT_EXPR_H
+#endif // BREAK_EXPR_H

@@ -6,30 +6,30 @@
  */
 
 #include "Parser.h"
-#include "../ast/expr/ShiftExpr.h"
-#include "../ast/expr/IncrementExpr.h"
-#include "../ast/expr/InputExpr.h"
-#include "../ast/expr/OutputExpr.h"
-#include "../ast/expr/LoopExpr.h"
-#include "../ast/expr/ArithmeticExpr.h"
-#include "../ast/expr/DebugExpr.h"
-#include "../ast/expr/BreakExpr.h"
-#include "../ast/expr/IfExpr.h"
-#include "../ast/expr/FloatExpr.h"
+#include "../ast/instr/ShiftInstr.h"
+#include "../ast/instr/IncrementInstr.h"
+#include "../ast/instr/InputInstr.h"
+#include "../ast/instr/OutputInstr.h"
+#include "../ast/instr/LoopInstr.h"
+#include "../ast/instr/ArithmeticInstr.h"
+#include "../ast/instr/DebugInstr.h"
+#include "../ast/instr/BreakInstr.h"
+#include "../ast/instr/IfInstr.h"
+#include "../ast/instr/FloatInstr.h"
 
 // Forward declaration of a static member
 static bool has_done_then = false;
 
-void Parser::parse(std::vector<Expr *> &exprs, int level)
+void Parser::parse(std::vector<Instr *> &instrs, int level)
 {
     char c = 0;
     while ((c = _data[_index++]))  {
-        Expr *expr = nullptr;
+        Instr *instr = nullptr;
         if (ArgsOptions::instance()->get_optimization() ==
-                BO_IS_OPTIMIZING_O1 && !exprs.empty()) {
+                BO_IS_OPTIMIZING_O1 && !instrs.empty()) {
 
-            Expr *last_expression = exprs.back();
-            if (last_expression->update_expression(c)) {
+            Instr *last_instruction = instrs.back();
+            if (last_instruction->update_instruction(c)) {
                 continue;
             }
         }
@@ -37,31 +37,31 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
         switch (c)
         {
         case TT_SHIFT_LEFT:
-            expr = new ShiftExpr(-1);
+            instr = new ShiftInstr(-1);
             break;
         case TT_SHIFT_RIGHT:
-            expr = new ShiftExpr(1);
+            instr = new ShiftInstr(1);
             break;
         case TT_SHIFT_JUMP:
-            expr = new ShiftExpr();
+            instr = new ShiftInstr();
             break;
         case TT_INCREMENT:
-            expr = new IncrementExpr(1);
+            instr = new IncrementInstr(1);
             break;
         case TT_DECREMENT:
-            expr = new IncrementExpr(-1);
+            instr = new IncrementInstr(-1);
             break;
         case TT_OUTPUT:
-            expr = new OutputExpr();
+            instr = new OutputInstr();
             break;
         case TT_INPUT:
-            expr = new InputExpr();
+            instr = new InputInstr();
             break;
         case TT_BEGIN_WHILE:
         {
-            std::vector<Expr *> loop_expression;
-            parse(loop_expression, level + 1);
-            expr = new LoopExpr(loop_expression, LT_WHILE);
+            std::vector<Instr *> loop_instruction;
+            parse(loop_instruction, level + 1);
+            instr = new LoopInstr(loop_instruction, LT_WHILE);
             break;
         }
         case TT_END_WHILE:
@@ -75,9 +75,9 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
         }
         case TT_BEGIN_FOR:
         {
-            std::vector<Expr *> loop_expression;
-            parse(loop_expression, level + 1);
-            expr = new LoopExpr(loop_expression, LT_FOR);
+            std::vector<Instr *> loop_instruction;
+            parse(loop_instruction, level + 1);
+            instr = new LoopInstr(loop_instruction, LT_FOR);
             break;
         }
         case TT_END_FOR:
@@ -91,9 +91,9 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
         }
         case TT_IF_THEN:
         {
-            std::vector<Expr *> if_expression;
-            parse(if_expression, level + 1);
-            expr = new IfExpr(if_expression);
+            std::vector<Instr *> if_instruction;
+            parse(if_instruction, level + 1);
+            instr = new IfInstr(if_instruction);
             break;
         }
         case TT_IF_ELSE:
@@ -109,13 +109,13 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
             }
 
             // do the else
-            if (!exprs.empty()) {
-                Expr *expr = exprs.back();
+            if (!instrs.empty()) {
+                Instr *instr = instrs.back();
 
-                if (expr->expression_category() == ET_BRANCH) {
-                    std::vector<Expr *> else_expression;
-                    parse(else_expression, level + 1);
-                    ((IfExpr *)expr)->set_else(else_expression);
+                if (instr->instruction_category() == ET_BRANCH) {
+                    std::vector<Instr *> else_instruction;
+                    parse(else_instruction, level + 1);
+                    ((IfInstr *)instr)->set_else(else_instruction);
                 }
             }
 
@@ -131,30 +131,30 @@ void Parser::parse(std::vector<Expr *> &exprs, int level)
             break;
         }
         case TT_MUL:
-            expr = new ArithmeticExpr(AT_MUL);
+            instr = new ArithmeticInstr(AT_MUL);
             break;
         case TT_DIV:
-            expr = new ArithmeticExpr(AT_DIV);
+            instr = new ArithmeticInstr(AT_DIV);
             break;
         case TT_REM:
-            expr = new ArithmeticExpr(AT_REM);
+            instr = new ArithmeticInstr(AT_REM);
             break;
         case TT_DEBUG:
-            expr = new DebugExpr();
+            instr = new DebugInstr();
             break;
         case TT_BREAK:
-            expr = new BreakExpr();
+            instr = new BreakInstr();
             break;
         case TT_FLOAT:
-            expr = new FloatExpr();
+            instr = new FloatInstr();
             break;
         default:
             // Ignored character
             continue;
         }
 
-        if (expr) {
-            exprs.push_back(expr);
+        if (instr) {
+            instrs.push_back(instr);
         }
     }
 }
@@ -163,22 +163,22 @@ void Parser::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 {
     ASTInfo::instance()->code_gen(M, B);
 
-    for (auto& expr : _exprs) {
-        expr->code_gen(M, B, nullptr);
+    for (auto& instr : _instrs) {
+        instr->code_gen(M, B, nullptr);
     }
 }
 
 void Parser::debug_description(int level)
 {
-    for (auto& expr : _exprs) {
+    for (auto& instr : _instrs) {
         std::cout << std::string(level * 2, ' ');
-        expr->debug_description(level+1);
+        instr->debug_description(level+1);
     }
 }
 
 void Parser::ast_code_gen()
 {
-    for (auto& expr : _exprs) {
-        expr->ast_code_gen();
+    for (auto& instr : _instrs) {
+        instr->ast_code_gen();
     }
 }

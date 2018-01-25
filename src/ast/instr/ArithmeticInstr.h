@@ -5,28 +5,40 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef FLOAT_EXPR_H
-#define FLOAT_EXPR_H
+#ifndef ARITHMETIC_EXPR_H
+#define ARITHMETIC_EXPR_H
 
-#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
 #include <iostream>
+#include <string>
 
-#include "Expr.h"
-#include "../general/ASTInfo.h"
+#include "Instr.h"
 
 /**
- * @brief The FloatExpr class behaves just like the output expression, but it
- * instead of print an integer number it will use io.c to divide the number by
- * 100 and print it.
+ * @brief The three kinds of arithmetic operations used in Brain: multiplication,
+ * division and modulus.
  */
-class FloatExpr : public Expr
+typedef enum
 {
+  AT_MUL,
+  AT_DIV,
+  AT_REM
+} ArithmeticType;
+
+/**
+ * @brief Represents the three arithmetic operations that you can use and abuse
+ * in Brain.
+ */
+class ArithmeticInstr : public Instr
+{
+protected:
+    ArithmeticType _type;
+    std::string type_to_string();
 public:
-    FloatExpr() { ASTInfo::instance()->is_using_io_lib = true; }
-    ~FloatExpr() {}
+    ArithmeticInstr(ArithmeticType type) : _type(type) {}
+    ~ArithmeticInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -50,4 +62,4 @@ public:
     void ast_code_gen();
 };
 
-#endif // FLOAT_EXPR_H
+#endif // ARITHMETIC_EXPR_H

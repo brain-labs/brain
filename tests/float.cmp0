@@ -1,93 +1,93 @@
 === Debug Information ===
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-FloatExpr
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-OutputExpr
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-OutputExpr
-LoopExpr: [
-  IncrementExpr (-1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+FloatInstr
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+OutputInstr
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+OutputInstr
+LoopInstr: [
+  IncrementInstr (-1)
  ]
-IncrementExpr (-1)
-IncrementExpr (-1)
-IncrementExpr (-1)
-FloatExpr
-ShiftExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-OutputExpr
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-OutputExpr
-LoopExpr: [
-  IncrementExpr (-1)
+IncrementInstr (-1)
+IncrementInstr (-1)
+IncrementInstr (-1)
+FloatInstr
+ShiftInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+OutputInstr
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+OutputInstr
+LoopInstr: [
+  IncrementInstr (-1)
  ]
-ShiftExpr (-1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-FloatExpr
-ShiftExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-OutputExpr
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-OutputExpr
-LoopExpr: [
-  IncrementExpr (-1)
+ShiftInstr (-1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+FloatInstr
+ShiftInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+OutputInstr
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+OutputInstr
+LoopInstr: [
+  IncrementInstr (-1)
  ]
-ShiftExpr (-1)
-IncrementExpr (1)
-IncrementExpr (1)
-ShiftExpr (1)
-IncrementExpr (1)
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-FloatExpr
-ShiftExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-OutputExpr
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-OutputExpr
+ShiftInstr (-1)
+IncrementInstr (1)
+IncrementInstr (1)
+ShiftInstr (1)
+IncrementInstr (1)
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+FloatInstr
+ShiftInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+OutputInstr
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+OutputInstr
 === Program Output ===
 0.03
 -0.03

@@ -1,3 +1,3 @@
-<map id="IncrementExpr" name="IncrementExpr">
-<area shape="rect" id="node2" href="$class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="34,5,83,32"/>
+<map id="IncrementInstr" name="IncrementInstr">
+<area shape="rect" id="node2" href="$class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="34,5,83,32"/>
 </map>

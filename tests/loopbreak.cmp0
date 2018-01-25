@@ -1,24 +1,24 @@
 === Debug Information ===
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-LoopExpr: [
-  DebugExpr
-  IfExpr (THEN) [
-    IncrementExpr (-1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+LoopInstr: [
+  DebugInstr
+  IfInstr (THEN) [
+    IncrementInstr (-1)
   ]
-  IfExpr (ELSE) [
-    BreakExpr
+  IfInstr (ELSE) [
+    BreakInstr
   ]
  ]
-DebugExpr
+DebugInstr
 === Program Output ===
 --------------------------------------------------
 [ 10 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]

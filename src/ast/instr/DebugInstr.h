@@ -5,30 +5,26 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef IF_EXPR_H
-#define IF_EXPR_H
+#ifndef DEBUG_EXPR_H
+#define DEBUG_EXPR_H
 
-#include <vector>
 #include <iostream>
 
+#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include "Expr.h"
+#include "Instr.h"
+#include "../general/ASTInfo.h"
 
 /**
- * @brief Class that represents the if operator in Brain.
+ * @brief Class that represents the debug operator in Brain.
  */
-class IfExpr : public Expr
+class DebugInstr : public Instr
 {
-protected:
-    std::vector<Expr *> _exprs_then;
-    std::vector<Expr *> _exprs_else;
 public:
-    IfExpr(std::vector<Expr *> exprs_then) : _exprs_then(exprs_then) {}
-    ~IfExpr() {}
-
-    void set_else(std::vector<Expr *> exprs_else) { _exprs_else = exprs_else; }
+    DebugInstr() { ASTInfo::instance()->is_using_io_lib = true; }
+    ~DebugInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -50,11 +46,6 @@ public:
      * out to the stdout the token itself.
      */
     void ast_code_gen();
-    /**
-     * @brief Returns the category of the expression given by the caller.
-     */
-    ExpressionType expression_category();
 };
 
-#endif // IF_EXPR_H
-
+#endif // DEBUG_EXPR_H

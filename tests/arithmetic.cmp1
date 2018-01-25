@@ -1,23 +1,23 @@
 === Debug Information ===
-IncrementExpr (3)
-ShiftExpr (1)
-IncrementExpr (2)
-ArithmeticExpr ( multiplication )
-DebugExpr
-ShiftExpr (2)
-IncrementExpr (2)
-ShiftExpr (1)
-IncrementExpr (1)
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-ArithmeticExpr ( multiplication )
-DebugExpr
-ArithmeticExpr ( division )
-DebugExpr
-ArithmeticExpr ( remainder )
-DebugExpr
+IncrementInstr (3)
+ShiftInstr (1)
+IncrementInstr (2)
+ArithmeticInstr ( multiplication )
+DebugInstr
+ShiftInstr (2)
+IncrementInstr (2)
+ShiftInstr (1)
+IncrementInstr (1)
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+ArithmeticInstr ( multiplication )
+DebugInstr
+ArithmeticInstr ( division )
+DebugInstr
+ArithmeticInstr ( remainder )
+DebugInstr
 === Program Output ===
 -------------------------------------------------
 [ 3 | 6 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]

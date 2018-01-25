@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('class_output_expr.html','');});
+$(document).ready(function(){initNavTree('class_output_instr.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -107,20 +107,20 @@ $(document).ready(function(){initNavTree('class_output_expr.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">OutputExpr Member List</div>  </div>
+<div class="title">OutputInstr Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="class_output_expr.html">OutputExpr</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="class_output_instr.html">OutputInstr</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_output_expr.html#ae63d2652d6d450f3cbea27e48b8fe65c">ast_code_gen</a>()</td><td class="entry"><a class="el" href="class_output_expr.html">OutputExpr</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_output_expr.html#aa8112abff8de44a6b242477d768f8c11">code_gen</a>(llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td><td class="entry"><a class="el" href="class_output_expr.html">OutputExpr</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_output_expr.html#ad6945f426badd1e9efe3d9d95f2bdfbb">debug_description</a>(int level)</td><td class="entry"><a class="el" href="class_output_expr.html">OutputExpr</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_expr.html#afaf1581533c12ddb3c71874921ed8eba">expression_category</a>()</td><td class="entry"><a class="el" href="class_expr.html">Expr</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>OutputExpr</b>() (defined in <a class="el" href="class_output_expr.html">OutputExpr</a>)</td><td class="entry"><a class="el" href="class_output_expr.html">OutputExpr</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_expr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_expression</a>(char update)</td><td class="entry"><a class="el" href="class_expr.html">Expr</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Expr</b>() (defined in <a class="el" href="class_expr.html">Expr</a>)</td><td class="entry"><a class="el" href="class_expr.html">Expr</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>~OutputExpr</b>() (defined in <a class="el" href="class_output_expr.html">OutputExpr</a>)</td><td class="entry"><a class="el" href="class_output_expr.html">OutputExpr</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_output_instr.html#ae63d2652d6d450f3cbea27e48b8fe65c">ast_code_gen</a>()</td><td class="entry"><a class="el" href="class_output_instr.html">OutputInstr</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_output_instr.html#aa8112abff8de44a6b242477d768f8c11">code_gen</a>(llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td><td class="entry"><a class="el" href="class_output_instr.html">OutputInstr</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_output_instr.html#ad6945f426badd1e9efe3d9d95f2bdfbb">debug_description</a>(int level)</td><td class="entry"><a class="el" href="class_output_instr.html">OutputInstr</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_instr.html#afaf1581533c12ddb3c71874921ed8eba">instruction_category</a>()</td><td class="entry"><a class="el" href="class_instr.html">Instr</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>OutputInstr</b>() (defined in <a class="el" href="class_output_instr.html">OutputInstr</a>)</td><td class="entry"><a class="el" href="class_output_instr.html">OutputInstr</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_instr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_instruction</a>(char update)</td><td class="entry"><a class="el" href="class_instr.html">Instr</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Instr</b>() (defined in <a class="el" href="class_instr.html">Instr</a>)</td><td class="entry"><a class="el" href="class_instr.html">Instr</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~OutputInstr</b>() (defined in <a class="el" href="class_output_instr.html">OutputInstr</a>)</td><td class="entry"><a class="el" href="class_output_instr.html">OutputInstr</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

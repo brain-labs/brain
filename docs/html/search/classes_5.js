@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ifexpr',['IfExpr',['../class_if_expr.html',1,'']]],
-  ['incrementexpr',['IncrementExpr',['../class_increment_expr.html',1,'']]],
-  ['inputexpr',['InputExpr',['../class_input_expr.html',1,'']]]
+  ['ifinstr',['IfInstr',['../class_if_instr.html',1,'']]],
+  ['incrementinstr',['IncrementInstr',['../class_increment_instr.html',1,'']]],
+  ['inputinstr',['InputInstr',['../class_input_instr.html',1,'']]]
 ];

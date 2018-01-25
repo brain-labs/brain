@@ -5,9 +5,9 @@
  * Copyright Brain, 2016.
  */
 
-#include "DebugExpr.h"
+#include "DebugInstr.h"
 
-void DebugExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void DebugInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)
 {
   llvm::LLVMContext &C = M->getContext();
@@ -26,19 +26,19 @@ void DebugExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
   B.CreateCall(DebugF, ArgsArr);
 }
 
-void DebugExpr::debug_description(int level)
+void DebugInstr::debug_description(int level)
 {
   std::cout.width(level);
   if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-    std::cout << "Debug Expression"
+    std::cout << "Debug Instruction"
               << std::endl;
   }
   else {
-    std::cout << "DebugExpr" << std::endl;
+    std::cout << "DebugInstr" << std::endl;
   }
 }
 
-void DebugExpr::ast_code_gen()
+void DebugInstr::ast_code_gen()
 {
     std::cout << (char)TT_DEBUG;
 }
