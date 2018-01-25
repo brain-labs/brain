@@ -72,7 +72,7 @@ void ASTInfo::code_gen(llvm::Module *M, llvm::IRBuilder<> &B)
 
     if (!__brain_cells_size) {
         // Create global variable |brain.cells.size|
-        llvm::Type *Ty = ASTInfo::_instance->get_cell_type(context);
+        llvm::Type *Ty = llvm::Type::getInt32Ty(context);
         // int 8, 16, 32 or 64 tape size
         const llvm::APInt Size = llvm::APInt(32, ArgsOptions::instance()->get_cells_size());
         llvm::Constant *InitV = llvm::Constant::getIntegerValue(Ty, Size);
