@@ -75,20 +75,90 @@ void b_show_tape(int idx, int *cells, int size) {
     printf("*(%d)\n", idx);
 }
 
-void b_getchar(int idx, int *cells, int size) {
-    cells[idx] = getchar();
+// -------------- 8 bits
+
+void b_getchar_8(char idx, char *cells, int size) {
+    cells[idx] = (char)getchar();
 }
 
-void b_putchar(int idx, int *cells, int size) {
-    putchar(cells[idx]);
+void b_putchar_8(char idx, char *cells, int size) {
+    putchar((int)cells[idx]);
 }
 
-void b_float_print(int idx, int *cells, int size) {
+void b_float_print_8(char idx, char *cells, int size) {
     float value = cells[idx] / 100.0;
     printf("%.2f", value);
 }
 
-void b_debug(int idx, int *cells, int size) {
+void b_debug_8(char idx, char *cells, int size) {
+    printf(
+      "Index Pointer: %d Value at Index Pointer: %d\n",
+      idx,
+      cells[idx]
+    );
+}
+
+// -------------- 16 bits
+
+void b_getchar_16(short idx, short *cells, int size) {
+    cells[idx] = (short)getchar();
+}
+
+void b_putchar_16(short idx, short *cells, int size) {
+    putchar((int)cells[idx]);
+}
+
+void b_float_print_16(short idx, short *cells, int size) {
+    float value = cells[idx] / 100.0;
+    printf("%.2f", value);
+}
+
+void b_debug_16(short idx, short *cells, int size) {
+    printf(
+      "Index Pointer: %d Value at Index Pointer: %d\n",
+      idx,
+      cells[idx]
+    );
+}
+
+// -------------- 32 bits
+
+void b_getchar_32(int idx, int *cells, int size) {
+    cells[idx] = getchar();
+}
+
+void b_putchar_32(int idx, int *cells, int size) {
+    putchar(cells[idx]);
+}
+
+void b_float_print_32(int idx, int *cells, int size) {
+    float value = cells[idx] / 100.0;
+    printf("%.2f", value);
+}
+
+void b_debug_32(int idx, int *cells, int size) {
     b_show_tape(idx, cells, size);
 }
 
+// -------------- 64 bits
+
+void b_getchar_64(long idx, long *cells, int size) {
+    cells[idx] = (long)getchar();
+}
+
+void b_putchar_64(long idx, long *cells, int size) {
+    putchar((int)cells[idx]);
+}
+
+void b_float_print_64(long idx, long *cells, int size) {
+    float value = cells[idx] / 100.0;
+    printf("%.2f", value);
+}
+
+void b_debug_64(long idx, long *cells, int size) {
+    printf(
+      "Index Pointer: %ld Value at Index Pointer: %ld\n",
+      idx,
+      cells[idx]
+    );
+}

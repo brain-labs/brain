@@ -15,13 +15,16 @@ void IncrementInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
         return;
     }
 
-    llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(ASTInfo::instance()->get_index_ptr()) };
+    llvm::Value* Idxs[] = { B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0),
+                            B.CreateLoad(ASTInfo::instance()->get_index_ptr()) };
     llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
     llvm::Value *CellPtr = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(), IdxsArr);
     // Load cell value
     llvm::Value *CellV = B.CreateLoad(CellPtr);
     // Add |_increment| to cell value and save the value
-    B.CreateStore(B.CreateAdd(CellV, B.getInt32(_increment)), CellPtr);
+    B.CreateStore(B.CreateAdd(CellV,
+                    B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), _increment)),
+                  CellPtr);
 }
 
 void IncrementInstr::debug_description(int level)

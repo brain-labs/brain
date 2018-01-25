@@ -16,6 +16,7 @@ ArgsOptions* ArgsOptions::instance()
         ArgsOptions::_instance = new ArgsOptions();
         ArgsOptions::_instance->set_cells_size(100);
         ArgsOptions::_instance->set_io_option(IO_REGULAR);
+        ArgsOptions::_instance->set_cell_bitsize(32);
     }
 
     return _instance;
@@ -54,6 +55,26 @@ void ArgsOptions::set_cells_size(int cells_size)
 int ArgsOptions::get_cells_size()
 {
     return _k_cells_size;
+}
+
+void ArgsOptions::set_cell_bitsize(int cell_bitsize)
+{
+    switch (cell_bitsize) {
+        case 8:
+        case 16:
+        // 32 is the default
+        case 64:
+          _k_cell_bitsize = cell_bitsize;
+          break;
+        default:
+          _k_cell_bitsize = 32;
+          break;
+    }
+}
+
+int ArgsOptions::get_cell_bitsize()
+{
+    return _k_cell_bitsize;
 }
 
 void ArgsOptions::set_io_option(int type_io)

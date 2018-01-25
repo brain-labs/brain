@@ -21,13 +21,13 @@ void IfInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     // Get the current cell adress
     llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
     llvm::Value *CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
-                                                           // Cast to int32*
-                                                           llvm::Type::getInt32Ty(C)->getPointerTo()),
+                                       // Cast to int 8*, 16*, 32* or 64*
+                                       ASTInfo::instance()->get_cell_type(C)->getPointerTo()),
                                        IdxV);
     llvm::Value *NEZeroCond = B.CreateICmpNE(B.CreateLoad(CellPtr),
                                              // is cell signed int not equal
                                              // to zero?
-                                             B.getInt32(0));
+                                             B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0));
 
     if (ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O0 ||
         !_instrs_else.empty()) {

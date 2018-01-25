@@ -52,6 +52,8 @@ private:
     int _options;
     /// Number of cells available to Brain interpreter.
     int _k_cells_size;
+    /// Number of bits of each cell of the tape.
+    int _k_cell_bitsize;
     /// Type for the io library
     int _type_io;
 public:
@@ -85,6 +87,18 @@ public:
      * as the Brain memory.
      */
     int get_cells_size();
+    /**
+     * @brief set_cell_bitsize Sets the bitsize of Brain's cells.
+     * @param cell_bitsize An integer representing the bitsize of each cell
+     * of the Brain tape.
+     */
+    void set_cell_bitsize(int cell_bitsize);
+    /**
+     * @brief get_cell_bitsize
+     * @return An integer corresponding with the bitsize of each cell of the
+     * tape.
+     */
+    int get_cell_bitsize();
     /**
      * @brief Returns the optimization level to compile Brain files.
      * @returns A BrainOption representing the level of optimization.

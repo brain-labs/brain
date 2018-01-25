@@ -68,8 +68,10 @@ int Bootstrap::init(int argc, char** argv)
 #endif // IS_DEBUG
 
     // Create the main function: "i32 @main()"
-    auto *MainF = llvm::cast<llvm::Function>(module->getOrInsertFunction("main",
-                                                                        llvm::Type::getInt32Ty(llvm_context)));
+    auto *MainF = llvm::cast<llvm::Function>(
+        module->getOrInsertFunction("main",
+        ASTInfo::instance()->get_cell_type(llvm_context))
+    );
 
     // Create the entry block
     auto *basic_block = llvm::BasicBlock::Create(llvm_context,
@@ -87,7 +89,7 @@ int Bootstrap::init(int argc, char** argv)
     parser.code_gen(module, builder);
 
     // Return 0 to the "main" function.
-    builder.CreateRet(builder.getInt32(0));
+    builder.CreateRet(builder.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0));
 
 #ifdef IS_DEBUG
     llvm::verifyModule(*module, &dumpStrOstreamDebug);
