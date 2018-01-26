@@ -46,6 +46,8 @@ void ArgsHandler::handle(int argc, char **argv)
                       << "--version\t\tShows the current version of Brain\n"
                       << "--size=<number>\t\tSets the number of cells used by \
 the interpreter\n"
+                      << "--size-cell=<number>\tSets the number of bits \
+(8, 16, 32, 64) of each cell\n"
                       << "-emit-llvm\t\tEmits LLVM IR code for the given input\n"
                       << "-emit-ast\t\tEmits the AST for the given input\n"
                       << "-emit-code\t\tEmits an optimized code for the given \
@@ -116,6 +118,13 @@ input\n"
              */
             int cells_size = std::atoi(str.substr(7, str.size()-7).c_str());
             ArgsOptions::instance()->set_cells_size(cells_size);
+        }
+        else if (str.size() > 11 && str.compare(0, 12, "--size-cell=") == 0) {
+            /* Specified a cell size of 8, 16, 32 or 64 bits.
+             * The default is 32 bits.
+             */
+            int cell_bitsize = std::atoi(str.substr(12, str.size()-12).c_str());
+            ArgsOptions::instance()->set_cell_bitsize(cell_bitsize);
         }
         else if (str.size() > 6 && str.compare(0, 7, "--code=") == 0) {
             _string_file = str.substr(7, str.size()-7);

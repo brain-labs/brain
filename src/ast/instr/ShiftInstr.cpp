@@ -17,7 +17,7 @@ void ShiftInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     }
 
     if (_jump) {
-        llvm::Value* Idxs[] = { B.getInt32(0),
+        llvm::Value* Idxs[] = { B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0),
            B.CreateLoad(ASTInfo::instance()->get_index_ptr()) };
         llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
         llvm::Value *CellPtr = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(),
@@ -31,8 +31,13 @@ void ShiftInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
         // Load index value
         llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
         // Add |_step| to index and save the value
-        B.CreateStore(B.CreateAdd(IdxV, B.getInt32(_step)),
-            ASTInfo::instance()->get_index_ptr());
+        B.CreateStore(
+            B.CreateAdd(
+                IdxV,
+                B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), _step)
+            ),
+            ASTInfo::instance()->get_index_ptr()
+        );
     }
 }
 

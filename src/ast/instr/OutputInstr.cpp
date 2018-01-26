@@ -11,15 +11,20 @@ void OutputInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                           llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
-    llvm::Type* PutCharArgs[] = { llvm::Type::getInt32Ty(C),
-                                  llvm::Type::getInt32PtrTy(C),
+    llvm::Type* PutCharArgs[] = { ASTInfo::instance()->get_cell_type(C),
+                                  ASTInfo::instance()->get_cell_ptr_type(C),
                                   llvm::Type::getInt32Ty(C) };
     llvm::FunctionType *PutCharTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C), PutCharArgs, false);
-    llvm::Function *PutCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("b_putchar", PutCharTy));
+    llvm::Function *PutCharF = llvm::cast<llvm::Function>(
+        M->getOrInsertFunction(
+            "b_putchar_" + std::to_string(ArgsOptions::instance()->get_cell_bitsize()),
+            PutCharTy
+        )
+    );
     llvm::Value* Args[] = {
         B.CreateLoad(ASTInfo::instance()->get_index_ptr()),
         B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
-                            llvm::Type::getInt32Ty(C)->getPointerTo()),
+                            ASTInfo::instance()->get_cell_type(C)->getPointerTo()),
         B.CreateLoad(ASTInfo::instance()->get_cells_size())
     };
     llvm::ArrayRef<llvm::Value *> ArgsArr(Args);

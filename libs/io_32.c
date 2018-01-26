@@ -1,3 +1,5 @@
+// -------------- 32 bits
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -75,20 +77,19 @@ void b_show_tape(int idx, int *cells, int size) {
     printf("*(%d)\n", idx);
 }
 
-void b_getchar(int idx, int *cells, int size) {
+void b_getchar_32(int idx, int *cells, int size) {
     cells[idx] = getchar();
 }
 
-void b_putchar(int idx, int *cells, int size) {
+void b_putchar_32(int idx, int *cells, int size) {
     putchar(cells[idx]);
 }
 
-void b_float_print(int idx, int *cells, int size) {
+void b_float_print_32(int idx, int *cells, int size) {
     float value = cells[idx] / 100.0;
     printf("%.2f", value);
 }
 
-void b_debug(int idx, int *cells, int size) {
+void b_debug_32(int idx, int *cells, int size) {
     b_show_tape(idx, cells, size);
 }
-

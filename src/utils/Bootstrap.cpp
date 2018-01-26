@@ -29,7 +29,9 @@ int Bootstrap::init(int argc, char** argv)
     Parser parser(args_handler.get_string_file());
 
     io_lib = std::string(getenv("HOME")) + "/.brain/lib/";
-    io_lib += ArgsOptions::instance()->get_io_option() == IO_REPL ? "io_repl.ll" : "io.ll"; 
+    io_lib += ArgsOptions::instance()->get_io_option() == IO_REPL ?
+        "io_repl.ll" :
+        "io_" + std::to_string(ArgsOptions::instance()->get_cell_bitsize()) + ".ll";
 
     if (ArgsOptions::instance()->has_option(BO_IS_EMITTING_CODE)) {
         parser.ast_code_gen();
@@ -68,8 +70,10 @@ int Bootstrap::init(int argc, char** argv)
 #endif // IS_DEBUG
 
     // Create the main function: "i32 @main()"
-    auto *MainF = llvm::cast<llvm::Function>(module->getOrInsertFunction("main",
-                                                                        llvm::Type::getInt32Ty(llvm_context)));
+    auto *MainF = llvm::cast<llvm::Function>(
+        module->getOrInsertFunction("main",
+        ASTInfo::instance()->get_cell_type(llvm_context))
+    );
 
     // Create the entry block
     auto *basic_block = llvm::BasicBlock::Create(llvm_context,
@@ -87,7 +91,7 @@ int Bootstrap::init(int argc, char** argv)
     parser.code_gen(module, builder);
 
     // Return 0 to the "main" function.
-    builder.CreateRet(builder.getInt32(0));
+    builder.CreateRet(builder.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0));
 
 #ifdef IS_DEBUG
     llvm::verifyModule(*module, &dumpStrOstreamDebug);

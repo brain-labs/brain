@@ -30,9 +30,10 @@ void LoopInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
         // Get the current cell adress
         IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
         CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
-                                                  llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
+                                                  // Cast to int 8*, 16*, 32* or 64*
+                                                  ASTInfo::instance()->get_cell_type(C)->getPointerTo()),
                               IdxV);
-        CounterV = B.CreateAlloca(llvm::Type::getInt32Ty(C), 0, "counter");
+        CounterV = B.CreateAlloca(ASTInfo::instance()->get_cell_type(C), 0, "counter");
         B.CreateStore(B.CreateLoad(CellPtr), CounterV);
     }
 
@@ -48,16 +49,19 @@ void LoopInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     llvm::Value *NEZeroCond = nullptr;
     if (_type == LT_FOR) {
         NEZeroCond = StartB.CreateICmpSGT(StartB.CreateLoad(CounterV),
-                                         StartB.getInt32(0)); // is cell Signed Int Greater than Zero?
+                                          // is cell Signed Int Greater than Zero?
+                                          B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0));
     }
     else {
         // Get the current cell adress
         IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
         CellPtr = B.CreateGEP(B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
-                                                  llvm::Type::getInt32Ty(C)->getPointerTo()), // Cast to int32*
+                                                  // Cast to int 8*. 16*, 32* or 64*
+                                                  ASTInfo::instance()->get_cell_type(C)->getPointerTo()),
                               IdxV);
         NEZeroCond = StartB.CreateICmpNE(StartB.CreateLoad(CellPtr),
-                                          StartB.getInt32(0)); // is cell Signed Int Not Equal to Zero?
+                                         // is cell Signed Int Not Equal to Zero?
+                                         B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0));
     }
 
     StartB.CreateCondBr(NEZeroCond, LoopBB, EndBB);
@@ -76,7 +80,13 @@ void LoopInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
 
     if (!hasTerminal) {
         if (_type == LT_FOR) {
-            LoopB.CreateStore(LoopB.CreateAdd(LoopB.CreateLoad(CounterV), LoopB.getInt32(-1)), CounterV);
+            LoopB.CreateStore(
+                LoopB.CreateAdd(
+                    LoopB.CreateLoad(CounterV),
+                    LoopB.getIntN(ArgsOptions::instance()->get_cell_bitsize(), -1)
+                ),
+                CounterV
+            );
         }
 
         LoopB.CreateBr(StartBB); // Restart loop (will next exit if current cell value > 0)

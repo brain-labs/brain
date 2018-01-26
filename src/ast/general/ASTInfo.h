@@ -62,6 +62,15 @@ public:
      */
     llvm::GlobalVariable* get_cells_size();
     /**
+     * @returns  The type representing the bitsize of each cell (8, 16, 32 or 64 bits).
+     */
+    llvm::Type* get_cell_type(llvm::LLVMContext &C);
+    /**
+     * @returns  The pointer type representing the bitsize of each
+     * cell (8, 16, 32 or 64 bits).
+     */
+    llvm::Type* get_cell_ptr_type(llvm::LLVMContext &C);
+    /**
      * @brief Controls if the io.ll module is included within the module which
      * is being interpreted, if the module does not uses any function defined in
      * io.c so it won't include io.ll in their .ll code.

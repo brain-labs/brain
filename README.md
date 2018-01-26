@@ -155,8 +155,9 @@ Example of the instructions above:
 
 - `--code=<"inline code">`	Sets inline brain code
 - `--io=repl`	Sets the IO module to REPLs style
-- `--out=<filename>`	Sets the output filename
-- `--size=<number>`	Sets the number of cells used by the interpreter
+- `--out=<filename>`	 Sets the output filename
+- `--size=<number>`	 Sets the number of cells used by the interpreter
+- `--size-cell=<number>` Sets the cell width (`8`, `16`, `32`, `64` bits) of each cell
 - `--version`   Shows the current version of Brain
 - `-emit-llvm`	Emits LLVM IR code for the given input
 - `-emit-ast`	Emits the AST for the given input
