@@ -1,62 +1,62 @@
 === Debug Information ===
-IncrementExpr (8)
-LoopExpr: [
-  ShiftExpr (1)
-  IncrementExpr (4)
-  LoopExpr: [
-    ShiftExpr (1)
-    IncrementExpr (2)
-    ShiftExpr (1)
-    IncrementExpr (3)
-    ShiftExpr (1)
-    IncrementExpr (3)
-    ShiftExpr (1)
-    IncrementExpr (1)
-    ShiftExpr (-4)
-    IncrementExpr (-1)
+IncrementInstr (8)
+LoopInstr: [
+  ShiftInstr (1)
+  IncrementInstr (4)
+  LoopInstr: [
+    ShiftInstr (1)
+    IncrementInstr (2)
+    ShiftInstr (1)
+    IncrementInstr (3)
+    ShiftInstr (1)
+    IncrementInstr (3)
+    ShiftInstr (1)
+    IncrementInstr (1)
+    ShiftInstr (-4)
+    IncrementInstr (-1)
   ]
-  ShiftExpr (1)
-  IncrementExpr (1)
-  ShiftExpr (1)
-  IncrementExpr (1)
-  ShiftExpr (1)
-  IncrementExpr (-1)
-  ShiftExpr (2)
-  IncrementExpr (1)
-  LoopExpr: [
-    ShiftExpr (-1)
+  ShiftInstr (1)
+  IncrementInstr (1)
+  ShiftInstr (1)
+  IncrementInstr (1)
+  ShiftInstr (1)
+  IncrementInstr (-1)
+  ShiftInstr (2)
+  IncrementInstr (1)
+  LoopInstr: [
+    ShiftInstr (-1)
   ]
-  ShiftExpr (-1)
-  IncrementExpr (-1)
+  ShiftInstr (-1)
+  IncrementInstr (-1)
  ]
-ShiftExpr (2)
-OutputExpr
-ShiftExpr (1)
-IncrementExpr (-3)
-OutputExpr
-IncrementExpr (7)
-OutputExpr
-OutputExpr
-IncrementExpr (3)
-OutputExpr
-ShiftExpr (2)
-OutputExpr
-ShiftExpr (-1)
-IncrementExpr (-1)
-OutputExpr
-ShiftExpr (-1)
-OutputExpr
-IncrementExpr (3)
-OutputExpr
-IncrementExpr (-6)
-OutputExpr
-IncrementExpr (-8)
-OutputExpr
-ShiftExpr (2)
-IncrementExpr (1)
-OutputExpr
-ShiftExpr (1)
-IncrementExpr (2)
-OutputExpr
+ShiftInstr (2)
+OutputInstr
+ShiftInstr (1)
+IncrementInstr (-3)
+OutputInstr
+IncrementInstr (7)
+OutputInstr
+OutputInstr
+IncrementInstr (3)
+OutputInstr
+ShiftInstr (2)
+OutputInstr
+ShiftInstr (-1)
+IncrementInstr (-1)
+OutputInstr
+ShiftInstr (-1)
+OutputInstr
+IncrementInstr (3)
+OutputInstr
+IncrementInstr (-6)
+OutputInstr
+IncrementInstr (-8)
+OutputInstr
+ShiftInstr (2)
+IncrementInstr (1)
+OutputInstr
+ShiftInstr (1)
+IncrementInstr (2)
+OutputInstr
 === Program Output ===
 Hello World!

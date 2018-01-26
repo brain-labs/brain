@@ -30,9 +30,12 @@ private:
     static llvm::GlobalVariable *__brain_index_ptr;
     /// The cells - or memory - of Brain.
     static llvm::GlobalVariable *__brain_cells_ptr;
+    /// Size of the cells in Brain
+    static llvm::GlobalVariable *__brain_cells_size;
 public:
     ASTInfo(ASTInfo const&) = delete;
     ASTInfo& operator=(ASTInfo const&) = delete;
+    ~ASTInfo();
     /**
      * @brief Returns the instance of ASTInfo class if the member _instance is
      * nullptr, otherwise it creates a new ASTInfo object and returns it.
@@ -54,6 +57,19 @@ public:
      * @returns  A pointer to the array of cells used as the Brain's memory.
      */
     llvm::GlobalVariable* get_cells_ptr();
+    /**
+     * @returns  The size of the cells used as the Brain's tape.
+     */
+    llvm::GlobalVariable* get_cells_size();
+    /**
+     * @returns  The type representing the bitsize of each cell (8, 16, 32 or 64 bits).
+     */
+    llvm::Type* get_cell_type(llvm::LLVMContext &C);
+    /**
+     * @returns  The pointer type representing the bitsize of each
+     * cell (8, 16, 32 or 64 bits).
+     */
+    llvm::Type* get_cell_ptr_type(llvm::LLVMContext &C);
     /**
      * @brief Controls if the io.ll module is included within the module which
      * is being interpreted, if the module does not uses any function defined in

@@ -1,17 +1,32 @@
 === Debug Information ===
-IncrementExpr (5)
-DebugExpr
-DebugExpr
-DebugExpr
-IncrementExpr (4)
-DebugExpr
-IfExpr (THEN) [
-  IncrementExpr (1)
-  DebugExpr
+IncrementInstr (5)
+DebugInstr
+DebugInstr
+DebugInstr
+IncrementInstr (4)
+DebugInstr
+IfInstr (THEN) [
+  IncrementInstr (1)
+  DebugInstr
  ]
 === Program Output ===
-Index Pointer: 0 Value at Index Pointer: 5
-Index Pointer: 0 Value at Index Pointer: 5
-Index Pointer: 0 Value at Index Pointer: 5
-Index Pointer: 0 Value at Index Pointer: 9
-Index Pointer: 0 Value at Index Pointer: 10
+-------------------------------------------------
+[ 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 9 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+--------------------------------------------------
+[ 10 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^^
+ *(0)

@@ -5,39 +5,31 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef LOOP_EXPR_H
-#define LOOP_EXPR_H
+#ifndef SHIFT_EXPR_H
+#define SHIFT_EXPR_H
 
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include <vector>
 #include <iostream>
 
-#include "Expr.h"
+#include "Instr.h"
 
 /**
- * @brief Enumerates the types of loops that exists in Brain.
+ * @brief Class that represents the shift operator in Brain.
  */
-typedef enum
-{
-  LT_WHILE,
-  LT_FOR
-} LoopType;
-
-
-/**
- * @brief Class that represents the loop operator in Brain.
- */
-class LoopExpr : public Expr
+class ShiftInstr : public Instr
 {
 protected:
-    std::vector<Expr *> _exprs;
-    LoopType _type;
+    /// steps to jump
+    int _step;
+
+    /// should it jump?
+    bool _jump;
 public:
-    LoopExpr(std::vector<Expr *> exprs, LoopType type) : _exprs(exprs),
-        _type(type) {}
-    ~LoopExpr() {}
+    ShiftInstr(int step) : _step(step), _jump(false) {}
+    ShiftInstr() : _step(0), _jump(true) {}
+    ~ShiftInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -59,6 +51,11 @@ public:
      * out to the stdout the token itself.
      */
     void ast_code_gen();
+    /**
+     * @brief Virtual method for updating the AST instrs.
+     * @param update The char whose instruction will be updated.
+     */
+    bool update_instruction(char update);
 };
 
-#endif  // LOOP_EXPR_H
+#endif  // SHIFT_EXPR_H

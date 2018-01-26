@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Brain: LoopExpr Class Reference</title>
+<title>Brain: LoopInstr Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('class_loop_expr.html','');});
+$(document).ready(function(){initNavTree('class_loop_instr.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -109,61 +109,61 @@ $(document).ready(function(){initNavTree('class_loop_expr.html','');});
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="class_loop_expr-members.html">List of all members</a>  </div>
+<a href="class_loop_instr-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">LoopExpr Class Reference</div>  </div>
+<div class="title">LoopInstr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Class that represents the loop operator in Brain.
- <a href="class_loop_expr.html#details">More...</a></p>
+ <a href="class_loop_instr.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_loop_expr_8h_source.html">LoopExpr.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_loop_instr_8h_source.html">LoopInstr.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for LoopExpr:</div>
+Inheritance diagram for LoopInstr:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_loop_expr__inherit__graph.png" border="0" usemap="#_loop_expr_inherit__map" alt="Inheritance graph"/></div>
-<map name="_loop_expr_inherit__map" id="_loop_expr_inherit__map">
-<area shape="rect" id="node2" href="class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="19,5,69,32"/>
+<div class="center"><img src="class_loop_instr__inherit__graph.png" border="0" usemap="#_loop_instr_inherit__map" alt="Inheritance graph"/></div>
+<map name="_loop_instr_inherit__map" id="_loop_instr_inherit__map">
+<area shape="rect" id="node2" href="class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="19,5,69,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for LoopExpr:</div>
+Collaboration diagram for LoopInstr:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_loop_expr__coll__graph.png" border="0" usemap="#_loop_expr_coll__map" alt="Collaboration graph"/></div>
-<map name="_loop_expr_coll__map" id="_loop_expr_coll__map">
-<area shape="rect" id="node2" href="class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="19,5,69,32"/>
+<div class="center"><img src="class_loop_instr__coll__graph.png" border="0" usemap="#_loop_instr_coll__map" alt="Collaboration graph"/></div>
+<map name="_loop_instr_coll__map" id="_loop_instr_coll__map">
+<area shape="rect" id="node2" href="class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="19,5,69,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1fe0d4399098234bdb8c2a805f2fbda2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1fe0d4399098234bdb8c2a805f2fbda2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>LoopExpr</b> (std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt; exprs, LoopType type)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>LoopInstr</b> (std::vector&lt; <a class="el" href="class_instr.html">Instr</a> * &gt; instrs, LoopType type)</td></tr>
 <tr class="separator:a1fe0d4399098234bdb8c2a805f2fbda2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad97793c951ff4cdbdfc304e067b94c75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_loop_expr.html#ad97793c951ff4cdbdfc304e067b94c75">code_gen</a> (llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td></tr>
+<tr class="memitem:ad97793c951ff4cdbdfc304e067b94c75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_loop_instr.html#ad97793c951ff4cdbdfc304e067b94c75">code_gen</a> (llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B, llvm::BasicBlock *BreakBB)</td></tr>
 <tr class="memdesc:ad97793c951ff4cdbdfc304e067b94c75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the IR (Intermediate Representation) code to be executed by llvm.  <a href="#ad97793c951ff4cdbdfc304e067b94c75">More...</a><br /></td></tr>
 <tr class="separator:ad97793c951ff4cdbdfc304e067b94c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe1773ba56267429a04f110794d0f01c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_loop_expr.html#afe1773ba56267429a04f110794d0f01c">debug_description</a> (int level)</td></tr>
+<tr class="memitem:afe1773ba56267429a04f110794d0f01c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_loop_instr.html#afe1773ba56267429a04f110794d0f01c">debug_description</a> (int level)</td></tr>
 <tr class="memdesc:afe1773ba56267429a04f110794d0f01c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints debug information when Brain's compiler has the active flags: -v | -emit-ast.  <a href="#afe1773ba56267429a04f110794d0f01c">More...</a><br /></td></tr>
 <tr class="separator:afe1773ba56267429a04f110794d0f01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50a78f6e6a916ff9aabd0ff0ee0931dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50a78f6e6a916ff9aabd0ff0ee0931dc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_loop_expr.html#a50a78f6e6a916ff9aabd0ff0ee0931dc">ast_code_gen</a> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_loop_instr.html#a50a78f6e6a916ff9aabd0ff0ee0931dc">ast_code_gen</a> ()</td></tr>
 <tr class="memdesc:a50a78f6e6a916ff9aabd0ff0ee0931dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for the reverse code generation from the AST. It prints out to the stdout the token itself. <br /></td></tr>
 <tr class="separator:a50a78f6e6a916ff9aabd0ff0ee0931dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_expr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_expr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_expr.html">Expr</a></td></tr>
-<tr class="memitem:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_expression</a> (char update)</td></tr>
-<tr class="memdesc:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method for updating the AST exprs.  <a href="#a9ce45bb336b7c54bcacfe52f6aa14b7d">More...</a><br /></td></tr>
-<tr class="separator:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_expr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_expr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afaf1581533c12ddb3c71874921ed8eba"></a>
-virtual ExpressionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr.html#afaf1581533c12ddb3c71874921ed8eba">expression_category</a> ()</td></tr>
-<tr class="memdesc:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_expr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the category of the expression given by the caller. <br /></td></tr>
-<tr class="separator:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_expr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_instr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_instr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_instr.html">Instr</a></td></tr>
+<tr class="memitem:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_instr.html#a9ce45bb336b7c54bcacfe52f6aa14b7d">update_instruction</a> (char update)</td></tr>
+<tr class="memdesc:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method for updating the AST instrs.  <a href="#a9ce45bb336b7c54bcacfe52f6aa14b7d">More...</a><br /></td></tr>
+<tr class="separator:a9ce45bb336b7c54bcacfe52f6aa14b7d inherit pub_methods_class_instr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_instr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afaf1581533c12ddb3c71874921ed8eba"></a>
+virtual InstructionType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_instr.html#afaf1581533c12ddb3c71874921ed8eba">instruction_category</a> ()</td></tr>
+<tr class="memdesc:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_instr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the category of the instruction given by the caller. <br /></td></tr>
+<tr class="separator:afaf1581533c12ddb3c71874921ed8eba inherit pub_methods_class_instr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a8304aaa5d035d10f245078c00e0f0cd7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8304aaa5d035d10f245078c00e0f0cd7"></a>
-std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_exprs</b></td></tr>
+std::vector&lt; <a class="el" href="class_instr.html">Instr</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_instrs</b></td></tr>
 <tr class="separator:a8304aaa5d035d10f245078c00e0f0cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f5cccf7263a60fe142b285b4d317a06"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f5cccf7263a60fe142b285b4d317a06"></a>
 LoopType&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></td></tr>
@@ -180,7 +180,7 @@ LoopType&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></td></t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void LoopExpr::code_gen </td>
+          <td class="memname">void LoopInstr::code_gen </td>
           <td>(</td>
           <td class="paramtype">llvm::Module *&#160;</td>
           <td class="paramname"><em>M</em>, </td>
@@ -220,7 +220,7 @@ LoopType&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></td></t
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_expr.html#adf036e4ffa9c8f043380f5e884e1005a">Expr</a>.</p>
+<p>Implements <a class="el" href="class_instr.html#adf036e4ffa9c8f043380f5e884e1005a">Instr</a>.</p>
 
 </div>
 </div>
@@ -232,7 +232,7 @@ LoopType&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></td></t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void LoopExpr::debug_description </td>
+          <td class="memname">void LoopInstr::debug_description </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>level</em></td><td>)</td>
@@ -254,20 +254,20 @@ LoopType&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></td></t
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_expr.html#aade8823eaa45f0df7873dfcd03e12ba8">Expr</a>.</p>
+<p>Implements <a class="el" href="class_instr.html#aade8823eaa45f0df7873dfcd03e12ba8">Instr</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/ast/expr/<a class="el" href="_loop_expr_8h_source.html">LoopExpr.h</a></li>
-<li>src/ast/expr/LoopExpr.cpp</li>
+<li>src/ast/instr/<a class="el" href="_loop_instr_8h_source.html">LoopInstr.h</a></li>
+<li>src/ast/instr/LoopInstr.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="class_loop_expr.html">LoopExpr</a></li>
+    <li class="navelem"><a class="el" href="class_loop_instr.html">LoopInstr</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>

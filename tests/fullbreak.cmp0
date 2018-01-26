@@ -1,0 +1,35 @@
+=== Debug Information ===
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+LoopInstr: {
+  ShiftInstr (1)
+  IfInstr (THEN) [
+    IncrementInstr (1)
+    IncrementInstr (1)
+    IncrementInstr (1)
+    IncrementInstr (1)
+  ]
+  IfInstr (ELSE) [
+    IncrementInstr (1)
+    IncrementInstr (1)
+    IncrementInstr (1)
+    IncrementInstr (1)
+    IncrementInstr (1)
+    IfInstr (THEN) [
+      BreakInstr
+   ]
+   IfInstr (ELSE) [
+   ]
+  ]
+  IncrementInstr (-1)
+  IncrementInstr (-1)
+  IncrementInstr (-1)
+ }
+DebugInstr
+=== Program Output ===
+-------------------------------------------------
+[ 4 | 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+     ^^^
+     *(1)

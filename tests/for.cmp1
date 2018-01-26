@@ -1,21 +1,30 @@
 === Debug Information ===
-IncrementExpr (-5)
-LoopExpr: {
-  IncrementExpr (5)
+IncrementInstr (-5)
+LoopInstr: {
+  IncrementInstr (5)
  }
-DebugExpr
-ShiftExpr (1)
-LoopExpr: {
-  IncrementExpr (6)
+DebugInstr
+ShiftInstr (1)
+LoopInstr: {
+  IncrementInstr (6)
  }
-DebugExpr
-ShiftExpr (1)
-IncrementExpr (3)
-LoopExpr: {
-  IncrementExpr (1)
+DebugInstr
+ShiftInstr (1)
+IncrementInstr (3)
+LoopInstr: {
+  IncrementInstr (1)
  }
-DebugExpr
+DebugInstr
 === Program Output ===
-Index Pointer: 0 Value at Index Pointer: -5
-Index Pointer: 1 Value at Index Pointer: 0
-Index Pointer: 2 Value at Index Pointer: 6
+--------------------------------------------------
+[ -5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^^
+ *(0)
+--------------------------------------------------
+[ -5 | 0 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+      ^^^
+      *(1)
+--------------------------------------------------
+[ -5 | _ | 6 | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+          ^^^
+          *(2)

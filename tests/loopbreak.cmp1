@@ -1,24 +1,57 @@
 === Debug Information ===
-IncrementExpr (10)
-LoopExpr: [
-  DebugExpr
-  IfExpr (THEN) [
-    IncrementExpr (-1)
+IncrementInstr (10)
+LoopInstr: [
+  DebugInstr
+  IfInstr (THEN) [
+    IncrementInstr (-1)
   ]
-  IfExpr (ELSE) [
-    BreakExpr
+  IfInstr (ELSE) [
+    BreakInstr
   ]
  ]
-DebugExpr
+DebugInstr
 === Program Output ===
-Index Pointer: 0 Value at Index Pointer: 10
-Index Pointer: 0 Value at Index Pointer: 9
-Index Pointer: 0 Value at Index Pointer: 8
-Index Pointer: 0 Value at Index Pointer: 7
-Index Pointer: 0 Value at Index Pointer: 6
-Index Pointer: 0 Value at Index Pointer: 5
-Index Pointer: 0 Value at Index Pointer: 4
-Index Pointer: 0 Value at Index Pointer: 3
-Index Pointer: 0 Value at Index Pointer: 2
-Index Pointer: 0 Value at Index Pointer: 1
-Index Pointer: 0 Value at Index Pointer: 0
+--------------------------------------------------
+[ 10 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^^
+ *(0)
+-------------------------------------------------
+[ 9 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 8 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 7 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 6 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 4 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 3 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 2 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 1 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 0 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)

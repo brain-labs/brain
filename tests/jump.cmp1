@@ -1,16 +1,50 @@
 === Debug Information ===
-IncrementExpr (10)
-ShiftExpr (jump)
-DebugExpr
-ShiftExpr (jump)
-DebugExpr
-ShiftExpr (jump)
-DebugExpr
-ShiftExpr (3)
-IncrementExpr (1)
-DebugExpr
+IncrementInstr (10)
+ShiftInstr (jump)
+DebugInstr
+ShiftInstr (jump)
+DebugInstr
+ShiftInstr (jump)
+DebugInstr
+ShiftInstr (3)
+IncrementInstr (1)
+DebugInstr
+LoopInstr: [
+  ShiftInstr (1)
+ ]
+ShiftInstr (jump)
+LoopInstr: [
+  IncrementInstr (-1)
+ ]
+ShiftInstr (1)
+LoopInstr: [
+  IncrementInstr (-1)
+ ]
+ShiftInstr (-1)
+ShiftInstr (jump)
+ShiftInstr (1)
+ShiftInstr (jump)
+ShiftInstr (1)
+IncrementInstr (1)
+DebugInstr
 === Program Output ===
-Index Pointer: 10 Value at Index Pointer: 0
-Index Pointer: 0 Value at Index Pointer: 10
-Index Pointer: 10 Value at Index Pointer: 0
-Index Pointer: 13 Value at Index Pointer: 1
+--------------------------------------------------
+[ 10 | _ | _ | _ | _ | _ | _ | _ | _ | _ | 0 | _ ]
+                                          ^^^
+                                          *(10)
+--------------------------------------------------
+[ 10 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^^
+ *(0)
+--------------------------------------------------
+[ 10 | _ | _ | _ | _ | _ | _ | _ | _ | _ | 0 | _ ]
+                                          ^^^
+                                          *(10)
+--------------------------------------------------
+[ 10 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+^^
+*(13)
+-------------------------------------------------
+[ _ | 1 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+     ^^^
+     *(1)

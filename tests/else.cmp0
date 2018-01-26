@@ -1,26 +1,41 @@
 === Debug Information ===
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-DebugExpr
-DebugExpr
-DebugExpr
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-IncrementExpr (1)
-DebugExpr
-IfExpr (THEN) [
-  IncrementExpr (1)
-  DebugExpr
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+DebugInstr
+DebugInstr
+DebugInstr
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+IncrementInstr (1)
+DebugInstr
+IfInstr (THEN) [
+  IncrementInstr (1)
+  DebugInstr
  ]
- IfExpr (ELSE) [
+ IfInstr (ELSE) [
  ]
 === Program Output ===
-Index Pointer: 0 Value at Index Pointer: 5
-Index Pointer: 0 Value at Index Pointer: 5
-Index Pointer: 0 Value at Index Pointer: 5
-Index Pointer: 0 Value at Index Pointer: 9
-Index Pointer: 0 Value at Index Pointer: 10
+-------------------------------------------------
+[ 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 9 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+--------------------------------------------------
+[ 10 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^^
+ *(0)

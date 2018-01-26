@@ -5,40 +5,27 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef ARITHMETIC_EXPR_H
-#define ARITHMETIC_EXPR_H
+#ifndef INPUT_EXPR_H
+#define INPUT_EXPR_H
 
+#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
 #include <iostream>
-#include <string>
 
-#include "Expr.h"
-
-/**
- * @brief The three kinds of arithmetic operations used in Brain: multiplication,
- * division and modulus.
- */
-typedef enum
-{
-  AT_MUL,
-  AT_DIV,
-  AT_REM
-} ArithmeticType;
+#include "Instr.h"
+#include "../general/ASTInfo.h"
 
 /**
- * @brief Represents the three arithmetic operations that you can use and abuse
- * in Brain.
+ * @brief Represents the input operator in Brain, aka as: .
+ * It calls b_getchar of io.c to interpret input.
  */
-class ArithmeticExpr : public Expr
+class InputInstr : public Instr
 {
-protected:
-    ArithmeticType _type;
-    std::string type_to_string();
 public:
-    ArithmeticExpr(ArithmeticType type) : _type(type) {}
-    ~ArithmeticExpr() {}
+    InputInstr() { ASTInfo::instance()->is_using_io_lib = true; }
+    ~InputInstr() {}
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -62,4 +49,4 @@ public:
     void ast_code_gen();
 };
 
-#endif // ARITHMETIC_EXPR_H
+#endif  // INPUT_EXPR_H

@@ -5,41 +5,48 @@
  * Copyright Brain, 2016.
  */
 
-#include "InputExpr.h"
+#include "InputInstr.h"
 
-void InputExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void InputInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)
 {
     llvm::LLVMContext &C = M->getContext();
-    llvm::Type* GetCharArgs[] = { llvm::Type::getInt32Ty(C),
-                                  llvm::Type::getInt32PtrTy(C) };
+    llvm::Type* GetCharArgs[] = { ASTInfo::instance()->get_cell_type(C),
+                                  ASTInfo::instance()->get_cell_ptr_type(C),
+                                  llvm::Type::getInt32Ty(C) };
     llvm::FunctionType *GetCharTy = llvm::FunctionType::get(llvm::Type::getVoidTy(C),
                                                             GetCharArgs, false);
-    llvm::Function *GetCharF = llvm::cast<llvm::Function>(M->getOrInsertFunction("b_getchar", GetCharTy));
+    llvm::Function *GetCharF = llvm::cast<llvm::Function>(
+        M->getOrInsertFunction(
+            "b_getchar_" + std::to_string(ArgsOptions::instance()->get_cell_bitsize()),
+            GetCharTy
+        )
+    );
 
     llvm::Value* Args[] = {
         B.CreateLoad(ASTInfo::instance()->get_index_ptr()),
         B.CreatePointerCast(ASTInfo::instance()->get_cells_ptr(),
-                            llvm::Type::getInt32Ty(C)->getPointerTo())
+                            ASTInfo::instance()->get_cell_type(C)->getPointerTo()),
+        B.CreateLoad(ASTInfo::instance()->get_cells_size())
     };
 
     llvm::ArrayRef<llvm::Value *> ArgsArr(Args);
     B.CreateCall(GetCharF, ArgsArr);
 }
 
-void InputExpr::debug_description(int level)
+void InputInstr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Input Expression - read char"
+        std::cout << "Input Instruction - read char"
                   << std::endl;
     }
     else {
-        std::cout << "InputExpr" << std::endl;
+        std::cout << "InputInstr" << std::endl;
     }
 }
 
-void InputExpr::ast_code_gen()
+void InputInstr::ast_code_gen()
 {
     std::cout << (char)TT_INPUT;
 }

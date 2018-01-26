@@ -12,7 +12,7 @@ This REPL only accepts
 >^ go back to cell 0
 
   prints REPL information
-# the debug command was overriden
+# the debug command was overwritten
 
 + add one to the 0th cell to start the while
 [ while (true)

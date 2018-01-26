@@ -1,13 +1,13 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_expr.html" title="Abstract class in which all expressions in Brain implement from. " alt="" coords="5,233,55,260"/>
-<area shape="rect" id="node2" href="$class_arithmetic_expr.html" title="Represents the three arithmetic operations that you can use and abuse in Brain. " alt="" coords="103,5,211,32"/>
-<area shape="rect" id="node3" href="$class_break_expr.html" title="Class that represents the break operator in Brain. " alt="" coords="115,56,198,83"/>
-<area shape="rect" id="node4" href="$class_debug_expr.html" title="Class that represents the debug operator in Brain. " alt="" coords="113,107,200,133"/>
-<area shape="rect" id="node5" href="$class_float_expr.html" title="The FloatExpr class behaves just like the output expression, but it instead of print an integer numbe..." alt="" coords="117,157,196,184"/>
-<area shape="rect" id="node6" href="$class_if_expr.html" title="Class that represents the if operator in Brain. " alt="" coords="128,208,185,235"/>
-<area shape="rect" id="node7" href="$class_increment_expr.html" title="Class that represent the increment operator in Brain. " alt="" coords="103,259,210,285"/>
-<area shape="rect" id="node8" href="$class_input_expr.html" title="Represents the input operator in Brain, aka as: . It calls b_getchar of io.c to interpret input..." alt="" coords="117,309,196,336"/>
-<area shape="rect" id="node9" href="$class_loop_expr.html" title="Class that represents the loop operator in Brain. " alt="" coords="118,360,195,387"/>
-<area shape="rect" id="node10" href="$class_output_expr.html" title="Class that represents the output operator in Brain. " alt="" coords="113,411,201,437"/>
-<area shape="rect" id="node11" href="$class_shift_expr.html" title="Class that represents the shift operator in Brain. " alt="" coords="119,461,195,488"/>
+<area shape="rect" id="node1" href="$class_instr.html" title="Abstract class in which all instructions in Brain implement from. " alt="" coords="5,233,55,260"/>
+<area shape="rect" id="node2" href="$class_arithmetic_instr.html" title="Represents the three arithmetic operations that you can use and abuse in Brain. " alt="" coords="103,5,211,32"/>
+<area shape="rect" id="node3" href="$class_break_instr.html" title="Class that represents the break operator in Brain. " alt="" coords="115,56,198,83"/>
+<area shape="rect" id="node4" href="$class_debug_instr.html" title="Class that represents the debug operator in Brain. " alt="" coords="113,107,200,133"/>
+<area shape="rect" id="node5" href="$class_float_instr.html" title="The FloatInstr class behaves just like the output instruction, but it instead of print an integer numbe..." alt="" coords="117,157,196,184"/>
+<area shape="rect" id="node6" href="$class_if_instr.html" title="Class that represents the if operator in Brain. " alt="" coords="128,208,185,235"/>
+<area shape="rect" id="node7" href="$class_increment_instr.html" title="Class that represent the increment operator in Brain. " alt="" coords="103,259,210,285"/>
+<area shape="rect" id="node8" href="$class_input_instr.html" title="Represents the input operator in Brain, aka as: . It calls b_getchar of io.c to interpret input..." alt="" coords="117,309,196,336"/>
+<area shape="rect" id="node9" href="$class_loop_instr.html" title="Class that represents the loop operator in Brain. " alt="" coords="118,360,195,387"/>
+<area shape="rect" id="node10" href="$class_output_instr.html" title="Class that represents the output operator in Brain. " alt="" coords="113,411,201,437"/>
+<area shape="rect" id="node11" href="$class_shift_instr.html" title="Class that represents the shift operator in Brain. " alt="" coords="119,461,195,488"/>
 </map>

@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('class_parser.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aea47923a854a4185c23bddfc19c7542f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parser.html#aea47923a854a4185c23bddfc19c7542f">Parser</a> (std::string source)</td></tr>
-<tr class="memdesc:aea47923a854a4185c23bddfc19c7542f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls parse to <em>create</em> all expressions found in the source code.  <a href="#aea47923a854a4185c23bddfc19c7542f">More...</a><br /></td></tr>
+<tr class="memdesc:aea47923a854a4185c23bddfc19c7542f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls parse to <em>create</em> all instructions found in the source code.  <a href="#aea47923a854a4185c23bddfc19c7542f">More...</a><br /></td></tr>
 <tr class="separator:aea47923a854a4185c23bddfc19c7542f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c89bda5f1304ad841967139103f64bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parser.html#a3c89bda5f1304ad841967139103f64bb">code_gen</a> (llvm::Module *M, llvm::IRBuilder&lt;&gt; &amp;B)</td></tr>
 <tr class="memdesc:a3c89bda5f1304ad841967139103f64bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the IR (Intermediate Representation) code to be executed by llvm.  <a href="#a3c89bda5f1304ad841967139103f64bb">More...</a><br /></td></tr>
@@ -139,7 +139,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:af2ff0019521e61478949263206b6825b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parser.html#af2ff0019521e61478949263206b6825b">parse</a> (std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt; &amp;exprs, int level)</td></tr>
+<tr class="memitem:af2ff0019521e61478949263206b6825b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parser.html#af2ff0019521e61478949263206b6825b">parse</a> (std::vector&lt; <a class="el" href="class_instr.html">Instr</a> * &gt; &amp;instrs, int level)</td></tr>
 <tr class="memdesc:af2ff0019521e61478949263206b6825b"><td class="mdescLeft">&#160;</td><td class="mdescRight">It parses the Brain code.  <a href="#af2ff0019521e61478949263206b6825b">More...</a><br /></td></tr>
 <tr class="separator:af2ff0019521e61478949263206b6825b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -153,7 +153,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parser.html#a3656cba0fda189235327f8abfe84b38a">_index</a></td></tr>
 <tr class="memdesc:a3656cba0fda189235327f8abfe84b38a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable that holds the current index read by the parser. <br /></td></tr>
 <tr class="separator:a3656cba0fda189235327f8abfe84b38a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3807f6bb06ff6c1133e0b2f8c3e269f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parser.html#ab3807f6bb06ff6c1133e0b2f8c3e269f">_exprs</a></td></tr>
+<tr class="memitem:ab3807f6bb06ff6c1133e0b2f8c3e269f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_instr.html">Instr</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parser.html#ab3807f6bb06ff6c1133e0b2f8c3e269f">_instrs</a></td></tr>
 <tr class="separator:ab3807f6bb06ff6c1133e0b2f8c3e269f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -181,7 +181,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </table>
 </div><div class="memdoc">
 
-<p>Calls parse to <em>create</em> all expressions found in the source code. </p>
+<p>Calls parse to <em>create</em> all instructions found in the source code. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">source</td><td>The source file as a string of characters. interpreter </td></tr>
@@ -261,8 +261,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
         <tr>
           <td class="memname">void Parser::parse </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_expr.html">Expr</a> * &gt; &amp;&#160;</td>
-          <td class="paramname"><em>exprs</em>, </td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="class_instr.html">Instr</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>instrs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -286,7 +286,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <p>It parses the Brain code. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">exprs</td><td>The vector of expressions read by the constructor </td></tr>
+    <tr><td class="paramname">instrs</td><td>The vector of instructions read by the constructor </td></tr>
     <tr><td class="paramname">level</td><td></td></tr>
   </table>
   </dd>
@@ -303,7 +303,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="class_expr.html">Expr</a> *&gt; Parser::_exprs</td>
+          <td class="memname">std::vector&lt;<a class="el" href="class_instr.html">Instr</a> *&gt; Parser::_instrs</td>
         </tr>
       </table>
   </td>
@@ -312,7 +312,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Store pointers of expressions to later call code_gen on each one of them. </p>
+<p>Store pointers of instructions to later call code_gen on each one of them. </p>
 
 </div>
 </div>

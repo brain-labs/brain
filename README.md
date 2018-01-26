@@ -99,10 +99,17 @@ To build it, after [installing LLVM](#how-to-build-llvm), execute:
 ```
 $ cd /path/to/brain/src
 $ make
+$ make install
 ```
-You can also change the compiler (tested on `g++` and `clang++`) on the `Makefile` inside the `src` directory.
+Brain will try to run on `clang` and `clang++` automatically. However you can change your `CC` with the commands:
+- `make build-3.8` or `make build-3.9` for LLVM 3.8 and 3.9
+- `make CC=clang++-3.7 LLVM_CONFIG=clang++-3.7` for older versions (3.7 in this case)
 
-After running `make` on it, you can execute:`./brain your_brain_file.b`. Please check the [current status](#current-status) of the project.
+And you can do the same for installing it and running tests:
+- `make install C=clang-3.7`
+- `make tests C=clang-3.7`
+
+After running `make` and `make install` on it, you can execute:`./brain your_brain_file.b`. Please check the [current status](#current-status) of the project.
 
 ### How it has been built
 Brain is based on previous work [https://github.com/luizperes/BrainfuckInterpreter](https://github.com/luizperes/BrainfuckInterpreter) and [https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM](https://github.com/Lisapple/BF-Compiler-Tutorial-with-LLVM), now trying to make something more serious: __Turing Complete__, faster, more features/commands and different types.
@@ -148,8 +155,9 @@ Example of the instructions above:
 
 - `--code=<"inline code">`	Sets inline brain code
 - `--io=repl`	Sets the IO module to REPLs style
-- `--out=<filename>`	Sets the output filename
-- `--size=<number>`	Sets the number of cells used by the interpreter
+- `--out=<filename>`	 Sets the output filename
+- `--size=<number>`	 Sets the number of cells used by the interpreter
+- `--size-cell=<number>` Sets the cell width (`8`, `16`, `32`, `64` bits) of each cell
 - `--version`   Shows the current version of Brain
 - `-emit-llvm`	Emits LLVM IR code for the given input
 - `-emit-ast`	Emits the AST for the given input

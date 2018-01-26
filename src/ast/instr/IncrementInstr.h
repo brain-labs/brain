@@ -5,25 +5,26 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef BREAK_EXPR_H
-#define BREAK_EXPR_H
+#ifndef INCREMENT_EXPR_H
+#define INCREMENT_EXPR_H
 
-#include <llvm/Transforms/Utils/BuildLibCalls.h>
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
 #include <iostream>
 
-#include "Expr.h"
+#include "Instr.h"
 
 /**
- * @brief Class that represents the break operator in Brain.
+ * @brief Class that represent the increment operator in Brain.
  */
-class BreakExpr : public Expr
+class IncrementInstr : public Instr
 {
+protected:
+    int _increment;
 public:
-    BreakExpr() {}
-    ~BreakExpr() {}
+    explicit IncrementInstr(int increment) : _increment(increment) { }
+    ~IncrementInstr() { }
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -46,9 +47,10 @@ public:
      */
     void ast_code_gen();
     /**
-     * @brief Returns the category of the expression given by the caller.
+     * @brief Virtual method for updating the AST instrs.
+     * @param update The char whose instruction will be updated.
      */
-    ExpressionType expression_category();
+    bool update_instruction(char update);
 };
 
-#endif // BREAK_EXPR_H
+#endif  // INCREMENT_EXPR_H

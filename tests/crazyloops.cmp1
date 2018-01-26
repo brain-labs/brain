@@ -1,21 +1,33 @@
 === Debug Information ===
-IncrementExpr (1)
-LoopExpr: [
-  IncrementExpr (3)
-  ShiftExpr (1)
+IncrementInstr (1)
+LoopInstr: [
+  IncrementInstr (3)
+  ShiftInstr (1)
  ]
-ShiftExpr (-1)
-LoopExpr: {
-  IfExpr (THEN) [
-    DebugExpr
-    IncrementExpr (1)
+ShiftInstr (-1)
+LoopInstr: {
+  IfInstr (THEN) [
+    DebugInstr
+    IncrementInstr (1)
   ]
-  IfExpr (ELSE) [
-    IncrementExpr (-4)
+  IfInstr (ELSE) [
+    IncrementInstr (-4)
   ]
  }
 === Program Output ===
-Index Pointer: 0 Value at Index Pointer: 4
-Index Pointer: 0 Value at Index Pointer: 5
-Index Pointer: 0 Value at Index Pointer: 6
-Index Pointer: 0 Value at Index Pointer: 7
+-------------------------------------------------
+[ 4 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 5 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 6 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)
+-------------------------------------------------
+[ 7 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)

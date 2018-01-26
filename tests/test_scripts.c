@@ -16,8 +16,11 @@ void appendExtToFile(char *dest, char *source, char *ext);
 void compareFiles(char *filename1, char *filename2);
 void execToFile(char *options, char *destFile);
 
-int main()
-{
+int main(void) {
+#if !__unix__ && !__APPLE__
+#error "This shouldn't work on any non unix platform. Please, make it portable."
+#endif
+
   char *execProg = "brain";
 
   DIR *d;
@@ -35,7 +38,7 @@ int main()
         execToFile(dir->d_name, fWithNoExt);
         compareFiles(fCmp, fWithNoExt);
 
-        // does not compare InputExpr for 0O and O1
+        // does not compare InputInstr for 0O and O1
         if (strncmp(dir->d_name, "read", 4) == 0) {
           printf("====================\n");
           continue;

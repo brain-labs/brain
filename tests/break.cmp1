@@ -1,9 +1,12 @@
 === Debug Information ===
-IncrementExpr (2)
-LoopExpr: {
-  IncrementExpr (-1)
-  BreakExpr
+IncrementInstr (2)
+LoopInstr: {
+  IncrementInstr (-1)
+  BreakInstr
  }
-DebugExpr
+DebugInstr
 === Program Output ===
-Index Pointer: 0 Value at Index Pointer: 1
+-------------------------------------------------
+[ 1 | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ ]
+ ^^^
+ *(0)

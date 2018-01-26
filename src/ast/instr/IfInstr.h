@@ -5,27 +5,30 @@
  * Copyright Brain, 2016.
  */
 
-#ifndef INPUT_EXPR_H
-#define INPUT_EXPR_H
+#ifndef IF_EXPR_H
+#define IF_EXPR_H
 
-#include <llvm/Transforms/Utils/BuildLibCalls.h>
+#include <vector>
+#include <iostream>
+
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Module.h>
 
-#include <iostream>
-
-#include "Expr.h"
-#include "../general/ASTInfo.h"
+#include "Instr.h"
 
 /**
- * @brief Represents the input operator in Brain, aka as: .
- * It calls b_getchar of io.c to interpret input.
+ * @brief Class that represents the if operator in Brain.
  */
-class InputExpr : public Expr
+class IfInstr : public Instr
 {
+protected:
+    std::vector<Instr *> _instrs_then;
+    std::vector<Instr *> _instrs_else;
 public:
-    InputExpr() { ASTInfo::instance()->is_using_io_lib = true; }
-    ~InputExpr() {}
+    IfInstr(std::vector<Instr *> instrs_then) : _instrs_then(instrs_then) {}
+    ~IfInstr() {}
+
+    void set_else(std::vector<Instr *> instrs_else) { _instrs_else = instrs_else; }
     /**
      * @brief Generates the IR (Intermediate Representation) code to be
      * executed by llvm.
@@ -47,6 +50,11 @@ public:
      * out to the stdout the token itself.
      */
     void ast_code_gen();
+    /**
+     * @brief Returns the category of the instruction given by the caller.
+     */
+    InstructionType instruction_category();
 };
 
-#endif  // INPUT_EXPR_H
+#endif // IF_EXPR_H
+

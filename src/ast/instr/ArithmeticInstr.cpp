@@ -6,14 +6,15 @@
  * Copyright Brain, 2016.
  */
 
-#include "ArithmeticExpr.h"
+#include "ArithmeticInstr.h"
 #include "../general/ASTInfo.h"
 
-void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void ArithmeticInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                               llvm::BasicBlock *BreakBB)
 {
     llvm::Value *IdxV = B.CreateLoad(ASTInfo::instance()->get_index_ptr());
-    llvm::Value* Idxs[] = { B.getInt32(0), IdxV };
+    llvm::Value* Idxs[] = { B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0),
+                            IdxV };
     llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
     llvm::Value *CellPtr = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(),
                                        IdxsArr);
@@ -21,8 +22,10 @@ void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     llvm::Value *CellV = B.CreateLoad(CellPtr);
 
     // Load index value - 1
-    llvm::Value *IdxPreV = B.CreateAdd(IdxV, B.getInt32(-1));
-    llvm::Value* Idxs2[] = { B.getInt32(0), IdxPreV };
+    llvm::Value *IdxPreV = B.CreateAdd(IdxV,
+                                       B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), -1));
+    llvm::Value* Idxs2[] = { B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0),
+                             IdxPreV };
     llvm::ArrayRef<llvm::Value *> IdxsArr2(Idxs2);
     llvm::Value *CellPtr2 = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(),
                                         IdxsArr2);
@@ -49,20 +52,20 @@ void ArithmeticExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     }
 }
 
-void ArithmeticExpr::debug_description(int level)
+void ArithmeticInstr::debug_description(int level)
 {
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Arithmetic Expression - " << type_to_string()
+        std::cout << "Arithmetic Instruction - " << type_to_string()
                   << std::endl;
     }
     else {
-        std::cout << "ArithmeticExpr ( " << type_to_string() << " )"
+        std::cout << "ArithmeticInstr ( " << type_to_string() << " )"
                   << std::endl;
     }
 }
 
-void ArithmeticExpr::ast_code_gen()
+void ArithmeticInstr::ast_code_gen()
 {
     char arithmetic_char = '\0';
 
@@ -82,7 +85,7 @@ void ArithmeticExpr::ast_code_gen()
     std::cout << (char)arithmetic_char;
 }
 
-std::string ArithmeticExpr::type_to_string()
+std::string ArithmeticInstr::type_to_string()
 {
     std::string type = "";
 

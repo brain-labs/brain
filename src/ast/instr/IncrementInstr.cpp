@@ -5,9 +5,9 @@
  * Copyright Brain, 2016.
  */
 
-#include "IncrementExpr.h"
+#include "IncrementInstr.h"
 
-void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
+void IncrementInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                              llvm::BasicBlock *BreakBB)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
@@ -15,16 +15,19 @@ void IncrementExpr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
         return;
     }
 
-    llvm::Value* Idxs[] = { B.getInt32(0), B.CreateLoad(ASTInfo::instance()->get_index_ptr()) };
+    llvm::Value* Idxs[] = { B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0),
+                            B.CreateLoad(ASTInfo::instance()->get_index_ptr()) };
     llvm::ArrayRef<llvm::Value *> IdxsArr(Idxs);
     llvm::Value *CellPtr = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(), IdxsArr);
     // Load cell value
     llvm::Value *CellV = B.CreateLoad(CellPtr);
     // Add |_increment| to cell value and save the value
-    B.CreateStore(B.CreateAdd(CellV, B.getInt32(_increment)), CellPtr);
+    B.CreateStore(B.CreateAdd(CellV,
+                    B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), _increment)),
+                  CellPtr);
 }
 
-void IncrementExpr::debug_description(int level)
+void IncrementInstr::debug_description(int level)
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
        _increment == 0) {
@@ -33,17 +36,17 @@ void IncrementExpr::debug_description(int level)
 
     std::cout.width(level);
     if (ArgsOptions::instance()->has_option(BO_IS_VERBOSE)) {
-        std::cout << "Increment Expression - increment of "
+        std::cout << "Increment Instruction - increment of "
                   << _increment
                   << std::endl;
     }
     else
     {
-        std::cout << "IncrementExpr (" << _increment << ")" << std::endl;
+        std::cout << "IncrementInstr (" << _increment << ")" << std::endl;
     }
 }
 
-void IncrementExpr::ast_code_gen()
+void IncrementInstr::ast_code_gen()
 {
     if(ArgsOptions::instance()->get_optimization() == BO_IS_OPTIMIZING_O1 &&
         _increment == 0) {
@@ -62,7 +65,7 @@ void IncrementExpr::ast_code_gen()
     }
 }
 
-bool IncrementExpr::update_expression(char update)
+bool IncrementInstr::update_instruction(char update)
 {
     switch (update)
     {
