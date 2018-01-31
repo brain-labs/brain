@@ -31,7 +31,7 @@ MKBIN=mkdir -p bin
 ROOT=src
 CLEANUP=rm -f *.dwo
 
-SRCS=$(ROOT)/utils/ArgsOptions.cpp $(ROOT)/utils/ArgsHandler.cpp $(ROOT)/utils/Bootstrap.cpp $(ROOT)/parser/Parser.cpp $(ROOT)/ast/general/ASTInfo.cpp $(ROOT)/ast/instr/Instr.cpp $(ROOT)/ast/instr/ShiftInstr.cpp $(ROOT)/ast/instr/IncrementInstr.cpp $(ROOT)/ast/instr/InputInstr.cpp $(ROOT)/ast/instr/OutputInstr.cpp $(ROOT)/ast/instr/LoopInstr.cpp $(ROOT)/ast/instr/ArithmeticInstr.cpp $(ROOT)/ast/instr/DebugInstr.cpp $(ROOT)/ast/instr/BreakInstr.cpp $(ROOT)/ast/instr/IfInstr.cpp $(ROOT)/ast/instr/FloatInstr.cpp $(ROOT)/main.cpp
+SRCS=$(ROOT)/utils/ArgsOptions.cpp $(ROOT)/utils/ArgsHandler.cpp $(ROOT)/utils/Bootstrap.cpp $(ROOT)/parser/Parser.cpp $(ROOT)/ast/general/ASTInfo.cpp $(ROOT)/ast/instr/Instr.cpp $(ROOT)/ast/instr/ShiftInstr.cpp $(ROOT)/ast/instr/IncrementInstr.cpp $(ROOT)/ast/instr/InputInstr.cpp $(ROOT)/ast/instr/OutputInstr.cpp $(ROOT)/ast/instr/LoopInstr.cpp $(ROOT)/ast/instr/ArithmeticInstr.cpp $(ROOT)/ast/instr/DebugInstr.cpp $(ROOT)/ast/instr/BreakInstr.cpp $(ROOT)/ast/instr/IfInstr.cpp $(ROOT)/ast/instr/FloatInstr.cpp $(ROOT)/ast/instr/MovInstr.cpp $(ROOT)/main.cpp
 CONFIG=`$(LLVM_CONFIG) --cxxflags --ldflags --system-libs --libs core mcjit native nativecodegen irreader linker`
 
 all: build

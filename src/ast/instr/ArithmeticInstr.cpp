@@ -7,6 +7,7 @@
  */
 
 #include "ArithmeticInstr.h"
+#include "../../utils/ArgsOptions.h"
 #include "../general/ASTInfo.h"
 
 void ArithmeticInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,

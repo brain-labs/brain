@@ -16,6 +16,7 @@
 #include "../ast/instr/BreakInstr.h"
 #include "../ast/instr/IfInstr.h"
 #include "../ast/instr/FloatInstr.h"
+#include "../ast/instr/MovInstr.h"
 
 // Forward declaration of a static member
 static bool has_done_then = false;
@@ -147,6 +148,9 @@ void Parser::parse(std::vector<Instr *> &instrs, int level)
             break;
         case TT_FLOAT:
             instr = new FloatInstr();
+            break;
+        case TT_MOV:
+            instr = new MovInstr();
             break;
         default:
             // Ignored character
