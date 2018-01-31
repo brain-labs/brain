@@ -33,12 +33,12 @@ void MovInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
     llvm::Value *CellV2 = B.CreateLoad(CellPtr2);
 
     llvm::Value* IdxsFinal[] = { B.getIntN(ArgsOptions::instance()->get_cell_bitsize(), 0),
-                            CellV2 };
+                            CellV };
     llvm::ArrayRef<llvm::Value *> IdxsArrFinal(IdxsFinal);
     llvm::Value *CellPtrFinal = B.CreateGEP(ASTInfo::instance()->get_cells_ptr(),
                                        IdxsArrFinal);
 
-    B.CreateStore(CellV, CellPtrFinal);
+    B.CreateStore(CellV2, CellPtrFinal);
 }
 
 void MovInstr::ast_code_gen()

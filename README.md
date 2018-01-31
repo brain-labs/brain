@@ -139,6 +139,7 @@ __Implemented__
 - `;` ends a statement.
 - `$` prints out the value at the data pointer **divided** by 100.
 - `^` move the data pointer (jump) on the tape. _Ex.: ++++++++++^ // the data pointer will jump to cell 10._
+- `&` stores the value of `*(ptr-1)` in the `*ptr`-th cell _// format: 10 500 & (stores 10 at cell number 500.)_
 
 __Not Implemented__
 - `@` calls a function according to the value at the data pointer.

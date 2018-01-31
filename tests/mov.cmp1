@@ -1,0 +1,13 @@
+=== Debug Information ===
+IncrementInstr (5)
+ShiftInstr (1)
+IncrementInstr (2)
+ArithmeticInstr ( multiplication )
+MovInstr
+ShiftInstr (jump)
+DebugInstr
+=== Program Output ===
+--------------------------------------------------
+[ 5 | 10 | _ | _ | _ | _ | _ | _ | _ | _ | 5 | _ ]
+                                          ^^^
+                                          *(10)
