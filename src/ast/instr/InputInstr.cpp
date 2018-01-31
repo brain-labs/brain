@@ -6,6 +6,7 @@
  */
 
 #include "InputInstr.h"
+#include "../../utils/ArgsOptions.h"
 
 void InputInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)

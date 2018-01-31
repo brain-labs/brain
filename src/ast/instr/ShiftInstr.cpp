@@ -7,6 +7,8 @@
 
 #include <string>
 #include "ShiftInstr.h"
+#include "../../utils/ArgsOptions.h"
+#include "../general/ASTInfo.h"
 
 void ShiftInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)

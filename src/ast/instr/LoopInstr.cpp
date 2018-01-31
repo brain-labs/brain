@@ -7,6 +7,7 @@
 
 #include "LoopInstr.h"
 #include "../../utils/ArgsOptions.h"
+#include "../general/ASTInfo.h"
 
 void LoopInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                         llvm::BasicBlock *BreakBB)

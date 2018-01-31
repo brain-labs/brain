@@ -6,6 +6,8 @@
  */
 
 #include "IncrementInstr.h"
+#include "../../utils/ArgsOptions.h"
+#include "../general/ASTInfo.h"
 
 void IncrementInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                              llvm::BasicBlock *BreakBB)
