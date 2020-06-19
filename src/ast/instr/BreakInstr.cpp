@@ -6,6 +6,7 @@
  */
 
 #include "BreakInstr.h"
+#include "../../utils/ArgsOptions.h"
 
 void BreakInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)

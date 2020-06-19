@@ -6,6 +6,7 @@
  */
 
 #include "DebugInstr.h"
+#include "../../utils/ArgsOptions.h"
 
 void DebugInstr::code_gen(llvm::Module *M, llvm::IRBuilder<> &B,
                          llvm::BasicBlock *BreakBB)
