@@ -67,7 +67,7 @@ private:
 
     static Bootstrap* _instance;
 public:
-    ~Bootstrap() {}
+    ~Bootstrap(); 
 
     /**
      * @brief Returns the instance of Bootstrap class if the member _instance is
