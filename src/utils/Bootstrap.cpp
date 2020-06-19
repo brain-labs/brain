@@ -14,7 +14,8 @@ Bootstrap::Bootstrap()
 {
 }
 
-Bootstrap::~Bootstrap() {
+Bootstrap::~Bootstrap()
+{
     delete _instance;
 }
 
